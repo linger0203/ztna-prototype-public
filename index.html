@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-page-node-id="o9dO65Yg9BHae8e2EqXslB">
-<head data-page-node-id="3gDGzFd4ijhFxO0fbwMmHQ">
-<meta charset="utf-8" data-page-node-id="dxjlBtylvs6MqJ6wX0AliW">
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
 <title>竹云零信任安全服务平台 · 管控台原型</title>
-<link rel="stylesheet" href="_assets/iconfont.css" data-page-node-id="LjESDKU4iH6SE61vqCwxZh">
+<link rel="stylesheet" href="_assets/iconfont.css">
 <script src="_assets/echarts.min.js"></script>
 <script>if(typeof echarts==="undefined"){document.write('<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"><\/script>')}</script>
 <style>
@@ -365,6 +365,11 @@ input{font-family:inherit}
 .placeholder{background:#fff;border-radius:3px;padding:70px 20px;text-align:center;color:var(--t3)}
 .placeholder .big{font-size:15px;color:var(--t2);margin-bottom:8px}
 .placeholder .route{font-size:12px;color:var(--t4);font-family:Consolas,monospace}
+
+
+
+
+
 
 
 
@@ -1794,94 +1799,151 @@ select.fsel,select.fin{
 .pf-learnhint{margin:0 0 14px;padding:8px 10px;background:#F2F9FE;border-left:2px solid var(--sp-blue);
   border-radius:0 2px 2px 0;font-size:12px;color:#4E5969;line-height:19px}
 
+/* ============ 时间控件（竹云规范 4.4.7 数据录入-时间控件，2026-11-18 补） ============
+   规范要点：控件 32 高、描边 C9CDD4、圆角 2；占位灰、选中的值深色、激活态主色；
+   弹层白底、4 圆角、向下投影；日历里选中日主色实心、今日主色浅底；时分两列可滚；
+   底部「此刻」在左、「确定」主按钮在右 */
+.pf-dtr{position:relative;display:inline-flex;align-items:center;flex:0 0 auto;height:32px;
+  padding:0 30px 0 10px;border:1px solid var(--sp-bd);border-radius:2px;background:#fff;
+  font-size:13px;color:#4E5969;transition:border-color .15s}
+.pf-dtr:hover{border-color:#A9AEB8}
+.pf-dtr:active,.pf-dtr:focus-within{border-color:var(--sp-blue)}
+.pf-dtr .pf-dtf{display:inline-flex;align-items:center;gap:4px;height:30px;line-height:30px;padding:0 2px;
+  cursor:pointer;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pf-dtr .pf-dtf em{font-style:normal;color:#A9AEB8}
+.pf-dtr .pf-dtf b{font-weight:400;color:#1D2129}
+.pf-dtr.on{border-color:var(--sp-blue)}
+.pf-dtr.on .ico{background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Crect x='1.6' y='2.6' width='10.8' height='9.8' rx='1.4' fill='none' stroke='%230095E5' stroke-width='1.1'/%3E%3Cpath d='M1.6 5.6h10.8M4.6 1.1v2.6M9.4 1.1v2.6' stroke='%230095E5' stroke-width='1.1' stroke-linecap='round'/%3E%3C/svg%3E")}
+.pf-dtr .pf-dtf .clr{font-style:normal;font-size:10px;line-height:1;color:#C9CDD4;padding:2px;border-radius:50%}
+.pf-dtr .pf-dtf .clr:hover{color:#86909C;background:#F2F3F5}
+.pf-dtr .sep{display:inline-block;width:6px;height:1px;background:var(--sp-bd);margin:0 6px;flex:0 0 6px}
+.pf-dtr .ico{position:absolute;right:9px;top:50%;width:14px;height:14px;margin-top:-7px;cursor:pointer;
+  background:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Crect x='1.6' y='2.6' width='10.8' height='9.8' rx='1.4' fill='none' stroke='%23C9CDD4' stroke-width='1.1'/%3E%3Cpath d='M1.6 5.6h10.8M4.6 1.1v2.6M9.4 1.1v2.6' stroke='%23C9CDD4' stroke-width='1.1' stroke-linecap='round'/%3E%3C/svg%3E") center/14px 14px no-repeat}
+.pf-dtr:active .ico,.pf-dtr:focus-within .ico{background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Crect x='1.6' y='2.6' width='10.8' height='9.8' rx='1.4' fill='none' stroke='%230095E5' stroke-width='1.1'/%3E%3Cpath d='M1.6 5.6h10.8M4.6 1.1v2.6M9.4 1.1v2.6' stroke='%230095E5' stroke-width='1.1' stroke-linecap='round'/%3E%3C/svg%3E")}
+
+/* 弹层一律右对齐：这个控件在筛选条最右侧，左对齐会顶出内容区被裁掉 */
+.pf-dtp{display:none;position:absolute;right:0;top:100%;margin-top:4px;z-index:70;width:334px;background:#fff;
+  border:1px solid var(--sp-bd-l);border-radius:4px;box-shadow:0 8px 24px rgba(29,33,41,.14)}
+.pf-dtp.on{display:block}
+.pf-dtp.rt{left:auto;right:0}
+.pf-dtp .hd{display:flex;align-items:center;height:38px;padding:0 8px;border-bottom:1px solid var(--sp-bd-l)}
+.pf-dtp .hd .tt{flex:1;text-align:center;font-size:13px;color:#1D2129}
+.pf-dtp .hd .pv,.pf-dtp .hd .nx{width:24px;height:24px;border-radius:2px;cursor:pointer;background-position:center;
+  background-repeat:no-repeat;background-size:12px 12px}
+.pf-dtp .hd .pv:hover,.pf-dtp .hd .nx:hover{background-color:var(--sp-hov)}
+.pf-dtp .hd .pv{background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M7.5 2L3.5 6l4 4' fill='none' stroke='%2386909C' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.pf-dtp .hd .nx{background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M4.5 2l4 4-4 4' fill='none' stroke='%2386909C' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.pf-dtp .bd{display:flex;padding:6px 8px 4px}
+.pf-dtp .cal{width:224px;flex:0 0 224px}
+.pf-dtp .wk{display:flex}
+.pf-dtp .wk i{flex:0 0 32px;width:32px;height:26px;line-height:26px;text-align:center;font-style:normal;font-size:12px;color:#86909C}
+.pf-dtp .dg{display:flex;flex-wrap:wrap}
+.pf-dtp .dg .d{flex:0 0 32px;width:32px;height:28px;line-height:28px;text-align:center;font-style:normal;font-size:12px;
+  color:#1D2129;border-radius:2px;cursor:pointer;font-variant-numeric:tabular-nums}
+.pf-dtp .dg .d:hover{background:#F2F9FE;color:var(--sp-blue)}
+.pf-dtp .dg .d.ou{color:#C9CDD4}
+.pf-dtp .dg .d.tod{color:var(--sp-blue);background:#EAF5FD}
+.pf-dtp .dg .d.on,.pf-dtp .dg .d.on:hover{background:var(--sp-blue);color:#fff}
+.pf-dtp .tm{display:flex;gap:2px;margin-left:6px;padding-left:6px;border-left:1px solid var(--sp-bd-l)}
+.pf-dtp .tm .col{position:relative;flex:0 0 38px;width:38px;max-height:194px;overflow:auto;scrollbar-width:thin}
+.pf-dtp .tm .col::-webkit-scrollbar{width:4px}
+.pf-dtp .tm .col::-webkit-scrollbar-thumb{background:#DCDFE6;border-radius:2px}
+.pf-dtp .tm .t{display:block;height:26px;line-height:26px;text-align:center;font-style:normal;font-size:12px;
+  color:#4E5969;border-radius:2px;cursor:pointer;font-variant-numeric:tabular-nums}
+.pf-dtp .tm .t:hover{background:#F2F9FE;color:var(--sp-blue)}
+.pf-dtp .tm .t.on,.pf-dtp .tm .t.on:hover{background:var(--sp-blue);color:#fff}
+.pf-dtp .ft{display:flex;align-items:center;height:44px;padding:0 10px;border-top:1px solid var(--sp-bd-l)}
+.pf-dtp .ft .lk{color:var(--sp-blue);font-size:12px;cursor:pointer;margin-right:auto}
+.pf-dtp .ft .btn-pri{height:28px;padding:0 14px;font-size:12px}
+
 /*<<LISTS_CSS_END>>*/
 </style>
 </head>
-<body data-page-node-id="Y5jxgSAGJASOsYOvIBSOdl">
+<body>
 
 <!-- ================= 登录 ================= -->
-<div id="login" data-page-node-id="ertE249KxFFzVB521by2kh">
-  <div class="lg" data-page-node-id="3VfflVFEOLgMNtdSBHEt5x"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台" data-page-node-id="kYfR4Z7e7ppu0u3qf6Yz2w"></div>
-  <div class="card" data-page-node-id="hjBEzEbvwsiTEZINuBdiJq">
-    <h2 data-page-node-id="Xwet81iAr9NRWQ8B65icUi">系统登录</h2>
-    <div class="fld" data-page-node-id="s86IaT3XsGFKFkVWmfyWt8"><i class="iconfont icon-account_number" data-page-node-id="ML2wHkYEQ8nmOzDmeYsEgb"></i><input id="u" placeholder="账号" value="aoyuling" data-page-node-id="osVpLQZgOiflXgjF1qHb9C"></div>
-    <div class="fld" data-page-node-id="fn8jf3epDoILoD1t5U0zbb"><i class="iconfont icon-password" data-page-node-id="VA9WP6l55XsRBi4OmXcLvn"></i><input id="p" type="password" placeholder="密码" value="B@m123456" data-page-node-id="lovKWVqIeWspOws9JgBEye"></div>
-    <div class="fld cap" data-page-node-id="n0DT6f73C8suabJc1HjfQd">
-      <i class="iconfont icon-verification_code" data-page-node-id="rbHcRWV56sYfljS82WyD6l"></i>
-      <input id="c" placeholder="验证码" value="8F2D" data-page-node-id="nAuTp8KZ5VCGwra4PDMek0">
-      <div class="img" id="capImg" title="看不清？换一张" onclick="makeCap()" data-page-node-id="3ygPNUmcmSLae9oWtL588w"><b style="color:#F2C94C" data-page-node-id="lWbNEEr1EWPJ9Hw7e02T0u">8</b><b style="color:#FF7BA9" data-page-node-id="ZPy3UJ5LxoAA3QhyZ37hqs">F</b><b style="color:#5ADE8B" data-page-node-id="aXBVZCEr121z7OELanYL92">2</b><b style="color:#5FB8FF" data-page-node-id="BU0ZeGA0AaxfvEKFAzJ68Q">D</b></div>
+<div id="login">
+  <div class="lg"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台"></div>
+  <div class="card">
+    <h2>系统登录</h2>
+    <div class="fld"><i class="iconfont icon-account_number"></i><input id="u" placeholder="账号" value="aoyuling"></div>
+    <div class="fld"><i class="iconfont icon-password"></i><input id="p" type="password" placeholder="密码" value="B@m123456"></div>
+    <div class="fld cap">
+      <i class="iconfont icon-verification_code"></i>
+      <input id="c" placeholder="验证码" value="8F2D">
+      <div class="img" id="capImg" title="看不清？换一张" onclick="makeCap()"><b style="color:#F2C94C">8</b><b style="color:#FF7BA9">F</b><b style="color:#5ADE8B">2</b><b style="color:#5FB8FF">D</b></div>
     </div>
-    <div class="row" onclick="document.getElementById('rm').classList.toggle('on')" data-page-node-id="pnjJuCVvOtBtsFskS3kwmw">
-      <span class="box" id="rm" data-page-node-id="k99tmXksZ8mXQiNXhnUyW0"></span>记住密码
+    <div class="row" onclick="document.getElementById('rm').classList.toggle('on')">
+      <span class="box" id="rm"></span>记住密码
     </div>
-    <div class="err" id="err" data-page-node-id="ZCEw0ukiW3ZAU6wzncKCMn"></div>
-    <button class="btn" onclick="doLogin()" data-page-node-id="o9iXjfFCAfvzI9GEFZgn7F">登 录</button>
+    <div class="err" id="err"></div>
+    <button class="btn" onclick="doLogin()">登 录</button>
   </div>
-  <div class="foot" data-page-node-id="VlTTwj8uTv3FFHDNSDaqX2">Copyright © 2022 BambooCloud 技术支持：深圳竹云科技股份有限公司</div>
+  <div class="foot">Copyright © 2022 BambooCloud 技术支持：深圳竹云科技股份有限公司</div>
 </div>
 
 <!-- ================= 角色选择 ================= -->
-<div id="role" class="hide" data-page-node-id="5JGrFWZfuSEwTh9ew8i31Z">
-  <div class="wrap" data-page-node-id="cEsl5MNRsJ6uRl17FZtcL9">
-    <h1 data-page-node-id="FwvTzQQzsYsRBGyaLCtMQ4">登录</h1>
-    <div class="tip" data-page-node-id="nMv3EgxSgQeu9PTeJAf3JS">您具有多个管理员角色，请选择本次登录的角色</div>
-    <div class="opt" data-r="系统管理员" onclick="pickRole(this)" data-page-node-id="583YwAj7E0rKFfkyD74KVh">
-      <span class="av" data-page-node-id="fomtcwU58EN2IwTXGGGiXP"><i class="iconfont icon-operator" data-page-node-id="EO6EwwONzbhBDQkDZMgmxI"></i></span><span class="nm" data-page-node-id="VDEYsARIN4eNzcVZY0D9Ex">系统管理员</span><span class="rdo" data-page-node-id="ssm5uHjT0CQb9Z15aZnG6P"></span>
+<div id="role" class="hide">
+  <div class="wrap">
+    <h1>登录</h1>
+    <div class="tip">您具有多个管理员角色，请选择本次登录的角色</div>
+    <div class="opt" data-r="系统管理员" onclick="pickRole(this)">
+      <span class="av"><i class="iconfont icon-operator"></i></span><span class="nm">系统管理员</span><span class="rdo"></span>
     </div>
-    <div class="opt on" data-r="超级管理员" onclick="pickRole(this)" data-page-node-id="adfS0v1hdLHNk1y8GfS4Kp">
-      <span class="av" data-page-node-id="7a71q5X9jOEyLmUDSQEJOd"><i class="iconfont icon-operator" data-page-node-id="yX8ZiRhdNZlUn4AL9vN2V4"></i></span><span class="nm" data-page-node-id="sNcXFzHDqT0YshUlJWZHTR">超级管理员</span><span class="rdo" data-page-node-id="44xQUdJX55sC5VpFPtaNKK"></span>
+    <div class="opt on" data-r="超级管理员" onclick="pickRole(this)">
+      <span class="av"><i class="iconfont icon-operator"></i></span><span class="nm">超级管理员</span><span class="rdo"></span>
     </div>
-    <div class="acts" data-page-node-id="qHM4RZVi0HW7AzQO1vMRrq">
-      <button class="no" onclick="location.reload()" data-page-node-id="LJy6GY3TLqzY3F8pP5vDPa">取 消</button>
-      <button class="ok" onclick="enterApp()" data-page-node-id="tixGEIumtanBpD3tK3XaYn">登 录</button>
+    <div class="acts">
+      <button class="no" onclick="location.reload()">取 消</button>
+      <button class="ok" onclick="enterApp()">登 录</button>
     </div>
   </div>
 </div>
 
 <!-- ================= 应用 ================= -->
-<div id="app" data-page-node-id="PMlGmGRSVtYZ8PSQCxEBdT">
-  <header class="topbar" data-page-node-id="BmbIeFeovydwLKytsUztuO">
-    <div class="logo" data-page-node-id="YDoYA1fL8DDucLItZDg4aZ"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台" data-page-node-id="2iejpKk5kKyHgsaTQnHCGF"></div>
-    <nav id="topnav" data-page-node-id="YoguGmKlcmNXsBHvGuZDcW"></nav>
-    <div class="right" data-page-node-id="aJdIjLlPEKAFVR9mTHPA6O">
-      <div class="grid" id="btnGrid" onclick="togglePop('popSafety',event)" data-page-node-id="RzTtbiHZWJUbaHxeUEjFNF"><i data-page-node-id="FinV2wCS8vah1GAc65MPFL"></i><i data-page-node-id="i9ZJUt2xlWy6Ght3PUu4Fu"></i><i data-page-node-id="ZDxK6Ph4LAvQBQapBJJod1"></i><i data-page-node-id="c8o4o8EVC32fbjOYX7BEvj"></i><i data-page-node-id="dCduEGU1rtfvR1BtwiDzrj"></i><i data-page-node-id="DlGIQiSJYmYRxDdU4ifd5H"></i><i data-page-node-id="ikkJ4V9vOFnpp9r4NeBC2w"></i><i data-page-node-id="FWatC4Ys8vBIk60K2csAPC"></i><i data-page-node-id="XO5XO4MPDO2jdLIdnJng09"></i></div>
-      <div class="who" id="btnWho" onclick="togglePop('popUser',event)" data-page-node-id="J9pSDcY7k5IRf2WL6i9jWj"><span class="av" data-page-node-id="NHgiOLjUs6aGW0tOPpIfaX">a</span><span id="whoName" data-page-node-id="hMYiS8s1IN1P4GmGGOZJXc">aoyuling</span></div>
+<div id="app">
+  <header class="topbar">
+    <div class="logo"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台"></div>
+    <nav id="topnav"></nav>
+    <div class="right">
+      <div class="grid" id="btnGrid" onclick="togglePop('popSafety',event)"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="who" id="btnWho" onclick="togglePop('popUser',event)"><span class="av">a</span><span id="whoName">aoyuling</span></div>
 
-      <div class="pop pop-safety" id="popSafety" data-page-node-id="aRsBCnckCN4vJSJ3YI8Wp2">
-        <div class="hero" data-page-node-id="4szRoumV9WjTSAExbUy0v1">
-          <div class="ht" data-page-node-id="at8cXdQLa9Df1yvoW2CF90">零信任安全中心</div>
-          <div class="hs" data-page-node-id="FjRFB3ZARnHU1LlWHPCmTN">点击进入其他安全管控台</div>
-          <svg class="himg" viewBox="0 0 72 52" fill="none" data-page-node-id="BThdTbawu5KBf0CzA7SEzp">
-            <rect x="14" y="6" width="44" height="34" rx="4" fill="#fff" opacity=".95" data-page-node-id="Yj0ZAfH2ClNhFFQyij9lbo"/>
-            <rect x="14" y="6" width="44" height="34" rx="4" stroke="#8CC6F2" stroke-width="1" data-page-node-id="JQDTbMaRNhZRopiFRiDUFf"/>
-            <path d="M36 14l9 3v8c0 5-3.8 8.6-9 9.8-5.2-1.2-9-4.8-9-9.8v-8l9-3z" fill="#2C8FE0" data-page-node-id="uUJ2bShup2BrFQ1igXhtC9"/>
-            <path d="M32 25.5l2.8 2.8 5.2-5.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="WfHsFwS8lrOcDjunLfzzc8"/>
+      <div class="pop pop-safety" id="popSafety">
+        <div class="hero">
+          <div class="ht">零信任安全中心</div>
+          <div class="hs">点击进入其他安全管控台</div>
+          <svg class="himg" viewBox="0 0 72 52" fill="none">
+            <rect x="14" y="6" width="44" height="34" rx="4" fill="#fff" opacity=".95"/>
+            <rect x="14" y="6" width="44" height="34" rx="4" stroke="#8CC6F2" stroke-width="1"/>
+            <path d="M36 14l9 3v8c0 5-3.8 8.6-9 9.8-5.2-1.2-9-4.8-9-9.8v-8l9-3z" fill="#2C8FE0"/>
+            <path d="M32 25.5l2.8 2.8 5.2-5.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <div class="apps" id="safetyApps" data-page-node-id="E0lwLKyGJ2VTNmDYOEMLb8"></div>
+        <div class="apps" id="safetyApps"></div>
       </div>
 
-      <div class="pop pop-user" id="popUser" data-page-node-id="X9cuGgbYJDkKWrcANYx5NR">
-        <div class="uhead" data-page-node-id="uhpxEXKHRtat4T2G4B4zPZ">
-          <span class="uav" data-page-node-id="RG5AlIR2Elu4mxyzBbgTHF"><i class="iconfont icon-head_sculpture" data-page-node-id="CUVLhHWYv9UIntfFH4Q1Kn"></i></span>
-          <div class="umeta" data-page-node-id="YvL0WH3GK0Ry9t0y5nFyDN"><b data-page-node-id="NowYfHd03hMpBkHCBp2k8s">aoyuling</b><span class="utag" data-page-node-id="y2chgBhLJP4e395Gon0h1K">超级管理员</span></div>
+      <div class="pop pop-user" id="popUser">
+        <div class="uhead">
+          <span class="uav"><i class="iconfont icon-head_sculpture"></i></span>
+          <div class="umeta"><b>aoyuling</b><span class="utag">超级管理员</span></div>
         </div>
-        <div class="uact" onclick="alert('修改密码：待批次七随「操作员管理」一起做')" data-page-node-id="nAnSplVsuWFydhpe2tH2Uy"><i class="iconfont icon-change_password" data-page-node-id="dxGPWAxf0ovRLM09gvR20j"></i>修改密码</div>
-        <div class="uact" onclick="location.reload()" data-page-node-id="9bFiscRevsp1kslpc7f0gT"><i class="iconfont icon-exit_the_system" data-page-node-id="HDPtZ5SLzFKCLrCRFEPtIb"></i>退出系统</div>
+        <div class="uact" onclick="alert('修改密码：待批次七随「操作员管理」一起做')"><i class="iconfont icon-change_password"></i>修改密码</div>
+        <div class="uact" onclick="location.reload()"><i class="iconfont icon-exit_the_system"></i>退出系统</div>
       </div>
     </div>
   </header>
 
-  <aside class="sidebar" data-page-node-id="ApAaQEAyrN2Dp9MtAAY7O7">
-    <div class="scroll" id="side" data-page-node-id="K7J6FeudHyazmRRowj7mEF"></div>
-    <div class="collapse" onclick="toggleCollapse()" data-page-node-id="ob2X74WxZw3FOhstk2Ql0m"><i class="iconfont icon-navigation_stow" data-page-node-id="mnaubOoCsGdsu81MF3RNLu"></i><span data-page-node-id="BFdw2oGQqyvkTQyhnfQOqF">收起菜单</span></div>
+  <aside class="sidebar">
+    <div class="scroll" id="side"></div>
+    <div class="collapse" onclick="toggleCollapse()"><i class="iconfont icon-navigation_stow"></i><span>收起菜单</span></div>
   </aside>
 
-  <div class="flyout" id="flyout" onmouseenter="clearTimeout(window.__flyT)" onmouseleave="hideFlySoon()" data-page-node-id="EH09LsmNCWFdeNc1HAdX8I"></div>
+  <div class="flyout" id="flyout" onmouseenter="clearTimeout(window.__flyT)" onmouseleave="hideFlySoon()"></div>
 
-  <main class="main" data-page-node-id="GHZWsPIJOOV9CNQH2S501Z">
-    <div class="tabbar" id="tabbar" data-page-node-id="XWPB4aFTpnieHTZgzQ6LXx"></div>
-    <div class="page" id="page" data-page-node-id="uLMQVwJd60hrE83BnyFcb6"></div>
+  <main class="main">
+    <div class="tabbar" id="tabbar"></div>
+    <div class="page" id="page"></div>
   </main>
 </div>
 
@@ -2943,6 +3005,11 @@ function drawApiMon(){
      {n:'1-10s',c:'#FE7D2D',d:[30,22,26,10,32,24,16]},
      {n:'>10s',c:'#FFC53D',d:[12,8,10,4,14,10,6]}],true,500,20));
 }
+
+
+
+
+
 
 
 
@@ -7440,6 +7507,146 @@ function pfReqData(b){
   return rows;
 }
 
+/* ---------- 时间控件（竹云规范 4.4.7 数据录入-时间控件） ----------
+   原生 datetime-local 的弹层样式改不了，这里自绘一套：输入区 32 高、日历图标在右，
+   点开是「日历 + 时/分两列 + 此刻 / 确定」，和规范里的日期时间选择器是同一套结构 */
+var PF_DTP={k:'',s:null,e:null};
+var PF_DTP_TODAY={y:2026,m:11,d:16};   /* 原型时间锚点 */
+var PF_DTP_NOW={y:2026,m:11,d:16,hh:15,mm:40};
+function pfDtpPad(n){ return (n<10?'0':'')+n; }
+function pfDtpParse(v){
+  var m=/^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})[\sT](\d{1,2}):(\d{1,2})/.exec(String(v||''));
+  if(!m) return null;
+  return {y:+m[1],m:+m[2],d:+m[3],hh:+m[4],mm:+m[5]};
+}
+function pfDtpFmt(st){
+  return st.y+'/'+pfDtpPad(st.m)+'/'+pfDtpPad(st.d)+' '+pfDtpPad(st.hh)+':'+pfDtpPad(st.mm);
+}
+function pfDtfHtml(k){
+  var v=PF_REQ_F[k]||'', ph=(k==='s'?'开始时间':'结束时间');
+  var inner=v
+    ? '<b>'+v+'</b><i class="clr" title="清空" onclick="event.stopPropagation();pfDtpClear(\''+k+'\')">&#10005;</i>'
+    : '<em>'+ph+'</em>';
+  return '<span class="pf-dtf'+(v?' has':'')+'" id="pfDtf_'+k+'" onclick="event.stopPropagation();pfDtpOpen(\''+k+'\')">'+inner+'</span>';
+}
+function pfDtpPanelHtml(){
+  return '<div class="pf-dtp" id="pfDtp">'
+    +'<div class="hd"><i class="pv" onclick="event.stopPropagation();pfDtpNav(-1)"></i>'
+    +'<span class="tt" id="pfDtpTt"></span>'
+    +'<i class="nx" onclick="event.stopPropagation();pfDtpNav(1)"></i></div>'
+    +'<div class="bd"><div class="cal">'
+    +'<div class="wk"><i>日</i><i>一</i><i>二</i><i>三</i><i>四</i><i>五</i><i>六</i></div>'
+    +'<div class="dg" id="pfDtpDg"></div></div>'
+    +'<div class="tm"><div class="col" id="pfDtpHh"></div><div class="col" id="pfDtpMm"></div></div>'
+    +'</div>'
+    +'<div class="ft"><span class="lk" onclick="event.stopPropagation();pfDtpNow()">此刻</span>'
+    +'<button class="btn-pri" onclick="event.stopPropagation();pfDtpOk()">确定</button></div></div>';
+}
+function pfDtrHtml(){
+  return '<div class="pf-dtr" id="pfDtr">'
+    +pfDtfHtml('s')+'<i class="sep"></i>'+pfDtfHtml('e')
+    +'<i class="ico" title="选择时间" onclick="event.stopPropagation();pfDtpOpen(\''+(PF_REQ_F.e?'e':'s')+'\')"></i>'
+    +pfDtpPanelHtml()+'</div>';
+}
+function pfDtpOpen(k){
+  var cur=pfDtpParse(PF_REQ_F[k]);
+  if(cur) PF_DTP[k]=cur;
+  else if(!PF_DTP[k]) PF_DTP[k]={y:PF_DTP_NOW.y,m:PF_DTP_NOW.m,d:PF_DTP_NOW.d,hh:PF_DTP_NOW.hh,mm:PF_DTP_NOW.mm};
+  PF_DTP.k=k;
+  var p=document.getElementById('pfDtp');
+  if(!p) return;
+  p.classList.add('on');
+  p.classList.toggle('rt',k==='e');
+  var w=document.getElementById('pfDtr');
+  if(w) w.classList.add('on');
+  var a=document.getElementById('pfDtf_s'), b=document.getElementById('pfDtf_e');
+  if(a) a.classList.toggle('on',k==='s');
+  if(b) b.classList.toggle('on',k==='e');
+  pfDtpRender();
+}
+function pfDtpClose(){
+  var p=document.getElementById('pfDtp');
+  if(p) p.classList.remove('on');
+  var w=document.getElementById('pfDtr');
+  if(w) w.classList.remove('on');
+  ['s','e'].forEach(function(k){ var f=document.getElementById('pfDtf_'+k); if(f) f.classList.remove('on'); });
+  PF_DTP.k='';
+}
+function pfDtpRender(){
+  var k=PF_DTP.k, st=PF_DTP[k]; if(!st) return;
+  var tt=document.getElementById('pfDtpTt');
+  if(tt) tt.textContent=st.y+' 年 '+st.m+' 月';
+  var sd=new Date(st.y,st.m-1,1).getDay(), dn=new Date(st.y,st.m,0).getDate(), pd=new Date(st.y,st.m-1,0).getDate();
+  var cells=[], i, ny={y:st.y,m:st.m+1,d:1};
+  if(ny.m>12){ ny.m=1; ny.y++; }
+  for(i=sd-1;i>=0;i--) cells.push({y:st.m===1?st.y-1:st.y,m:st.m===1?12:st.m-1,d:pd-i,ou:1});
+  for(i=1;i<=dn;i++) cells.push({y:st.y,m:st.m,d:i});
+  var nx=0;
+  while(cells.length%7!==0 || cells.length<35){ nx++; cells.push({y:ny.y,m:ny.m,d:nx,ou:1}); }
+  var h='';
+  cells.forEach(function(c){
+    var on=(!c.ou && c.d===st.d && c.m===st.m && c.y===st.y);
+    var tod=(c.y===PF_DTP_TODAY.y && c.m===PF_DTP_TODAY.m && c.d===PF_DTP_TODAY.d);
+    h+='<i class="d'+(c.ou?' ou':'')+(tod?' tod':'')+(on?' on':'')+'" data-y="'+c.y+'" data-m="'+c.m+'" data-d="'+c.d+'"'
+      +' onclick="event.stopPropagation();pfDtpDay(this)">'+c.d+'</i>';
+  });
+  var dg=document.getElementById('pfDtpDg'); if(dg) dg.innerHTML=h;
+  var hh='', mm='';
+  for(i=0;i<24;i++) hh+='<i class="t'+(i===st.hh?' on':'')+'" data-v="'+i+'" onclick="event.stopPropagation();pfDtpTime(\'hh\',this)">'+pfDtpPad(i)+'</i>';
+  for(i=0;i<60;i++) mm+='<i class="t'+(i===st.mm?' on':'')+'" data-v="'+i+'" onclick="event.stopPropagation();pfDtpTime(\'mm\',this)">'+pfDtpPad(i)+'</i>';
+  var eh=document.getElementById('pfDtpHh'), em=document.getElementById('pfDtpMm');
+  if(eh){ eh.innerHTML=hh; pfDtpScroll(eh); }
+  if(em){ em.innerHTML=mm; pfDtpScroll(em); }
+}
+function pfDtpScroll(box){
+  var a=box.querySelector('.on'); if(!a||!box.clientHeight) return;
+  box.scrollTop=Math.max(0, a.offsetTop - box.clientHeight/2 + a.offsetHeight/2);
+}
+function pfDtpDay(el){
+  var st=PF_DTP[PF_DTP.k]; if(!st) return;
+  st.y=+el.getAttribute('data-y'); st.m=+el.getAttribute('data-m'); st.d=+el.getAttribute('data-d');
+  pfDtpRender();
+}
+function pfDtpTime(f,el){
+  var st=PF_DTP[PF_DTP.k]; if(!st) return;
+  st[f]=+el.getAttribute('data-v'); pfDtpRender();
+}
+function pfDtpNav(n){
+  var st=PF_DTP[PF_DTP.k]; if(!st) return;
+  var m=st.m+n, y=st.y;
+  if(m<1){ m=12; y--; } if(m>12){ m=1; y++; }
+  st.m=m; st.y=y; pfDtpRender();
+}
+function pfDtpNow(){
+  var st=PF_DTP[PF_DTP.k]; if(!st) return;
+  st.y=PF_DTP_NOW.y; st.m=PF_DTP_NOW.m; st.d=PF_DTP_NOW.d; st.hh=PF_DTP_NOW.hh; st.mm=PF_DTP_NOW.mm;
+  pfDtpRender();
+}
+function pfDtpOk(){
+  var k=PF_DTP.k, st=PF_DTP[k]; if(!k||!st) return;
+  var v=pfDtpFmt(st);
+  if(k==='s' && PF_REQ_F.e && v>PF_REQ_F.e){ lpTip('开始时间不能晚于结束时间'); return; }
+  if(k==='e' && PF_REQ_F.s && v<PF_REQ_F.s){ lpTip('结束时间不能早于开始时间'); return; }
+  PF_REQ_F[k]=v; pfDtpClose(); lpRerender();
+}
+function pfDtpClear(k){
+  PF_REQ_F[k]=''; PF_DTP[k]=null; pfDtpClose(); lpRerender();
+}
+if(typeof document!=='undefined' && document.addEventListener){
+  /* 点面板外收起；Esc 收起 */
+  document.addEventListener('click',function(e){
+    var p=document.getElementById('pfDtp');
+    if(!p || !p.classList.contains('on')) return;
+    var r=document.getElementById('pfDtr');
+    if(r && r.contains(e.target)) return;
+    pfDtpClose();
+  });
+  document.addEventListener('keydown',function(e){
+    var p=document.getElementById('pfDtp');
+    if(e.key==='Escape' && p && p.classList.contains('on')) pfDtpClose();
+  });
+}
+
 function pfReqF(k,v){ PF_REQ_F[k]=v; lpRerender(); }
 function pfReqReset(){
   PF_REQ_F={u:'',ip:'',kw:'',s:'',e:'',hideBg:true,hideTimed:true,hideChan:true};
@@ -7451,8 +7658,8 @@ function pfReqFiltered(b){
     if(F.u && r.user!==F.u) return false;
     if(F.ip && r.ip!==F.ip) return false;
     if(F.kw && r.api.toLowerCase().indexOf(F.kw.toLowerCase())<0) return false;
-    if(F.s && r.ts.replace(/-/g,'/')<F.s.replace('T',' ')) return false;
-    if(F.e && r.ts.replace(/-/g,'/')>F.e.replace('T',' ')+':59') return false;
+    if(F.s && r.ts.replace(/-/g,'/').slice(0,16)<F.s) return false;
+    if(F.e && r.ts.replace(/-/g,'/').slice(0,16)>F.e) return false;
     if(F.hideBg && r.flag==='bg') return false;
     if(F.hideTimed && r.flag==='timed') return false;
     if(F.hideChan && r.flag==='chan') return false;
@@ -7525,9 +7732,7 @@ function pfReqList(b){
     +Object.keys(ips).sort().map(function(p){return '<option'+(F.ip===p?' selected':'')+'>'+p+'</option>'}).join('')
     +'</select>'
     +'<input class="fin" placeholder="API 关键字" style="width:132px;flex:0 0 132px" value="'+F.kw+'" onchange="pfReqF(\'kw\',this.value)">'
-    +'<input class="fin" type="datetime-local" style="width:auto;min-width:122px;flex:1 1 130px" value="'+F.s+'" onchange="pfReqF(\'s\',this.value)" title="开始时间">'
-    +'<span class="pf-tilde">~</span>'
-    +'<input class="fin" type="datetime-local" style="width:auto;min-width:122px;flex:1 1 130px" value="'+F.e+'" onchange="pfReqF(\'e\',this.value)" title="结束时间">'
+    +pfDtrHtml()
     +'</div>';
   h+='<div class="pf-fbar sub">'
     +'<label class="pf-cb"><input type="checkbox" '+(F.hideBg?'checked':'')+' onchange="pfReqF(\'hideBg\',this.checked)">隐藏后台请求</label>'
@@ -7676,9 +7881,9 @@ function pfDelApp(){
 function pfOpenLearn(preId){
   PF_SEL={};
   if(preId){ PF_SEL[preId]=7; }
-  /* 2026-11-17：弹窗改右侧抽屉，和「设置」抽屉同一套版式（分区标题 + 左标签 + 底部操作条） */
-  var body='<div class="pf-learnhint">新学习按本次识别结果生成；上一版做过的校准（改名 / 主 API / 敏感度）不会带过来，'
-    +'需要保留就在学习完的「版本对比」里采纳。</div>'
+  /* 2026-11-17：弹窗改右侧抽屉，和「设置」抽屉同一套版式（分区标题 + 左标签 + 底部操作条）
+     2026-11-18 沁：首次学习不提示「不带校准」，只有这个应用学过、再次学习时才提示 */
+  var body='<div id="pfLearnHint"></div>'
     +'<div class="pf-sect"><div class="st">选择应用<em>可跨数据中心、分组多选</em></div>'
     +'<div class="pf-sel"><div class="pf-selbox" id="pfSelBox" onclick="pfTogglePanel(event)">'
     +'<span class="ph">请选择应用（支持按数据中心、分组选择）</span><i class="arw"></i></div>'
@@ -7783,6 +7988,25 @@ function pfSetDays(id,v){
   var n=parseInt(v,10);
   PF_SEL[id]=isNaN(n)||n<1?1:n;
 }
+/* 选中应用里有没有学过（有批次）——决定要不要提示「校准不会带过来」（沁 2026-11-18） */
+function pfHasHist(id){
+  var a=pfApp(id);
+  return !!(a && a.batches && a.batches.length);
+}
+function pfLearnHintHtml(){
+  var ids=Object.keys(PF_SEL).filter(pfHasHist);
+  if(!ids.length) return '';
+  var nm=ids.length===1 ? ((pfApp(ids[0])||{}).n||'') : ('所选应用中的 '+ids.length+' 个');
+  return '<div class="pf-learnhint">'
+    +(ids.length===1 ? '「'+nm+'」之前学过。' : nm+'之前学过。')
+    +'这次按本次识别结果生成；上一版做过的校准（改名 / 主 API / 敏感度）不会带过来，'
+    +'需要保留就在学习完的「版本对比」里采纳。</div>';
+}
+function pfRenderLearnHint(){
+  var box=document.getElementById('pfLearnHint');
+  if(!box) return;
+  box.innerHTML=pfLearnHintHtml();
+}
 function pfRenderPicked(){
   var ids=Object.keys(PF_SEL), h='';
   var box=document.getElementById('pfSelBox');
@@ -7817,6 +8041,7 @@ function pfRenderPicked(){
   /* 一个应用都没选时「开始学习」不可点（不可点击就置灰，而不是点了再弹提示） */
   var sb=document.getElementById('pfStartBtn');
   if(sb) sb.disabled=!ids.length;
+  pfRenderLearnHint();
 }
 function pfApplyBatch(){
   var v=parseInt((document.getElementById('pfBatch')||{}).value,10);
