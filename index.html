@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
+<html lang="zh-CN" data-page-node-id="orahOoCgjmvo2kvU6R50hT">
+<head data-page-node-id="FFk00PhBDPcxIKvf7ewCQK">
+<meta charset="utf-8" data-page-node-id="lyjyu7fn6Bf4DNV2B4ZL5s">
 <title>竹云零信任安全服务平台 · 管控台原型</title>
-<link rel="stylesheet" href="_assets/iconfont.css">
+<link rel="stylesheet" href="_assets/iconfont.css" data-page-node-id="E0BWQY8k7cIPbDdCNbahJJ">
 <script src="_assets/echarts.min.js"></script>
 <script>if(typeof echarts==="undefined"){document.write('<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"><\/script>')}</script>
 <style>
@@ -365,6 +365,14 @@ input{font-family:inherit}
 .placeholder{background:#fff;border-radius:3px;padding:70px 20px;text-align:center;color:var(--t3)}
 .placeholder .big{font-size:15px;color:var(--t2);margin-bottom:8px}
 .placeholder .route{font-size:12px;color:var(--t4);font-family:Consolas,monospace}
+
+
+
+
+
+
+
+
 
 
 
@@ -1600,94 +1608,115 @@ select.fsel,select.fin{
 .pf-cmpd .tg.only-b{color:var(--sp-danger);background:#FEECEC}
 .pf-cmpd .tg.only-c{color:var(--sp-blue);background:#EAF5FD}
 
+/* ---------- 版本标识 + 描边按钮（2026-11-18 沁：批次号认不出是哪一版；对比入口不像按钮） ---------- */
+/* .btn-line 原来只在 .pf-hact 里定义，落在页签行里就退化成纯文字。这里补一层通用描边按钮 */
+.btn-line{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;padding:0 16px;
+  background:#fff;color:#4E5969;border:1px solid var(--sp-bd);border-radius:2px;font-size:14px;
+  cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s,background .15s}
+.btn-line:hover{color:var(--sp-blue);border-color:var(--sp-blue);background:var(--sp-hov)}
+.btn-line:active{color:var(--sp-blue-a);border-color:var(--sp-blue-a)}
+.btn-line.danger{color:var(--sp-danger);border-color:#FBB9B9}
+.btn-line.danger:hover{color:#D92C2C;border-color:var(--sp-danger);background:#FEF0F0}
+.btn-line[disabled]{color:#C0C4CC;border-color:var(--sp-bd-l);background:#FAFBFC;cursor:not-allowed}
+.pf-ttabs .act{display:inline-flex;align-items:center;gap:8px}
+.pf-ttabs .act .btn-line{height:32px;padding:0 14px;font-size:13px}
+.pf-ttabs .act .btn-line.pf-cmpgo::before{content:"";width:12px;height:12px;flex-shrink:0;
+  background:currentColor;opacity:.75;
+  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M2 5h9l-2.2-2.2 1.1-1.1L14.4 6l-4.5 4.3-1.1-1.1L11 7H2V5zm12 6H5l2.2 2.2-1.1 1.1L1.6 10l4.5-4.3 1.1 1.1L5 9h9v2z'/></svg>") center/contain no-repeat;
+          mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M2 5h9l-2.2-2.2 1.1-1.1L14.4 6l-4.5 4.3-1.1-1.1L11 7H2V5zm12 6H5l2.2 2.2-1.1 1.1L1.6 10l4.5-4.3 1.1 1.1L5 9h9v2z'/></svg>") center/contain no-repeat}
+/* 版本徽标：列表与对比栏共用一套视觉 */
+.pf-ver{display:inline-flex;align-items:center;height:18px;padding:0 5px;margin-right:5px;border-radius:2px;
+  background:#EAF5FD;color:var(--sp-blue);font-size:11px;font-style:normal;font-weight:600;letter-spacing:.2px;
+  vertical-align:1px}
+
 /*<<LISTS_CSS_END>>*/
 </style>
 </head>
-<body>
+<body data-page-node-id="BUtbCMrfyh8yXMTtGLLl7D">
 
 <!-- ================= 登录 ================= -->
-<div id="login">
-  <div class="lg"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台"></div>
-  <div class="card">
-    <h2>系统登录</h2>
-    <div class="fld"><i class="iconfont icon-account_number"></i><input id="u" placeholder="账号" value="aoyuling"></div>
-    <div class="fld"><i class="iconfont icon-password"></i><input id="p" type="password" placeholder="密码" value="B@m123456"></div>
-    <div class="fld cap">
-      <i class="iconfont icon-verification_code"></i>
-      <input id="c" placeholder="验证码" value="8F2D">
-      <div class="img" id="capImg" title="看不清？换一张" onclick="makeCap()"><b style="color:#F2C94C">8</b><b style="color:#FF7BA9">F</b><b style="color:#5ADE8B">2</b><b style="color:#5FB8FF">D</b></div>
+<div id="login" data-page-node-id="SMPJZ1C9Plwh1urh0aCa3M">
+  <div class="lg" data-page-node-id="MFu44pB25alaHFRHqlqFib"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台" data-page-node-id="UDqtQ1xQCAQehGvvqgpwrG"></div>
+  <div class="card" data-page-node-id="rQxtHUQALzzkYEiceewqXA">
+    <h2 data-page-node-id="QqnvCxFwwMfuYkMeOnRZbJ">系统登录</h2>
+    <div class="fld" data-page-node-id="oUAHu64RqrzU220mkYZ0NT"><i class="iconfont icon-account_number" data-page-node-id="MUsEfgcBZWhzkItIR0lmW1"></i><input id="u" placeholder="账号" value="aoyuling" data-page-node-id="h5gyrjsBrJ2ed9AXM2LfMO"></div>
+    <div class="fld" data-page-node-id="7OasoqvDXFmcSvyHUYCVO9"><i class="iconfont icon-password" data-page-node-id="UAcA0b2IBJH055GLnYDIU7"></i><input id="p" type="password" placeholder="密码" value="B@m123456" data-page-node-id="hxXVIcz15ri16SS7yjxNe1"></div>
+    <div class="fld cap" data-page-node-id="HD1UArl0VLCdjSeOFpdXMV">
+      <i class="iconfont icon-verification_code" data-page-node-id="tPVjUAlojnDzvM8wuHRQlP"></i>
+      <input id="c" placeholder="验证码" value="8F2D" data-page-node-id="pmd0AxGyc8OAsuF1nPiLzU">
+      <div class="img" id="capImg" title="看不清？换一张" onclick="makeCap()" data-page-node-id="rXY6DcfSPRs3b0IspIwtIU"><b style="color:#F2C94C" data-page-node-id="WMMpLtWzrjyuX91jjKDy5k">8</b><b style="color:#FF7BA9" data-page-node-id="IOcEjMDAcvjJhWgJFHzDel">F</b><b style="color:#5ADE8B" data-page-node-id="qEYxxB83cJ25PcRyHPj49Z">2</b><b style="color:#5FB8FF" data-page-node-id="GETKj5raypIvkw3Hb6HhC1">D</b></div>
     </div>
-    <div class="row" onclick="document.getElementById('rm').classList.toggle('on')">
-      <span class="box" id="rm"></span>记住密码
+    <div class="row" onclick="document.getElementById('rm').classList.toggle('on')" data-page-node-id="ooNeKHBJ3t6HlhEwpmXojo">
+      <span class="box" id="rm" data-page-node-id="3OjZ8z96ZsgONXxmBvRdGQ"></span>记住密码
     </div>
-    <div class="err" id="err"></div>
-    <button class="btn" onclick="doLogin()">登 录</button>
+    <div class="err" id="err" data-page-node-id="GYXiiGlHvCaptFVFzkYvfO"></div>
+    <button class="btn" onclick="doLogin()" data-page-node-id="KkgIbPlcn4wEOJkoUkbcbO">登 录</button>
   </div>
-  <div class="foot">Copyright © 2022 BambooCloud 技术支持：深圳竹云科技股份有限公司</div>
+  <div class="foot" data-page-node-id="vASQ5H01Ze49G4QfyRcRPz">Copyright © 2022 BambooCloud 技术支持：深圳竹云科技股份有限公司</div>
 </div>
 
 <!-- ================= 角色选择 ================= -->
-<div id="role" class="hide">
-  <div class="wrap">
-    <h1>登录</h1>
-    <div class="tip">您具有多个管理员角色，请选择本次登录的角色</div>
-    <div class="opt" data-r="系统管理员" onclick="pickRole(this)">
-      <span class="av"><i class="iconfont icon-operator"></i></span><span class="nm">系统管理员</span><span class="rdo"></span>
+<div id="role" class="hide" data-page-node-id="si9dBlMBOWCGEKQKEvzLMy">
+  <div class="wrap" data-page-node-id="rFNtR8HO0CW5ionYgqH5fE">
+    <h1 data-page-node-id="KT7tjBiigTahYUTcCpkNpv">登录</h1>
+    <div class="tip" data-page-node-id="Mn3nkvfvDdSKV9dIKmrGVT">您具有多个管理员角色，请选择本次登录的角色</div>
+    <div class="opt" data-r="系统管理员" onclick="pickRole(this)" data-page-node-id="4lMKgFqY8FtG1t86mQPDID">
+      <span class="av" data-page-node-id="3pb7GrCMyeKSYSRCZPeXnb"><i class="iconfont icon-operator" data-page-node-id="mQxHgVSWDew5mpeQil3fQu"></i></span><span class="nm" data-page-node-id="PkDMMKQ6Na4qRGvrOq2NeC">系统管理员</span><span class="rdo" data-page-node-id="xZilzcSE2wvZB4udPZnc4U"></span>
     </div>
-    <div class="opt on" data-r="超级管理员" onclick="pickRole(this)">
-      <span class="av"><i class="iconfont icon-operator"></i></span><span class="nm">超级管理员</span><span class="rdo"></span>
+    <div class="opt on" data-r="超级管理员" onclick="pickRole(this)" data-page-node-id="DNxcaaGYjwF3dLDMoZaExp">
+      <span class="av" data-page-node-id="CnyHLKVy0OiDk7Tji2mCGB"><i class="iconfont icon-operator" data-page-node-id="TQKugUF4Y3waPw4YdwDlKj"></i></span><span class="nm" data-page-node-id="v3nON9cQFhiHWvnq9FDGzZ">超级管理员</span><span class="rdo" data-page-node-id="TFPXm906waIu3LOFZQXDvH"></span>
     </div>
-    <div class="acts">
-      <button class="no" onclick="location.reload()">取 消</button>
-      <button class="ok" onclick="enterApp()">登 录</button>
+    <div class="acts" data-page-node-id="rCemXva7XnIqwqjMJtDRAb">
+      <button class="no" onclick="location.reload()" data-page-node-id="Gr5snNG8xyvbOQVY1x1UcR">取 消</button>
+      <button class="ok" onclick="enterApp()" data-page-node-id="0yvOf0rzTE1gmRas8sdtOx">登 录</button>
     </div>
   </div>
 </div>
 
 <!-- ================= 应用 ================= -->
-<div id="app">
-  <header class="topbar">
-    <div class="logo"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台"></div>
-    <nav id="topnav"></nav>
-    <div class="right">
-      <div class="grid" id="btnGrid" onclick="togglePop('popSafety',event)"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="who" id="btnWho" onclick="togglePop('popUser',event)"><span class="av">a</span><span id="whoName">aoyuling</span></div>
+<div id="app" data-page-node-id="G3fnGyKB63Ky0c83FbDjV8">
+  <header class="topbar" data-page-node-id="t156FA13sBeMRXeCCr4cIJ">
+    <div class="logo" data-page-node-id="D2F7ZXBthWRop5Hr994Aol"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台" data-page-node-id="MtjfXAjOuQKNhBLo6q6OA4"></div>
+    <nav id="topnav" data-page-node-id="A7ituF5njhMGqrMCQ9nuHy"></nav>
+    <div class="right" data-page-node-id="SdzqMYjG9Quuj7hmfjhFlL">
+      <div class="grid" id="btnGrid" onclick="togglePop('popSafety',event)" data-page-node-id="E7A2hFMvF4uAXrjLHMUiD8"><i data-page-node-id="rPuEIhunLp9au3YNgy4FbC"></i><i data-page-node-id="ehEZo8zhHQa8nrUh3g1zTR"></i><i data-page-node-id="woYh7dlnHCUvMldavNwSU3"></i><i data-page-node-id="zGjahRZJiAHHGAuE2KBGUx"></i><i data-page-node-id="P7E1rXEla2AE1MsyH9NmgJ"></i><i data-page-node-id="goF1sxx9qEtlN8dDAod6iV"></i><i data-page-node-id="wUJKIl1TvDig1F7Vsf0VUA"></i><i data-page-node-id="3riAf3Bu194K57GJMbDekK"></i><i data-page-node-id="eT1GvF85SlATI4b4oFaBRv"></i></div>
+      <div class="who" id="btnWho" onclick="togglePop('popUser',event)" data-page-node-id="8nMAHyQGsHsdBan1IWWoa2"><span class="av" data-page-node-id="KB97y1Nv8gG0IZ2qMz6Hao">a</span><span id="whoName" data-page-node-id="FDlvthfKBFByQ07EcHKM9s">aoyuling</span></div>
 
-      <div class="pop pop-safety" id="popSafety">
-        <div class="hero">
-          <div class="ht">零信任安全中心</div>
-          <div class="hs">点击进入其他安全管控台</div>
-          <svg class="himg" viewBox="0 0 72 52" fill="none">
-            <rect x="14" y="6" width="44" height="34" rx="4" fill="#fff" opacity=".95"/>
-            <rect x="14" y="6" width="44" height="34" rx="4" stroke="#8CC6F2" stroke-width="1"/>
-            <path d="M36 14l9 3v8c0 5-3.8 8.6-9 9.8-5.2-1.2-9-4.8-9-9.8v-8l9-3z" fill="#2C8FE0"/>
-            <path d="M32 25.5l2.8 2.8 5.2-5.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <div class="pop pop-safety" id="popSafety" data-page-node-id="BBwN4nX8ghWofpcUu4jRJx">
+        <div class="hero" data-page-node-id="xfhhIOQGCURbrCLTdQNjOx">
+          <div class="ht" data-page-node-id="Vv1DaYpC3BVSteXnix7yfl">零信任安全中心</div>
+          <div class="hs" data-page-node-id="LdEqKLA6HjBBAIDEVtmrwF">点击进入其他安全管控台</div>
+          <svg class="himg" viewBox="0 0 72 52" fill="none" data-page-node-id="MMtL1xltmeuVpd1xizgmGj">
+            <rect x="14" y="6" width="44" height="34" rx="4" fill="#fff" opacity=".95" data-page-node-id="INkX4e8OHBUihyyx6pN96k"/>
+            <rect x="14" y="6" width="44" height="34" rx="4" stroke="#8CC6F2" stroke-width="1" data-page-node-id="Pbr1TFkE8ETBrTG1WCZzD4"/>
+            <path d="M36 14l9 3v8c0 5-3.8 8.6-9 9.8-5.2-1.2-9-4.8-9-9.8v-8l9-3z" fill="#2C8FE0" data-page-node-id="atpMYsBkTwseTYRXusITmP"/>
+            <path d="M32 25.5l2.8 2.8 5.2-5.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="rRDGk3LXJNvYTBiWxNCHUC"/>
           </svg>
         </div>
-        <div class="apps" id="safetyApps"></div>
+        <div class="apps" id="safetyApps" data-page-node-id="y8FpFzCmzIDIL9CnAmSAEy"></div>
       </div>
 
-      <div class="pop pop-user" id="popUser">
-        <div class="uhead">
-          <span class="uav"><i class="iconfont icon-head_sculpture"></i></span>
-          <div class="umeta"><b>aoyuling</b><span class="utag">超级管理员</span></div>
+      <div class="pop pop-user" id="popUser" data-page-node-id="LZfwtVDeGpxh2ECvLOODBK">
+        <div class="uhead" data-page-node-id="zuUmgCyYTWRU79fPCHaP1a">
+          <span class="uav" data-page-node-id="gS8N7go8V9Ini84nhcIFfe"><i class="iconfont icon-head_sculpture" data-page-node-id="vnexaxr0UTwaUVYkcXX9Cz"></i></span>
+          <div class="umeta" data-page-node-id="bi17ApNtNjlY1pDxY8Vnop"><b data-page-node-id="Vhutrlbkn0TH3GJQe5Ws2Y">aoyuling</b><span class="utag" data-page-node-id="ODT75gSGPIDHHoYNDcNu6N">超级管理员</span></div>
         </div>
-        <div class="uact" onclick="alert('修改密码：待批次七随「操作员管理」一起做')"><i class="iconfont icon-change_password"></i>修改密码</div>
-        <div class="uact" onclick="location.reload()"><i class="iconfont icon-exit_the_system"></i>退出系统</div>
+        <div class="uact" onclick="alert('修改密码：待批次七随「操作员管理」一起做')" data-page-node-id="5GtpydwYNnI4sJrQ19gdBY"><i class="iconfont icon-change_password" data-page-node-id="Vhu1KAknG4O25gNS7DZuBP"></i>修改密码</div>
+        <div class="uact" onclick="location.reload()" data-page-node-id="DwhHTMVfVaentguedvAblg"><i class="iconfont icon-exit_the_system" data-page-node-id="EI0V4nIFKWXwXw7SP8XEsb"></i>退出系统</div>
       </div>
     </div>
   </header>
 
-  <aside class="sidebar">
-    <div class="scroll" id="side"></div>
-    <div class="collapse" onclick="toggleCollapse()"><i class="iconfont icon-navigation_stow"></i><span>收起菜单</span></div>
+  <aside class="sidebar" data-page-node-id="ZexCBDEJaHQm3DKRnlGzWv">
+    <div class="scroll" id="side" data-page-node-id="VHchA7OG6uP3WN0fl47zgZ"></div>
+    <div class="collapse" onclick="toggleCollapse()" data-page-node-id="g0GbpH35GOzKAJmKk3gPwx"><i class="iconfont icon-navigation_stow" data-page-node-id="gtARGolaffXiXOL3xQjrvL"></i><span data-page-node-id="ZKzER5KHFMc8oEFsTcfAKD">收起菜单</span></div>
   </aside>
 
-  <div class="flyout" id="flyout" onmouseenter="clearTimeout(window.__flyT)" onmouseleave="hideFlySoon()"></div>
+  <div class="flyout" id="flyout" onmouseenter="clearTimeout(window.__flyT)" onmouseleave="hideFlySoon()" data-page-node-id="v1ALwOQywFdDyieZ9rDdY8"></div>
 
-  <main class="main">
-    <div class="tabbar" id="tabbar"></div>
-    <div class="page" id="page"></div>
+  <main class="main" data-page-node-id="G4jAQcvPtUx7qGBBe1HC3E">
+    <div class="tabbar" id="tabbar" data-page-node-id="52KCg7tJCb2TZfARJ5G1VV"></div>
+    <div class="page" id="page" data-page-node-id="YKtM4bwvcp4G9ChEmSOwaB"></div>
   </main>
 </div>
 
@@ -2749,6 +2778,14 @@ function drawApiMon(){
      {n:'1-10s',c:'#FE7D2D',d:[30,22,26,10,32,24,16]},
      {n:'>10s',c:'#FFC53D',d:[12,8,10,4,14,10,6]}],true,500,20));
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -5360,21 +5397,46 @@ function pfCurBatch(){
 }
 /* 模块数据是批次私有的（2026-11-18 改）：原来所有批次共用 PF_MODS_FULL 里同一批对象，
    A 画像校准完，B 画像跟着一起变——既没法做版本对比，也没法把基线模块回填到新画像。
-   现在批次首次被访问时按 b.ord 深拷贝一份，之后改名 / 主 API / 敏感度 / 顺序都只动这一份 */
+   现在批次首次被访问时按 b.ord 深拷贝一份，之后改名 / 主 API / 敏感度 / 顺序都只动这一份。
+   注意 __modsN：学习阶段 b.mod=0，会被问出一次空数组；分析完成把 mod 改成 7 时
+   必须按新的模块数重建，否则模块清单永远是空的（空数组在 JS 里是 truthy） */
 function pfClone(o){ return JSON.parse(JSON.stringify(o)); }
 function pfMods(b){
   if(!b) return [];
-  var n=Math.min(b.mod||0, PF_MODS_FULL.length);
-  if(!b.mods){
-    var src=(b.ord&&b.ord.length===n)?b.ord.slice(0):(function(){var a=[];for(var i=0;i<n;i++)a.push(i);return a;})();
-    b.mods=src.map(function(k){ return pfClone(PF_MODS_FULL[k]); });
-  }
+  var n=b.mod||0;
+  /* 显式赋过模块数组（pfEvolve / 演示数据）且数量对得上 → 原样用，不碰模板。
+     不能把 mod 截到 PF_MODS_FULL.length：再次学习生成的画像会多出模板里没有的新模块
+     （文件预览），一截就又按模板重建，新模块当场丢掉，对比永远算不出「新增」 */
+  if(b.mods && b.__modsN===n) return b.mods;
+  var tpl=Math.min(n, PF_MODS_FULL.length);
+  var src=(b.ord&&b.ord.length===tpl)?b.ord.slice(0):(function(){var a=[];for(var i=0;i<tpl;i++)a.push(i);return a;})();
+  b.mods=src.map(function(k){ return pfClone(PF_MODS_FULL[k]); });
+  b.__modsN=n;
   return b.mods;
 }
 /* 取当前批次的第 ri 个模块（渲染/操作都以批次内索引为准） */
 function pfModAt(ri){
   var m=pfMods(pfCurBatch());
   return (m&&m[ri])?m[ri]:null;
+}
+
+/* ---------- 版本标识 ----------
+   一个应用的第几次学习 = 第几版画像。批次号 PF-20261116-02 这种串没人记得住，
+   列表和对比下拉里一律显示「V2 · 11-05~11-12」，能一眼认出是哪一版。
+   编号按学习开始时间升序：最早那版是 V1，最新一次学习就是最大号（2026-11-18 沁提） */
+function pfVerNo(a,b){
+  if(!a||!b) return 0;
+  var arr=(a.batches||[]).slice(0).sort(function(x,y){ return x.ct>y.ct?1:-1; });
+  for(var i=0;i<arr.length;i++){ if(arr[i].id===b.id) return i+1; }
+  return 0;
+}
+function pfVerTag(a,b){
+  var n=pfVerNo(a,b);
+  return n?('<i class="pf-ver">V'+n+'</i>'):'';
+}
+function pfVerTx(a,b){
+  var n=pfVerNo(a,b);
+  return (n?'V'+n:'—')+' · '+String(b.ct||'').slice(5,10)+'~'+String(b.et||'').slice(5,10);
 }
 
 /* ---------- 状态徽标 ---------- */
@@ -5444,6 +5506,35 @@ function pfModalOpen(){
   return !!(m && m.className && m.className.indexOf('on')>=0);
 }
 
+/* 新学习产出的画像：以当前生效画像为底，叠加上本次新识别到的内容。
+   —— 应用没变化时，重新学习的识别结果本该和上一版几乎一致，所以底稿取基线；
+      原型里固定多识别出一个「文件预览」模块，模拟"应用上了新功能"，
+      这样从新建学习一路点下来，对比页能真的看到「新增 1」。
+   —— 真实环境这块完全由识别结果决定，原型只是给一个确定的演示态 */
+function pfEvolve(a,b){
+  if(!a||!b||b.st!=='pd'||b.__evolved) return;
+  b.__evolved=1;
+  /* 底稿优先取当前生效画像；没有已发布的，退到最近一版已出结果的画像
+     （只学到「待发布」就再学一次的场景，也得能看出这一版多了什么） */
+  var pb=null, fallback=null;
+  (a.batches||[]).forEach(function(x){
+    if(x.id===b.id) return;
+    if(x.st==='pb'&&!pb) pb=x;
+    if((x.st==='pd'||x.st==='rp')&&!fallback) fallback=x;
+  });
+  var src=pb||fallback;
+  if(!src) return;                      /* 这个应用的第一次学习，没有底稿可继承 */
+  var base=pfMods(src);
+  if(!base.length) return;
+  var ms=base.map(function(m){ return pfClone(m); });
+  if(!ms.some(function(m){ return m.n==='文件预览'; })){
+    ms.push({n:'文件预览',api:2,main:'/blim-api/api/file/v1/preview',cnt:168,usr:19,sens:'',
+      apis:[{u:'/blim-api/api/file/v1/preview',cnt:132,usr:19},
+            {u:'/blim-api/api/file/v1/thumb',cnt:36,usr:11}]});
+  }
+  b.mods=ms; b.mod=ms.length; b.__modsN=ms.length;
+}
+
 /* 分析中 → 待发布：2026-11-17 沁定 5 秒——演示时不用干等，等待感也够 */
 function pfAutoAn(){
   if(typeof window==='undefined'||!window.document) return;
@@ -5456,6 +5547,7 @@ function pfAutoAn(){
         if(b.st!=='an') return;
         b.st='pd'; b.mod=b.mod||PF_MODS_FULL.length;
         b.pt='';
+        pfEvolve(a,b);
         pfAudit(a.n,b.id,'生成画像','分析完成，产出 '+b.mod+' 个模块，转为待发布');
         if(PF_CUR.app===a.id){ lpTip('「'+a.n+'」画像已生成，待发布'); if(!pfModalOpen()) lpRerender(); }
       },5000);
@@ -5657,7 +5749,7 @@ function pfMainHtml(c,r){
 
   /* 批次列表 */
   h+='<div class="pf-batches"><table class="pf-btbl"><thead><tr>'
-    +'<th style="width:36px"></th><th>学习窗口</th><th style="width:66px">时长</th>'
+    +'<th style="width:36px"></th><th>版本 / 学习窗口</th><th style="width:66px">时长</th>'
     +'<th style="width:92px">采集条数</th><th style="width:66px">模块数</th>'
     /* 列宽按内容定（2026-11-17）：时间、状态这类字段一旦折行，整张表行高就参差不齐 */
     +'<th style="width:118px">状态</th><th style="width:142px">最近发布时间</th>'
@@ -5669,7 +5761,7 @@ function pfMainHtml(c,r){
     if(b.st==='an') stCell+='<div class="pf-sub">约 5 秒</div><div class="pf-bar wait"><i></i></div>';
     h+='<tr class="'+(on?'on':'')+'" onclick="pfPickBatch(\''+b.id+'\')">'
       +'<td class="c-chk"><input type="radio" name="pfb" '+(on?'checked':'')+'></td>'
-      +'<td'+(on?' class="cur"':'')+'>'+b.ct+' ~ '+b.et.slice(5,10)+'</td>'
+      +'<td'+(on?' class="cur"':'')+'>'+pfVerTag(app,b)+b.ct+' ~ '+b.et.slice(5,10)+'</td>'
       +'<td>'+b.days+' 天</td><td>'+pfNum(b.cnt)+'</td><td>'+pfNum(b.mod)+'</td>'
       +'<td>'+stCell+'</td><td style="color:#909399">'+(b.pt||'\u2014')+'</td>'
       /* 主操作位固定宽度：发布 / 取消发布 / 结束学习 / — 文字长度不同，不固定宽度会把删除顶来顶去 */
@@ -5699,13 +5791,13 @@ function pfMainHtml(c,r){
     h+='<div class="pf-ttabs">'
       +tabs.map(function(t,i){
         return '<span class="'+(i===PF_CUR.tab?'on':'')+'" onclick="pfTab('+i+')">'+t+'</span>' }).join('')
-      +'<span class="meta">批次 '+cur.id+' · 采集 '+pfNum(cur.cnt)+' 条 · '+cur.usr+' 个用户'
+      +'<span class="meta">'+pfVerTx(app,cur)+' · 批次 '+cur.id+' · 采集 '+pfNum(cur.cnt)+' 条 · '+cur.usr+' 个用户'
         +(live?' · <b style="color:#0095E5">学习中，实时采集</b>':'')
         +(cur.st==='pb'?' · <b style="color:#00B42A">当前生效</b>':'')
         +(cur.st==='rp'?' · <b style="color:#A8ABB2">已被替换，可重新发布</b>':'')+'</span>'
       +((cur.st==='pd'||cur.st==='rp')
         ? '<span class="act">'
-          +(pfCmpBaseList(cur).length?'<button class="btn-line" style="margin-right:8px" onclick="pfCmpOpen()">对比历史画像</button>':'')
+          +(pfCmpBaseList(cur).length?'<button class="btn-line pf-cmpgo" onclick="pfCmpOpen()">版本对比</button>':'')
           +'<button class="btn-pri pf-btn" onclick="pfPublish(\''+app.id+'\',\''+cur.id+'\')">'+(cur.st==='rp'?'重新发布画像':'发布画像')+'</button></span>'
         : '')
       +'</div>';
@@ -6227,20 +6319,20 @@ function pfCmpView(app, cb){
   /* 头：基线选择 + 退出 */
   var h='<div class="pf-cmpbar">'
     +'<span class="back" onclick="pfCmpClose()">‹ 返回模块清单</span>'
-    +'<span class="dv"></span><b>画像对比</b>'
-    +'<span class="vs">基线</span>'
-    +'<select class="fsel" style="min-width:190px;height:28px;font-size:12px" onchange="pfCmpSetBase(this.value)">'
+    +'<span class="dv"></span><b>版本对比</b>'
+    +'<span class="vs">对比基线</span>'
+    +'<select class="fsel" style="min-width:236px;height:32px;font-size:12px" onchange="pfCmpSetBase(this.value)">'
     +(function(){
       var o='';
       pfCmpBaseList(cb).forEach(function(b){
-        o+='<option value="'+b.id+'"'+(b.id===PF_CMP.base?' selected':'')+'>'+b.id
+        o+='<option value="'+b.id+'"'+(b.id===PF_CMP.base?' selected':'')+'>'+pfVerTx(app,b)
           +'（'+(b.st==='pb'?'当前生效':b.st==='rp'?'已替换':'待发布')+' · '+b.mod+' 模块）</option>';
       });
       return o;
     })()
     +'</select>'
     +'<span class="arw">→</span>'
-    +'<span class="cur">'+cb.id+'（本批次 · '+pfMods(cb).length+' 模块）</span>'
+    +'<span class="cur">'+pfVerTx(app,cb)+'（当前画像 · '+pfMods(cb).length+' 模块）</span>'
     +'</div>';
 
   /* 摘要：四态可点筛选 */
@@ -6281,9 +6373,14 @@ function pfCmpView(app, cb){
       +'<td class="c-exp"><span class="pf-caret'+(sel?' on':'')+'">'+(sel?'&minus;':'+')+'</span></td>'
       +'<td class="nm">'+nm+cal+'</td>'
       +'<td><span class="pf-ctag '+r.type+'">'+PF_CMP_T[r.type]+'</span></td>'
-      +'<td class="ch">'+(desc.length?desc.join(' · '):'<span class="nil">无结构变化</span>')+'</td>'
+      +'<td class="ch">'+(function(){
+        if(desc.length) return desc.join(' · ');
+        if(r.type==='add') return '新识别 · '+((r.now&&r.now.api)||0)+' 个 API';
+        if(r.type==='del') return '<span class="nil">本版未识别到</span>';
+        return '<span class="nil">&mdash;</span>';
+      })()+'</td>'
       +'<td class="ops">'
-      +((r.type==='add')?'<span class="nil">新模块，无基线可比</span>'
+      +((r.type==='add')?'<span class="nil">保留新模块</span>'
         :(r.now&&r.now.__cal==='base')
           ? '<a class="op" onclick="event.stopPropagation();pfCmpUndo(\''+encodeURIComponent(r.key)+'\')">撤销回填</a>'
           : (r.type==='same')
@@ -7315,7 +7412,7 @@ reg('/resource/publish/profile',{html:pfMainHtml});
   if(!bm.some(function(m){ return m.n==='旧版权限校验'; })){
     bm.push({n:'旧版权限校验',api:1,main:'/blim-api/api/auth/v1/legacyPermit',cnt:42,usr:6,sens:'',
       apis:[{u:'/blim-api/api/auth/v1/legacyPermit',cnt:42,usr:6}]});
-    pb.mod=bm.length;
+    pb.mod=bm.length; pb.__modsN=bm.length;   /* 两个一起改，否则下次 pfMods 会按模板重建把它冲掉 */
   }
 })();
 
