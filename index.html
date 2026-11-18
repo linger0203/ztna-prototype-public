@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-page-node-id="orahOoCgjmvo2kvU6R50hT">
-<head data-page-node-id="FFk00PhBDPcxIKvf7ewCQK">
-<meta charset="utf-8" data-page-node-id="lyjyu7fn6Bf4DNV2B4ZL5s">
+<html lang="zh-CN" data-page-node-id="o9dO65Yg9BHae8e2EqXslB">
+<head data-page-node-id="3gDGzFd4ijhFxO0fbwMmHQ">
+<meta charset="utf-8" data-page-node-id="dxjlBtylvs6MqJ6wX0AliW">
 <title>竹云零信任安全服务平台 · 管控台原型</title>
-<link rel="stylesheet" href="_assets/iconfont.css" data-page-node-id="E0BWQY8k7cIPbDdCNbahJJ">
+<link rel="stylesheet" href="_assets/iconfont.css" data-page-node-id="LjESDKU4iH6SE61vqCwxZh">
 <script src="_assets/echarts.min.js"></script>
 <script>if(typeof echarts==="undefined"){document.write('<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"><\/script>')}</script>
 <style>
@@ -365,6 +365,27 @@ input{font-family:inherit}
 .placeholder{background:#fff;border-radius:3px;padding:70px 20px;text-align:center;color:var(--t3)}
 .placeholder .big{font-size:15px;color:var(--t2);margin-bottom:8px}
 .placeholder .route{font-size:12px;color:var(--t4);font-family:Consolas,monospace}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1629,94 +1650,238 @@ select.fsel,select.fin{
   background:#EAF5FD;color:var(--sp-blue);font-size:11px;font-style:normal;font-weight:600;letter-spacing:.2px;
   vertical-align:1px}
 
+/* ---------- 对比清单：V1/V2 名字并列 + 变更内容（2026-11-18 沁：箭头看不懂谁是谁，API 也要露出来） ---------- */
+.pf-crow .nm{vertical-align:top}
+.nmline{display:flex;align-items:baseline;gap:6px;line-height:20px;font-size:13px;color:#1D2129;min-width:0}
+.nmline>span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nmline.mute,.nmline.mute>span{color:#86909C;font-size:12px}
+.vbadge{display:inline-flex;align-items:center;justify-content:center;height:16px;padding:0 4px;border-radius:2px;
+  background:#EAF5FD;color:var(--sp-blue);font-size:10px;font-style:normal;font-weight:600;flex-shrink:0;letter-spacing:.3px}
+.vbadge.old{background:#F2F3F5;color:#86909C}
+.cl{display:flex;align-items:flex-start;gap:6px;line-height:20px;font-size:12px;color:#1D2129}
+.cl+.cl{margin-top:1px}
+.cl .k{flex-shrink:0;font-style:normal;color:#86909C;min-width:66px}
+.cl .df{color:var(--sp-warn);word-break:break-all}
+.cl .df em{font-style:normal;color:#C9CDD4;margin:0 4px}
+.cvs{display:flex;flex-wrap:wrap;gap:3px 4px;min-width:0;flex:1}
+.cvs.col{flex-direction:column;flex-wrap:nowrap}
+.cl .ap{display:block;max-width:100%;white-space:normal;word-break:break-all;
+  font-family:Consolas,Monaco,'Courier New',monospace;font-size:11px;padding:1px 5px;border-radius:2px;
+  line-height:16px}
+.cvs:not(.col) .ap{max-width:100%}
+.cl .ap.add{color:var(--sp-blue);background:#EAF5FD}
+.cl .ap.del{color:var(--sp-danger);background:#FEECEC}
+.cl .ap.more{color:#A8ABB2;background:var(--sp-th)}
+.pf-cmpd .rhd .vbadge{margin-right:6px;vertical-align:1px}
+
+/* ---------- 对比视图：沿用开关 + 草稿态 + 底部保存条 + V2 预览（2026-11-18 沁：点完不知道生效没、要能取消、要能批量、要预览） ---------- */
+/* 采纳后不改状态文案，整行高亮表示「已选中/待保存」（沁 2026-11-18） */
+.pf-crow.ado td{background:#EAF5FD}
+.pf-crow.ado:hover td{background:#E1F1FC}
+.pf-ctag.wait{background:#FFF7E6;color:#C77700;border:1px solid #F7D9A8}
+.pf-cmp-tbl .c-chk{text-align:center;padding-right:0}
+.pf-sw{display:inline-flex;align-items:center;gap:7px;cursor:pointer;user-select:none}
+.pf-sw i{position:relative;width:28px;height:16px;border-radius:8px;background:#D9DDE3;transition:background .15s;flex-shrink:0}
+.pf-sw i::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.15);transition:left .15s}
+.pf-sw.on i{background:var(--sp-blue)}
+.pf-sw.on i::after{left:14px}
+.pf-sw b{font-size:12px;font-weight:400;color:#86909C;white-space:nowrap}
+.pf-sw.on b{color:var(--sp-blue);font-weight:500}
+.pf-sw:hover b{color:var(--sp-blue)}
+.pf-cmpfoot{position:sticky;bottom:0;z-index:5;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:12px 0;margin-top:14px;background:#fff;border-top:1px solid var(--sp-bd-l)}
+.pf-cmpfoot .sel{font-size:13px;color:#4E5969}
+.pf-cmpfoot .sel b{color:var(--sp-blue);font-weight:600}
+.pf-cmpfoot .dv{width:1px;height:14px;background:var(--sp-bd-l)}
+.pf-cmpfoot .dt{font-size:12px;color:#86909C}
+.pf-cmpfoot .dt.on{color:var(--sp-warn);font-weight:500}
+.pf-cmpfoot .sp{flex:1}
+.pf-cmpfoot .btn-line[disabled]{opacity:.55;cursor:not-allowed}
+.pf-prev{margin-top:14px;border:1px solid var(--sp-bd-l);border-radius:3px;overflow:hidden}
+.pf-prev .hd{display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--sp-th);cursor:pointer}
+.pf-prev .hd b{font-size:13px;color:#1D2129}
+.pf-prev .hd .sub{font-size:12px;color:#86909C}
+.pf-prev .hd .tg{margin-left:auto;font-size:12px;color:var(--sp-blue)}
+.pf-prev .bd{padding:0 12px 10px}
+.pf-prev .pf-prevt{margin-top:6px}
+.pf-prevt tr.fromv1 td{background:#FAF6FF}
+.pf-prevt td.u{font-family:Consolas,Monaco,'Courier New',monospace;font-size:12px;color:#4E5969}
+
+/* 预览抽屉（v2.24）：原来是常驻表格，差异多时把清单挤下去，改成按钮开抽屉 */
+.pf-prevwrap{padding:2px 0}
+.pf-prevwrap .cap{font-size:12px;color:#86909C;margin-bottom:10px;line-height:18px}
+.pf-prevwrap .cap b{color:#1D2129;font-weight:600}
+.pf-prevwrap .pf-prevt{width:100%;table-layout:fixed}
+
+/* ---------- v2.25 对比清单可读性（2026-11-18 沁：整列太花、V1/V2 顺序要统一、沿用改「采纳」按钮） ---------- */
+/* 变更内容：同一维度两行对照，当前版在上、基线版在下，徽标与模块名称列一致 */
+.cl .vv{display:flex;align-items:baseline;gap:5px;min-width:0;color:#1D2129;font-size:12px;line-height:20px}
+.cl .vv.old{color:#86909C}
+.cl .vv .tx{min-width:0;word-break:break-all}
+.cl .vv.mono .tx{font-family:Consolas,Monaco,'Courier New',monospace;font-size:11px}
+.cl .dg{min-width:0;word-break:break-all;color:#1D2129;line-height:20px}
+.cl .dg.old{color:#86909C}
+.cl .dg b{font-weight:600}
+.cl .dv2{font-style:normal;color:#C9CDD4;margin:0 5px}
+.cl .dg.apx{font-family:Consolas,Monaco,'Courier New',monospace;font-size:11px}
+.cl .dg.apx{color:var(--sp-blue)}
+.cl .dg.old.apx{color:#86909C}
+.cl .k{white-space:nowrap}
+.pf-cmp-tbl td.ch{vertical-align:top;padding-top:10px;padding-bottom:10px}
+
+/* 采纳按钮：未采纳描边（可点），已采纳进草稿浅底带勾，已写入画像实心 */
+.pf-adopt{display:inline-flex;align-items:center;justify-content:center;gap:4px;height:28px;padding:0 10px;
+  background:#fff;color:var(--sp-blue);border:1px solid var(--sp-blue);border-radius:2px;font-size:12px;
+  font-family:inherit;cursor:pointer;white-space:nowrap;transition:background .15s}
+.pf-adopt:hover{background:#EAF5FD}
+.pf-adopt.on{background:#EAF5FD}
+.pf-adopt.done{background:var(--sp-blue);border-color:var(--sp-blue);color:#fff}
+.pf-adopt.done:hover{background:var(--sp-blue-h);border-color:var(--sp-blue-h)}
+.pf-adopt .ck{font-style:normal;font-size:11px;line-height:1}
+
+/* 底部操作条分两组：左批量、右「状态 + 收尾 + 主按钮」，两组各自不内部换行 */
+.pf-cmpfoot{justify-content:space-between}
+.pf-cmpfoot .lf,.pf-cmpfoot .rg{display:flex;align-items:center;gap:10px;flex-wrap:nowrap;min-width:0}
+.pf-cmpfoot .rg{margin-left:auto}
+
+/* 多行变更内容时，状态与采纳按钮跟着第一行落顶，不要浮在行中间 */
+.pf-cmp-tbl td.st{vertical-align:top;padding-top:13px}
+.pf-cmp-tbl td.ops{vertical-align:top;padding-top:11px}
+/* 底部操作条压一点内边距，1440 下保证「全部采纳 / 状态 / 保存」同一行放得下 */
+.pf-cmpfoot{gap:8px}
+.pf-cmpfoot .lf,.pf-cmpfoot .rg{gap:8px}
+.pf-cmpfoot .btn-line{padding:0 12px}
+
+/* 预览抽屉里的模块 API 明细行 */
+.pf-prevwrap .aprow td{padding:0 10px 8px;border-bottom:1px solid #F2F3F5}
+.pf-prevwrap .aprow .aplist{margin-left:2px;padding:6px 10px 6px 9px;background:#F8FAFC;border-left:2px solid #E5E6EB;border-radius:0 2px 2px 0}
+.pf-prevwrap .aprow.fromv1 .aplist{background:#F9F6FE;border-left-color:#E3D6F5}
+.pf-prevwrap .apil{display:flex;align-items:baseline;gap:6px;padding:2px 0;font-size:11px;color:#4E5969;line-height:16px}
+.pf-prevwrap .apil .u{flex:1;min-width:0;font-family:Consolas,Monaco,'Courier New',monospace;word-break:break-all}
+.pf-prevwrap .apil .mk{flex-shrink:0;height:14px;line-height:14px;padding:0 4px;border-radius:2px;
+  background:#EAF5FD;color:var(--sp-blue);font-size:10px}
+.pf-prevwrap .apil .c{flex-shrink:0;color:#A8ABB2;font-variant-numeric:tabular-nums}
+
+/* ---------- v2.28 新建学习：应用多选下拉（2026-11-18 沁：点选择框展开、多选、点空白收起） ---------- */
+/* 面板改成浮层：原来在文档流里，一展开就把「学习时长」和已选表格顶下去，像换了个页面 */
+.pf-sel{position:relative}
+.pf-panel{position:absolute;left:0;right:0;top:100%;z-index:60;margin-top:4px;background:#fff;
+  border:1px solid #E5E6EB;border-radius:6px;box-shadow:0 8px 24px rgba(29,33,41,.12)}
+.pf-panel.on{display:block}
+.pf-panel .phead{display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 10px;
+  border-bottom:1px solid #F2F3F5;font-size:12px;color:#86909C;background:#FAFBFC;border-radius:6px 6px 0 0}
+.pf-panel .phead .lk{color:var(--sp-blue);cursor:pointer}
+.pf-panel .phead .lk:hover{text-decoration:underline}
+.pf-panel .sbox{padding:8px;border-bottom:1px solid #F2F3F5}
+.pf-panel .sbox input{width:100%;height:32px;border:1px solid var(--sp-bd);border-radius:2px;padding:0 8px;
+  font-size:13px;outline:none;font-family:inherit}
+.pf-panel .sbox input:focus{border-color:var(--sp-blue)}
+.pf-panel .list{max-height:264px;overflow:auto;padding:4px 0 6px}
+/* 已勾选的行在面板里也要看得出来（光看 checkbox 太弱） */
+.pf-pn.lv2.on{background:#F2F9FE}
+.pf-pn.lv2.on .nm{color:var(--sp-blue);font-weight:500}
+.pf-pn.lv2.on:hover{background:#EAF5FD}
+.pf-chip.more{background:#F2F3F5;color:#86909C}
+
+/* 展开行顶部的「恢复为本次识别结果」条（列表行不再挂已采纳标记） */
+.pf-exp .pf-expbar{display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:6px 10px;
+  background:#FAFBFC;border-left:2px solid var(--sp-bd);border-radius:0 2px 2px 0;font-size:12px;color:#86909C}
+.pf-exp .pf-expbar .tx{flex:1;min-width:0}
+.pf-exp .pf-expbar .op{color:var(--sp-blue);cursor:pointer}
+
+/* 新建学习：说明「新学习不带上一版校准」 */
+.pf-learnhint{margin:0 0 14px;padding:8px 10px;background:#F2F9FE;border-left:2px solid var(--sp-blue);
+  border-radius:0 2px 2px 0;font-size:12px;color:#4E5969;line-height:19px}
+
 /*<<LISTS_CSS_END>>*/
 </style>
 </head>
-<body data-page-node-id="BUtbCMrfyh8yXMTtGLLl7D">
+<body data-page-node-id="Y5jxgSAGJASOsYOvIBSOdl">
 
 <!-- ================= 登录 ================= -->
-<div id="login" data-page-node-id="SMPJZ1C9Plwh1urh0aCa3M">
-  <div class="lg" data-page-node-id="MFu44pB25alaHFRHqlqFib"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台" data-page-node-id="UDqtQ1xQCAQehGvvqgpwrG"></div>
-  <div class="card" data-page-node-id="rQxtHUQALzzkYEiceewqXA">
-    <h2 data-page-node-id="QqnvCxFwwMfuYkMeOnRZbJ">系统登录</h2>
-    <div class="fld" data-page-node-id="oUAHu64RqrzU220mkYZ0NT"><i class="iconfont icon-account_number" data-page-node-id="MUsEfgcBZWhzkItIR0lmW1"></i><input id="u" placeholder="账号" value="aoyuling" data-page-node-id="h5gyrjsBrJ2ed9AXM2LfMO"></div>
-    <div class="fld" data-page-node-id="7OasoqvDXFmcSvyHUYCVO9"><i class="iconfont icon-password" data-page-node-id="UAcA0b2IBJH055GLnYDIU7"></i><input id="p" type="password" placeholder="密码" value="B@m123456" data-page-node-id="hxXVIcz15ri16SS7yjxNe1"></div>
-    <div class="fld cap" data-page-node-id="HD1UArl0VLCdjSeOFpdXMV">
-      <i class="iconfont icon-verification_code" data-page-node-id="tPVjUAlojnDzvM8wuHRQlP"></i>
-      <input id="c" placeholder="验证码" value="8F2D" data-page-node-id="pmd0AxGyc8OAsuF1nPiLzU">
-      <div class="img" id="capImg" title="看不清？换一张" onclick="makeCap()" data-page-node-id="rXY6DcfSPRs3b0IspIwtIU"><b style="color:#F2C94C" data-page-node-id="WMMpLtWzrjyuX91jjKDy5k">8</b><b style="color:#FF7BA9" data-page-node-id="IOcEjMDAcvjJhWgJFHzDel">F</b><b style="color:#5ADE8B" data-page-node-id="qEYxxB83cJ25PcRyHPj49Z">2</b><b style="color:#5FB8FF" data-page-node-id="GETKj5raypIvkw3Hb6HhC1">D</b></div>
+<div id="login" data-page-node-id="ertE249KxFFzVB521by2kh">
+  <div class="lg" data-page-node-id="3VfflVFEOLgMNtdSBHEt5x"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台" data-page-node-id="kYfR4Z7e7ppu0u3qf6Yz2w"></div>
+  <div class="card" data-page-node-id="hjBEzEbvwsiTEZINuBdiJq">
+    <h2 data-page-node-id="Xwet81iAr9NRWQ8B65icUi">系统登录</h2>
+    <div class="fld" data-page-node-id="s86IaT3XsGFKFkVWmfyWt8"><i class="iconfont icon-account_number" data-page-node-id="ML2wHkYEQ8nmOzDmeYsEgb"></i><input id="u" placeholder="账号" value="aoyuling" data-page-node-id="osVpLQZgOiflXgjF1qHb9C"></div>
+    <div class="fld" data-page-node-id="fn8jf3epDoILoD1t5U0zbb"><i class="iconfont icon-password" data-page-node-id="VA9WP6l55XsRBi4OmXcLvn"></i><input id="p" type="password" placeholder="密码" value="B@m123456" data-page-node-id="lovKWVqIeWspOws9JgBEye"></div>
+    <div class="fld cap" data-page-node-id="n0DT6f73C8suabJc1HjfQd">
+      <i class="iconfont icon-verification_code" data-page-node-id="rbHcRWV56sYfljS82WyD6l"></i>
+      <input id="c" placeholder="验证码" value="8F2D" data-page-node-id="nAuTp8KZ5VCGwra4PDMek0">
+      <div class="img" id="capImg" title="看不清？换一张" onclick="makeCap()" data-page-node-id="3ygPNUmcmSLae9oWtL588w"><b style="color:#F2C94C" data-page-node-id="lWbNEEr1EWPJ9Hw7e02T0u">8</b><b style="color:#FF7BA9" data-page-node-id="ZPy3UJ5LxoAA3QhyZ37hqs">F</b><b style="color:#5ADE8B" data-page-node-id="aXBVZCEr121z7OELanYL92">2</b><b style="color:#5FB8FF" data-page-node-id="BU0ZeGA0AaxfvEKFAzJ68Q">D</b></div>
     </div>
-    <div class="row" onclick="document.getElementById('rm').classList.toggle('on')" data-page-node-id="ooNeKHBJ3t6HlhEwpmXojo">
-      <span class="box" id="rm" data-page-node-id="3OjZ8z96ZsgONXxmBvRdGQ"></span>记住密码
+    <div class="row" onclick="document.getElementById('rm').classList.toggle('on')" data-page-node-id="pnjJuCVvOtBtsFskS3kwmw">
+      <span class="box" id="rm" data-page-node-id="k99tmXksZ8mXQiNXhnUyW0"></span>记住密码
     </div>
-    <div class="err" id="err" data-page-node-id="GYXiiGlHvCaptFVFzkYvfO"></div>
-    <button class="btn" onclick="doLogin()" data-page-node-id="KkgIbPlcn4wEOJkoUkbcbO">登 录</button>
+    <div class="err" id="err" data-page-node-id="ZCEw0ukiW3ZAU6wzncKCMn"></div>
+    <button class="btn" onclick="doLogin()" data-page-node-id="o9iXjfFCAfvzI9GEFZgn7F">登 录</button>
   </div>
-  <div class="foot" data-page-node-id="vASQ5H01Ze49G4QfyRcRPz">Copyright © 2022 BambooCloud 技术支持：深圳竹云科技股份有限公司</div>
+  <div class="foot" data-page-node-id="VlTTwj8uTv3FFHDNSDaqX2">Copyright © 2022 BambooCloud 技术支持：深圳竹云科技股份有限公司</div>
 </div>
 
 <!-- ================= 角色选择 ================= -->
-<div id="role" class="hide" data-page-node-id="si9dBlMBOWCGEKQKEvzLMy">
-  <div class="wrap" data-page-node-id="rFNtR8HO0CW5ionYgqH5fE">
-    <h1 data-page-node-id="KT7tjBiigTahYUTcCpkNpv">登录</h1>
-    <div class="tip" data-page-node-id="Mn3nkvfvDdSKV9dIKmrGVT">您具有多个管理员角色，请选择本次登录的角色</div>
-    <div class="opt" data-r="系统管理员" onclick="pickRole(this)" data-page-node-id="4lMKgFqY8FtG1t86mQPDID">
-      <span class="av" data-page-node-id="3pb7GrCMyeKSYSRCZPeXnb"><i class="iconfont icon-operator" data-page-node-id="mQxHgVSWDew5mpeQil3fQu"></i></span><span class="nm" data-page-node-id="PkDMMKQ6Na4qRGvrOq2NeC">系统管理员</span><span class="rdo" data-page-node-id="xZilzcSE2wvZB4udPZnc4U"></span>
+<div id="role" class="hide" data-page-node-id="5JGrFWZfuSEwTh9ew8i31Z">
+  <div class="wrap" data-page-node-id="cEsl5MNRsJ6uRl17FZtcL9">
+    <h1 data-page-node-id="FwvTzQQzsYsRBGyaLCtMQ4">登录</h1>
+    <div class="tip" data-page-node-id="nMv3EgxSgQeu9PTeJAf3JS">您具有多个管理员角色，请选择本次登录的角色</div>
+    <div class="opt" data-r="系统管理员" onclick="pickRole(this)" data-page-node-id="583YwAj7E0rKFfkyD74KVh">
+      <span class="av" data-page-node-id="fomtcwU58EN2IwTXGGGiXP"><i class="iconfont icon-operator" data-page-node-id="EO6EwwONzbhBDQkDZMgmxI"></i></span><span class="nm" data-page-node-id="VDEYsARIN4eNzcVZY0D9Ex">系统管理员</span><span class="rdo" data-page-node-id="ssm5uHjT0CQb9Z15aZnG6P"></span>
     </div>
-    <div class="opt on" data-r="超级管理员" onclick="pickRole(this)" data-page-node-id="DNxcaaGYjwF3dLDMoZaExp">
-      <span class="av" data-page-node-id="CnyHLKVy0OiDk7Tji2mCGB"><i class="iconfont icon-operator" data-page-node-id="TQKugUF4Y3waPw4YdwDlKj"></i></span><span class="nm" data-page-node-id="v3nON9cQFhiHWvnq9FDGzZ">超级管理员</span><span class="rdo" data-page-node-id="TFPXm906waIu3LOFZQXDvH"></span>
+    <div class="opt on" data-r="超级管理员" onclick="pickRole(this)" data-page-node-id="adfS0v1hdLHNk1y8GfS4Kp">
+      <span class="av" data-page-node-id="7a71q5X9jOEyLmUDSQEJOd"><i class="iconfont icon-operator" data-page-node-id="yX8ZiRhdNZlUn4AL9vN2V4"></i></span><span class="nm" data-page-node-id="sNcXFzHDqT0YshUlJWZHTR">超级管理员</span><span class="rdo" data-page-node-id="44xQUdJX55sC5VpFPtaNKK"></span>
     </div>
-    <div class="acts" data-page-node-id="rCemXva7XnIqwqjMJtDRAb">
-      <button class="no" onclick="location.reload()" data-page-node-id="Gr5snNG8xyvbOQVY1x1UcR">取 消</button>
-      <button class="ok" onclick="enterApp()" data-page-node-id="0yvOf0rzTE1gmRas8sdtOx">登 录</button>
+    <div class="acts" data-page-node-id="qHM4RZVi0HW7AzQO1vMRrq">
+      <button class="no" onclick="location.reload()" data-page-node-id="LJy6GY3TLqzY3F8pP5vDPa">取 消</button>
+      <button class="ok" onclick="enterApp()" data-page-node-id="tixGEIumtanBpD3tK3XaYn">登 录</button>
     </div>
   </div>
 </div>
 
 <!-- ================= 应用 ================= -->
-<div id="app" data-page-node-id="G3fnGyKB63Ky0c83FbDjV8">
-  <header class="topbar" data-page-node-id="t156FA13sBeMRXeCCr4cIJ">
-    <div class="logo" data-page-node-id="D2F7ZXBthWRop5Hr994Aol"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台" data-page-node-id="MtjfXAjOuQKNhBLo6q6OA4"></div>
-    <nav id="topnav" data-page-node-id="A7ituF5njhMGqrMCQ9nuHy"></nav>
-    <div class="right" data-page-node-id="SdzqMYjG9Quuj7hmfjhFlL">
-      <div class="grid" id="btnGrid" onclick="togglePop('popSafety',event)" data-page-node-id="E7A2hFMvF4uAXrjLHMUiD8"><i data-page-node-id="rPuEIhunLp9au3YNgy4FbC"></i><i data-page-node-id="ehEZo8zhHQa8nrUh3g1zTR"></i><i data-page-node-id="woYh7dlnHCUvMldavNwSU3"></i><i data-page-node-id="zGjahRZJiAHHGAuE2KBGUx"></i><i data-page-node-id="P7E1rXEla2AE1MsyH9NmgJ"></i><i data-page-node-id="goF1sxx9qEtlN8dDAod6iV"></i><i data-page-node-id="wUJKIl1TvDig1F7Vsf0VUA"></i><i data-page-node-id="3riAf3Bu194K57GJMbDekK"></i><i data-page-node-id="eT1GvF85SlATI4b4oFaBRv"></i></div>
-      <div class="who" id="btnWho" onclick="togglePop('popUser',event)" data-page-node-id="8nMAHyQGsHsdBan1IWWoa2"><span class="av" data-page-node-id="KB97y1Nv8gG0IZ2qMz6Hao">a</span><span id="whoName" data-page-node-id="FDlvthfKBFByQ07EcHKM9s">aoyuling</span></div>
+<div id="app" data-page-node-id="PMlGmGRSVtYZ8PSQCxEBdT">
+  <header class="topbar" data-page-node-id="BmbIeFeovydwLKytsUztuO">
+    <div class="logo" data-page-node-id="YDoYA1fL8DDucLItZDg4aZ"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台" data-page-node-id="2iejpKk5kKyHgsaTQnHCGF"></div>
+    <nav id="topnav" data-page-node-id="YoguGmKlcmNXsBHvGuZDcW"></nav>
+    <div class="right" data-page-node-id="aJdIjLlPEKAFVR9mTHPA6O">
+      <div class="grid" id="btnGrid" onclick="togglePop('popSafety',event)" data-page-node-id="RzTtbiHZWJUbaHxeUEjFNF"><i data-page-node-id="FinV2wCS8vah1GAc65MPFL"></i><i data-page-node-id="i9ZJUt2xlWy6Ght3PUu4Fu"></i><i data-page-node-id="ZDxK6Ph4LAvQBQapBJJod1"></i><i data-page-node-id="c8o4o8EVC32fbjOYX7BEvj"></i><i data-page-node-id="dCduEGU1rtfvR1BtwiDzrj"></i><i data-page-node-id="DlGIQiSJYmYRxDdU4ifd5H"></i><i data-page-node-id="ikkJ4V9vOFnpp9r4NeBC2w"></i><i data-page-node-id="FWatC4Ys8vBIk60K2csAPC"></i><i data-page-node-id="XO5XO4MPDO2jdLIdnJng09"></i></div>
+      <div class="who" id="btnWho" onclick="togglePop('popUser',event)" data-page-node-id="J9pSDcY7k5IRf2WL6i9jWj"><span class="av" data-page-node-id="NHgiOLjUs6aGW0tOPpIfaX">a</span><span id="whoName" data-page-node-id="hMYiS8s1IN1P4GmGGOZJXc">aoyuling</span></div>
 
-      <div class="pop pop-safety" id="popSafety" data-page-node-id="BBwN4nX8ghWofpcUu4jRJx">
-        <div class="hero" data-page-node-id="xfhhIOQGCURbrCLTdQNjOx">
-          <div class="ht" data-page-node-id="Vv1DaYpC3BVSteXnix7yfl">零信任安全中心</div>
-          <div class="hs" data-page-node-id="LdEqKLA6HjBBAIDEVtmrwF">点击进入其他安全管控台</div>
-          <svg class="himg" viewBox="0 0 72 52" fill="none" data-page-node-id="MMtL1xltmeuVpd1xizgmGj">
-            <rect x="14" y="6" width="44" height="34" rx="4" fill="#fff" opacity=".95" data-page-node-id="INkX4e8OHBUihyyx6pN96k"/>
-            <rect x="14" y="6" width="44" height="34" rx="4" stroke="#8CC6F2" stroke-width="1" data-page-node-id="Pbr1TFkE8ETBrTG1WCZzD4"/>
-            <path d="M36 14l9 3v8c0 5-3.8 8.6-9 9.8-5.2-1.2-9-4.8-9-9.8v-8l9-3z" fill="#2C8FE0" data-page-node-id="atpMYsBkTwseTYRXusITmP"/>
-            <path d="M32 25.5l2.8 2.8 5.2-5.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="rRDGk3LXJNvYTBiWxNCHUC"/>
+      <div class="pop pop-safety" id="popSafety" data-page-node-id="aRsBCnckCN4vJSJ3YI8Wp2">
+        <div class="hero" data-page-node-id="4szRoumV9WjTSAExbUy0v1">
+          <div class="ht" data-page-node-id="at8cXdQLa9Df1yvoW2CF90">零信任安全中心</div>
+          <div class="hs" data-page-node-id="FjRFB3ZARnHU1LlWHPCmTN">点击进入其他安全管控台</div>
+          <svg class="himg" viewBox="0 0 72 52" fill="none" data-page-node-id="BThdTbawu5KBf0CzA7SEzp">
+            <rect x="14" y="6" width="44" height="34" rx="4" fill="#fff" opacity=".95" data-page-node-id="Yj0ZAfH2ClNhFFQyij9lbo"/>
+            <rect x="14" y="6" width="44" height="34" rx="4" stroke="#8CC6F2" stroke-width="1" data-page-node-id="JQDTbMaRNhZRopiFRiDUFf"/>
+            <path d="M36 14l9 3v8c0 5-3.8 8.6-9 9.8-5.2-1.2-9-4.8-9-9.8v-8l9-3z" fill="#2C8FE0" data-page-node-id="uUJ2bShup2BrFQ1igXhtC9"/>
+            <path d="M32 25.5l2.8 2.8 5.2-5.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="WfHsFwS8lrOcDjunLfzzc8"/>
           </svg>
         </div>
-        <div class="apps" id="safetyApps" data-page-node-id="y8FpFzCmzIDIL9CnAmSAEy"></div>
+        <div class="apps" id="safetyApps" data-page-node-id="E0lwLKyGJ2VTNmDYOEMLb8"></div>
       </div>
 
-      <div class="pop pop-user" id="popUser" data-page-node-id="LZfwtVDeGpxh2ECvLOODBK">
-        <div class="uhead" data-page-node-id="zuUmgCyYTWRU79fPCHaP1a">
-          <span class="uav" data-page-node-id="gS8N7go8V9Ini84nhcIFfe"><i class="iconfont icon-head_sculpture" data-page-node-id="vnexaxr0UTwaUVYkcXX9Cz"></i></span>
-          <div class="umeta" data-page-node-id="bi17ApNtNjlY1pDxY8Vnop"><b data-page-node-id="Vhutrlbkn0TH3GJQe5Ws2Y">aoyuling</b><span class="utag" data-page-node-id="ODT75gSGPIDHHoYNDcNu6N">超级管理员</span></div>
+      <div class="pop pop-user" id="popUser" data-page-node-id="X9cuGgbYJDkKWrcANYx5NR">
+        <div class="uhead" data-page-node-id="uhpxEXKHRtat4T2G4B4zPZ">
+          <span class="uav" data-page-node-id="RG5AlIR2Elu4mxyzBbgTHF"><i class="iconfont icon-head_sculpture" data-page-node-id="CUVLhHWYv9UIntfFH4Q1Kn"></i></span>
+          <div class="umeta" data-page-node-id="YvL0WH3GK0Ry9t0y5nFyDN"><b data-page-node-id="NowYfHd03hMpBkHCBp2k8s">aoyuling</b><span class="utag" data-page-node-id="y2chgBhLJP4e395Gon0h1K">超级管理员</span></div>
         </div>
-        <div class="uact" onclick="alert('修改密码：待批次七随「操作员管理」一起做')" data-page-node-id="5GtpydwYNnI4sJrQ19gdBY"><i class="iconfont icon-change_password" data-page-node-id="Vhu1KAknG4O25gNS7DZuBP"></i>修改密码</div>
-        <div class="uact" onclick="location.reload()" data-page-node-id="DwhHTMVfVaentguedvAblg"><i class="iconfont icon-exit_the_system" data-page-node-id="EI0V4nIFKWXwXw7SP8XEsb"></i>退出系统</div>
+        <div class="uact" onclick="alert('修改密码：待批次七随「操作员管理」一起做')" data-page-node-id="nAnSplVsuWFydhpe2tH2Uy"><i class="iconfont icon-change_password" data-page-node-id="dxGPWAxf0ovRLM09gvR20j"></i>修改密码</div>
+        <div class="uact" onclick="location.reload()" data-page-node-id="9bFiscRevsp1kslpc7f0gT"><i class="iconfont icon-exit_the_system" data-page-node-id="HDPtZ5SLzFKCLrCRFEPtIb"></i>退出系统</div>
       </div>
     </div>
   </header>
 
-  <aside class="sidebar" data-page-node-id="ZexCBDEJaHQm3DKRnlGzWv">
-    <div class="scroll" id="side" data-page-node-id="VHchA7OG6uP3WN0fl47zgZ"></div>
-    <div class="collapse" onclick="toggleCollapse()" data-page-node-id="g0GbpH35GOzKAJmKk3gPwx"><i class="iconfont icon-navigation_stow" data-page-node-id="gtARGolaffXiXOL3xQjrvL"></i><span data-page-node-id="ZKzER5KHFMc8oEFsTcfAKD">收起菜单</span></div>
+  <aside class="sidebar" data-page-node-id="ApAaQEAyrN2Dp9MtAAY7O7">
+    <div class="scroll" id="side" data-page-node-id="K7J6FeudHyazmRRowj7mEF"></div>
+    <div class="collapse" onclick="toggleCollapse()" data-page-node-id="ob2X74WxZw3FOhstk2Ql0m"><i class="iconfont icon-navigation_stow" data-page-node-id="mnaubOoCsGdsu81MF3RNLu"></i><span data-page-node-id="BFdw2oGQqyvkTQyhnfQOqF">收起菜单</span></div>
   </aside>
 
-  <div class="flyout" id="flyout" onmouseenter="clearTimeout(window.__flyT)" onmouseleave="hideFlySoon()" data-page-node-id="v1ALwOQywFdDyieZ9rDdY8"></div>
+  <div class="flyout" id="flyout" onmouseenter="clearTimeout(window.__flyT)" onmouseleave="hideFlySoon()" data-page-node-id="EH09LsmNCWFdeNc1HAdX8I"></div>
 
-  <main class="main" data-page-node-id="G4jAQcvPtUx7qGBBe1HC3E">
-    <div class="tabbar" id="tabbar" data-page-node-id="52KCg7tJCb2TZfARJ5G1VV"></div>
-    <div class="page" id="page" data-page-node-id="YKtM4bwvcp4G9ChEmSOwaB"></div>
+  <main class="main" data-page-node-id="GHZWsPIJOOV9CNQH2S501Z">
+    <div class="tabbar" id="tabbar" data-page-node-id="XWPB4aFTpnieHTZgzQ6LXx"></div>
+    <div class="page" id="page" data-page-node-id="uLMQVwJd60hrE83BnyFcb6"></div>
   </main>
 </div>
 
@@ -2778,6 +2943,27 @@ function drawApiMon(){
      {n:'1-10s',c:'#FE7D2D',d:[30,22,26,10,32,24,16]},
      {n:'>10s',c:'#FFC53D',d:[12,8,10,4,14,10,6]}],true,500,20));
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5439,6 +5625,18 @@ function pfVerTx(a,b){
   return (n?'V'+n:'—')+' · '+String(b.ct||'').slice(5,10)+'~'+String(b.et||'').slice(5,10);
 }
 
+/* 对比视图里的版本标签一律从这里取，不写死 V1/V2。
+   原来整张表写着「V1 / V2」，画到第三版（V3 对 V2）时标签还是 V1/V2，
+   看着像数据没更新、也分不清谁是谁（沁 2026-11-18 指出） */
+function pfCmpLab(){
+  var a=pfCurApp(), bb=pfCmpBase(), cb=pfCurBatch();
+  var nb=pfVerNo(a,bb), nc=pfVerNo(a,cb);
+  if(!nc&&!nb) return {b:'V1', c:'V2'};
+  if(!nb){ nb=nc-1; if(nb<1) nb=1; }
+  if(!nc) nc=nb+1;
+  return {b:'V'+nb, c:'V'+nc};
+}
+
 /* ---------- 状态徽标 ---------- */
 function pfBadge(st,sm){
   var c=sm?' sm':'';
@@ -5506,6 +5704,15 @@ function pfModalOpen(){
   return !!(m && m.className && m.className.indexOf('on')>=0);
 }
 
+/* 人工校准（改名 / 主 API / 敏感度）只在「人工修正层」生效，不改变识别结果本身。
+   第一次校准时把识别原值存进 __ori，再次学习时用它还原成本次识别到的样子。
+   不这么做的话，重新学习会把上一版改过的名字、主 API 原样搬过来，
+   看着像"根本没重新识别"（沁 2026-11-18 指出） */
+function pfMarkOri(m){
+  if(!m||m.__ori) return;
+  m.__ori={n:m.n, main:m.main, sens:(m.sens||'')};
+}
+
 /* 新学习产出的画像：以当前生效画像为底，叠加上本次新识别到的内容。
    —— 应用没变化时，重新学习的识别结果本该和上一版几乎一致，所以底稿取基线；
       原型里固定多识别出一个「文件预览」模块，模拟"应用上了新功能"，
@@ -5526,7 +5733,21 @@ function pfEvolve(a,b){
   if(!src) return;                      /* 这个应用的第一次学习，没有底稿可继承 */
   var base=pfMods(src);
   if(!base.length) return;
-  var ms=base.map(function(m){ return pfClone(m); });
+  /* 克隆后先把上一版的人工校准还原成识别原值，再按识别顺序重排 ——
+     新画像 = 本次识别结果，人工校准要保留得在「版本对比」里采纳回来 */
+  var ms=base.map(function(m){
+    var c=pfClone(m);
+    if(c.__ori){ c.n=c.__ori.n; c.main=c.__ori.main; c.sens=c.__ori.sens||''; }
+    delete c.__cal; delete c.__bak; delete c.__ori;
+    return c;
+  });
+  var tplIdx={};
+  PF_MODS_FULL.forEach(function(t,i){ if(tplIdx[t.n]===undefined) tplIdx[t.n]=i; });
+  ms.sort(function(x,y){
+    var ix=tplIdx[x.n], iy=tplIdx[y.n];
+    if(ix===undefined) ix=900; if(iy===undefined) iy=900;
+    return (ix-iy)||(x.n>y.n?1:-1);
+  });
   if(!ms.some(function(m){ return m.n==='文件预览'; })){
     ms.push({n:'文件预览',api:2,main:'/blim-api/api/file/v1/preview',cnt:168,usr:19,sens:'',
       apis:[{u:'/blim-api/api/file/v1/preview',cnt:132,usr:19},
@@ -5922,7 +6143,7 @@ function pfModList(b){
       +'<td class="c-seq">'+(editable?'<span class="pf-grip" title="拖动调整顺序"><i></i></span>':'')
         +'<span class="no">'+(gi+1)+'</span></td>'
       +'<td class="c-nm" onclick="event.stopPropagation()"><span class="pf-mod-nm" title="'+m.n+'">'+m.n+'</span>'
-        +(m.__cal==='base'?'<span class="pf-ctag cal">沿用基线</span>':'')+'</td>'
+        +'</td>'
       +'<td><span'+(editable
         ?' class="pf-senpick" title="点击设置模块敏感度" onclick="event.stopPropagation();pfPickSens('+ri+')"'
         :'')+'>'+pfSensTag(m.sens)+'</span></td>'
@@ -5933,6 +6154,7 @@ function pfModList(b){
       +'<td class="c-op">'+(editable
         ?'<a class="op" onclick="event.stopPropagation();pfRename('+ri+')">改名</a>'
           +'<a class="op" onclick="event.stopPropagation();pfPickMain('+ri+','+i+')">主 API</a>'
+
         :'<span class="dim">\u2014</span>')+'</td>'
       +'</tr>';
 
@@ -5944,8 +6166,13 @@ function pfModList(b){
         if(y.u===m.main) return 1;
         return y.cnt-x.cnt;
       });
-      h+='<tr class="pf-mexp"><td colspan="9"><div class="pf-exp">'
-        +'<table class="pf-apitbl"><thead><tr>'
+      h+='<tr class="pf-mexp"><td colspan="9"><div class="pf-exp">';
+      /* 采纳过旧版内容的模块，撤销入口只在展开行里给（列表行保持干净，沁 2026-11-18） */
+      if(m.__cal==='base' && editable){
+        h+='<div class="pf-expbar"><span class="tx">这个模块当前用的是旧版画像的内容</span>'
+          +'<a class="op" onclick="event.stopPropagation();pfRestoreBase('+ri+')">恢复为本次识别结果</a></div>';
+      }
+      h+='<table class="pf-apitbl"><thead><tr>'
         +'<th>API 地址</th>'
         +'<th class="r" style="width:100px">调用次数</th>'
         +'<th class="r" style="width:80px">用户数</th>'
@@ -6035,6 +6262,7 @@ function pfApiOwner(ri,u){
 function pfSetMain(ri,u){
   var m=pfModAt(ri);
   if(u===m.main){ lpTip('已经是主 API 了'); return; }
+  pfMarkOri(m);
   var owner=pfApiOwner(ri,u);
   if(owner){ lpTip('该 API 归属模块「'+owner+'」，不能重复使用'); return; }
   var old=m.main;
@@ -6060,6 +6288,7 @@ function pfPickSens(ri){
 }
 function pfSensOk(ri,k){
   var m=pfModAt(ri);
+  pfMarkOri(m);
   m.sens=(k==='none'?'':k);
   lpCloseModal();
   pfAudit(pfCurApp().n,m.n,'改敏感度','敏感度 → '+(k==='none'?'未设置':PF_SENS[k].t));
@@ -6154,6 +6383,7 @@ function pfRenameOk(ri){
   if(!v){ lpTip('模块名称不能为空'); return; }
   var m=pfModAt(ri), old=m.n;
   if(v===old){ lpCloseModal(); return; }
+  pfMarkOri(m);
   m.n=v;
   /* 展开状态是按名字记的，改名后要跟着把 key 挪过去，不然行会自己收起来 */
   if(PF_EXP[old]){ PF_EXP[v]=1; delete PF_EXP[old]; }
@@ -6167,7 +6397,7 @@ function pfRenameOk(ri){
    校准好的模块直接回填到新画像，不用逐项重抄。
    对比口径：模块结构（名称 / 主 API / API 列表 / 敏感度），不含调用量与用户数
    —— 后者随学习窗口变化，比了没有决策价值。 */
-var PF_CMP={on:false,base:'',sel:'',only:''};
+var PF_CMP={on:false,base:'',sel:'',only:'',draft:{},chk:{},prev:true};
 
 /* 能当基线的：当前批次之外，且已经有画像的批次（学习中、分析中没有画像可对） */
 function pfCmpBaseList(cb){
@@ -6188,12 +6418,27 @@ function pfCmpOpen(){
   if(!hit) list.forEach(function(b){ if(!hit && b.st==='pb') hit=b; });
   if(!hit) hit=list[0];
   PF_CMP.on=true; PF_CMP.base=hit.id; PF_CMP.sel=''; PF_CMP.only='';
+  PF_CMP.draft={}; PF_CMP.chk={};
   lpRerender();
 }
-function pfCmpClose(){ PF_CMP.on=false; PF_CMP.sel=''; PF_CMP.only=''; lpRerender(); }
-function pfCmpSetBase(id){ PF_CMP.base=id; PF_CMP.sel=''; lpRerender(); }
+/* 有未保存的沿用改动时先确认，避免一路返回把草稿丢了 */
+function pfCmpClose(){
+  var n=pfCmpDraftN();
+  if(n){
+    var _L=pfCmpLab();
+    lpConfirm('放弃未保存的改动？','有 '+n+' 项「采纳 '+_L.b+'」的改动还没保存，离开对比视图后会丢失。',function(){
+      PF_CMP.draft={}; PF_CMP.chk={};
+      PF_CMP.on=false; PF_CMP.sel=''; PF_CMP.only=''; lpRerender();
+    },'warn');
+    return;
+  }
+  PF_CMP.on=false; PF_CMP.sel=''; PF_CMP.only=''; lpRerender();
+}
+function pfCmpSetBase(id){ PF_CMP.base=id; PF_CMP.sel=''; PF_CMP.draft={}; PF_CMP.chk={}; lpRerender(); }
 function pfCmpFilter(k){ PF_CMP.only=(PF_CMP.only===k?'':k); lpRerender(); }
-function pfCmpPick(k){ PF_CMP.sel=(PF_CMP.sel===k?'':k); lpRerender(); }
+/* onclick 里为了安全把 key 编码过，进函数先还原——否则中文模块名永远匹配不上（2026-11-18 修） */
+function pfDK(k){ try{ return decodeURIComponent(k); }catch(e){ return k; } }
+function pfCmpPick(k){ k=pfDK(k); PF_CMP.sel=(PF_CMP.sel===k?'':k); lpRerender(); }
 
 /* 两个模块的 API 是否同一批（只比路径） */
 function pfApiSet(m){
@@ -6252,53 +6497,159 @@ function pfCmpRows(cb, bb){
   return rows;
 }
 
-/* 用基线模块覆盖新画像的同名模块（位置不变），并留一份原副本供撤销 */
-function pfCmpAdopt(key){
+/* ---------- 沿用 V1：草稿 → 保存 ----------
+   2026-11-18 沁：点一下就直接改数据，既不知道生效没有，也不能反悔、不能批量。
+   现在「沿用 V1」是一个开关：先只改草稿 PF_CMP.draft（可随时关掉），点【保存修改】才写进画像，
+   保存前还能在下面「保存后的 V2 画像」里看到结果。 */
+function pfCmpRowByKey(key){
   var cb=pfCurBatch(), bb=pfCmpBase();
-  if(!cb||!bb) return;
-  if(cb.st==='pb'){ lpTip('已发布画像只读，请先取消发布'); return; }
-  var rows=pfCmpRows(cb,bb), r=null;
-  rows.forEach(function(x){ if(x.key===key) r=x; });
-  if(!r||!r.base) return;
-  var cm=pfMods(cb);
-  var bak=pfClone(r.base);
+  if(!cb||!bb) return null;
+  var hit=null;
+  pfCmpRows(cb,bb).forEach(function(x){ if(x.key===key) hit=x; });
+  return hit;
+}
+/* 这一项「是否应该沿用 V1」：草稿优先，否则看已保存状态 */
+function pfCmpRowOn(r){
+  if(!r) return false;
+  if(PF_CMP.draft.hasOwnProperty(r.key)) return !!PF_CMP.draft[r.key];
+  return !!(r.now&&r.now.__cal==='base');
+}
+function pfCmpSaved(r){ return !!(r&&r.now&&r.now.__cal==='base'); }
+/* 能采纳的行：只有「还有差异」的修改行和消失行。
+   一致行（包括已经采纳过、这次比对已经一致的）一律不可操作 ——
+   采纳完再进来就是一轮新比对，不该还挂着上一轮的处理痕迹（沁 2026-11-18）。
+   要反悔已经采纳的模块，去模块清单点「恢复识别」 */
+function pfCmpSwitchable(r){
+  if(!r) return false;
+  if(r.type==='add'||r.type==='same') return false;
+  return true;
+}
+function pfCmpToggle(key){
+  key=pfDK(key);
+  var r=pfCmpRowByKey(key); if(!r||!pfCmpSwitchable(r)) return;
+  var want=!pfCmpRowOn(r), saved=pfCmpSaved(r);
+  if(want===saved) delete PF_CMP.draft[key];
+  else PF_CMP.draft[key]=want?1:0;
+  lpRerender();
+}
+/* 未保存的改动数量（草稿与已保存状态不一致的项） */
+function pfCmpDraftN(){
+  return Object.keys(PF_CMP.draft||{}).filter(function(k){
+    var r=pfCmpRowByKey(k); if(!r) return false;
+    return !!PF_CMP.draft[k]!==pfCmpSaved(r);
+  }).length;
+}
+/* 真正写进画像：不提示、不重绘，供保存时批量调用 */
+function pfApplyAdopt(key, cb, bb){
+  var r=null;
+  pfCmpRows(cb,bb).forEach(function(x){ if(x.key===key) r=x; });
+  if(!r||!r.base) return false;
+  var cm=pfMods(cb), bak=pfClone(r.base);
   if(r.now){
-    var i=cm.indexOf(r.now);
-    if(i<0) return;
+    var i=cm.indexOf(r.now); if(i<0) return false;
     r.now.__bak=pfClone(r.now);
     r.now.__cal='base';
     cm[i]=Object.assign(r.now, {
       n:bak.n, main:bak.main, apis:bak.apis, api:bak.api, cnt:bak.cnt, usr:bak.usr,
       sens:bak.sens, __cal:'base', __bak:r.now.__bak
     });
-    pfAudit(pfCurApp().n, bak.n, '采用基线模块',
+    pfAudit(pfCurApp().n, bak.n, '沿用旧版模块',
       '用「'+bb.id+'」的「'+bak.n+'」覆盖当前画像同名模块');
   }else{
-    /* 基线独有 → 追加进新画像 */
     bak.__cal='base';
     cm.push(bak);
-    pfAudit(pfCurApp().n, bak.n, '补入基线模块',
+    pfAudit(pfCurApp().n, bak.n, '补回旧版模块',
       '把「'+bb.id+'」独有模块「'+bak.n+'」补进当前画像');
   }
-  lpTip('已用基线覆盖「'+bak.n+'」，仍需点「发布」才生效');
+  return true;
+}
+function pfApplyUndo(key, cb, bb){
+  var cm=pfMods(cb), hit=null;
+  cm.forEach(function(x){ if(x.__cal==='base'&&x.n===key) hit=x; });
+  if(!hit) cm.forEach(function(x){ if(x.__cal==='base'&&x.__bak&&x.__bak.n===key) hit=x; });
+  if(!hit) return false;
+  var name=hit.n;
+  if(hit.__bak){ Object.assign(hit, hit.__bak); delete hit.__cal; delete hit.__bak; }
+  else { var i=cm.indexOf(hit); if(i>=0) cm.splice(i,1); }
+  pfAudit(pfCurApp().n, name, '撤销沿用旧版', '恢复为本次学习原始识别结果');
+  return true;
+}
+function pfCmpSave(){
+  var cb=pfCurBatch(), bb=pfCmpBase();
+  if(!cb||!bb) return;
+  if(cb.st==='pb'){ lpTip('已发布画像只读，请先取消发布'); return; }
+  var keys=Object.keys(PF_CMP.draft||{}), n=0;
+  keys.forEach(function(k){
+    if(PF_CMP.draft[k]){ if(pfApplyAdopt(k,cb,bb)) n++; }
+    else if(pfApplyUndo(k,cb,bb)) n++;
+  });
+  PF_CMP.draft={}; PF_CMP.chk={};
+  if(!n){ lpTip('没有需要保存的改动'); lpRerender(); return; }
+  lpTip('已保存 '+n+' 项改动，仍需点「发布」才对 TA 生效');
   lpRerender();
 }
-/* 撤销回填：恢复覆盖前的原模块（基线独有的则移除） */
-function pfCmpUndo(key){
-  var cb=pfCurBatch(); if(!cb) return;
-  var cm=pfMods(cb), m=null;
-  cm.forEach(function(x){ if(x.n===key||(x.__bak&&x.__bak.n===key)) m=x; });
-  if(!m) return;
-  if(m.__bak){
-    var bak=m.__bak;
-    Object.assign(m, bak);
-    delete m.__cal; delete m.__bak;
-  }else if(m.__cal==='base'){
-    var i=cm.indexOf(m); if(i>=0) cm.splice(i,1);
-  }
-  pfAudit(pfCurApp().n, key, '撤销基线覆盖', '恢复为本次学习原始识别结果');
-  lpTip('已撤销，恢复本次学习结果');
+function pfCmpDiscard(){
+  var n=pfCmpDraftN(); if(!n) return;
+  PF_CMP.draft={}; PF_CMP.chk={};
+  lpTip('已放弃 '+n+' 项未保存的改动');
   lpRerender();
+}
+/* 批量：对勾选的行统一开关 */
+function pfCmpCheck(key){
+  key=pfDK(key);
+  if(PF_CMP.chk[key]) delete PF_CMP.chk[key]; else PF_CMP.chk[key]=1;
+  lpRerender();
+}
+function pfCmpCheckAll(){
+  var rs=pfCmpRows(pfCurBatch(),pfCmpBase()).filter(pfCmpSwitchable);
+  var all=rs.length&&rs.every(function(r){ return PF_CMP.chk[r.key]; });
+  PF_CMP.chk={};
+  if(!all) rs.forEach(function(r){ PF_CMP.chk[r.key]=1; });
+  lpRerender();
+}
+function pfCmpChkN(){ return Object.keys(PF_CMP.chk||{}).length; }
+function pfCmpBatch(on){
+  var n=0;
+  Object.keys(PF_CMP.chk||{}).forEach(function(k){
+    var r=pfCmpRowByKey(k); if(!r||!pfCmpSwitchable(r)) return;
+    var want=on?1:0, saved=pfCmpSaved(r);
+    if(want===saved) delete PF_CMP.draft[k]; else PF_CMP.draft[k]=want;
+    n++;
+  });
+  if(!n){ lpTip('先勾选要处理的模块'); return; }
+  var _L=pfCmpLab();
+  lpTip('已'+(on?'采纳 '+_L.b:'撤销采纳')+' '+n+' 项，点【保存修改】后写入画像');
+  lpRerender();
+}
+
+/* 兼容旧入口（自检仍在调用） */
+function pfCmpAdopt(key){
+  key=pfDK(key);
+  var cb=pfCurBatch(), bb=pfCmpBase();
+  if(!cb||!bb) return;
+  if(cb.st==='pb'){ lpTip('已发布画像只读，请先取消发布'); return; }
+  var _L=pfCmpLab();
+  if(pfApplyAdopt(key,cb,bb)){ lpTip('已采纳 '+_L.b+'，仍需点「保存修改」写入画像'); lpRerender(); }
+}
+/* 模块清单里把「沿用旧版」的模块改回本次识别结果（对比视图不再提供撤销，入口挪到这里） */
+function pfRestoreBase(ri){
+  var cb=pfCurBatch(), m=pfModAt(ri);
+  if(!cb||!m||m.__cal!=='base') return;
+  if(cb.st==='pb'){ lpTip('已发布画像只读，请先取消发布'); return; }
+  var name=m.n;
+  lpConfirm('恢复为本次识别结果？',
+    '「'+name+'」会改回本次学习识别到的内容，不再使用旧版画像里的模块数据。',
+    function(){
+      if(pfApplyUndo(name,cb,pfCmpBase())){
+        lpTip('已恢复「'+name+'」的本次识别结果');
+        lpRerender();
+      }
+    });
+}
+function pfCmpUndo(key){
+  key=pfDK(key);
+  var cb=pfCurBatch(); if(!cb) return;
+  if(pfApplyUndo(key,cb,pfCmpBase())){ lpTip('已撤销，恢复本次学习结果'); lpRerender(); }
 }
 function pfCmpBase(){
   var b=null;
@@ -6315,6 +6666,7 @@ function pfCmpView(app, cb){
   var cnt={add:0,chg:0,del:0,same:0};
   rows.forEach(function(r){ cnt[r.type]++; });
   var rowsShown=PF_CMP.only?rows.filter(function(r){ return r.type===PF_CMP.only; }):rows;
+  var L=pfCmpLab();   /* 版本标签：基线 / 当前分别是 V 几，全表统一从这里取 */
 
   /* 头：基线选择 + 退出 */
   var h='<div class="pf-cmpbar">'
@@ -6345,84 +6697,280 @@ function pfCmpView(app, cb){
       });
       return s;
     })()
-    +'<span class="hint">只比模块结构（名称 / 主 API / API 列表 / 敏感度），不比调用量；'
-    +'回填后仍需点「发布」才生效。</span></div>';
+    +'<span class="hint">'+L.b+' = 对比基线，'+L.c+' = 当前画像。只比名称 / 主 API / API 列表 / 敏感度，不比调用量；'
+    +'改动要再点「发布」才生效。</span></div>';
 
-  /* 差异清单 */
+  /* 差异清单：左侧勾选框批量操作，模块列当前版在上 / 基线版在下，右侧是「采纳」按钮。
+     全表统一口径：当前画像在前，对比基线在后；版本号跟着两边实际版本走 */
+  var swRows=rows.filter(pfCmpSwitchable);
+  var allChk=swRows.length&&swRows.every(function(r){ return PF_CMP.chk[r.key]; });
+  var cN=pfCmpChkN(), dN=pfCmpDraftN();
+
   h+='<div class="pf-cmp-tbl"><table class="pf-mtbl"><thead><tr>'
-    +'<th style="width:38px"></th><th>模块</th><th style="width:76px">状态</th>'
-    +'<th>变更项</th><th style="width:132px">操作</th></tr></thead><tbody>';
-  if(!rowsShown.length) h+='<tr><td colspan="5" class="pf-cmp-empty">没有该类型的差异</td></tr>';
+    +'<th style="width:34px"><input type="checkbox" '+(allChk?'checked':'')+' title="全选可采纳项" '
+      +'onclick="event.stopPropagation();pfCmpCheckAll()"></th>'
+    +'<th style="width:26px"></th><th style="width:214px">模块名称</th><th style="width:88px">状态</th>'
+    +'<th>变更内容</th><th style="width:112px">采纳 '+L.b+'</th></tr></thead><tbody>';
+  if(!rowsShown.length) h+='<tr><td colspan="6" class="pf-cmp-empty">没有该类型的差异</td></tr>';
+  var vB=pfVerNo(app,bb), vC=pfVerNo(app,cb);
   rowsShown.forEach(function(r){
     var sel=(PF_CMP.sel===r.key);
-    var nm=(r.base?r.base.n:'')+(r.base&&r.now&&r.base.n!==r.now.n?' <i class="to">→</i> '+r.now.n:'')
-      +(r.base?'':r.now.n);
-    var desc=[];
-    r.ch.forEach(function(c){
-      if(c.k==='API 列表'){
-        var bits=[];
-        if(c.add.length) bits.push('+'+c.add.length);
-        if(c.del.length) bits.push('\u2212'+c.del.length);
-        desc.push('API '+bits.join(' / '));
-      }else if(c.k==='名称') desc.push('改名');
-      else if(c.k==='主 API') desc.push('主 API 变更');
-      else desc.push(c.k+'变更');
-    });
-    var cal=(r.now&&r.now.__cal==='base')?'<span class="pf-ctag cal">已采用基线</span>':'';
-    h+='<tr class="pf-crow'+(sel?' on':'')+'" onclick="pfCmpPick(\''+encodeURIComponent(r.key)+'\')">'
+    var saved=pfCmpSaved(r);
+    var dirty=(PF_CMP.draft.hasOwnProperty(r.key)&&!!PF_CMP.draft[r.key]!==saved);
+    /* 采纳完这份画像就是新数据，不留「已采纳」痕迹（沁 2026-11-18） */
+    var cal='';
+    /* 采纳后不再把状态文案改成「待保存」：一行字变来变去反而看不懂。
+       改成整行高亮 = 选中（沁 2026-11-18），待保存的条数在底部操作条上给 */
+    var st='<span class="pf-ctag '+r.type+'">'+PF_CMP_T[r.type]+'</span>';
+    var chk=pfCmpSwitchable(r)
+      ? '<input type="checkbox" '+(PF_CMP.chk[r.key]?'checked':'')+' onclick="event.stopPropagation();pfCmpCheck(\''+encodeURIComponent(r.key)+'\')">'
+      : '';
+    h+='<tr class="pf-crow'+(sel?' on':'')+(dirty?' ado':'')+'" onclick="pfCmpPick(\''+encodeURIComponent(r.key)+'\')">'
+      +'<td class="c-chk">'+chk+'</td>'
       +'<td class="c-exp"><span class="pf-caret'+(sel?' on':'')+'">'+(sel?'&minus;':'+')+'</span></td>'
-      +'<td class="nm">'+nm+cal+'</td>'
-      +'<td><span class="pf-ctag '+r.type+'">'+PF_CMP_T[r.type]+'</span></td>'
-      +'<td class="ch">'+(function(){
-        if(desc.length) return desc.join(' · ');
-        if(r.type==='add') return '新识别 · '+((r.now&&r.now.api)||0)+' 个 API';
-        if(r.type==='del') return '<span class="nil">本版未识别到</span>';
-        return '<span class="nil">&mdash;</span>';
-      })()+'</td>'
-      +'<td class="ops">'
-      +((r.type==='add')?'<span class="nil">保留新模块</span>'
-        :(r.now&&r.now.__cal==='base')
-          ? '<a class="op" onclick="event.stopPropagation();pfCmpUndo(\''+encodeURIComponent(r.key)+'\')">撤销回填</a>'
-          : (r.type==='same')
-            ? '<span class="nil">无差异</span>'
-            : '<a class="op" onclick="event.stopPropagation();pfCmpAdopt(\''+encodeURIComponent(r.key)+'\')">'
-              +(r.type==='del'?'补进新画像':'用基线覆盖')+'</a>')
-      +'</td></tr>';
-    if(sel) h+='<tr class="pf-crow-detail"><td></td><td colspan="4">'+pfCmpDetail(r,bb,cb)+'</td></tr>';
+      +'<td class="nm">'+pfCmpNameCell(r,vB,vC)+cal+'</td>'
+      +'<td class="st">'+st+'</td>'
+      +'<td class="ch">'+pfCmpChgCell(r)+'</td>'
+      +'<td class="ops">'+pfCmpOpsCell(r)+'</td></tr>';
+    if(sel) h+='<tr class="pf-crow-detail"><td></td><td colspan="5">'+pfCmpDetail(r,bb,cb)+'</td></tr>';
   });
   h+='</tbody></table></div>';
+
+  /* 底部操作条：批量 / 一键采纳 / 预览 / 保存（预览改成按钮开抽屉，不再常驻挤占清单） */
+  var canAll=rows.filter(pfCmpSwitchable).length;
+  /* 分两组：左侧批量动作、右侧「状态 + 收尾动作 + 主按钮」。两组各自不换行，
+     窄屏时整体换行也不会把主按钮甩到第二行最左边 */
+  h+='<div class="pf-cmpfoot">'
+    +'<div class="lf">'
+      +'<span class="sel">已选 <b>'+cN+'</b> 项</span>'
+      +'<button class="btn-line" onclick="pfCmpBatch(1)"'+(cN?'':' disabled')+'>批量采纳 '+L.b+'</button>'
+      +'<button class="btn-line" onclick="pfCmpBatch(0)"'+(cN?'':' disabled')+'>批量撤销采纳</button>'
+      +'<button class="btn-line" onclick="pfCmpAllV1()"'+(canAll?'':' disabled')+'>全部采纳 '+L.b+'</button>'
+    +'</div>'
+    +'<div class="rg">'
+      +'<span class="dt'+(dN?' on':'')+'">'+(dN?dN+' 项改动未保存':'暂无改动')+'</span>'
+      +'<button class="btn-line" onclick="pfCmpDiscard()"'+(dN?'':' disabled')+'>放弃修改</button>'
+      +'<button class="btn-line" onclick="pfCmpPrevOpen()">预览 '+L.c+' 画像</button>'
+      +'<button class="btn-pri" onclick="pfCmpSave()"'+(dN?'':' disabled')+'>保存修改'+(dN?'（'+dN+'）':'')+'</button>'
+    +'</div>'
+    +'</div>';
   return h;
 }
 
-/* 选中模块的双栏明细：左边基线、右边新画像，逐项对齐 */
+/* 全部采纳：一次性把整表回到基线。属于不可逆操作，必须二次确认。
+   确定 = 直接写入画像（等同点一次【保存修改】），不再留草稿（沁 2026-11-18） */
+function pfCmpAllV1(){
+  var cb=pfCurBatch(), bb=pfCmpBase();
+  if(!cb||!bb) return;
+  if(cb.st==='pb'){ lpTip('已发布画像只读，请先取消发布'); return; }
+  var L=pfCmpLab();
+  var rows=pfCmpRows(cb,bb).filter(pfCmpSwitchable);
+  var n=rows.filter(function(r){ return !pfCmpSaved(r); }).length;
+  if(!rows.length||!n){ lpTip('当前没有可采纳的差异'); return; }
+  lpConfirm('全部采纳 '+L.b+'？',
+    '会把 '+L.c+' 里 <b>'+n+'</b> 处差异改成 '+L.b+'。<br>确定要全部采纳？操作不可逆。',
+    function(){
+      var ok=0;
+      rows.forEach(function(r){
+        if(pfCmpSaved(r)){ if(PF_CMP.draft.hasOwnProperty(r.key)) delete PF_CMP.draft[r.key]; return; }
+        if(pfApplyAdopt(r.key,cb,bb)) ok++;
+      });
+      PF_CMP.draft={}; PF_CMP.chk={};
+      lpTip('已采纳 '+ok+' 项并保存，点「发布」才对 TA 生效');
+      lpRerender();
+    },'warn');
+}
+
+/* 预览：不动数据，只看「保存后当前画像长什么样」——用抽屉，760 宽放得下 5 列。
+   每个模块下面把它的 API 列表也铺出来：只看主 API 判断不了这版到底抓到了哪些接口 */
+function pfCmpPrevHtml(cb, bb){
+  var L=pfCmpLab();
+  var list=pfCmpFinalMods(cb,bb), dN=pfCmpDraftN();
+  var t='<div class="pf-prevwrap"><div class="cap">共 <b>'+list.length+'</b> 个模块'
+    +(dN?' · 含 <b>'+dN+'</b> 处未保存改动，下表按草稿渲染':' · 与当前画像一致')+'</div>'
+    +'<table class="pf-mtbl pf-prevt"><thead><tr><th style="width:180px">模块名称</th><th>主 API</th>'
+    +'<th style="width:60px">API 数</th><th style="width:78px">敏感度</th><th style="width:88px">来源</th></tr></thead><tbody>';
+  list.forEach(function(x){
+    t+='<tr'+(x.src==='V1'?' class="fromv1"':'')+'><td>'+x.m.n+'</td>'
+      +'<td class="u" title="'+x.m.main+'">'+pfShortPath(x.m.main)+'</td>'
+      +'<td>'+(((x.m.apis||[]).length)||x.m.api||0)+'</td>'
+      +'<td>'+pfSensTag(x.m.sens)+'</td>'
+      +'<td>'+(x.src==='V1'?'<span class="pf-ctag cal">采纳 '+L.b+'</span>':'<span class="nil">'+L.c+' 识别</span>')+'</td></tr>';
+    var ap=x.m.apis||[];
+    if(ap.length){
+      t+='<tr class="aprow'+(x.src==='V1'?' fromv1':'')+'"><td></td><td colspan="4"><div class="aplist">'
+        + ap.map(function(a){
+            return '<div class="apil"><span class="u" title="'+a.u+'">'+a.u+'</span>'
+              +(a.u===x.m.main?'<span class="mk">主</span>':'')
+              +'<span class="c">'+pfNum(a.cnt||0)+' 次</span></div>';
+          }).join('')
+        +'</div></td></tr>';
+    }
+  });
+  t+='</tbody></table></div>';
+  return {html:t, n:list.length, dN:dN};
+}
+function pfCmpPrevOpen(){
+  var cb=pfCurBatch(), bb=pfCmpBase();
+  if(!cb||!bb) return;
+  var L=pfCmpLab(), p=pfCmpPrevHtml(cb,bb), dN=p.dN;
+  var foot='<button class="btn-line" onclick="lpCloseFormDrawer()">关闭</button>'
+    +'<button class="btn-pri" onclick="pfCmpSaveFromPrev()"'+(dN?'':' disabled')+'>保存修改'+(dN?'（'+dN+'）':'')+'</button>';
+  lpFormDrawer('保存后的 '+L.c+' 画像', p.html, foot, 760);
+}
+function pfCmpSaveFromPrev(){ pfCmpSave(); lpCloseFormDrawer(); }
+
+/* 按当前草稿算出保存后的 V2 模块清单 */
+function pfCmpFinalMods(cb, bb){
+  var cm=pfMods(cb), rows=pfCmpRows(cb,bb), byKey={};
+  rows.forEach(function(r){ byKey[r.key]=r; });
+  var out=cm.map(function(m){ return {m:m,src:'V2'}; });
+  Object.keys(PF_CMP.draft||{}).forEach(function(k){
+    if(!PF_CMP.draft[k]) return;
+    var r=byKey[k]; if(!r||!r.base) return;
+    if(r.now){
+      for(var i=0;i<out.length;i++){ if(out[i].m===r.now){ out[i]={m:r.base,src:'V1'}; break; } }
+    }else out.push({m:r.base,src:'V1'});
+  });
+  /* 草稿里改回 V2 的（取消沿用），预览要回到本次识别结果 */
+  Object.keys(PF_CMP.draft||{}).forEach(function(k){
+    if(PF_CMP.draft[k]) return;
+    var r=byKey[k]; if(!r||!r.now||!r.now.__bak) return;
+    for(var i=0;i<out.length;i++){ if(out[i].m===r.now){ out[i]={m:r.now.__bak,src:'V2'}; break; } }
+  });
+  return out;
+}
+
+/* 模块列：当前版在上、基线版在下 —— 谁是谁写在标签上，不靠箭头猜。
+   标签取 pfCmpLab()，跟着真实版本号走（V3 对 V2 时不会还写 V1/V2） */
+function pfCmpNameCell(r, vB, vC){
+  var b=r.base, c=r.now, L=pfCmpLab();
+  function line(v, txt, mute){
+    return '<div class="nmline'+(mute?' mute':'')+'"><i class="vbadge'+((v===L.b)?' old':'')+'">'+v+'</i>'
+      +'<span title="'+txt+'">'+txt+'</span></div>';
+  }
+  if(r.type==='add') return line(L.c, c.n, 0)+line(L.b, '无此模块', 1);
+  if(r.type==='del') return line(L.c, '已无此模块', 1)+line(L.b, b.n, 0);
+  /* 两版同名时只写一行：写两遍一样的东西纯属噪音（沁 2026-11-18 说整列太花）。
+     名字真变了才并列对照 ——「基线到底叫啥」只在有差异时才需要看 */
+  if(b.n===c.n){
+    return '<div class="nmline"><span title="'+L.c+' 与 '+L.b+' 同名：'+c.n+'">'+c.n+'</span></div>';
+  }
+  return line(L.c, c.n, 0)+line(L.b, b.n, 1);
+}
+
+/* 变更内容：主 API / API 列表 / 敏感度 三行说清，API 直接列出差异路径——
+   只看名字改了没有不够，API 有可能变了但名字没变（沁 2026-11-18 提） */
+/* 长 API 路径中间省略、保住尾巴：两个接口常常只有最后一段不同（…/device/check vs …/device/confirm），
+   从尾部截断就正好把差异切掉了。完整路径放 title */
+function pfShortPath(u){
+  u=String(u||'');
+  if(u.length<=34) return u;
+  return u.slice(0,12)+'\u2026'+u.slice(-18);
+}
+
+/* 变更内容：只写变化项，全表统一 V2 在上 / V1 在下（和模块名称列同一顺序）。
+   沁 2026-11-18 反馈：① 名称列 V2 在上、变更内容里 V1 在上，两处反着看很费劲；
+   ② 整列太花，相同的项目不要在「修改」里再念一遍（原来每行都挂一句「未变项 … 与 V1 相同」），
+   所以现在：一致的模块只给一个「—」，修改的只列真正变了的维度 */
+function pfCmpChgCell(r){
+  var b=r.base||{}, c=r.now||{}, L=pfCmpLab();
+
+  if(r.type==='add') return '<div class="cl"><i class="k">来源</i><span class="dg">'+L.c+' 新识别，'+L.b+' 无此模块</span></div>';
+  if(r.type==='del') return '<div class="cl"><i class="k">来源</i><span class="dg">'+L.c+' 未识别到，'+L.b+' 原有</span></div>';
+  if(r.type==='same') return '<div class="cl"><i class="k"></i><span class="nil">&mdash;</span></div>';
+
+  /* 同一维度：当前版值在上、基线版值在下，带版本徽标 */
+  function two(k, t2, t1, mono, m2, m1){
+    return '<div class="cl"><i class="k">'+k+'</i><div class="cvs col">'
+      +'<span class="vv'+(mono?' mono':'')+'"'+(m2?' title="'+L.c+' '+m2+'"':'')+'>'
+        +'<i class="vbadge">'+L.c+'</i><span class="tx">'+t2+'</span></span>'
+      +'<span class="vv old'+(mono?' mono':'')+'"'+(m1?' title="'+L.b+' '+m1+'"':'')+'>'
+        +'<i class="vbadge old">'+L.b+'</i><span class="tx">'+t1+'</span></span>'
+      +'</div></div>';
+  }
+
+  var out=[];
+
+  if(b.n!==c.n) out.push(two('模块名称', c.n, b.n));
+
+  if((b.main||'')!==(c.main||'')){
+    out.push(two('主 API', pfShortPath(c.main), pfShortPath(b.main), 1, c.main, b.main));
+  }
+
+  var bs=pfApiSet(b), cs=pfApiSet(c), add=[], del=[];
+  Object.keys(cs).forEach(function(u){ if(!bs[u]) add.push(u); });
+  Object.keys(bs).forEach(function(u){ if(!cs[u]) del.push(u); });
+  if(add.length||del.length){
+    var nb=(c.apis||[]).length||c.api||0, ob=(b.apis||[]).length||b.api||0;
+    out.push('<div class="cl"><i class="k">API 数</i><span class="dg">'+L.c+' <b>'+nb+'</b> 个<i class="dv2">·</i>'+L.b+' '+ob+' 个</span></div>');
+    add.slice(0,2).forEach(function(u){
+      out.push('<div class="cl"><i class="k">新增 API</i><span class="dg apx" title="'+u+'">+ '+pfShortPath(u)+'</span></div>');
+    });
+    del.slice(0,2).forEach(function(u){
+      out.push('<div class="cl"><i class="k">移除 API</i><span class="dg old apx" title="'+u+'">&minus; '+pfShortPath(u)+'</span></div>');
+    });
+    var rest=Math.max(0,add.length-2)+Math.max(0,del.length-2);
+    if(rest) out.push('<div class="cl"><i class="k"></i><span class="nil">还有 '+rest+' 个接口变化</span></div>');
+  }
+
+  if((b.sens||'')!==(c.sens||'')){
+    out.push('<div class="cl"><i class="k">敏感度</i><div class="cvs col">'
+      +'<span class="vv"><i class="vbadge">'+L.c+'</i>'+(pfSensTag(c.sens)||'<span class="nil">未设置</span>')+'</span>'
+      +'<span class="vv old"><i class="vbadge old">'+L.b+'</i>'+(pfSensTag(b.sens)||'<span class="nil">未设置</span>')+'</span>'
+      +'</div></div>');
+  }
+
+  return out.join('')||'<div class="cl"><i class="k"></i><span class="nil">&mdash;</span></div>';
+}
+
+/* 「采纳基线」按钮：点一下把这一项换成基线版的内容（进草稿），再点一次撤销。
+   按钮文字跟着版本走：基线是 V2 就写「采纳 V2」，是 V1 就写「采纳 V1」 */
+function pfCmpOpsCell(r){
+  var L=pfCmpLab();
+  if(!pfCmpSwitchable(r)){
+    return '<span class="nil" title="'+L.c+' 本次新增的模块，没有可采纳的 '+L.b+' 内容">&mdash;</span>';
+  }
+  var k=encodeURIComponent(r.key), on=pfCmpRowOn(r), saved=pfCmpSaved(r);
+  var tip=on
+    ? '点击取消：这一项改回 '+L.c+' 本次识别的结果（点【保存修改】后才写入画像）'
+    : '点击采纳：这一项用 '+L.b+' 的名称 / 主 API / API 列表 / 敏感度（点【保存修改】后才写入画像）';
+  return '<button class="pf-adopt'+(on?' on':'')+(saved?' done':'')+'" title="'+tip+'" '
+    +'onclick="event.stopPropagation();pfCmpToggle(\''+k+'\')">'
+    +(on?'<i class="ck">&#10003;</i>':'')+(on?'取消采纳':'采纳 '+L.b)+'</button>';
+}
+
+/* 选中模块的双栏明细：左边当前画像、右边对比基线，逐项对齐（与清单「当前在上」同一口径） */
 function pfCmpDetail(r, bb, cb){
-  var b=r.base, c=r.now;
+  var b=r.base, c=r.now, L=pfCmpLab();
   function cell(v, diff, empty){
     if(v===null||v===undefined||v==='') return '<span class="nil">'+(empty||'\u2014')+'</span>';
     return '<span class="'+(diff?'dft':'')+'">'+v+'</span>';
   }
   var h='<div class="pf-cmpd">';
-  h+='<div class="rhd"><span>基线画像 <b>'+bb.id+'</b></span><span>新画像 <b>'+cb.id+'</b></span></div>';
+  var app=pfCurApp();
+  h+='<div class="rhd"><span><i class="vbadge">'+L.c+'</i>当前画像 <b>'+pfVerTx(app,cb)+'</b></span>'
+    +'<span><i class="vbadge old">'+L.b+'</i>对比基线 <b>'+pfVerTx(app,bb)+'</b></span></div>';
 
   /* 模块名 */
   var nDiff=!!(b&&c&&b.n!==c.n);
   h+='<div class="row"><label>模块名称</label>'
-    +'<div class="c1">'+(b?cell(b.n,false):'<span class="nil">基线无此模块</span>')+'</div>'
-    +'<div class="c2">'+(c?cell(c.n,nDiff,'本次未识别'):'<span class="nil">新画像无此模块</span>')+'</div></div>';
+    +'<div class="c1">'+(c?cell(c.n,nDiff,'\u2014'):'<span class="nil">'+L.c+' 无此模块</span>')+'</div>'
+    +'<div class="c2">'+(b?cell(b.n,false):'<span class="nil">'+L.b+' 无此模块</span>')+'</div></div>';
 
   /* 主 API */
   var mDiff=!!(b&&c&&(b.main||'')!==(c.main||''));
   h+='<div class="row"><label>主 API</label>'
-    +'<div class="c1">'+(b?cell(b.main,false):'\u2014')+'</div>'
-    +'<div class="c2">'+(c?cell(c.main,mDiff):'\u2014')+'</div></div>';
+    +'<div class="c1">'+(c?cell(c.main,mDiff):'\u2014')+'</div>'
+    +'<div class="c2">'+(b?cell(b.main,false):'\u2014')+'</div></div>';
 
   /* 敏感度 */
   var sDiff=!!(b&&c&&(b.sens||'')!==(c.sens||''));
   h+='<div class="row"><label>敏感度</label>'
-    +'<div class="c1">'+(b?pfSensTag(b.sens):'\u2014')+'</div>'
-    +'<div class="c2">'+(c?pfSensTag(c.sens):'\u2014')+'</div></div>';
+    +'<div class="c1">'+(c?pfSensTag(c.sens):'\u2014')+'</div>'
+    +'<div class="c2">'+(b?pfSensTag(b.sens):'\u2014')+'</div></div>';
 
-  /* API 列表：并集对齐，标出只在基线 / 只在新增 */
+  /* API 列表：并集对齐，标出只在哪一版 */
   var bset=pfApiSet(b), cset=pfApiSet(c);
   var all=[];
   ((b&&b.apis)||[]).forEach(function(a){ all.push({u:a.u,inB:1,inC:cset[a.u]?1:0,cntB:a.cnt}); });
@@ -6431,8 +6979,8 @@ function pfCmpDetail(r, bb, cb){
   if(!all.length) h+='<div class="nil">两边都没有 API 记录</div>';
   all.forEach(function(x){
     var flag=x.inB&&x.inC?'<span class="tg both">共有</span>'
-      :x.inB?'<span class="tg only-b">基线独有</span>'
-      :'<span class="tg only-c">新增</span>';
+      :x.inB?'<span class="tg only-b">仅 '+L.b+'</span>'
+      :'<span class="tg only-c">仅 '+L.c+'</span>';
     h+='<div class="apirow'+(x.inB&&x.inC?'':' diff')+'">'+flag
       +'<span class="u" title="'+x.u+'">'+x.u+'</span>'
       +'<span class="ct">'+(x.inB?pfNum(x.cntB)+' 次':'')+'</span></div>';
@@ -7129,10 +7677,15 @@ function pfOpenLearn(preId){
   PF_SEL={};
   if(preId){ PF_SEL[preId]=7; }
   /* 2026-11-17：弹窗改右侧抽屉，和「设置」抽屉同一套版式（分区标题 + 左标签 + 底部操作条） */
-  var body='<div class="pf-sect"><div class="st">选择应用<em>可跨数据中心、分组多选</em></div>'
+  var body='<div class="pf-learnhint">新学习按本次识别结果生成；上一版做过的校准（改名 / 主 API / 敏感度）不会带过来，'
+    +'需要保留就在学习完的「版本对比」里采纳。</div>'
+    +'<div class="pf-sect"><div class="st">选择应用<em>可跨数据中心、分组多选</em></div>'
     +'<div class="pf-sel"><div class="pf-selbox" id="pfSelBox" onclick="pfTogglePanel(event)">'
     +'<span class="ph">请选择应用（支持按数据中心、分组选择）</span><i class="arw"></i></div>'
-    +'<div class="pf-panel" id="pfPanel"><div class="sbox"><input id="pfKw" placeholder="搜索应用名称或标识" oninput="pfRenderPanel()"></div>'
+    +'<div class="pf-panel" id="pfPanel">'
+    +'<div class="phead"><span id="pfPanelCnt">已选 0 个</span>'
+    +'<span class="lk" onclick="event.stopPropagation();pfClearSel()">清空</span></div>'
+    +'<div class="sbox"><input id="pfKw" placeholder="搜索应用名称或标识" oninput="pfRenderPanel()"></div>'
     +'<div class="list" id="pfList"></div></div></div>'
     +'<div id="pfPicked"></div></div>';
 
@@ -7194,17 +7747,36 @@ function pfRenderPanel(){
         var inList=!!pfApp(m.id);
         var st=inList?pfAppSt(pfApp(m.id)):'none', dis=(st==='lr'||st==='an');
         var ck=PF_SEL[m.id]!==undefined?'checked':'';
-        h+='<div class="pf-pn lv2'+(dis?' dis':'')+'" onclick="'+(dis?'lpTip(\'该应用正在学习中\')':'pfPick(\''+m.id+'\')')+'">'
+        var isOn=(PF_SEL[m.id]!==undefined);
+        /* 必须 stopPropagation：点完会重绘列表，原节点已脱离文档，
+           冒泡到 document 的「点空白收起」判断会认为点在了面板外，把下拉关掉（多选时尤为明显） */
+        h+='<div class="pf-pn lv2'+(dis?' dis':'')+(isOn?' on':'')+'" onclick="event.stopPropagation();'+(dis?'lpTip(\'该应用正在学习中\')':'pfPick(\''+m.id+'\')')+'">'
           +'<input type="checkbox" '+(dis?'disabled':'')+' '+ck+' onclick="event.stopPropagation();'+(dis?'':'pfPick(\''+m.id+'\')')+'">'
-          +'<span>'+m.n+'</span><span class="ft">'+(dis?'学习中':(inList?m.id:m.id+' · 未添加'))+'</span></div>';
+          +'<span class="nm">'+m.n+'</span><span class="ft">'+(dis?'学习中':(inList?m.id:m.id+' · 未添加'))+'</span></div>';
       });
     });
   });
   document.getElementById('pfList').innerHTML=h||'<div class="pf-pn lv1" style="color:#A8ABB2">无匹配应用</div>';
+  var pc=document.getElementById('pfPanelCnt');
+  if(pc) pc.textContent='已选 '+Object.keys(PF_SEL).length+' 个';
 }
 function pfPick(id){
   if(PF_SEL[id]!==undefined) delete PF_SEL[id]; else PF_SEL[id]=7;
   pfRenderPanel(); pfRenderPicked();
+}
+function pfClearSel(){
+  PF_SEL={}; pfRenderPanel(); pfRenderPicked();
+}
+/* Esc 收起下拉（和「点空白处收起」配套） */
+if(typeof document!=='undefined' && document.addEventListener){
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Escape') return;
+    var p=document.getElementById('pfPanel'), b=document.getElementById('pfSelBox');
+    if(p&&p.classList.contains('on')){
+      p.classList.remove('on');
+      if(b) b.classList.remove('on');
+    }
+  });
 }
 function pfRemove(id){ delete PF_SEL[id]; pfRenderPanel(); pfRenderPicked(); }
 function pfSetDays(id,v){
@@ -7215,10 +7787,12 @@ function pfRenderPicked(){
   var ids=Object.keys(PF_SEL), h='';
   var box=document.getElementById('pfSelBox');
   if(box){
-    var chips=ids.map(function(id){
+    var showN=ids.slice(0,2), rest=ids.length-showN.length;
+    var chips=showN.map(function(id){
       var m=pfApp(id)||pfMeta(id);
       return '<span class="pf-chip">'+(m?m.n:id)+'<b onclick="event.stopPropagation();pfRemove(\''+id+'\')">&#10005;</b></span>';
     }).join('');
+    if(rest>0) chips+='<span class="pf-chip more">+' + rest + '</span>';
     box.innerHTML=(chips||'<span class="ph">请选择应用（支持按数据中心、分组选择）</span>')+'<i class="arw"></i>';
   }
   if(!ids.length){
