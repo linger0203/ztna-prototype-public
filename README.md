@@ -4,9 +4,11 @@ SAG 零信任安全服务平台的管控台高保真原型。**单文件 HTML，
 
 ## 怎么看
 
-**在线看（推荐，手机也能开）**
+**在线看（推荐，手机也能开，无需登录）**
 
-https://26e8e1c6d4144ae4a8cb6df1c4bdbcbe.app.workbuddy.host
+https://linger0203.github.io/ztna-prototype-public/
+
+> 首次访问如果 404：到仓库 Settings → Pages，Source 选 `Deploy from a branch`，分支 `main`、目录 `/ (root)`，保存后等 1 分钟。
 
 **本地看**
 
@@ -15,6 +17,10 @@ git clone git@github.com:linger0203/ztna-prototype-public.git
 ```
 
 双击 `index.html`。
+
+## 注意
+
+仓库根目录的 `.nojekyll` 不要删。GitHub Pages 默认走 Jekyll，会跳过 `_assets` 这类下划线开头的目录，删了它样式、图表、图标会全部 404。
 
 ## 这是什么
 
