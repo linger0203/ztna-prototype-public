@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-page-node-id="lvEwGT19e1Q7SekxcqWGRN">
-<head data-page-node-id="gkmc1agWws6VgE7vfINO69">
-<meta charset="utf-8" data-page-node-id="I3k01gsyB5gLNPuBNdX7DP">
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
 <title>竹云零信任安全服务平台 · 管控台原型</title>
-<link rel="stylesheet" href="_assets/iconfont.css" data-page-node-id="o8TOktRsrwBix74oJQP5jE">
+<link rel="stylesheet" href="_assets/iconfont.css">
 <script src="_assets/echarts.min.js"></script>
 <script>if(typeof echarts==="undefined"){document.write('<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"><\/script>')}</script>
 <style>
@@ -176,12 +176,40 @@ input{font-family:inherit}
 #app.collapsed .sidebar .alone,#app.collapsed .sidebar .grp>.hd,#app.collapsed .sidebar .dc-pick,#app.collapsed .sidebar .collapse{justify-content:center;padding:0}
 #app.collapsed .sidebar .collapse .iconfont{transform:rotate(180deg)}
 .main{margin-left:var(--side);padding-top:var(--top);min-height:100vh;display:flex;flex-direction:column}
-.tabbar{height:42px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:2px;padding:0 12px;overflow-x:auto;flex-shrink:0}
-.tabbar .tab{display:flex;align-items:center;gap:8px;height:30px;padding:0 12px;border-radius:3px;font-size:13px;color:var(--t2);cursor:pointer;white-space:nowrap}
-.tabbar .tab:hover{background:#F5F7FA}
-.tabbar .tab.on{background:var(--blue-weak);color:var(--blue);font-weight:500}
-.tabbar .tab .x{font-size:12px;color:var(--t4);width:14px;height:14px;line-height:14px;text-align:center;border-radius:2px}
-.tabbar .tab .x:hover{background:#DCE6EE;color:var(--t1)}
+/* 页签栏（对齐 1.8.4.0 实况：浅灰底 + 白底签 + 当前页蓝字 + 溢出左右箭头） */
+.tabbar{height:36px;background:#F2F3F5;border-bottom:1px solid #E5E6EB;display:flex;align-items:center;padding:0 6px 0 2px;flex-shrink:0}
+.tabbar.hide{display:none}
+.tabbar .tb-nav{display:flex;align-items:center;gap:1px;flex-shrink:0;padding-right:4px}
+.tabbar .tb-nav span{width:16px;height:20px;line-height:19px;text-align:center;font-size:12px;color:#86909C;cursor:pointer;border-radius:2px}
+.tabbar .tb-nav span:hover{background:#E5E6EB;color:#1D2129}
+.tabbar .tb-nav span.dis{color:#C9CDD4;cursor:default;background:none}
+.tabbar .tb-wrap{flex:1;min-width:0;display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:none;height:100%}
+.tabbar .tb-wrap::-webkit-scrollbar{display:none}
+.tabbar .tab{display:flex;align-items:center;gap:5px;height:26px;padding:0 8px 0 10px;background:#fff;border-radius:2px;font-size:12px;color:#4E5969;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.tabbar .tab:hover{color:#0095E5}
+.tabbar .tab.on{color:#0095E5;font-weight:500}
+.tabbar .tab .x{display:none;font-size:11px;color:#C9CDD4;width:14px;height:14px;line-height:13px;text-align:center;border-radius:2px}
+.tabbar .tab.on .x,.tabbar .tab:hover .x{display:block}
+.tabbar .tab .x:hover{background:#E8F3FF;color:#0095E5}
+/* 顶栏语言切换 */
+.topbar .right .lang{position:relative;display:flex;align-items:center;gap:4px;height:32px;padding:0 8px;margin-right:4px;
+  color:#fff;font-size:13px;cursor:pointer;border-radius:3px}
+.topbar .right .lang:hover{background:rgba(255,255,255,.14)}
+.topbar .right .lang .iconfont{font-size:11px;opacity:.85}
+.topbar .right .lang .lang-pop{display:none;position:absolute;top:36px;right:0;min-width:128px;background:#fff;
+  border:1px solid var(--line);border-radius:4px;box-shadow:0 6px 20px rgba(23,66,122,.14);padding:4px 0;z-index:96}
+.topbar .right .lang .lang-pop.on{display:block}
+.topbar .right .lang .lang-pop div{padding:8px 14px;font-size:13px;color:var(--t2);cursor:pointer}
+.topbar .right .lang .lang-pop div:hover{background:#F5F9FD;color:var(--blue)}
+.topbar .right .lang .lang-pop div.on{color:var(--blue);font-weight:500}
+/* 多语言录入抽屉 */
+.ml-tabs{display:flex;gap:24px;border-bottom:1px solid #E5E6EB;margin-bottom:16px}
+.ml-tabs span{padding:9px 0 11px;font-size:13px;color:#4E5969;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.ml-tabs span.on{color:#0095E5;border-bottom-color:#0095E5;font-weight:600}
+.ml-tabs span em{font-style:normal;color:#86909C;font-size:12px;font-weight:400}
+.ml-tabs span.on em{color:#86909C}
+.ml-note{font-size:12px;color:#86909C;line-height:1.8;background:#F7F8FA;border-radius:4px;padding:8px 10px;margin-top:6px}
+.ml-note{font-size:12px;color:#86909C;line-height:1.8}
 .page{flex:1;padding:16px;background:var(--bg)}
 .crumb{font-size:13px;color:var(--t3);margin-bottom:12px}
 .crumb b{color:var(--t1);font-weight:400}
@@ -365,6 +393,36 @@ input{font-family:inherit}
 .placeholder{background:#fff;border-radius:3px;padding:70px 20px;text-align:center;color:var(--t3)}
 .placeholder .big{font-size:15px;color:var(--t2);margin-bottom:8px}
 .placeholder .route{font-size:12px;color:var(--t4);font-family:Consolas,monospace}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1954,94 +2012,321 @@ input[type=number]{-moz-appearance:textfield}
   width:40px;height:30px;border:0;border-radius:0;padding:0;flex:0 0 40px;background:transparent;text-align:center}
 .pf-dayset .pf-num{flex:0 0 auto}
 
+/* ===== 以下两块由 v2.37/v2.38 手工层补充，随 lists.css 一起注入 ===== */
+/* ============ 项目定制 · 应用维护（/project/maintenance/index） ============ */
+.mt-hd{display:flex;align-items:center;border-bottom:1px solid #E5E6EB;margin:-2px 0 10px}
+.mt-tabs{display:flex;align-items:center;gap:26px;flex:1;min-width:0}
+.mt-tabs>span{padding:11px 0;font-size:14px;color:#4E5969;cursor:pointer;border-bottom:2px solid transparent;line-height:1;margin-bottom:-1px}
+.mt-tabs>span.on{color:#0095E5;border-bottom-color:#0095E5;font-weight:600}
+.mt-tag{font-size:12px;color:#FF7D00;background:#FFF7E8;border:1px solid #FFE4B8;border-radius:2px;padding:3px 8px;line-height:1.2;flex-shrink:0}
+.mt-hint{font-size:12px;color:#86909C;margin:0 0 12px}
+.mt-gc{color:#86909C;font-size:12px;margin-left:4px}
+.mt-tfoot{font-size:12px;color:#86909C;padding:16px 14px 0;line-height:1.9}
+.mt-st{display:inline-block;height:22px;line-height:22px;padding:0 8px;border-radius:2px;font-size:12px}
+.mt-st.s-ok{background:#E8FFEA;color:#00B42A}
+.mt-st.s-warn{background:#FFF7E8;color:#FF7D00}
+.mt-st.s-info{background:#E8F3FF;color:#0095E5}
+.mt-i{display:inline-block;width:14px;height:14px;line-height:14px;text-align:center;border-radius:50%;
+  background:#FFB65D;color:#fff;font-size:10px;font-style:normal;margin-left:4px;cursor:help;vertical-align:1px}
+.mt-tbl th,.mt-tbl td{padding:9px 8px;font-size:12px}
+.mt-tbl .c-op .op{font-size:12px;margin-left:10px}
+.mt-tbl-tpl{table-layout:fixed}
+.mt-tbl-tpl .c-op{padding-right:12px}
+.mt-tbl tbody tr.on td{background:#EAF5FD}
+.mt-own{display:inline-block;font-size:11px;color:#0095E5;background:#E8F3FF;border-radius:2px;padding:1px 5px;margin-left:6px;vertical-align:1px}
+.mt-td-c{max-width:520px;white-space:normal!important;color:#86909C!important;font-size:12px!important;line-height:1.7}
+.mt-pg{display:inline-flex;gap:10px;margin-left:14px;font-size:13px;color:#4E5969}
+.mt-pg b{color:#0095E5}
+.mt-pg a{cursor:pointer}
+.mt-pg a:hover{color:#0095E5}
+.mt-foot{font-size:12px;color:#86909C;padding:12px 2px 0}
+/* 维护页面模板 */
+.mt-frow{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.mt-frow>label{flex:0 0 84px;text-align:right;font-size:13px;color:#4E5969}
+.mt-frow .fin{flex:1 1 auto;height:32px;border:1px solid #C9CDD4;border-radius:2px;padding:0 10px;font-size:13px;color:#1F2329;background:#fff;outline:none}
+.mt-frow .fin:disabled{background:#F7F8FA;color:#86909C}
+.mt-frow .fin:focus{border-color:#0095E5}
+.mt-col{align-items:flex-start}
+.mt-col>label{padding-top:8px}
+.mt-ta{height:132px!important;padding:8px 10px!important;line-height:1.7;resize:vertical;font-family:inherit}
+.mt-chk{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#4E5969}
+.mt-note2{background:#F7F8FA;border:1px solid #E5E6EB;border-radius:2px;padding:12px 14px;font-size:12px;color:#4E5969;line-height:2}
+.mt-note2>b{display:block;font-size:13px;color:#1F2329;margin-bottom:6px}
+.mt-note2 i{color:#0095E5;font-style:normal;font-weight:600;display:inline-block;min-width:76px}
+.mt-tip{font-size:12px;color:#FF7D00;background:#FFF7E8;border:1px solid #FFE4B8;border-radius:2px;padding:8px 10px;line-height:1.7;margin-bottom:16px}
+.mt-sep{color:#86909C}
+.mt-dt{flex:0 0 196px!important}
+.mt-ro{font-size:13px;color:#1F2329}
+.mt-dl>div{display:flex;gap:12px;padding:7px 0;border-bottom:1px dashed #F2F3F5;font-size:13px}
+.mt-dl>div>span{flex:0 0 100px;color:#86909C}
+.mt-dl>div>b{color:#1F2329;font-weight:400}
+/* 用户侧维护页效果 */
+.mt-prev{background:linear-gradient(160deg,#EEF4FF 0%,#F6F9FF 60%,#FFFFFF 100%);border-radius:4px;padding:52px 0;display:flex;justify-content:center}
+.mt-card{width:740px;background:#fff;border-radius:8px;box-shadow:0 6px 24px rgba(29,33,41,.06);display:flex;align-items:center;gap:24px;padding:42px 46px;box-sizing:border-box}
+.mt-card-l{flex:1 1 auto;min-width:0}
+.mt-badge{display:inline-block;font-size:12px;color:#0095E5;background:#E8F3FF;border-radius:2px;padding:3px 10px;margin-bottom:14px}
+.mt-h1{font-size:26px;font-weight:600;color:#1F2329;margin-bottom:16px}
+.mt-ul{margin:0;padding-left:18px}
+.mt-ul li{font-size:13px;color:#4E5969;line-height:2;margin-bottom:6px}
+.mt-card-r{flex:0 0 260px;text-align:center}
+.mt-lbl{font-size:12px;color:#FF9A2E;margin-top:-8px}
+
+/* ============ V1.8.4.0 新增 5 页 ============ */
+.wz{display:flex;align-items:center;margin:0 0 20px}
+.wz .wzs{display:flex;align-items:center;gap:8px;font-size:13px;color:#86909C;white-space:nowrap}
+.wz .wzs i{width:20px;height:20px;line-height:20px;text-align:center;border-radius:50%;background:#E5E6EB;color:#86909C;font-style:normal;font-size:12px}
+.wz .wzs.on{color:#0095E5;font-weight:600}
+.wz .wzs.on i{background:#0095E5;color:#fff}
+.wz .wzs.done i{background:#00B42A;color:#fff}
+.wz em{flex:1;height:1px;background:#E5E6EB;margin:0 10px;min-width:20px}
+.wzsec{font-size:13px;font-weight:600;color:#1F2329;margin:4px 0 14px;padding-left:9px;border-left:3px solid #0095E5;line-height:1.1}
+.wzsec .wz-sub{font-size:12px;font-weight:400;color:#86909C;margin-left:8px;border:0}
+.wz-done{text-align:center;padding:34px 10px 26px}
+.wz-done i{display:inline-block;width:48px;height:48px;line-height:48px;border-radius:50%;background:#E8FFEA;color:#00B42A;font-size:24px;font-style:normal;margin-bottom:14px}
+.wz-done b{display:block;font-size:15px;color:#1F2329;margin-bottom:8px}
+.wz-done div{font-size:13px;color:#4E5969;line-height:1.8}
+.sp-tip{display:flex;gap:8px;background:#E8F3FF;border:1px solid #BEDAFF;border-radius:2px;padding:10px 12px;font-size:12px;color:#4E5969;line-height:1.8;margin-bottom:16px}
+.sp-tip i{flex-shrink:0;width:14px;height:14px;line-height:14px;text-align:center;border-radius:50%;background:#0095E5;color:#fff;font-size:10px;font-style:normal;margin-top:2px}
+.sp-tip b{color:#0095E5;font-weight:400;cursor:pointer}
+.spa-in{width:64px!important;text-align:center;height:32px;border:1px solid #C9CDD4;border-radius:2px;padding:0 6px;font-size:13px;color:#1F2329}
+.spa-in:focus{border-color:#0095E5}
+.spa-t{font-size:13px;color:#4E5969;line-height:32px}
+.spa-note{font-size:12px;color:#86909C;line-height:32px}
+.spa-link{color:#0095E5;cursor:pointer}
+.spa-link:hover{text-decoration:underline}
+.sdp-grp{border-top:1px dashed #EBEEF5;padding-top:16px;margin-top:4px}
+.sdp-gt{text-align:center;font-size:13px;color:#1F2329;font-weight:600;margin-bottom:14px}
+.sdp-chk{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#4E5969}
+.sdp-id input{background:#F7F8FA;color:#4E5969}
+.sdp-act,.sdp-q{display:inline-block;width:16px;height:16px;line-height:16px;text-align:center;border-radius:50%;
+  font-size:11px;font-style:normal;cursor:pointer;flex-shrink:0}
+.sdp-act{color:#0095E5;border:1px solid #B3DEF7}
+.sdp-q{background:#C9CDD4;color:#fff;cursor:help}
+.tree-foot-chk{padding:12px 14px 0;font-size:13px;color:#4E5969}
+.tree-foot-chk label{display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+
+
+/* MCP服务：树标题右侧「显示空组」（对齐 1.8.4.0 实况） */
+.tree .th .mcp-eh{margin-left:auto;display:inline-flex;align-items:center;gap:3px;
+  font-size:12px;font-weight:400;color:#0095E5;cursor:pointer;white-space:nowrap}
+.tree .th .mcp-eh i{font-style:normal;font-size:12px;line-height:1}
+.tree .th .mcp-eh:hover{color:#007FC4}
+
+/* ============ 原型页面导航（index 内嵌左侧常驻栏，2026-11-19 v2.36） ============
+   左右布局：左栏常驻，右侧原型整体右移（topbar / sidebar / main 三处让位）
+   收起后只剩 52px 竖条；全屏时整栏隐藏，屏幕就是 index 原样 */
+:root,body{--npw:0px}
+
+/* ---- 让位：顶栏、侧栏、主区跟着 var(--npw) 走 ---- */
+.topbar{left:var(--npw,0px);transition:left .18s ease}
+.sidebar{left:var(--npw,0px);transition:left .18s ease}
+.main{margin-left:calc(var(--side) + var(--npw,0px));transition:margin-left .18s ease}
+
+/* ---- 左栏本体 ---- */
+.np-dock{position:fixed;left:0;top:0;bottom:0;width:var(--npw,0px);z-index:70;
+  display:none;flex-direction:column;background:#fff;border-right:1px solid #E5E6EB;
+  box-shadow:2px 0 10px rgba(29,33,41,.05);overflow:hidden}
+body.np-in .np-dock{display:flex}
+body.np-fs .np-dock{display:none}
+
+.np-hd{flex:0 0 auto;display:flex;align-items:center;gap:8px;height:64px;padding:0 10px 0 16px;
+  border-bottom:1px solid #F0F2F5;background:#FAFBFC}
+.np-hd b{font-size:14px;font-weight:600;color:#1D2129;white-space:nowrap}
+.np-hd .n{font-size:11px;color:#86909C;background:#F2F3F5;border-radius:9px;padding:1px 7px}
+.np-hd .col{margin-left:auto;width:24px;height:24px;flex:0 0 24px;display:flex;align-items:center;
+  justify-content:center;border-radius:3px;color:#86909C;cursor:pointer;font-size:15px;line-height:1}
+.np-hd .col:hover{background:#EDEFF2;color:#1D2129}
+
+.np-q{flex:0 0 auto;padding:10px 12px 6px}
+.np-q .box{position:relative}
+.np-q input{width:100%;height:30px;border:1px solid #C9CDD4;border-radius:2px;background:#fff;
+  padding:0 8px 0 27px;font:inherit;font-size:12.5px;color:#1D2129;outline:none}
+.np-q input::placeholder{color:#A9AEB8}
+.np-q input:hover,.np-q input:focus{border-color:#0095E5}
+.np-q .i{position:absolute;left:8px;top:50%;width:12px;height:12px;margin-top:-6px;background:#A9AEB8;
+  -webkit-mask:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Ccircle cx='5' cy='5' r='3.6' fill='none' stroke='%23000' stroke-width='1.2'/%3E%3Cpath d='M7.8 7.8L10.6 10.6' stroke='%23000' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E") center/12px no-repeat;
+  mask:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Ccircle cx='5' cy='5' r='3.6' fill='none' stroke='%23000' stroke-width='1.2'/%3E%3Cpath d='M7.8 7.8L10.6 10.6' stroke='%23000' stroke-width='1.2' stroke-linecap='round'/%3E%3C/svg%3E") center/12px no-repeat}
+
+/* 登录页入口（固定在最上面，翻列表也找得到） */
+.np-loginrow{flex:0 0 auto;display:flex;align-items:center;gap:6px;height:32px;margin:0 8px 2px;
+  padding:0 10px;border-radius:3px;font-size:12.5px;color:#4E5969;cursor:pointer}
+.np-loginrow:hover{background:#F2F9FA;color:#0078C8}
+.np-loginrow::before{content:"";width:7px;height:7px;border-left:1.3px solid currentColor;
+  border-bottom:1.3px solid currentColor;transform:rotate(45deg);margin-top:1px}
+
+.np-tree{flex:1 1 auto;min-height:0;overflow:auto;padding:4px 0 10px}
+.np-tree::-webkit-scrollbar{width:8px}
+.np-tree::-webkit-scrollbar-thumb{background:#DCDFE6;border-radius:4px}
+.np-tree::-webkit-scrollbar-thumb:hover{background:#C9CDD4}
+
+.np-mod{border-top:1px solid #F0F2F5}
+.np-mod:first-child{border-top:0}
+.np-mh{display:flex;align-items:center;gap:6px;height:32px;padding:0 12px;cursor:pointer;
+  user-select:none;color:#1D2129;background:#FAFBFC}
+.np-mh:hover{background:#F2F3F5}
+.np-mh .ar{width:7px;height:7px;flex:0 0 7px;border-right:1.2px solid #86909C;border-bottom:1.2px solid #86909C;
+  transform:rotate(-45deg);transition:transform .15s;margin-left:1px}
+.np-mod.open>.np-mh .ar{transform:rotate(45deg)}
+.np-mh span.t{font-size:12.5px;font-weight:600;letter-spacing:.2px}
+.np-mh .c{margin-left:auto;font-size:11px;color:#A9AEB8;font-weight:400}
+.np-mb{display:none}
+.np-mod.open>.np-mb{display:block}
+
+.np-gh{display:flex;align-items:center;gap:6px;height:26px;padding:0 12px 0 22px;cursor:pointer;
+  user-select:none;font-size:12px;color:#86909C}
+.np-gh:hover{color:#4E5969;background:#FAFBFC}
+.np-gh .ar{width:6px;height:6px;flex:0 0 6px;border-right:1px solid #A9AEB8;border-bottom:1px solid #A9AEB8;
+  transform:rotate(-45deg);transition:transform .15s}
+.np-grp.open>.np-gh .ar{transform:rotate(45deg)}
+.np-gb{display:none}
+.np-grp.open>.np-gb{display:block}
+
+.np-it{display:flex;align-items:center;height:30px;padding:0 10px 0 32px;cursor:pointer;
+  font-size:13px;color:#1D2129;position:relative;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.np-grp .np-it{padding-left:38px}
+.np-it:hover{background:#F2F9FA}
+.np-it.on{background:#EAF5FD;color:#0078C8;font-weight:500}
+.np-it.on::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:#0095E5}
+.np-empty{padding:18px 14px;text-align:center;color:#A9AEB8;font-size:12px}
+
+.np-ft{flex:0 0 auto;display:flex;align-items:center;gap:10px;height:38px;padding:0 12px;
+  border-top:1px solid #F0F2F5;background:#FCFCFD;font-size:11.5px;color:#A9AEB8}
+.np-ft .fs{display:flex;align-items:center;gap:5px;color:#4E5969;cursor:pointer;padding:2px 6px;
+  border-radius:3px;font-size:12px}
+.np-ft .fs:hover{background:#EDEFF2;color:#1D2129}
+.np-ft .fs i{width:12px;height:12px;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M1.6 5V2.4a.8.8 0 0 1 .8-.8H5M9 1.6h2.6a.8.8 0 0 1 .8.8V5M12.4 9v2.6a.8.8 0 0 1-.8.8H9M5 12.4H2.4a.8.8 0 0 1-.8-.8V9' stroke='%23000' stroke-width='1.3' stroke-linecap='round' fill='none'/%3E%3C/svg%3E") center/12px no-repeat;
+  mask:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M1.6 5V2.4a.8.8 0 0 1 .8-.8H5M9 1.6h2.6a.8.8 0 0 1 .8.8V5M12.4 9v2.6a.8.8 0 0 1-.8.8H9M5 12.4H2.4a.8.8 0 0 1-.8-.8V9' stroke='%23000' stroke-width='1.3' stroke-linecap='round' fill='none'/%3E%3C/svg%3E") center/12px no-repeat}
+
+/* ---- 收起态：52px 竖条 ---- */
+body.np-col .np-dock .np-hd{display:none}
+body.np-col .np-dock .np-q,body.np-col .np-dock .np-loginrow,
+body.np-col .np-dock .np-tree,body.np-col .np-dock .np-ft{display:none}
+.np-rail{display:none;flex:1;flex-direction:column;align-items:center;padding-top:16px;gap:12px;
+  cursor:pointer;color:#4E5969;user-select:none}
+body.np-col .np-dock .np-rail{display:flex}
+.np-rail:hover{color:#0078C8}
+.np-rail i{width:16px;height:16px;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Crect x='2' y='2.6' width='9.4' height='10.8' rx='1.4' fill='none' stroke='%23000' stroke-width='1.4'/%3E%3Cpath d='M4.4 5.8h4.6M4.4 8h4.6M4.4 10.2h3' stroke='%23000' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E") center/16px no-repeat;
+  mask:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Crect x='2' y='2.6' width='9.4' height='10.8' rx='1.4' fill='none' stroke='%23000' stroke-width='1.4'/%3E%3Cpath d='M4.4 5.8h4.6M4.4 8h4.6M4.4 10.2h3' stroke='%23000' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.np-rail .vt{writing-mode:vertical-rl;font-size:12px;letter-spacing:2px;color:#86909C}
+
+/* ---- 登录页胶囊（只在登录页出现） ---- */
+.np-btn{position:fixed;right:22px;bottom:22px;z-index:100;display:inline-flex;align-items:center;gap:7px;
+  height:40px;padding:0 18px 0 15px;border:1px solid rgba(255,255,255,.32);border-radius:20px;
+  background:var(--sp-blue,#0095E5);color:#fff;font:inherit;font-size:14px;cursor:pointer;
+  box-shadow:0 8px 24px rgba(0,149,229,.42);transition:background .15s,box-shadow .15s,transform .12s;user-select:none}
+.np-btn:hover{background:#0086CE;box-shadow:0 10px 28px rgba(0,149,229,.52)}
+.np-btn:active{transform:translateY(1px)}
+.np-btn i{width:15px;height:15px;flex:0 0 15px;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Crect x='2' y='2.6' width='9.4' height='10.8' rx='1.4' fill='none' stroke='%23000' stroke-width='1.4'/%3E%3Cpath d='M4.4 5.8h4.6M4.4 8h4.6M4.4 10.2h3' stroke='%23000' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E") center/15px no-repeat;
+  mask:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Crect x='2' y='2.6' width='9.4' height='10.8' rx='1.4' fill='none' stroke='%23000' stroke-width='1.4'/%3E%3Cpath d='M4.4 5.8h4.6M4.4 8h4.6M4.4 10.2h3' stroke='%23000' stroke-width='1.3' stroke-linecap='round'/%3E%3C/svg%3E") center/15px no-repeat}
+.np-btn kbd{margin-left:2px;font:inherit;font-size:11px;opacity:.72;border:1px solid rgba(255,255,255,.5);
+  border-radius:3px;padding:0 4px;line-height:15px}
+body.np-in .np-btn,body.np-fs .np-btn{display:none!important}
+
+/* ---- 全屏提示 ---- */
+.np-toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%);z-index:120;
+  padding:8px 16px;border-radius:4px;background:rgba(29,33,41,.82);color:#fff;font-size:13px;
+  opacity:0;transition:opacity .25s;pointer-events:none}
+.np-toast.on{opacity:1}
+
+
 /*<<LISTS_CSS_END>>*/
 </style>
 </head>
-<body data-page-node-id="gmDrCcFGMqqqMOi0gdqxf9">
+<body>
 
 <!-- ================= 登录 ================= -->
-<div id="login" data-page-node-id="RWmQMhgw820B7sGcp6v65h">
-  <div class="lg" data-page-node-id="ww3DwTRNDmCTNNCmGVNXMP"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台" data-page-node-id="fUY9b5FwkowR7R692QmkWV"></div>
-  <div class="card" data-page-node-id="rNii9IJqAYLWZ1LMB1Hw89">
-    <h2 data-page-node-id="2RHllh0VAEcALszEJlUs8N">系统登录</h2>
-    <div class="fld" data-page-node-id="pXgJSILy5asfwnyQOM3DIn"><i class="iconfont icon-account_number" data-page-node-id="wzzYT38o8Za4uL2XZSfBnD"></i><input id="u" placeholder="账号" value="aoyuling" data-page-node-id="Nyj4wkWfGgFjAOumhInVZB"></div>
-    <div class="fld" data-page-node-id="XEBI98LNGmbk8xCNar63f0"><i class="iconfont icon-password" data-page-node-id="rx4Mrao5ntaCjDb4HHHEUr"></i><input id="p" type="password" placeholder="密码" value="B@m123456" data-page-node-id="piwKK2B7jEMFLO1Pp7e1I1"></div>
-    <div class="fld cap" data-page-node-id="yXFdp5SECiDu8gshD4kAco">
-      <i class="iconfont icon-verification_code" data-page-node-id="5w2Ca2G5hTPP1y5EnmJmCH"></i>
-      <input id="c" placeholder="验证码" value="8F2D" data-page-node-id="xWNASkPGN225DaEXtGvkei">
-      <div class="img" id="capImg" title="看不清？换一张" onclick="makeCap()" data-page-node-id="ogV2BBnawtFHqGC2kWqf33"><b style="color:#F2C94C" data-page-node-id="ObIcJQFyf6V88eZSDZEMU1">8</b><b style="color:#FF7BA9" data-page-node-id="snep6YagVhMiGEsoiqtGDw">F</b><b style="color:#5ADE8B" data-page-node-id="gAACPBfYs3i2xJYAnHdPVU">2</b><b style="color:#5FB8FF" data-page-node-id="m4NyYnUgn8lZBDaN8sIq26">D</b></div>
+<div id="login">
+  <div class="lg"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台"></div>
+  <div class="card">
+    <h2>系统登录</h2>
+    <div class="fld"><i class="iconfont icon-account_number"></i><input id="u" placeholder="账号" value="admin"></div>
+    <div class="fld"><i class="iconfont icon-password"></i><input id="p" type="password" placeholder="密码" value="B@m123456"></div>
+    <div class="fld cap">
+      <i class="iconfont icon-verification_code"></i>
+      <input id="c" placeholder="验证码" value="8F2D">
+      <div class="img" id="capImg" title="看不清？换一张" onclick="makeCap()"><b style="color:#F2C94C">8</b><b style="color:#FF7BA9">F</b><b style="color:#5ADE8B">2</b><b style="color:#5FB8FF">D</b></div>
     </div>
-    <div class="row" onclick="document.getElementById('rm').classList.toggle('on')" data-page-node-id="aPpamFmAuxjcRPU2vzOocO">
-      <span class="box" id="rm" data-page-node-id="Dw7CPde6tDj6kdWYUHzAjP"></span>记住密码
+    <div class="row" onclick="document.getElementById('rm').classList.toggle('on')">
+      <span class="box" id="rm"></span>记住密码
     </div>
-    <div class="err" id="err" data-page-node-id="8QYwwPF3IsLGJdopxVIcFG"></div>
-    <button class="btn" onclick="doLogin()" data-page-node-id="onvV3P2v0gz0a8eXRJfCZT">登 录</button>
+    <div class="err" id="err"></div>
+    <button class="btn" onclick="doLogin()">登 录</button>
   </div>
-  <div class="foot" data-page-node-id="aRlfXlAvyZhoNGMU4hAEIX">Copyright © 2022 BambooCloud 技术支持：深圳竹云科技股份有限公司</div>
+  <div class="foot">Copyright © 2022 BambooCloud 技术支持：深圳竹云科技股份有限公司</div>
 </div>
 
 <!-- ================= 角色选择 ================= -->
-<div id="role" class="hide" data-page-node-id="9dmP8WITyxy2wOPCHn16i7">
-  <div class="wrap" data-page-node-id="0bVtTfF4fAvuuATVbut8JB">
-    <h1 data-page-node-id="TCAm4SKVyxsyykZdtyLUtY">登录</h1>
-    <div class="tip" data-page-node-id="0LqmBbArGoaWKir3NtnVOf">您具有多个管理员角色，请选择本次登录的角色</div>
-    <div class="opt" data-r="系统管理员" onclick="pickRole(this)" data-page-node-id="g8TxrbEtGS7G5UBTHpkSxG">
-      <span class="av" data-page-node-id="qwISu8LKWAPD173hM9zMc5"><i class="iconfont icon-operator" data-page-node-id="lMCPXhxHu41jzBZmY1F28X"></i></span><span class="nm" data-page-node-id="iO65w5ViOeDtUrc9jJBGEQ">系统管理员</span><span class="rdo" data-page-node-id="kjk4QzD4QsSJcoiEHVvfOC"></span>
+<div id="role" class="hide">
+  <div class="wrap">
+    <h1>登录</h1>
+    <div class="tip">您具有多个管理员角色，请选择本次登录的角色</div>
+    <div class="opt" data-r="系统管理员" onclick="pickRole(this)">
+      <span class="av"><i class="iconfont icon-operator"></i></span><span class="nm">系统管理员</span><span class="rdo"></span>
     </div>
-    <div class="opt on" data-r="超级管理员" onclick="pickRole(this)" data-page-node-id="IloTmunCPoy6IhxNsv6tZk">
-      <span class="av" data-page-node-id="saUIlZ41Fso8sUOKEAXmue"><i class="iconfont icon-operator" data-page-node-id="MYlgamgEpWuVK1C4bZGyGP"></i></span><span class="nm" data-page-node-id="TM6hZHVcD6qCrkzPJJop89">超级管理员</span><span class="rdo" data-page-node-id="0x55uCPtCNsNUUxHg2mGET"></span>
+    <div class="opt on" data-r="超级管理员" onclick="pickRole(this)">
+      <span class="av"><i class="iconfont icon-operator"></i></span><span class="nm">超级管理员</span><span class="rdo"></span>
     </div>
-    <div class="acts" data-page-node-id="B3ECBDGdDjq5m2cs9BPlSl">
-      <button class="no" onclick="location.reload()" data-page-node-id="xoTvx3sV8Zi2ChtHMBL4WV">取 消</button>
-      <button class="ok" onclick="enterApp()" data-page-node-id="OBA6ctgWyx900dZLlZW5Eb">登 录</button>
+    <div class="acts">
+      <button class="no" onclick="location.reload()">取 消</button>
+      <button class="ok" onclick="enterApp()">登 录</button>
     </div>
   </div>
 </div>
 
 <!-- ================= 应用 ================= -->
-<div id="app" data-page-node-id="CNitCebY3gbbPiVqEkX9fJ">
-  <header class="topbar" data-page-node-id="Ba9A6xmzLSdLTVWsneTznE">
-    <div class="logo" data-page-node-id="VUFEGikUODtQRS1pDcAQcC"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台" data-page-node-id="BhGzW6IQU1dGwqMtY7hUBk"></div>
-    <nav id="topnav" data-page-node-id="CTtUEqdPOhNbWoRUBRIISd"></nav>
-    <div class="right" data-page-node-id="CYh8oq4xmbg0MQn4Ff48Dy">
-      <div class="grid" id="btnGrid" onclick="togglePop('popSafety',event)" data-page-node-id="4HO8KHGuxOMHT78URn26Ws"><i data-page-node-id="zTAkfpn25dfh23z8IKLsD3"></i><i data-page-node-id="ZtbIgyveijWzl1s8ujuHXm"></i><i data-page-node-id="9HHEWIJHlA3XzuRjqGOSIu"></i><i data-page-node-id="vClxuCeu22Gaa37GqvTBsc"></i><i data-page-node-id="94q9iWEUnM2jxWyJ8VJZEr"></i><i data-page-node-id="MGeRZICOHwSrQGaVdicB4H"></i><i data-page-node-id="1dfoFOFvAEgrZzsTgqcLcg"></i><i data-page-node-id="N1LkYaDt5xnMvaNsVtXWhq"></i><i data-page-node-id="Zp1SER9WwmEqF1ZKSYXNkb"></i></div>
-      <div class="who" id="btnWho" onclick="togglePop('popUser',event)" data-page-node-id="idT3ECB88Lqi0vkVCv6sxK"><span class="av" data-page-node-id="MA9le1yXeVbNS0R1LMQTve">a</span><span id="whoName" data-page-node-id="aUbpkgZERzlaYD8DjaXseE">aoyuling</span></div>
+<div id="app">
+  <header class="topbar">
+    <div class="logo"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台"></div>
+    <nav id="topnav"></nav>
+    <div class="right">
+      <div class="lang" id="btnLang" onclick="toggleLang(event)">
+        <span id="langName">简体中文</span><i class="iconfont icon-drop_down"></i>
+        <div class="lang-pop" id="langPop">
+          <div class="on" onclick="pickLang('zh',event)">简体中文</div>
+          <div onclick="pickLang('en',event)">English</div>
+        </div>
+      </div>
+      <div class="grid" id="btnGrid" onclick="togglePop('popSafety',event)"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="who" id="btnWho" onclick="togglePop('popUser',event)"><span class="av">a</span><span id="whoName">admin</span></div>
 
-      <div class="pop pop-safety" id="popSafety" data-page-node-id="HI03YmgpnF2rsEocBWlvpm">
-        <div class="hero" data-page-node-id="ZTLi5xq6XIaWdLXGLIIGsh">
-          <div class="ht" data-page-node-id="Rzwx9GlShAe8uuBGCvdVFN">零信任安全中心</div>
-          <div class="hs" data-page-node-id="8e5Bvziu2Wfn1lusnBB1Ez">点击进入其他安全管控台</div>
-          <svg class="himg" viewBox="0 0 72 52" fill="none" data-page-node-id="Vm2cKkWVJQX0Mie8iLDtUJ">
-            <rect x="14" y="6" width="44" height="34" rx="4" fill="#fff" opacity=".95" data-page-node-id="XLJAA4IjzFK7gcG2kAsvvu"/>
-            <rect x="14" y="6" width="44" height="34" rx="4" stroke="#8CC6F2" stroke-width="1" data-page-node-id="aM0etK4oSnsC1AxTJ4ze05"/>
-            <path d="M36 14l9 3v8c0 5-3.8 8.6-9 9.8-5.2-1.2-9-4.8-9-9.8v-8l9-3z" fill="#2C8FE0" data-page-node-id="zdE9irw0vnCwUopjK1FSoN"/>
-            <path d="M32 25.5l2.8 2.8 5.2-5.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="1nsBAwzimeewxhAlmRXzFi"/>
+      <div class="pop pop-safety" id="popSafety">
+        <div class="hero">
+          <div class="ht">零信任安全中心</div>
+          <div class="hs">点击进入其他安全管控台</div>
+          <svg class="himg" viewBox="0 0 72 52" fill="none">
+            <rect x="14" y="6" width="44" height="34" rx="4" fill="#fff" opacity=".95"/>
+            <rect x="14" y="6" width="44" height="34" rx="4" stroke="#8CC6F2" stroke-width="1"/>
+            <path d="M36 14l9 3v8c0 5-3.8 8.6-9 9.8-5.2-1.2-9-4.8-9-9.8v-8l9-3z" fill="#2C8FE0"/>
+            <path d="M32 25.5l2.8 2.8 5.2-5.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <div class="apps" id="safetyApps" data-page-node-id="d6JsSkAClqdATKT4PWGCbX"></div>
+        <div class="apps" id="safetyApps"></div>
       </div>
 
-      <div class="pop pop-user" id="popUser" data-page-node-id="yknUwGzFXYJQbgiCB4PmQs">
-        <div class="uhead" data-page-node-id="61tD83rPBwfiSoM7HFGKpA">
-          <span class="uav" data-page-node-id="4F1Za0oTkcVVUDHVgc55ur"><i class="iconfont icon-head_sculpture" data-page-node-id="MxMUEySNVjHFJlHAKg9dCt"></i></span>
-          <div class="umeta" data-page-node-id="4b43aVcKb9Gb5hF6rSaEF5"><b data-page-node-id="yPw5Nhv2unc9Jy9etUu7ZT">aoyuling</b><span class="utag" data-page-node-id="3mOPkJdDUCRqCY5WcKloFY">超级管理员</span></div>
+      <div class="pop pop-user" id="popUser">
+        <div class="uhead">
+          <span class="uav"><i class="iconfont icon-head_sculpture"></i></span>
+          <div class="umeta"><b>admin</b><span class="utag">超级管理员</span></div>
         </div>
-        <div class="uact" onclick="alert('修改密码：待批次七随「操作员管理」一起做')" data-page-node-id="Iiey3CDc8iKB1AjmDAHloV"><i class="iconfont icon-change_password" data-page-node-id="Fmwq9sr2rm5hJhw3TwAzhP"></i>修改密码</div>
-        <div class="uact" onclick="location.reload()" data-page-node-id="uQIymMGPsHyVdYg9IxtLwG"><i class="iconfont icon-exit_the_system" data-page-node-id="lMgmwUUkzQBzr2irVc8aAE"></i>退出系统</div>
+        <div class="uact" onclick="alert('修改密码：待批次七随「操作员管理」一起做')"><i class="iconfont icon-change_password"></i>修改密码</div>
+        <div class="uact" onclick="location.reload()"><i class="iconfont icon-exit_the_system"></i>退出系统</div>
       </div>
     </div>
   </header>
 
-  <aside class="sidebar" data-page-node-id="3acbsBj0Qdl4aTtUL84Ups">
-    <div class="scroll" id="side" data-page-node-id="zD1bnncIa2qntIwXeYjDuc"></div>
-    <div class="collapse" onclick="toggleCollapse()" data-page-node-id="pKidZ0X3cbdKCwtF8y5tAz"><i class="iconfont icon-navigation_stow" data-page-node-id="1xBKWApHG8OcA79ucOALMO"></i><span data-page-node-id="rnScaYsDnFJz2YZH1MzcZb">收起菜单</span></div>
+  <aside class="sidebar">
+    <div class="scroll" id="side"></div>
+    <div class="collapse" onclick="toggleCollapse()"><i class="iconfont icon-navigation_stow"></i><span>收起菜单</span></div>
   </aside>
 
-  <div class="flyout" id="flyout" onmouseenter="clearTimeout(window.__flyT)" onmouseleave="hideFlySoon()" data-page-node-id="s0H5iz5reF9a3M2ffHM5T5"></div>
+  <div class="flyout" id="flyout" onmouseenter="clearTimeout(window.__flyT)" onmouseleave="hideFlySoon()"></div>
 
-  <main class="main" data-page-node-id="gox6ZOTqj8Eick9JSLGZtr">
-    <div class="tabbar" id="tabbar" data-page-node-id="ReFYz18inPwjdJf4yGu2zs"></div>
-    <div class="page" id="page" data-page-node-id="VXTCZnaujd9qZwdP9DqTA7"></div>
+  <main class="main">
+    <div class="tabbar" id="tabbar"></div>
+    <div class="page" id="page"></div>
   </main>
 </div>
 
@@ -2074,11 +2359,10 @@ var MODULES = [
           { name:'认证策略', route:'/terminal/security/auth' },
           { name:'流量限速', route:'/terminal/security/rate_limit' },
           { name:'基线策略', route:'/terminal/security/check' },
-          { name:'应用合规', route:'/terminal/security/app_check' } ]},
+          { name:'应用合规', route:'/terminal/security/app_check' },
+          { name:'SPA策略', route:'/terminal/security/agent_spa' } ]},
       { group:'客户端', icon:'icon-client_version', items:[
-          { name:'客户端版本', route:'/terminal/client/version' },
-          { name:'客户端下载', route:'/terminal/client/download' },
-          { name:'客户端升级', route:'/terminal/client/upgrade' } ]}
+          { name:'客户端版本', route:'/terminal/client/version' } ]}
   ]},
   { key:'network', name:'网络', menus:[
       { group:'设备管理', icon:'icon-device_management', items:[
@@ -2091,13 +2375,15 @@ var MODULES = [
           { name:'SDP服务', route:'/network/manage/sdp' },
           { name:'虚拟网络', route:'/network/manage/virtual' },
           { name:'终端网络', route:'/network/manage/agent_work' },
-          { name:'防火墙', route:'/network/manage/firewall' } ]}
+          { name:'防火墙', route:'/network/manage/firewall' },
+          { name:'SDP代理', route:'/network/manage/sdp_proxy' } ]}
   ]},
   { key:'resource', name:'资源', menus:[
       { center:true, items:[
           { name:'Web应用', icon:'icon-application_management', route:'/resource/application/system' },
           { name:'邮件系统', route:'/resource/application/mail' },
           { name:'网络资源', route:'/resource/application/net' },
+          { name:'MCP服务', route:'/resource/application/mcp' },
           { name:'API资源', route:'/resource/application/api' } ]},
       { group:'资源发布', icon:'icon-app_publishing', items:[
           { name:'应用发布', route:'/resource/publish/index' },
@@ -2105,14 +2391,17 @@ var MODULES = [
           { name:'API授权', route:'/resource/resource/api' } ]},
       { group:'基础配置', icon:'icon-configuration_center', items:[
           { name:'数据中心', route:'/resource/datacenter/index' },
-          { name:'应用证书', route:'/resource/application/certificate' } ]}
+          { name:'应用证书', route:'/resource/application/certificate' } ]},
+      { group:'项目定制', icon:'icon-configuration_center', items:[
+          { name:'应用维护', route:'/project/maintenance/index' } ]}
   ]},
   { key:'security', name:'安全', menus:[
       { group:'网络控制', icon:'icon-network_control', items:[
           { name:'IP策略', route:'/strategy/network/ip' },
           { name:'智能IP封禁', route:'/strategy/network/risk_ip' } ]},
       { group:'身份安全', icon:'icon-identity_security', items:[
-          { name:'用户认证', route:'/strategy/identity/auth' } ]},
+          { name:'用户认证', route:'/strategy/identity/auth' },
+          { name:'智能体认证', route:'/strategy/identity/agent' } ]},
       { group:'数据安全', icon:'icon-data_security', items:[
           { name:'页面安全', route:'/strategy/data/watermark' },
           { name:'数据脱敏', route:'/strategy/data/masking' } ]},
@@ -2138,7 +2427,8 @@ var MODULES = [
           { name:'应用访问记录', route:'/audit/flow/application' },
           { name:'邮件发送记录', route:'/audit/flow/mail_send' },
           { name:'邮件接收记录', route:'/audit/flow/mail_receive' },
-          { name:'API调用记录', route:'/audit/flow/api' } ]}
+          { name:'API调用记录', route:'/audit/flow/api' },
+          { name:'MCP访问记录', route:'/audit/flow/mcp' } ]}
   ]},
   { key:'system', name:'系统', menus:[
       { group:'操作员', icon:'icon-operator', items:[
@@ -2201,12 +2491,36 @@ function enterApp(){
 }
 
 /* ================= 外壳 ================= */
+var LANG='zh';
+var MOD_EN={home:'Home',terminal:'Terminal',network:'Network',resource:'Resource',
+            security:'Security',audit:'Audit',system:'System'};
 function buildTopNav(){
   var html='';
   MODULES.forEach(function(m){
-    html+='<a href="javascript:;" data-k="'+m.key+'" onclick="switchModule(\''+m.key+'\')">'+m.name+'</a>';
+    var label=(LANG==='en'?(MOD_EN[m.key]||m.name):m.name);
+    html+='<a href="javascript:;" data-k="'+m.key+'" class="'+(m.key===curModule?'on':'')+'" onclick="switchModule(\''+m.key+'\')">'+label+'</a>';
   });
   document.getElementById('topnav').innerHTML=html;
+}
+function toggleLang(e){
+  if(e) e.stopPropagation();
+  var p=document.getElementById('langPop'), s=document.getElementById('popSafety'), u=document.getElementById('popUser');
+  if(s) s.classList.remove('on');
+  if(u) u.classList.remove('on');
+  p.classList.toggle('on');
+}
+function pickLang(l,e){
+  if(e) e.stopPropagation();
+  LANG=l;
+  document.getElementById('langName').textContent=(l==='en'?'English':'简体中文');
+  var items=document.getElementById('langPop').querySelectorAll('div');
+  for(var i=0;i<items.length;i++) items[i].classList.toggle('on', i===(l==='en'?1:0));
+  document.getElementById('langPop').classList.remove('on');
+  document.documentElement.lang=(l==='en'?'en':'zh-CN');
+  buildTopNav();
+  if(document.querySelector('.sidebar .collapse span'))
+    document.querySelector('.sidebar .collapse span').textContent=(l==='en'?'Collapse':'收起菜单');
+  lpTip(l==='en'?'Language: English（原型仅演示顶栏语言项，完整语言包见实机）':'界面语言已切换为简体中文');
 }
 
 var curModule='home';
@@ -2299,6 +2613,7 @@ function renderSafety(){
 document.addEventListener('click',function(){
   var ids=['popSafety','popUser'];
   for(var i=0;i<ids.length;i++) document.getElementById(ids[i]).classList.remove('on');
+  var lp=document.getElementById('langPop'); if(lp) lp.classList.remove('on');
 });
 
 /* ================= 收起态飞层 ================= */
@@ -2325,13 +2640,270 @@ function hideFlySoon(){ clearTimeout(window.__flyT); window.__flyT=setTimeout(fu
 function flyGo(route,name){ document.getElementById('flyout').classList.remove('on'); openPage(name,route); }
 
 /* ================= 快捷访问页 ================= */
+/* ================= 项目定制 · 应用维护 =================
+   入口：资源 › 项目定制 › 应用维护   route: /project/maintenance/index
+   依据：03-PRD文档\化学工程-应用办公维护场景解决方案.docx（img1~img8 八张原型图）
+   三块：维护状态列表 / 维护页面模板 / 用户侧维护页效果
+   —— 属项目定制能力，不并入 1.8.4.0 标准菜单与功能清单 */
+var MT_TAB=0, MT_FILTER='全部', MT_GRP='所有分组', MT_TPL=0;
+var MT_APPS=[
+  {name:'OA系统',       way:'域名',   a1:'www.oa.com',          a2:'www.oa.com',          id:'232982', fip:'10.150.1.1',  grp:'办公软件',   p1:'http',  p2:'http',  pub:'已发布', st:'维护中',   bs:'2025-10-01 10:00', es:'永久维护',         mc:'升级已知问题', api:21},
+  {name:'策略管理系统', way:'IP地址', a1:'—',                   a2:'10.153.89.10:2443',   id:'232986', fip:'10.150.1.2',  grp:'合作方系统', p1:'https', p2:'https', pub:'已发布', st:'正常',     bs:'', es:'',               mc:'',             api:32},
+  {name:'SAG管控平台',  way:'FakeIP', a1:'—',                   a2:'10.150.1.3:1443',     id:'232998', fip:'10.150.1.3',  grp:'合作方系统', p1:'http',  p2:'http',  pub:'已发布', st:'正常',     bs:'', es:'',               mc:'',             api:''},
+  {name:'CRM系统',      way:'域名',   a1:'crm.bc.com',          a2:'crm.bc.com',          id:'232992', fip:'10.150.1.4',  grp:'办公软件',   p1:'http',  p2:'https', pub:'已发布', st:'定时维护', bs:'2025-11-01 10:00', es:'2025-11-11 19:00', mc:'版本升级',     api:''},
+  {name:'IDP认证系统',  way:'域名',   a1:'idp.bc.com',          a2:'idp.bc.com',          id:'232999', fip:'10.150.1.5',  grp:'合作方系统', p1:'https', p2:'http',  pub:'未发布', st:'正常',     bs:'', es:'',               mc:'',             api:''},
+  {name:'风险评估系统', way:'泛域名', a1:'r%s.bc.com:8080',     a2:'r%s.bc.com:8080',     id:'231982', fip:'10.150.1.21', grp:'合作方系统', p1:'http',  p2:'http',  pub:'已发布', st:'正常',     bs:'', es:'',               mc:'',             api:''}
+];
+var MT_GROUPS=[{n:'所有分组',c:MT_APPS.length},{n:'办公软件',c:2,lv:1},{n:'合作方系统',c:4,lv:1}];
+var MT_TPLS=[
+  {n:'应用维护模板', code:'Maintenance_Template', own:1,
+   t:'已为您开启安全办公模式，系统升级维护中',
+   c:'我们正在对[APP_NAME]进行升级维护，以给您带来更好的服务体验<br>预计恢复时间：2025/10/23 9:00<br>维护内容：升级已知问题'},
+  {n:'应用未发布通知模板', code:'App_Unpublished_Template',
+   t:'已为您开启安全办公模式，检测到应用无法连接',
+   c:'可能的原因有：当前网络异常，请先检查您的网络问题；您请求地址是否准确，请确认使用正确的域名/IP进行访问；该站点已被管理员停止，请联系管理员进行处理'},
+  {n:'应用无权访问模板', code:'App_Denied_Template',
+   t:'已为您开启安全办公模式，检测到您无权访问权限',
+   c:'零信任平台检测到您对APP_NAME应用的访问权限，基于安全合规要求，您的访问被阻断，您可联系管理员申请权限；零信任安全服务平台将全程保护您的访问安全。'},
+  {n:'访问安全拦截页面通知模板', code:'Access_Block_Template',
+   t:'已为您开启安全办公模式，您的访问不符合安全要求',
+   c:'零信任平台开启了【POLICY_ID】，检测到您访问APP_NAME应用时存在安全风险，基于安全合规要求，您的访问被阻断，您可联系管理员解除安全风险。零信任安全服务平台将全程保护您的访问安全。'},
+  {n:'认证失败页面通知模板', code:'Auth_Fail_Template',
+   t:'已为您开启安全办公模式，您的身份认证未通过',
+   c:'零信任平台检测到您访问APP_NAME应用的身份认证未通过，可能的原因有：用户身份校验失败或设备认证失败。基于安全合规要求，您的访问被阻断，如有任何问题可联系管理员。零信任安全服务平台将全程保护您的访问安全。'},
+  {n:'补充认证通知模板', code:'Reauth_Template',
+   t:'已为您开启安全办公模式，需要完成增强认证才可继续访问',
+   c:'零信任平台开启了【POLICY_ID】增强认证，检测到您访问APP_NAME应用未按照要求完成【ACTION】。平台需要您完成以下步骤才可继续访问：第一步，完成客户端的身份信息校验；第二步，认证通过后，您可点击下方按钮继续访问。'},
+  {n:'身份登录安全通知模板', code:'Identity_Risk_Template',
+   t:'已为您开启安全办公模式，您的身份与终端登录身份不符',
+   c:'零信任平台检测到您访问APP_NAME应用的用户身份与当前终端登录身份不符，基于安全合规要求，为保障应用访问安全，需要您重新登录，具体步骤如下：第一步，打开客户端重新连接，完成终端用户登录；第二步，认证通过后，您可点击下方按钮继续访问；若当前客户端为智能连接模式，可直接点击继续访问按钮后完成用户登录。'},
+  {n:'应用异常通知模板', code:'App_Error_Template',
+   t:'检测到后台应用服务异常',
+   c:'零信任平台检测到【APP_NAME】服务异常，分析原因为（MSG）。'}
+];
+function mtCls(s){ return s==='维护中'?'warn':(s==='定时维护'?'info':'ok'); }
+function mtRedraw(){ renderPage(currentName, currentRoute); }
+function mtSetTab(i){ MT_TAB=i; mtRedraw(); }
+function mtFilter(v){ MT_FILTER=v; mtRedraw(); }
+function mtGrp(n){ MT_GRP=n; mtRedraw(); }
+function mtTipCell(a){
+  if(a.st==='正常') return '<span class="mt-st s-ok">正常</span>';
+  var tip='维护开始时间：'+a.bs+'\n维护结束时间：'+a.es;
+  return '<span class="mt-st s-'+mtCls(a.st)+'">'+a.st+'</span><i class="mt-i" title="'+tip+'">i</i>';
+}
+function mtHtml(){
+  var tabs=['应用维护','维护页面模板','用户侧效果'].map(function(t,i){
+    return '<span class="'+(i===MT_TAB?'on':'')+'" onclick="mtSetTab('+i+')">'+t+'</span>';
+  }).join('');
+  var body = MT_TAB===0 ? mtListHtml() : (MT_TAB===1 ? mtTplHtml() : mtPrevHtml());
+  return '<div class="mt-hd"><div class="mt-tabs">'+tabs+'</div><span class="mt-tag">项目定制</span></div>'
+    + '<div class="mt-hint">化学工程项目「应用办公维护场景」定制能力，仅作原型演示，不并入 1.8.4.0 标准功能清单。</div>'
+    + body + modalHtml();
+}
+function mtListHtml(){
+  var rows=MT_APPS.filter(function(a){
+    return (MT_FILTER==='全部' || a.st===MT_FILTER) && (MT_GRP==='所有分组' || a.grp===MT_GRP);
+  });
+  var trs=rows.map(function(a){
+    var i=MT_APPS.indexOf(a);
+    return '<tr>'
+      + '<td class="c-chk"><input type="checkbox"></td>'
+      + '<td>'+a.name+'</td>'
+      + '<td>'+a.way+'</td>'
+      + '<td>'+a.a1+'</td>'
+      + '<td>'+a.a2+'</td>'
+      + '<td>'+a.id+'</td>'
+      + '<td>'+a.fip+'</td>'
+      + '<td>'+a.grp+'</td>'
+      + '<td>'+a.p1+'</td>'
+      + '<td>'+a.p2+'</td>'
+      + '<td>'+a.pub+'</td>'
+      + '<td>'+mtTipCell(a)+'</td>'
+      + '<td>'+(a.api===''?'—':a.api)+'</td>'
+      + '<td class="c-op"><a class="op" onclick="mtDetail('+i+')">详情</a>'
+      +   '<a class="op" onclick="'+(a.st==='正常'?'mtOpenMaint('+i+')':'mtCancel('+i+')')+'">'
+      +   (a.st==='正常'?'维护':'取消维护')+'</a></td>'
+      + '</tr>';
+  }).join('');
+  if(!trs) trs='<tr><td colspan="14"><div class="lp-empty"><div class="big">暂无数据</div><div>当前筛选条件下没有应用</div></div></td></tr>';
+  var opts=['全部','正常','维护中','定时维护'].map(function(o){
+    return '<option'+(o===MT_FILTER?' selected':'')+'>'+o+'</option>';
+  }).join('');
+  var tree=MT_GROUPS.map(function(g){
+    return '<div class="tn'+(g.lv?' lv1':'')+(g.n===MT_GRP?' on':'')+'" onclick="mtGrp(\''+g.n+'\')">'
+      + '<i class="ar'+(g.lv?' open':' none')+'"></i>'
+      + '<span class="tx">'+g.n+'<span class="mt-gc">('+g.c+')</span></span></div>';
+  }).join('');
+  return '<div class="lp-card"><div class="tree">'
+    + '<div class="th">应用分组<span class="tool"><i class="iconfont icon-a-Add" title="新增分组"></i></span></div>'
+    + tree
+    + '<div class="mt-tfoot">维护中 '+MT_APPS.filter(function(a){return a.st==='维护中'}).length
+    + ' &nbsp;·&nbsp; 定时维护 '+MT_APPS.filter(function(a){return a.st==='定时维护'}).length+'</div>'
+    + '</div><div class="lp-body">'
+    + '<div class="filters">'
+    +   '<input class="fin" placeholder="请输入应用名称">'
+    +   '<input class="fin" placeholder="请输入应用标识">'
+    +   '<select class="fsel" onchange="mtFilter(this.value)"><option value="">请选择维护状态</option>'+opts+'</select>'
+    +   '<div class="fbtns"><button class="btn-plain" onclick="mtRedraw()">重置</button>'
+    +   '<button class="btn-pri" onclick="lpTip(\'查询完成\')">查询</button></div>'
+    + '</div>'
+    + '<div class="toolbar">'
+    +   '<button class="btn-plain" onclick="mtRedraw()">刷新</button>'
+    +   '<button class="btn-plain" onclick="lpTip(\'新增应用（演示）\')">新增</button>'
+    +   '<button class="btn-plain" onclick="lpTip(\'更换分组（演示）\')">更换分组</button>'
+    +   '<button class="btn-pri" onclick="mtOpenMaint()">维护</button>'
+    +   '<button class="btn-plain" onclick="mtCancelSel()">取消维护</button>'
+    +   '<button class="btn-plain" onclick="lpTip(\'删除应用（演示）\')">删除</button>'
+    + '</div>'
+    + '<div class="lp-tbl-wrap"><table class="lp-tbl mt-tbl"><thead><tr>'
+    + '<th class="c-chk"><input type="checkbox"></th><th>应用名称</th><th>访问方式</th>'
+    + '<th>访问地址（无端）</th><th>访问地址（有端）</th><th>应用标识</th><th>FakeIP</th>'
+    + '<th>应用分组</th><th>访问协议</th><th>应用协议</th><th>发布状态</th>'
+    + '<th style="width:130px">维护状态</th><th>API数量</th><th class="c-op">操作</th>'
+    + '</tr></thead><tbody>'+trs+'</tbody></table></div>'
+    + '<div class="pager2"><span>共 '+rows.length+' 条</span>'
+    + '<span class="mt-pg"><b>1</b><a>2</a><a>3</a><a>4</a></span></div>'
+    + '</div></div>';
+}
+function mtTplHtml(){
+  var trs=MT_TPLS.map(function(t,i){
+    return '<tr'+(i===MT_TPL?' class="on"':'')+'>'
+      + '<td>'+(i+1)+'</td><td>'+t.n+(t.own?'<span class="mt-own">定制</span>':'')+'</td>'
+      + '<td>'+t.code+'</td><td class="mt-td-c">'+t.c.replace(/<br>/g,' / ')+'</td>'
+      + '<td class="c-op"><a class="op" onclick="mtTplEdit('+i+')">编辑</a></td></tr>';
+  }).join('');
+  return '<div class="lp-card"><div class="lp-body">'
+    + '<div class="toolbar">'
+    +   '<button class="btn-plain" onclick="mtRedraw()">刷新</button>'
+    +   '<button class="btn-plain" onclick="lpTip(\'新增模板（演示）\')">新增</button>'
+    + '</div>'
+    + '<div class="lp-tbl-wrap"><table class="lp-tbl mt-tbl mt-tbl-tpl"><thead><tr>'
+    + '<th style="width:64px">序号</th><th style="width:210px">名称</th><th style="width:230px">代码</th>'
+    + '<th>模板</th><th class="c-op" style="width:86px">操作</th></tr></thead><tbody>'+trs+'</tbody></table></div>'
+    + '<div class="mt-foot">共 '+MT_TPLS.length+' 个模板 &nbsp;·&nbsp; 维护中应用统一调用「应用维护模板」，可在编辑弹层中修改标题与内容</div>'
+    + '</div></div>';
+}
+function mtTplEdit(i){
+  MT_TPL=i;
+  var t=MT_TPLS[i];
+  lpFormDrawer('编辑模板',
+    '<div class="mt-frow"><label>模板名称</label><input class="fin" value="'+t.n+'"></div>'
+    + '<div class="mt-frow"><label>模板代码</label><input class="fin" value="'+t.code+'" disabled></div>'
+    + '<div class="mt-frow"><label>模板标题</label><input class="fin" value="'+t.t+'"></div>'
+    + '<div class="mt-frow mt-col"><label>模板内容</label>'
+    + '<textarea class="fin mt-ta">'+t.c.replace(/<br>/g,'\n')+'</textarea></div>'
+    + '<div class="mt-frow"><label>补充说明</label><label class="mt-chk"><input type="checkbox"> 开启详情内容</label></div>'
+    + '<div class="mt-note2"><b>说明</b>'
+    + '<div><i>TYPE</i> 适用防护策略类别，全局变量</div>'
+    + '<div><i>APP_NAME</i> 应用系统名称或应用域名，全局变量</div>'
+    + '<div><i>USER_ID</i> 用户ID，仅用于默认证、安全防护策略</div>'
+    + '<div><i>POLICY_ID</i> 策略的防护策略类别，分为黑名单、WAF、CC、策略管理下发策略</div>'
+    + '<div><i>ACTION</i> 策略执行动作，分别为阻断、放行、补充认证</div>'
+    + '<div><i>MSG</i> 认证、安全策略固定模板说明，建议使用</div></div>',
+    '<button class="btn-plain" onclick="lpCloseFormDrawer()">取消</button>'
+    + '<button class="btn-pri" onclick="mtTplSave()">保存</button>', 560);
+}
+function mtTplSave(){
+  var ta=document.querySelector('#fdDrawer .mt-ta');
+  if(ta) MT_TPLS[MT_TPL].c=ta.value.replace(/\n/g,'<br>');
+  lpCloseFormDrawer(); mtRedraw(); lpTip('模板已保存');
+}
+function mtPrevHtml(){
+  var a=MT_APPS.filter(function(x){return x.st!=='正常'})[0]||MT_APPS[0];
+  return '<div class="mt-prev"><div class="mt-card">'
+    + '<div class="mt-card-l">'
+    + '<div class="mt-badge">已为您开启安全办公模式</div>'
+    + '<div class="mt-h1">应用系统维护中</div>'
+    + '<ul class="mt-ul">'
+    + '<li>我们正在对 '+a.name+' 进行升级维护，以给您带来更好的服务体验<br>'
+    + '预计恢复时间：'+(a.es&&a.es!=='永久维护'?a.es:'2025/10/23 9:00')+'<br>维护内容：'+(a.mc||'升级已知问题')+'</li>'
+    + '<li>如您有任何疑问可联系管理员，零信任安全服务平台将全程保护您的访问安全。</li>'
+    + '</ul></div>'
+    + '<div class="mt-card-r"><svg width="260" height="170" viewBox="0 0 260 170" fill="none">'
+    + '<rect x="46" y="34" width="150" height="104" rx="10" fill="#BFDBFF"/>'
+    + '<rect x="58" y="24" width="150" height="104" rx="10" fill="#DCEBFF" stroke="#9CC5FF"/>'
+    + '<path d="M58 40h150" stroke="#9CC5FF"/>'
+    + '<circle cx="72" cy="32" r="3" fill="#FF7D7D"/><circle cx="84" cy="32" r="3" fill="#FFC46B"/><circle cx="96" cy="32" r="3" fill="#7ED9A0"/>'
+    + '<rect x="88" y="58" width="90" height="52" rx="6" fill="#6FA8FF"/>'
+    + '<rect x="112" y="70" width="42" height="34" rx="4" fill="#fff"/>'
+    + '<rect x="118" y="82" width="30" height="22" rx="4" fill="#fff" opacity=".95"/>'
+    + '<path d="M124 82v-8a9 9 0 0118 0v8" stroke="#6FA8FF" stroke-width="3" fill="none"/>'
+    + '<rect x="66" y="112" width="132" height="26" rx="6" fill="#E8F3FF" stroke="#9CC5FF"/>'
+    + '<rect x="150" y="106" width="86" height="16" rx="8" fill="#FF9A2E" opacity=".9"/>'
+    + '</svg><div class="mt-lbl">应用系统维护中</div></div>'
+    + '</div></div>'
+    + '<div class="mt-foot" style="text-align:center">用户访问维护中应用时展示的页面模板，标题与内容取自「维护页面模板 › 应用维护模板」，[APP_NAME] 由实际应用名称替换</div>';
+}
+function mtOpenMaint(idx){
+  var sel=(idx===undefined||idx<0)?null:MT_APPS[idx];
+  window.__mtIdx=(idx===undefined||idx<0)?-1:idx;
+  lpOpenModal('确认维护',
+    '<div class="mt-tip">若不设置「维护开始时间」，则代表立即生效；若不设置「维护结束时间」，则代表永久维护中。</div>'
+    + (sel?'<div class="mt-frow"><label>应用</label><span class="mt-ro">'+sel.name+'</span></div>':'')
+    + '<div class="mt-frow"><label>维护时间</label>'
+    + '<input class="fin mt-dt" type="datetime-local" id="mtBs" value="2025-10-01T10:00"><span class="mt-sep">~</span>'
+    + '<input class="fin mt-dt" type="datetime-local" id="mtEs"></div>',
+    '<button class="btn-plain" onclick="lpCloseModal()">取消</button>'
+    + '<button class="btn-pri" onclick="mtDoMaint()">确定</button>');
+}
+function mtDoMaint(){
+  var bs=(document.getElementById('mtBs')||{}).value||'';
+  var es=(document.getElementById('mtEs')||{}).value||'';
+  var i=window.__mtIdx;
+  var list=(i>=0)?[MT_APPS[i]]:MT_APPS.filter(function(a){return a.st==='正常'});
+  if(!list.length){ lpCloseModal(); lpTip('当前没有可维护的应用'); return; }
+  list.forEach(function(a){
+    a.st = es ? '定时维护' : '维护中';
+    a.bs = bs ? bs.replace('T',' ') : '立即生效';
+    a.es = es ? es.replace('T',' ') : '永久维护';
+    a.mc = a.mc||'升级已知问题';
+  });
+  lpCloseModal(); mtRedraw();
+  lpTip(i>=0?('已开启维护：'+list[0].name):('已对 '+list.length+' 个应用开启维护'));
+}
+function mtCancel(idx){
+  var a=MT_APPS[idx];
+  if(!a) return;
+  lpConfirm('取消维护','确定取消「'+a.name+'」的维护状态？取消后用户可立即正常访问。',function(){
+    a.st='正常'; a.bs=''; a.es=''; a.mc=''; mtRedraw(); lpTip('已取消维护');
+  });
+}
+function mtCancelSel(){
+  var n=MT_APPS.filter(function(a){return a.st!=='正常'}).length;
+  if(!n){ lpTip('当前没有维护中的应用'); return; }
+  lpConfirm('取消维护','确定取消全部 '+n+' 个应用的维护状态？',function(){
+    MT_APPS.forEach(function(a){ a.st='正常'; a.bs=''; a.es=''; a.mc=''; });
+    mtRedraw(); lpTip('已取消 '+n+' 个应用的维护');
+  });
+}
+function mtDetail(idx){
+  var a=MT_APPS[idx]; if(!a) return;
+  lpOpenModal('应用维护详情',
+    '<div class="mt-dl">'
+    + '<div><span>应用名称</span><b>'+a.name+'</b></div>'
+    + '<div><span>应用标识</span><b>'+a.id+'</b></div>'
+    + '<div><span>访问方式</span><b>'+a.way+'</b></div>'
+    + '<div><span>访问地址（无端）</span><b>'+a.a1+'</b></div>'
+    + '<div><span>访问地址（有端）</span><b>'+a.a2+'</b></div>'
+    + '<div><span>FakeIP</span><b>'+a.fip+'</b></div>'
+    + '<div><span>应用分组</span><b>'+a.grp+'</b></div>'
+    + '<div><span>发布状态</span><b>'+a.pub+'</b></div>'
+    + '<div><span>维护状态</span><b>'+a.st+'</b></div>'
+    + '<div><span>维护开始</span><b>'+(a.bs||'—')+'</b></div>'
+    + '<div><span>维护结束</span><b>'+(a.es||'—')+'</b></div>'
+    + '<div><span>维护内容</span><b>'+(a.mc||'—')+'</b></div>'
+    + '</div>',
+    '<button class="btn-plain" onclick="lpCloseModal()">关闭</button>');
+}
+
 function qaHtml(){
   var tb=QUICK_ACCESS.map(function(a,i){
     return '<tr><td>'+a.name+'</td><td style="color:#606266">'+a.url+'</td>'
       +'<td><span class="sw'+(a.on?' on':'')+'" onclick="qaToggle('+i+')"><i></i></span>'
       +'<span style="margin-left:8px;font-size:12px;color:'+(a.on?'#00B42A':'#909399')+'">'+(a.on?'是':'否')+'</span></td>'
       +'<td class="c-op"><a class="op" onclick="qaEdit('+i+')">编辑</a>'
-      +'<a class="op" onclick="qaDel('+i+')">删除</a></td></tr>';
+      +'<a class="op" onclick="qaDel('+i+')">删除</a>'
+      +'<a class="op more" title="更多操作" onclick="qaMoreOps(event,'+i+')">&#8943;</a></td></tr>';
   }).join('');
   if(!QUICK_ACCESS.length) tb='<tr><td colspan="4"><div class="lp-empty"><div class="big">暂无数据</div><div>点击「新增」添加常用系统入口</div></div></td></tr>';
   return '<div class="lp-card"><div class="lp-body">'
@@ -2344,6 +2916,25 @@ function qaHtml(){
     +'<th style="width:150px">是否启用</th><th class="c-op">操作</th></tr></thead><tbody>'+tb+'</tbody></table></div>'
     +'<div class="pager2"><span>共 '+QUICK_ACCESS.length+' 条</span></div>'
     +'</div></div>'+modalHtml();
+}
+function qaMoreOps(e,i){
+  if(e){ e.stopPropagation(); e.preventDefault(); }
+  lpCloseOps();
+  var a=QUICK_ACCESS[i]||{};
+  var m=document.createElement('div');
+  m.id='lpOpsMenu'; m.className='lp-opsmenu';
+  m.innerHTML='<span onclick="qaMultiLang('+i+');lpCloseOps()">多语言</span>';
+  document.body.appendChild(m);
+  var b=e&&e.target?e.target.getBoundingClientRect():{left:0,bottom:0,right:0};
+  var w=m.offsetWidth||100, h=m.offsetHeight||40;
+  m.style.left=Math.max(8,Math.min(b.right-w,(window.innerWidth||1200)-w-8))+'px';
+  m.style.top=Math.min(b.bottom+4,(window.innerHeight||800)-h-8)+'px';
+  setTimeout(function(){ document.addEventListener('click',lpCloseOps); },0);
+}
+function qaMultiLang(i){
+  var a=QUICK_ACCESS[i==null?0:i];
+  if(!a){ lpTip('暂无可配置的数据'); return; }
+  mlOpenCustom(['应用名称','应用地址'],[a.name,a.url]);
 }
 function qaToggle(i){ QUICK_ACCESS[i].on=!QUICK_ACCESS[i].on; renderPage('快捷访问','/system/quick-access/index'); }
 function qaDel(i){
@@ -2382,7 +2973,29 @@ function qaSave(i){
 /* ================= 多页签 ================= */
 var tabs=[], currentRoute='', currentName='';
 var HOME_LAST={name:'系统监视', route:'/home/system/index'};
+/* 由 route 反查所属一级模块：页签跨模块切页时用 */
+function moduleOfRoute(route){
+  if(!route) return null;
+  for(var i=0;i<MODULES.length;i++){
+    var m=MODULES[i];
+    for(var j=0;j<m.menus.length;j++){
+      var nd=m.menus[j];
+      if(nd.items){
+        for(var k=0;k<nd.items.length;k++) if(nd.items[k].route===route) return m.key;
+      } else if(nd.route===route){ return m.key; }
+    }
+  }
+  return null;
+}
 function openPage(name, route){
+  /* 点页签跳到别的模块的页面时，顶栏高亮 + 左侧菜单必须跟着切（沁 2026-11-19） */
+  var mk=moduleOfRoute(route);
+  if(mk && mk!==curModule){
+    curModule=mk;
+    var tls=document.querySelectorAll('#topnav a');
+    for(var ti=0;ti<tls.length;ti++) tls[ti].classList.toggle('on', tls[ti].getAttribute('data-k')===mk);
+    renderSidebar();
+  }
   currentRoute=route; currentName=name;
   if(curModule==='home'){
     /* 首页不出页签，只记住停留页，切回首页时回到这里 */
@@ -2390,20 +3003,46 @@ function openPage(name, route){
   } else {
     var exist=tabs.filter(function(t){return t.route===route})[0];
     if(!exist) tabs.push({name:name, route:route});
+    else exist.name=name;
   }
   renderTabs(); markSide(route); renderPage(name, route);
 }
 function renderTabs(){
   var bar=document.getElementById('tabbar');
-  /* 首页模块整条页签栏不展示 */
+  /* 首页模块整条页签栏不展示（与 1.8.4.0 一致） */
   if(curModule==='home'){ bar.classList.add('hide'); bar.innerHTML=''; return; }
   bar.classList.remove('hide');
-  var html='';
+  var html='<div class="tb-nav">'
+    + '<span class="tb-l" onclick="tbScroll(-1)" title="向左">&#8249;</span>'
+    + '<span class="tb-r" onclick="tbScroll(1)" title="向右">&#8250;</span></div>'
+    + '<div class="tb-wrap" id="tbWrap" onscroll="tbSyncNav()">';
   tabs.forEach(function(t){
-    html+='<div class="tab'+(t.route===currentRoute?' on':'')+'" onclick="openPage(\''+t.name+'\',\''+t.route+'\')">'
-        + '<span>'+t.name+'</span><span class="x" onclick="closeTab(event,\''+t.route+'\')">×</span></div>';
+    html+='<div class="tab'+(t.route===currentRoute?' on':'')+'" title="'+t.name+'" onclick="openPage(\''+t.name+'\',\''+t.route+'\')">'
+        + '<span>'+t.name+'</span><span class="x" onclick="closeTab(event,\''+t.route+'\')">&#10005;</span></div>';
   });
+  html+='</div>';
   bar.innerHTML=html;
+  tbSyncNav();
+  var w=document.getElementById('tbWrap'), el=bar.querySelector('.tab.on');
+  if(w&&el){
+    var l=el.offsetLeft, r=l+el.offsetWidth;
+    if(l<w.scrollLeft) w.scrollLeft=l-8;
+    else if(r>w.scrollLeft+w.clientWidth) w.scrollLeft=r-w.clientWidth+8;
+  }
+}
+function tbScroll(dir){
+  var w=document.getElementById('tbWrap'); if(!w) return;
+  w.scrollLeft += dir*Math.max(160, w.clientWidth*0.7);
+}
+function tbSyncNav(){
+  var w=document.getElementById('tbWrap'); if(!w) return;
+  var l=document.querySelector('.tb-l'), r=document.querySelector('.tb-r');
+  if(!l||!r) return;
+  var over=w.scrollWidth-w.clientWidth>2;
+  l.style.visibility=over?'visible':'hidden';
+  r.style.visibility=over?'visible':'hidden';
+  l.classList.toggle('dis', w.scrollLeft<=1);
+  r.classList.toggle('dis', w.scrollLeft>=w.scrollWidth-w.clientWidth-1);
 }
 function closeTab(e, route){
   if(e) e.stopPropagation();
@@ -2411,10 +3050,16 @@ function closeTab(e, route){
   for(var i=0;i<tabs.length;i++) if(tabs[i].route===route) idx=i;
   if(idx<0) return;
   tabs.splice(idx,1);
-  if(route===currentRoute){
-    if(tabs.length){ var t=tabs[Math.max(0,idx-1)]; openPage(t.name,t.route); }
+  if(route!==currentRoute){ renderTabs(); return; }
+  if(tabs.length){
+    /* 关掉当前页：激活右邻（没有则左邻），与浏览器页签一致 */
+    var t=tabs[Math.min(idx, tabs.length-1)];
+    openPage(t.name, t.route);
+  } else {
+    var f=firstLeaf(curModule);
+    if(f && f.route) openPage(f.name, f.route);
     else { currentRoute=''; renderTabs(); document.getElementById('page').innerHTML=''; }
-  } else renderTabs();
+  }
 }
 function markSide(route){
   var els=document.querySelectorAll('#side .it,#side .alone');
@@ -2436,6 +3081,7 @@ function renderPage(name, route){
   if(route==='/home/resource/data_center'){ P.innerHTML=head+dcMonHtml(); drawDcMon(); return; }
   if(route==='/home/resource/api'){ P.innerHTML=head+apiMonHtml(); drawApiMon(); return; }
   if(route==='/system/quick-access/index'){ P.innerHTML=head+qaHtml(); return; }
+  if(route==='/project/maintenance/index'){ P.innerHTML=head+mtHtml(); return; }
   if(LISTS[route]){ P.innerHTML=head+lpHtml(route); if(LISTS[route].after) LISTS[route].after(LISTS[route],route); return; }
   P.innerHTML=head
     + '<div class="placeholder"><div class="big">「'+name+'」待还原</div>'
@@ -3258,6 +3904,36 @@ function drawApiMon(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*<<LISTS_JS_BEGIN>>*/
 /* ================= 列表页引擎（第 2 批） ================= */
 var LISTS={}, LSTATE={};
@@ -3347,6 +4023,14 @@ function lpAll(el,r){
 function lpSelCount(r){ return Object.keys(lst(r).sel).length; }
 
 /* --- 渲染 --- */
+/* 1.8.4.0：带「多语言」的 19 个配置页 —— 入口在行内「…」下拉，不在工具条（实况 2026-11-19 核实） */
+var ML_ROUTES=['/terminal/manage/group','/terminal/security/auth','/terminal/security/rate_limit',
+  '/network/device/control','/network/device/colony','/network/device/strategy','/network/device/log',
+  '/network/manage/sdp','/network/manage/firewall','/network/manage/sdp_proxy',
+  '/resource/datacenter/index','/strategy/identity/auth','/strategy/flow/waf','/strategy/flow/cc',
+  '/strategy/flow/fusing','/system/operator/operator-manage','/system/operator/role-manage',
+  '/system/setting/secret','/system/quick-access/index'];
+
 function lpHtml(r){
   var c=LISTS[r];
   if(c.before) c.before(c,r);
@@ -3455,8 +4139,13 @@ function tableHtml(r){
       td+='<td'+(nc.indexOf(j)>=0?' class="num"':'')+(t===''?' class="hollow"':'')+'>'+(t===''?'--':cell)+'</td>';
     });
     if(c.ops){
-      /* 规范 4.5.1：单行最多三个操作，其余收进「…」 */
-      var first=c.ops.slice(0,3), rest=c.ops.slice(3);
+      /* 规范 4.5.1：单行最多三个操作，其余收进「…」；带 menu:true 的固定进「…」 */
+      var opsAll=(c.ops||[]).slice();
+      if(ML_ROUTES.indexOf(r)>=0 && opsAll.filter(function(o){return o.n==='多语言'}).length===0)
+        opsAll.push({n:'多语言',menu:true});
+      var inlineOps=opsAll.filter(function(o){return !o.menu});
+      var menuOps=opsAll.filter(function(o){return o.menu});
+      var first=inlineOps.slice(0,3), rest=inlineOps.slice(3).concat(menuOps);
       td+='<td class="c-op">'+first.map(function(o){
         return '<a class="op" onclick="lpOp(\''+r+'\','+gi+',\''+o.n+'\')">'+o.n+'</a>' }).join('')
         +(rest.length?'<a class="op more" title="更多操作" onclick="lpMoreOps(event,\''+r+'\','+gi+',\''+rest.map(function(o){return o.n}).join('|')+'\')">&#8943;</a>':'')
@@ -3514,6 +4203,7 @@ function pagerHtml2(r){
 /* --- 操作 --- */
 function lpAct(r,name){
   var c=LISTS[r];
+  if(name==='多语言'){ mlOpen(r); return; }
   if(name==='删除'){
     var n=lpSelCount(r);
     if(!n){ lpTip('请先勾选要删除的数据'); return; }
@@ -3526,6 +4216,7 @@ function lpAct(r,name){
 }
 function lpOp(r,gi,name){
   var c=LISTS[r];
+  if(name==='多语言'){ mlOpen(r,gi); return; }
   if(name==='详情'||name==='查看'){ if(c.drawer){ lpOpenDrawer(r,gi); return; } }
   if(name==='删除'){ lpConfirm('确认删除','删除后不可恢复，是否继续？',function(){ lpTip('已删除（演示）'); }); return; }
   if(name==='编辑'&&c.form){ lpForm(c,'编辑'); return; }
@@ -3654,6 +4345,70 @@ function lpForm(c,title){
   lpFormDrawer(title, body,
     '<button class="btn-plain" onclick="lpCloseFormDrawer()">取消</button>'
     +'<button class="btn-pri" onclick="lpCloseFormDrawer();lpTip(\'已保存（演示）\')">保存</button>');
+}
+
+
+/* ================= 多语言录入（实况：行内「…」→ 多语言 → 居中弹窗，语言为 tab） ================= */
+var ML={route:'', gi:-1, lang:'zh', vals:{}};
+function mlFields(r){
+  var c=LISTS[r]||{}, out=[];
+  (c.cols||[]).slice(0,2).forEach(function(col){ out.push(col.t); });
+  if(!out.length) out=['名称'];
+  return out;
+}
+function mlFieldsOf(){ return ML.fields || mlFields(ML.route); }
+function mlPlain(v){
+  v=(v==null?'':String(v)).replace(/<[^>]+>/g,'');
+  return v.length>40? v.slice(0,40): v;
+}
+function mlOpen(r,gi){
+  if(gi==null||gi<0){
+    var s=lst(r); gi=-1;
+    for(var k in s.sel){ if(s.sel[k]){ gi=+k; break; } }
+    if(gi<0){ lpTip('请先勾选一条数据'); return; }
+  }
+  ML={route:r, gi:gi, lang:'zh', vals:{}};
+  var c=LISTS[r], row=(c.rows||[])[gi]||[];
+  mlFields(r).forEach(function(f,i){ ML.vals[f]={zh:mlPlain(row[i]), en:''}; });
+  mlRender();
+}
+/* 自定义页（快捷访问等）直接给字段与初值 */
+function mlOpenCustom(fields, vals){
+  ML={route:'', gi:-1, lang:'zh', vals:{}, fields:fields};
+  fields.forEach(function(f,i){ ML.vals[f]={zh:(vals&&vals[i])||'', en:''}; });
+  mlRender();
+}
+function mlRender(){
+  var fs=mlFieldsOf();
+  var body='<div class="ml-tabs">'
+    + '<span class="'+(ML.lang==='zh'?'on':'')+'" onclick="mlLang(\'zh\')">Chinese (Simplified, China)<em>（默认语言）</em></span>'
+    + '<span class="'+(ML.lang==='en'?'on':'')+'" onclick="mlLang(\'en\')">English</span></div>'
+    + fs.map(function(f){
+        var v=(ML.vals[f][ML.lang]||'').replace(/"/g,'&quot;');
+        var ph=ML.lang==='en'? ('Please enter '+f) : ('请输入'+f);
+        return '<div class="frow"><label>'+f+'</label><div class="ctl">'
+          + '<input value="'+v+'" placeholder="'+ph+'">'
+          + (ML.lang==='en'? '<div class="hint">留空时界面回落显示默认语言内容</div>':'')
+          + '</div></div>';
+      }).join('')
+    + '<div class="ml-note">多语言仅作用于当前这一条数据；未填写的语言项，界面回落显示默认语言。</div>';
+  lpOpenModal('多语言', body,
+    '<button class="btn-plain" onclick="lpCloseModal()">取消</button>'
+    + '<button class="btn-pri" onclick="mlSave()">保存</button>');
+  var m=document.getElementById('modal'); if(m) m.style.width='660px';
+}
+function mlLang(l){
+  var fs=mlFieldsOf();
+  var inputs=document.querySelectorAll('#mBody .frow input');
+  for(var i=0;i<inputs.length&&i<fs.length;i++) ML.vals[fs[i]][ML.lang]=inputs[i].value;
+  ML.lang=l; mlRender();
+}
+function mlSave(){
+  var fs=mlFieldsOf();
+  var inputs=document.querySelectorAll('#mBody .frow input');
+  for(var i=0;i<inputs.length&&i<fs.length;i++) ML.vals[fs[i]][ML.lang]=inputs[i].value;
+  lpCloseModal();
+  lpTip('多语言内容已保存（演示）');
 }
 
 /* ================= 终端模块（10 页） ================= */
@@ -4455,7 +5210,7 @@ function sdpIcon(s){
 }
 function sdpHtml(c,r){
   var q=lpRows(r);
-  var body=q.rows.map(function(x){
+  var body=q.rows.map(function(x,ri){
     var eg=x.eg.map(function(e){
       return '<div class="sdp-edge"><span class="en">'+e[0]+'</span><span class="eu">在线用户：<b>'+e[1]+'</b></span></div>';
     }).join('');
@@ -4479,6 +5234,7 @@ function sdpHtml(c,r){
         +'<a class="op" onclick="lpTip(\'SDP 服务详情（演示）\')">详情</a>'
         +'<a class="op" onclick="lpTip(\'编辑 SDP 服务（演示）\')">编辑</a>'
         +'<a class="op" onclick="lpTip(\'删除确认（演示）\')">删除</a>'
+        +'<a class="op more" title="更多操作" onclick="lpMoreOps(event,'+JSON.stringify("'/network/manage/sdp'")+',ri,'+JSON.stringify("'多语言'")+')">&#8943;</a>'
       +'</div></td>'
     +'</tr>';
   }).join('');
@@ -4812,7 +5568,7 @@ var S_OP=[[ 'liangqilan','梁绮澜','系统管理员',d('正常','g'),'199****4
   ['liuyulong','刘宇龙','系统管理员',d('正常','g'),'181****3333','****@ba'],
   ['houdongliang','侯东亮','系统管理员',d('正常','g'),'181****2222','****@ba'],
   ['liangyuyao','梁宇尧','系统管理员',d('正常','g'),'136****8075','****@ba'],
-  ['aoyuling','敖玉玲','超级管理员',d('正常','g'),'138****1102','****@ba'],
+  ['admin','敖玉玲','超级管理员',d('正常','g'),'138****1102','****@ba'],
   ['zhangwei','张伟','审计管理员',d('停用','r'),'137****6611','****@ba']];
 reg('/system/operator/operator-manage',{
   tree:{title:'组织机构',tool:['icon-newly_added'],items:[
@@ -5092,7 +5848,7 @@ function authRegs(route, objCol, extraCol){
           i%7===6? d('拒绝','r') : d('通过','g'),
           ['默认认证策略','高安全认证策略','内网免密策略'][i%3],
           extraCol==='网关节点'? P_GW[i%5] : aip(i)]); } return out; })(),
-    check:false, ops:[{n:'详情'}],
+    check:false,
     filters:[adate(),{t:'in',ph:'请输入'+objCol}],
     toolbar:[{n:'导出'}]
   });
@@ -5190,35 +5946,35 @@ var LIVE={
       ['liuyulong','<span class="dot gy">离线</span>','MB-31C7','深圳湾科技园','10.20.21.34','2026-11-03 13:14:26','3 小时 14 分','16'],
       ['houdongliang','<span class="dot g">在线</span>','PC-7D55','北京望京SOHO','10.20.21.41','2026-11-04 16:21:39','4 小时 21 分','53'],
       ['liangyuyao','<span class="dot g">在线</span>','PC-9C31','北辰世纪中心-A座','10.20.21.48','2026-11-05 19:28:52','5 小时 28 分','31'],
-      ['aoyuling','<span class="dot gy">离线</span>','MB-04BA','西北旺镇政府大楼','10.20.21.55','2026-11-06 22:35:05','6 小时 35 分','9'],
+      ['admin','<span class="dot gy">离线</span>','MB-04BA','西北旺镇政府大楼','10.20.21.55','2026-11-06 22:35:05','6 小时 35 分','9'],
       ['zhangwei','<span class="dot g">在线</span>','PC-2A08','深圳湾科技园','10.20.21.62','2026-11-07 01:42:18','7 小时 42 分','46'],
       ['chendaw','<span class="dot g">在线</span>','PC-5B77','北京望京SOHO','10.20.21.69','2026-11-08 04:49:31','8 小时 49 分','24'],
       ['wangjie','<span class="dot gy">离线</span>','PC-1D92','北辰世纪中心-A座','10.20.21.76','2026-11-09 07:56:44','9 小时 56 分','2'],
       ['lihui','<span class="dot g">在线</span>','PC-4F60','西北旺镇政府大楼','10.20.21.83','2026-11-10 10:03:57','1 小时 3 分','39']
     ],toolbar:[],tabs2:null},
-  '/terminal/online-device/index':{cols:['终端标识','设备指纹','主机名','操作系统','使用人','用户ID','接入位置','控制器','终端IP','网络IP','出口IP','连接时间','在线时长','单包鉴权'],rows:[
-      ['PC-8F21','PC-8F21','默认策略，覆盖全部适用对象','Windows 11 22H2','梁绮澜','liangqilan','北辰世纪中心-A座','控制器243','10.20.21.20','10.20.21.20','10.20.21.20','2026-11-01 07:00:00','1 小时 0 分','<span class="dot g">开启</span>'],
-      ['PC-8F0A','PC-8F0A','针对敏感数据的访问控制','Windows 10 21H2','李巍','liwei','西北旺镇政府大楼','控制器244','10.20.21.27','10.20.21.27','10.20.21.27','2026-11-02 10:07:13','2 小时 7 分','<span class="dot g">开启</span>'],
-      ['MB-31C7','MB-31C7','仅允许内网办公终端访问','macOS 14.5','刘宇龙','liuyulong','深圳湾科技园','控制器245','10.20.21.34','10.20.21.34','10.20.21.34','2026-11-03 13:14:26','3 小时 14 分','<span class="dot g">关闭</span>'],
-      ['PC-7D55','PC-7D55','高峰期流量灰度策略','Ubuntu 22.04','侯东亮','houdongliang','北京望京SOHO','控制器243','10.20.21.41','10.20.21.41','10.20.21.41','2026-11-04 16:21:39','4 小时 21 分','<span class="dot g">开启</span>'],
-      ['PC-9C31','PC-9C31','生产环境灰度验证中','统信 UOS 20','梁宇尧','liangyuyao','北辰世纪中心-A座','控制器244','10.20.21.48','10.20.21.48','10.20.21.48','2026-11-05 19:28:52','5 小时 28 分','<span class="dot g">开启</span>'],
-      ['MB-04BA','MB-04BA','由系统初始化自动创建','iOS 17.4','敖玉玲','aoyuling','西北旺镇政府大楼','控制器245','10.20.21.55','10.20.21.55','10.20.21.55','2026-11-06 22:35:05','6 小时 35 分','<span class="dot g">关闭</span>'],
-      ['PC-2A08','PC-2A08','应客户要求临时开放','Windows 11 22H2','张伟','zhangwei','深圳湾科技园','控制器243','10.20.21.62','10.20.21.62','10.20.21.62','2026-11-07 01:42:18','7 小时 42 分','<span class="dot g">开启</span>'],
-      ['PC-5B77','PC-5B77','运维专用，变更需审批','Windows 10 21H2','陈大卫','chendaw','北京望京SOHO','控制器244','10.20.21.69','10.20.21.69','10.20.21.69','2026-11-08 04:49:31','8 小时 49 分','<span class="dot g">开启</span>'],
-      ['PC-1D92','PC-1D92','定期巡检后调整','macOS 14.5','王劼','wangjie','北辰世纪中心-A座','控制器245','10.20.21.76','10.20.21.76','10.20.21.76','2026-11-09 07:56:44','9 小时 56 分','<span class="dot g">关闭</span>'],
-      ['PC-4F60','PC-4F60','试点范围，后续按需扩量','Ubuntu 22.04','李慧','lihui','西北旺镇政府大楼','控制器243','10.20.21.83','10.20.21.83','10.20.21.83','2026-11-10 10:03:57','1 小时 3 分','<span class="dot g">开启</span>']
-    ],toolbar:[],tabs2:null},
-  '/terminal/manage/group':{cols:['终端分组','应用门户','用户登录','用户鉴权','接入服务','终端限流','数据脱敏','页面水印','终端总数','在线数量'],rows:[
-      ['默认分组','零信任图形化管理平台','默认策略，覆盖全部适用对象','默认策略，覆盖全部适用对象','终端接入服务','默认策略，覆盖全部适用对象','<span class="dot g">开启</span>','<span class="dot g">开启</span>','1','1'],
-      ['研发中心','OA办公系统','针对敏感数据的访问控制','针对敏感数据的访问控制','应用接入服务','针对敏感数据的访问控制','<span class="dot g">开启</span>','<span class="dot g">开启</span>','38','38'],
-      ['零信任产品BU','财务共享中心','仅允许内网办公终端访问','仅允许内网办公终端访问','终端接入服务','仅允许内网办公终端访问','<span class="dot g">关闭</span>','<span class="dot g">关闭</span>','75','75'],
-      ['平台研发部','HR人力资源系统','高峰期流量灰度策略','高峰期流量灰度策略','应用接入服务','高峰期流量灰度策略','<span class="dot g">开启</span>','<span class="dot g">开启</span>','112','112'],
-      ['交付服务中心','邮件系统','生产环境灰度验证中','生产环境灰度验证中','终端接入服务','生产环境灰度验证中','<span class="dot g">开启</span>','<span class="dot g">开启</span>','149','149'],
-      ['外部组织','代码仓库服务','由系统初始化自动创建','由系统初始化自动创建','应用接入服务','由系统初始化自动创建','<span class="dot g">关闭</span>','<span class="dot g">关闭</span>','186','186'],
-      ['默认分组','运维堡垒机','应客户要求临时开放','应客户要求临时开放','终端接入服务','应客户要求临时开放','<span class="dot g">开启</span>','<span class="dot g">开启</span>','223','223'],
-      ['研发中心','客户关系管理','运维专用，变更需审批','运维专用，变更需审批','应用接入服务','运维专用，变更需审批','<span class="dot g">开启</span>','<span class="dot g">开启</span>','260','260'],
-      ['零信任产品BU','统一身份认证','定期巡检后调整','定期巡检后调整','终端接入服务','定期巡检后调整','<span class="dot g">关闭</span>','<span class="dot g">关闭</span>','297','297'],
-      ['平台研发部','日志分析平台','试点范围，后续按需扩量','试点范围，后续按需扩量','应用接入服务','试点范围，后续按需扩量','<span class="dot g">开启</span>','<span class="dot g">开启</span>','334','334']
+  '/terminal/online-device/index':{cols:['终端标识','设备指纹','主机名','操作系统','使用人','用户ID','接入位置','控制器','终端IP','用户IP','终端出口IP','虚拟IP','连接时间','在线时长','单包鉴权'],rows:[
+      ['PC-8F21','PC-8F21','默认策略，覆盖全部适用对象','Windows 11 22H2','梁绮澜','liangqilan','北辰世纪中心-A座','控制器243','10.20.21.20','10.20.21.20','默认策略，覆盖全部适用对象','169.2.1.20','2026-11-01 07:00:00','1 小时 0 分','<span class="dot g">开启</span>'],
+      ['PC-8F0A','PC-8F0A','针对敏感数据的访问控制','Windows 10 21H2','李巍','liwei','西北旺镇政府大楼','控制器244','10.20.21.27','10.20.21.27','针对敏感数据的访问控制','169.2.2.25','2026-11-02 10:07:13','2 小时 7 分','<span class="dot g">开启</span>'],
+      ['MB-31C7','MB-31C7','仅允许内网办公终端访问','macOS 14.5','刘宇龙','liuyulong','深圳湾科技园','控制器245','10.20.21.34','10.20.21.34','仅允许内网办公终端访问','169.2.3.30','2026-11-03 13:14:26','3 小时 14 分','<span class="dot g">关闭</span>'],
+      ['PC-7D55','PC-7D55','高峰期流量灰度策略','Ubuntu 22.04','侯东亮','houdongliang','北京望京SOHO','控制器243','10.20.21.41','10.20.21.41','高峰期流量灰度策略','169.2.4.35','2026-11-04 16:21:39','4 小时 21 分','<span class="dot g">开启</span>'],
+      ['PC-9C31','PC-9C31','生产环境灰度验证中','统信 UOS 20','梁宇尧','liangyuyao','北辰世纪中心-A座','控制器244','10.20.21.48','10.20.21.48','生产环境灰度验证中','169.2.5.40','2026-11-05 19:28:52','5 小时 28 分','<span class="dot g">开启</span>'],
+      ['MB-04BA','MB-04BA','由系统初始化自动创建','iOS 17.4','敖玉玲','admin','西北旺镇政府大楼','控制器245','10.20.21.55','10.20.21.55','由系统初始化自动创建','169.2.6.45','2026-11-06 22:35:05','6 小时 35 分','<span class="dot g">关闭</span>'],
+      ['PC-2A08','PC-2A08','应客户要求临时开放','Windows 11 22H2','张伟','zhangwei','深圳湾科技园','控制器243','10.20.21.62','10.20.21.62','应客户要求临时开放','169.2.7.50','2026-11-07 01:42:18','7 小时 42 分','<span class="dot g">开启</span>'],
+      ['PC-5B77','PC-5B77','运维专用，变更需审批','Windows 10 21H2','陈大卫','chendaw','北京望京SOHO','控制器244','10.20.21.69','10.20.21.69','运维专用，变更需审批','169.2.8.55','2026-11-08 04:49:31','8 小时 49 分','<span class="dot g">开启</span>'],
+      ['PC-1D92','PC-1D92','定期巡检后调整','macOS 14.5','王劼','wangjie','北辰世纪中心-A座','控制器245','10.20.21.76','10.20.21.76','定期巡检后调整','169.2.1.60','2026-11-09 07:56:44','9 小时 56 分','<span class="dot g">关闭</span>'],
+      ['PC-4F60','PC-4F60','试点范围，后续按需扩量','Ubuntu 22.04','李慧','lihui','西北旺镇政府大楼','控制器243','10.20.21.83','10.20.21.83','试点范围，后续按需扩量','169.2.2.65','2026-11-10 10:03:57','1 小时 3 分','<span class="dot g">开启</span>']
+    ],toolbar:['详情','下载'],tabs2:null},
+  '/terminal/manage/group':{cols:['终端分组','应用门户','用户登录','用户鉴权','接入服务','终端限流','数据脱敏','页面水印','境外IP接入','可信访问','终端总数','在线数量'],rows:[
+      ['默认分组','零信任图形化管理平台','默认策略，覆盖全部适用对象','默认策略，覆盖全部适用对象','终端接入服务','默认策略，覆盖全部适用对象','<span class="dot g">开启</span>','<span class="dot g">开启</span>','默认策略，覆盖全部适用对象','<span class="dot g">开启</span>','1','1'],
+      ['研发中心','OA办公系统','针对敏感数据的访问控制','针对敏感数据的访问控制','应用接入服务','针对敏感数据的访问控制','<span class="dot g">开启</span>','<span class="dot g">开启</span>','针对敏感数据的访问控制','<span class="dot g">开启</span>','38','38'],
+      ['零信任产品BU','财务共享中心','仅允许内网办公终端访问','仅允许内网办公终端访问','终端接入服务','仅允许内网办公终端访问','<span class="dot g">关闭</span>','<span class="dot g">关闭</span>','仅允许内网办公终端访问','<span class="dot g">关闭</span>','75','75'],
+      ['平台研发部','HR人力资源系统','高峰期流量灰度策略','高峰期流量灰度策略','应用接入服务','高峰期流量灰度策略','<span class="dot g">开启</span>','<span class="dot g">开启</span>','高峰期流量灰度策略','<span class="dot g">开启</span>','112','112'],
+      ['交付服务中心','邮件系统','生产环境灰度验证中','生产环境灰度验证中','终端接入服务','生产环境灰度验证中','<span class="dot g">开启</span>','<span class="dot g">开启</span>','生产环境灰度验证中','<span class="dot g">开启</span>','149','149'],
+      ['外部组织','代码仓库服务','由系统初始化自动创建','由系统初始化自动创建','应用接入服务','由系统初始化自动创建','<span class="dot g">关闭</span>','<span class="dot g">关闭</span>','由系统初始化自动创建','<span class="dot g">关闭</span>','186','186'],
+      ['默认分组','运维堡垒机','应客户要求临时开放','应客户要求临时开放','终端接入服务','应客户要求临时开放','<span class="dot g">开启</span>','<span class="dot g">开启</span>','应客户要求临时开放','<span class="dot g">开启</span>','223','223'],
+      ['研发中心','客户关系管理','运维专用，变更需审批','运维专用，变更需审批','应用接入服务','运维专用，变更需审批','<span class="dot g">开启</span>','<span class="dot g">开启</span>','运维专用，变更需审批','<span class="dot g">开启</span>','260','260'],
+      ['零信任产品BU','统一身份认证','定期巡检后调整','定期巡检后调整','终端接入服务','定期巡检后调整','<span class="dot g">关闭</span>','<span class="dot g">关闭</span>','定期巡检后调整','<span class="dot g">关闭</span>','297','297'],
+      ['平台研发部','日志分析平台','试点范围，后续按需扩量','试点范围，后续按需扩量','应用接入服务','试点范围，后续按需扩量','<span class="dot g">开启</span>','<span class="dot g">开启</span>','试点范围，后续按需扩量','<span class="dot g">开启</span>','334','334']
     ],toolbar:['新增','删除','编辑'],tabs2:null},
   '/terminal/manage/register':{cols:['状态','用户ID','设备指纹','操作系统','终端标识','终端分组','注册时间'],rows:[
       ['<span class="dot g">正常</span>','liangqilan','PC-8F21','Windows 11 22H2','PC-8F21','默认分组','2026-11-01 07:00:00'],
@@ -5226,7 +5982,7 @@ var LIVE={
       ['<span class="dot g">正常</span>','liuyulong','MB-31C7','macOS 14.5','MB-31C7','零信任产品BU','2026-11-03 13:14:26'],
       ['<span class="dot o">告警</span>','houdongliang','PC-7D55','Ubuntu 22.04','PC-7D55','平台研发部','2026-11-04 16:21:39'],
       ['<span class="dot g">正常</span>','liangyuyao','PC-9C31','统信 UOS 20','PC-9C31','交付服务中心','2026-11-05 19:28:52'],
-      ['<span class="dot gy">离线</span>','aoyuling','MB-04BA','iOS 17.4','MB-04BA','外部组织','2026-11-06 22:35:05'],
+      ['<span class="dot gy">离线</span>','admin','MB-04BA','iOS 17.4','MB-04BA','外部组织','2026-11-06 22:35:05'],
       ['<span class="dot g">正常</span>','zhangwei','PC-2A08','Windows 11 22H2','PC-2A08','默认分组','2026-11-07 01:42:18'],
       ['<span class="dot g">正常</span>','chendaw','PC-5B77','Windows 10 21H2','PC-5B77','研发中心','2026-11-08 04:49:31'],
       ['<span class="dot gy">停用</span>','wangjie','PC-1D92','macOS 14.5','PC-1D92','零信任产品BU','2026-11-09 07:56:44'],
@@ -5286,7 +6042,7 @@ var LIVE={
       ['策略引擎-3','仅允许内网办公终端访问','<span class="dot gy">离线</span>','10.20.21.34','22','SAG_3','liuyulong','仅允许内网办公终端访问'],
       ['策略引擎-4','高峰期流量灰度策略','<span class="dot o">告警</span>','10.20.22.41','3389','ACG_1','houdongliang','高峰期流量灰度策略'],
       ['策略引擎-1','生产环境灰度验证中','<span class="dot g">正常</span>','10.20.21.48','8080','ACG_2','liangyuyao','生产环境灰度验证中'],
-      ['策略引擎-2','由系统初始化自动创建','<span class="dot g">正常</span>','10.20.21.55','9200','DR_1','aoyuling','由系统初始化自动创建'],
+      ['策略引擎-2','由系统初始化自动创建','<span class="dot g">正常</span>','10.20.21.55','9200','DR_1','admin','由系统初始化自动创建'],
       ['策略引擎-3','应客户要求临时开放','<span class="dot gy">离线</span>','10.20.22.62','443','SAG_1','zhangwei','应客户要求临时开放'],
       ['策略引擎-4','运维专用，变更需审批','<span class="dot o">告警</span>','10.20.21.69','80','SAG_2','chendaw','运维专用，变更需审批'],
       ['策略引擎-1','定期巡检后调整','<span class="dot g">正常</span>','10.20.21.76','22','SAG_3','wangjie','定期巡检后调整'],
@@ -5370,7 +6126,7 @@ var LIVE={
       ['OA 系统','零信任产品BU','liuyulong','14','<span class="dot g">正常</span>'],
       ['数据中台','平台研发部','houdongliang','21','<span class="dot o">告警</span>'],
       ['人力系统','交付服务中心','liangyuyao','28','<span class="dot g">正常</span>'],
-      ['财务系统','外部组织','aoyuling','5','<span class="dot gy">离线</span>'],
+      ['财务系统','外部组织','admin','5','<span class="dot gy">离线</span>'],
       ['OA 系统','默认分组','zhangwei','12','<span class="dot g">正常</span>'],
       ['数据中台','研发中心','chendaw','19','<span class="dot g">正常</span>'],
       ['人力系统','零信任产品BU','wangjie','26','<span class="dot gy">停用</span>'],
@@ -5478,31 +6234,31 @@ var LIVE={
       ['<span class="tag b">低</span>','2026-11-03 13:14:26','终端离线','仅允许内网办公终端访问','应用','liuyulong','<span class="dot g">正常</span>'],
       ['<span class="tag r">高</span>','2026-11-04 16:21:39','证书到期','高峰期流量灰度策略','网关','houdongliang','<span class="dot o">告警</span>'],
       ['<span class="tag o">中</span>','2026-11-05 19:28:52','账号锁定','生产环境灰度验证中','用户','liangyuyao','<span class="dot g">正常</span>'],
-      ['<span class="tag b">低</span>','2026-11-06 22:35:05','登录异常','由系统初始化自动创建','终端','aoyuling','<span class="dot gy">离线</span>'],
+      ['<span class="tag b">低</span>','2026-11-06 22:35:05','登录异常','由系统初始化自动创建','终端','admin','<span class="dot gy">离线</span>'],
       ['<span class="tag r">高</span>','2026-11-07 01:42:18','策略变更','应客户要求临时开放','应用','zhangwei','<span class="dot g">正常</span>'],
       ['<span class="tag o">中</span>','2026-11-08 04:49:31','终端离线','运维专用，变更需审批','网关','chendaw','<span class="dot g">正常</span>'],
       ['<span class="tag b">低</span>','2026-11-09 07:56:44','证书到期','定期巡检后调整','用户','wangjie','<span class="dot gy">停用</span>'],
       ['<span class="tag r">高</span>','2026-11-10 10:03:57','账号锁定','试点范围，后续按需扩量','终端','lihui','<span class="dot g">正常</span>']
     ],toolbar:['设置'],tabs2:null},
-  '/audit/safety/security':{cols:['时间','用户ID','源IP','链路IP','应用系统','URL地址','攻击信息','攻击类型','危险等级','策略/规则ID','防护动作'],rows:[
-      ['2026-11-01 07:00:00','liangqilan','10.20.21.20','10.20.21.20','零信任图形化管理平台','/api/v1/user/100','payload=1%27or%271','SQL 注入','<span class="tag r">高</span>','R0100','<span class="tag">拦截</span>'],
-      ['2026-11-02 10:07:13','liwei','10.20.21.27','10.20.21.27','OA办公系统','/api/v1/app/101','payload=<script>','XSS 跨站','<span class="tag o">中</span>','R0101','<span class="tag">告警</span>'],
-      ['2026-11-03 13:14:26','liuyulong','10.20.21.34','10.20.21.34','财务共享中心','/api/v1/policy/102','payload=../../etc/passwd','暴力破解','<span class="tag b">低</span>','R0102','<span class="tag">放行</span>'],
-      ['2026-11-04 16:21:39','houdongliang','10.20.21.41','10.20.21.41','HR人力资源系统','/api/v1/session/103','payload=admin=admin','异常扫描','<span class="tag r">高</span>','R0103','<span class="tag">拦截</span>'],
-      ['2026-11-05 19:28:52','liangyuyao','10.20.21.48','10.20.21.48','邮件系统','/api/v1/log/104','payload=1%27or%271','恶意爬虫','<span class="tag o">中</span>','R0104','<span class="tag">告警</span>'],
-      ['2026-11-06 22:35:05','aoyuling','10.20.21.55','10.20.21.55','代码仓库服务','/api/v1/user/105','payload=<script>','SQL 注入','<span class="tag b">低</span>','R0105','<span class="tag">放行</span>'],
-      ['2026-11-07 01:42:18','zhangwei','10.20.21.62','10.20.21.62','运维堡垒机','/api/v1/app/106','payload=../../etc/passwd','XSS 跨站','<span class="tag r">高</span>','R0106','<span class="tag">拦截</span>'],
-      ['2026-11-08 04:49:31','chendaw','10.20.21.69','10.20.21.69','客户关系管理','/api/v1/policy/107','payload=admin=admin','暴力破解','<span class="tag o">中</span>','R0107','<span class="tag">告警</span>'],
-      ['2026-11-09 07:56:44','wangjie','10.20.21.76','10.20.21.76','统一身份认证','/api/v1/session/108','payload=1%27or%271','异常扫描','<span class="tag b">低</span>','R0108','<span class="tag">放行</span>'],
-      ['2026-11-10 10:03:57','lihui','10.20.21.83','10.20.21.83','日志分析平台','/api/v1/log/109','payload=<script>','恶意爬虫','<span class="tag r">高</span>','R0109','<span class="tag">拦截</span>']
-    ],toolbar:[],tabs2:null},
+  '/audit/safety/security':{cols:['时间','防护来源','用户ID','源IP','链路IP','应用系统','URL地址','攻击信息','攻击类型','危险等级','策略/规则ID','防护动作'],rows:[
+      ['2026-11-01 07:00:00','默认策略，覆盖全部适用对象','liangqilan','10.20.21.20','10.20.21.20','零信任图形化管理平台','/api/v1/user/100','payload=1%27or%271','SQL 注入','<span class="tag r">高</span>','R0100','<span class="tag">拦截</span>'],
+      ['2026-11-02 10:07:13','针对敏感数据的访问控制','liwei','10.20.21.27','10.20.21.27','OA办公系统','/api/v1/app/101','payload=<script>','XSS 跨站','<span class="tag o">中</span>','R0101','<span class="tag">告警</span>'],
+      ['2026-11-03 13:14:26','仅允许内网办公终端访问','liuyulong','10.20.21.34','10.20.21.34','财务共享中心','/api/v1/policy/102','payload=../../etc/passwd','暴力破解','<span class="tag b">低</span>','R0102','<span class="tag">放行</span>'],
+      ['2026-11-04 16:21:39','高峰期流量灰度策略','houdongliang','10.20.21.41','10.20.21.41','HR人力资源系统','/api/v1/session/103','payload=admin=admin','异常扫描','<span class="tag r">高</span>','R0103','<span class="tag">拦截</span>'],
+      ['2026-11-05 19:28:52','生产环境灰度验证中','liangyuyao','10.20.21.48','10.20.21.48','邮件系统','/api/v1/log/104','payload=1%27or%271','恶意爬虫','<span class="tag o">中</span>','R0104','<span class="tag">告警</span>'],
+      ['2026-11-06 22:35:05','由系统初始化自动创建','admin','10.20.21.55','10.20.21.55','代码仓库服务','/api/v1/user/105','payload=<script>','SQL 注入','<span class="tag b">低</span>','R0105','<span class="tag">放行</span>'],
+      ['2026-11-07 01:42:18','应客户要求临时开放','zhangwei','10.20.21.62','10.20.21.62','运维堡垒机','/api/v1/app/106','payload=../../etc/passwd','XSS 跨站','<span class="tag r">高</span>','R0106','<span class="tag">拦截</span>'],
+      ['2026-11-08 04:49:31','运维专用，变更需审批','chendaw','10.20.21.69','10.20.21.69','客户关系管理','/api/v1/policy/107','payload=admin=admin','暴力破解','<span class="tag o">中</span>','R0107','<span class="tag">告警</span>'],
+      ['2026-11-09 07:56:44','定期巡检后调整','wangjie','10.20.21.76','10.20.21.76','统一身份认证','/api/v1/session/108','payload=1%27or%271','异常扫描','<span class="tag b">低</span>','R0108','<span class="tag">放行</span>'],
+      ['2026-11-10 10:03:57','试点范围，后续按需扩量','lihui','10.20.21.83','10.20.21.83','日志分析平台','/api/v1/log/109','payload=<script>','恶意爬虫','<span class="tag r">高</span>','R0109','<span class="tag">拦截</span>']
+    ],toolbar:['导出 WAF 日志','详情'],tabs2:null},
   '/audit/safety/data_masking':{cols:['时间','用户ID','源IP','应用系统','URL地址','脱敏规则ID','处置方式','敏感等级','数据标签','脱敏前数据','脱敏后数据'],rows:[
       ['2026-11-01 07:00:00','liangqilan','10.20.21.20','零信任图形化管理平台','/api/v1/user/100','R0100','<span class="tag">拦截</span>','<span class="tag r">高</span>','个人信息','13800131000','138****1000'],
       ['2026-11-02 10:07:13','liwei','10.20.21.27','OA办公系统','/api/v1/app/101','R0101','<span class="tag">告警</span>','<span class="tag o">中</span>','财务数据','13800131001','138****1001'],
       ['2026-11-03 13:14:26','liuyulong','10.20.21.34','财务共享中心','/api/v1/policy/102','R0102','<span class="tag">放行</span>','<span class="tag b">低</span>','研发代码','13800131002','138****1002'],
       ['2026-11-04 16:21:39','houdongliang','10.20.21.41','HR人力资源系统','/api/v1/session/103','R0103','<span class="tag">拦截</span>','<span class="tag r">高</span>','客户资料','13800131003','138****1003'],
       ['2026-11-05 19:28:52','liangyuyao','10.20.21.48','邮件系统','/api/v1/log/104','R0104','<span class="tag">告警</span>','<span class="tag o">中</span>','个人信息','13800131004','138****1004'],
-      ['2026-11-06 22:35:05','aoyuling','10.20.21.55','代码仓库服务','/api/v1/user/105','R0105','<span class="tag">放行</span>','<span class="tag b">低</span>','财务数据','13800131005','138****1005'],
+      ['2026-11-06 22:35:05','admin','10.20.21.55','代码仓库服务','/api/v1/user/105','R0105','<span class="tag">放行</span>','<span class="tag b">低</span>','财务数据','13800131005','138****1005'],
       ['2026-11-07 01:42:18','zhangwei','10.20.21.62','运维堡垒机','/api/v1/app/106','R0106','<span class="tag">拦截</span>','<span class="tag r">高</span>','研发代码','13800131006','138****1006'],
       ['2026-11-08 04:49:31','chendaw','10.20.21.69','客户关系管理','/api/v1/policy/107','R0107','<span class="tag">告警</span>','<span class="tag o">中</span>','客户资料','13800131007','138****1007'],
       ['2026-11-09 07:56:44','wangjie','10.20.21.76','统一身份认证','/api/v1/session/108','R0108','<span class="tag">放行</span>','<span class="tag b">低</span>','个人信息','13800131008','138****1008'],
@@ -5526,23 +6282,23 @@ var LIVE={
       ['MB-31C7','liuyulong','10.20.21.34','华南区外网接入服务','SAG_3','专线通道','财务共享中心','2026-11-03 13:14:26','<span class="dot g">成功</span>'],
       ['PC-7D55','houdongliang','10.20.21.41','海外公司接入服务','ACG_1','加密隧道','HR人力资源系统','2026-11-04 16:21:39','<span class="dot r">失败</span>'],
       ['PC-9C31','liangyuyao','10.20.21.48','总部DC内网接入服务','ACG_2','明文直连','邮件系统','2026-11-05 19:28:52','<span class="dot g">成功</span>'],
-      ['MB-04BA','aoyuling','10.20.21.55','华北区外网接入服务','DR_1','专线通道','代码仓库服务','2026-11-06 22:35:05','<span class="dot g">成功</span>'],
+      ['MB-04BA','admin','10.20.21.55','华北区外网接入服务','DR_1','专线通道','代码仓库服务','2026-11-06 22:35:05','<span class="dot g">成功</span>'],
       ['PC-2A08','zhangwei','10.20.21.62','华南区外网接入服务','SAG_1','加密隧道','运维堡垒机','2026-11-07 01:42:18','<span class="dot g">成功</span>'],
       ['PC-5B77','chendaw','10.20.21.69','海外公司接入服务','SAG_2','明文直连','客户关系管理','2026-11-08 04:49:31','<span class="dot r">失败</span>'],
       ['PC-1D92','wangjie','10.20.21.76','总部DC内网接入服务','SAG_3','专线通道','统一身份认证','2026-11-09 07:56:44','<span class="dot g">成功</span>'],
       ['PC-4F60','lihui','10.20.21.83','华北区外网接入服务','ACG_1','加密隧道','日志分析平台','2026-11-10 10:03:57','<span class="dot g">成功</span>']
     ],toolbar:[],tabs2:null},
-  '/audit/auth/strategy':{cols:['鉴权时间','鉴权类型','控制器','鉴权服务','用户ID','应用系统','鉴权结果'],rows:[
-      ['2026-11-01 07:00:00','终端鉴权','控制器243','IAM 鉴权服务','liangqilan','零信任图形化管理平台','<span class="dot g">成功</span>'],
-      ['2026-11-02 10:07:13','用户鉴权','控制器244','本地鉴权服务','liwei','OA办公系统','<span class="dot g">成功</span>'],
-      ['2026-11-03 13:14:26','策略鉴权','控制器245','IAM 鉴权服务','liuyulong','财务共享中心','<span class="dot g">成功</span>'],
-      ['2026-11-04 16:21:39','终端鉴权','控制器243','本地鉴权服务','houdongliang','HR人力资源系统','<span class="dot r">失败</span>'],
-      ['2026-11-05 19:28:52','用户鉴权','控制器244','IAM 鉴权服务','liangyuyao','邮件系统','<span class="dot g">成功</span>'],
-      ['2026-11-06 22:35:05','策略鉴权','控制器245','本地鉴权服务','aoyuling','代码仓库服务','<span class="dot g">成功</span>'],
-      ['2026-11-07 01:42:18','终端鉴权','控制器243','IAM 鉴权服务','zhangwei','运维堡垒机','<span class="dot g">成功</span>'],
-      ['2026-11-08 04:49:31','用户鉴权','控制器244','本地鉴权服务','chendaw','客户关系管理','<span class="dot r">失败</span>'],
-      ['2026-11-09 07:56:44','策略鉴权','控制器245','IAM 鉴权服务','wangjie','统一身份认证','<span class="dot g">成功</span>'],
-      ['2026-11-10 10:03:57','终端鉴权','控制器243','本地鉴权服务','lihui','日志分析平台','<span class="dot g">成功</span>']
+  '/audit/auth/strategy':{cols:['鉴权时间','鉴权类型','控制器','鉴权服务','用户ID','鉴权资源','鉴权结果'],rows:[
+      ['2026-11-01 07:00:00','终端鉴权','控制器243','IAM 鉴权服务','liangqilan','默认策略，覆盖全部适用对象','<span class="dot g">成功</span>'],
+      ['2026-11-02 10:07:13','用户鉴权','控制器244','本地鉴权服务','liwei','针对敏感数据的访问控制','<span class="dot g">成功</span>'],
+      ['2026-11-03 13:14:26','策略鉴权','控制器245','IAM 鉴权服务','liuyulong','仅允许内网办公终端访问','<span class="dot g">成功</span>'],
+      ['2026-11-04 16:21:39','终端鉴权','控制器243','本地鉴权服务','houdongliang','高峰期流量灰度策略','<span class="dot r">失败</span>'],
+      ['2026-11-05 19:28:52','用户鉴权','控制器244','IAM 鉴权服务','liangyuyao','生产环境灰度验证中','<span class="dot g">成功</span>'],
+      ['2026-11-06 22:35:05','策略鉴权','控制器245','本地鉴权服务','admin','由系统初始化自动创建','<span class="dot g">成功</span>'],
+      ['2026-11-07 01:42:18','终端鉴权','控制器243','IAM 鉴权服务','zhangwei','应客户要求临时开放','<span class="dot g">成功</span>'],
+      ['2026-11-08 04:49:31','用户鉴权','控制器244','本地鉴权服务','chendaw','运维专用，变更需审批','<span class="dot r">失败</span>'],
+      ['2026-11-09 07:56:44','策略鉴权','控制器245','IAM 鉴权服务','wangjie','定期巡检后调整','<span class="dot g">成功</span>'],
+      ['2026-11-10 10:03:57','终端鉴权','控制器243','本地鉴权服务','lihui','试点范围，后续按需扩量','<span class="dot g">成功</span>']
     ],toolbar:[],tabs2:null},
   '/audit/session/terminal':{cols:['终端标识','控制器','用户ID','设备指纹','操作系统','终端分组','接入位置','源IP','网络IP','虚拟IP','单包鉴权','连接时间','断开时间','断开原因','在线时长'],rows:[
       ['PC-8F21','控制器243','liangqilan','PC-8F21','Windows 11 22H2','默认分组','北辰世纪中心-A座','10.20.21.20','10.20.21.20','169.2.1.20','<span class="dot g">开启</span>','2026-11-01 07:00:00','2026-11-01 07:00:00','用户主动退出','1 小时 0 分'],
@@ -5550,7 +6306,7 @@ var LIVE={
       ['MB-31C7','控制器245','liuyulong','MB-31C7','macOS 14.5','零信任产品BU','深圳湾科技园','10.20.21.34','10.20.21.34','169.2.3.30','<span class="dot g">关闭</span>','2026-11-03 13:14:26','2026-11-03 13:14:26','策略变更','3 小时 14 分'],
       ['PC-7D55','控制器243','houdongliang','PC-7D55','Ubuntu 22.04','平台研发部','北京望京SOHO','10.20.21.41','10.20.21.41','169.2.4.35','<span class="dot g">开启</span>','2026-11-04 16:21:39','2026-11-04 16:21:39','终端离线','4 小时 21 分'],
       ['PC-9C31','控制器244','liangyuyao','PC-9C31','统信 UOS 20','交付服务中心','北辰世纪中心-A座','10.20.21.48','10.20.21.48','169.2.5.40','<span class="dot g">开启</span>','2026-11-05 19:28:52','2026-11-05 19:28:52','用户主动退出','5 小时 28 分'],
-      ['MB-04BA','控制器245','aoyuling','MB-04BA','iOS 17.4','外部组织','西北旺镇政府大楼','10.20.21.55','10.20.21.55','169.2.6.45','<span class="dot g">关闭</span>','2026-11-06 22:35:05','2026-11-06 22:35:05','会话超时','6 小时 35 分'],
+      ['MB-04BA','控制器245','admin','MB-04BA','iOS 17.4','外部组织','西北旺镇政府大楼','10.20.21.55','10.20.21.55','169.2.6.45','<span class="dot g">关闭</span>','2026-11-06 22:35:05','2026-11-06 22:35:05','会话超时','6 小时 35 分'],
       ['PC-2A08','控制器243','zhangwei','PC-2A08','Windows 11 22H2','默认分组','深圳湾科技园','10.20.21.62','10.20.21.62','169.2.7.50','<span class="dot g">开启</span>','2026-11-07 01:42:18','2026-11-07 01:42:18','策略变更','7 小时 42 分'],
       ['PC-5B77','控制器244','chendaw','PC-5B77','Windows 10 21H2','研发中心','北京望京SOHO','10.20.21.69','10.20.21.69','169.2.8.55','<span class="dot g">开启</span>','2026-11-08 04:49:31','2026-11-08 04:49:31','终端离线','8 小时 49 分'],
       ['PC-1D92','控制器245','wangjie','PC-1D92','macOS 14.5','零信任产品BU','北辰世纪中心-A座','10.20.21.76','10.20.21.76','169.2.1.60','<span class="dot g">关闭</span>','2026-11-09 07:56:44','2026-11-09 07:56:44','用户主动退出','9 小时 56 分'],
@@ -5562,7 +6318,7 @@ var LIVE={
       ['liuyulong','<span class="dot gy">离线</span>','MB-31C7','深圳湾科技园','10.20.21.34','16','2026-11-03 13:14:26','2026-11-03 13:14:26','3 小时 14 分'],
       ['houdongliang','<span class="dot g">在线</span>','PC-7D55','北京望京SOHO','10.20.21.41','53','2026-11-04 16:21:39','2026-11-04 16:21:39','4 小时 21 分'],
       ['liangyuyao','<span class="dot g">在线</span>','PC-9C31','北辰世纪中心-A座','10.20.21.48','31','2026-11-05 19:28:52','2026-11-05 19:28:52','5 小时 28 分'],
-      ['aoyuling','<span class="dot gy">离线</span>','MB-04BA','西北旺镇政府大楼','10.20.21.55','9','2026-11-06 22:35:05','2026-11-06 22:35:05','6 小时 35 分'],
+      ['admin','<span class="dot gy">离线</span>','MB-04BA','西北旺镇政府大楼','10.20.21.55','9','2026-11-06 22:35:05','2026-11-06 22:35:05','6 小时 35 分'],
       ['zhangwei','<span class="dot g">在线</span>','PC-2A08','深圳湾科技园','10.20.21.62','46','2026-11-07 01:42:18','2026-11-07 01:42:18','7 小时 42 分'],
       ['chendaw','<span class="dot g">在线</span>','PC-5B77','北京望京SOHO','10.20.21.69','24','2026-11-08 04:49:31','2026-11-08 04:49:31','8 小时 49 分'],
       ['wangjie','<span class="dot gy">离线</span>','PC-1D92','北辰世纪中心-A座','10.20.21.76','2','2026-11-09 07:56:44','2026-11-09 07:56:44','9 小时 56 分'],
@@ -5586,7 +6342,7 @@ var LIVE={
       ['2026-11-03 13:14:26','liuyulong','10.20.21.34','10.20.21.34','MB-31C7','macOS 14.5','mail.example.com','REST','/api/v1/policy/102','84','84','<span class="tag gy">200</span>','42 ms','研发代码'],
       ['2026-11-04 16:21:39','houdongliang','10.20.21.41','10.20.21.41','PC-7D55','Windows 11 22H2','hr.example.com','TCP','/api/v1/session/103','121','121','<span class="tag gy">302</span>','59 ms','客户资料'],
       ['2026-11-05 19:28:52','liangyuyao','10.20.21.48','10.20.21.48','PC-9C31','Windows 10 21H2','gitlab.example.com','GET','/api/v1/log/104','158','158','<span class="tag gy">403</span>','76 ms','个人信息'],
-      ['2026-11-06 22:35:05','aoyuling','10.20.21.55','10.20.21.55','MB-04BA','macOS 14.5','bastion.example.com','POST','/api/v1/user/105','195','195','<span class="tag gy">500</span>','93 ms','财务数据'],
+      ['2026-11-06 22:35:05','admin','10.20.21.55','10.20.21.55','MB-04BA','macOS 14.5','bastion.example.com','POST','/api/v1/user/105','195','195','<span class="tag gy">500</span>','93 ms','财务数据'],
       ['2026-11-07 01:42:18','zhangwei','10.20.21.62','10.20.21.62','PC-2A08','Windows 11 22H2','crm.example.com','HTTP','/api/v1/app/106','232','232','<span class="tag gy">200</span>','110 ms','研发代码'],
       ['2026-11-08 04:49:31','chendaw','10.20.21.69','10.20.21.69','PC-5B77','Windows 10 21H2','iam.example.com','HTTPS','/api/v1/policy/107','269','269','<span class="tag gy">200</span>','127 ms','客户资料'],
       ['2026-11-09 07:56:44','wangjie','10.20.21.76','10.20.21.76','PC-1D92','macOS 14.5','log.example.com','REST','/api/v1/session/108','306','306','<span class="tag gy">200</span>','144 ms','个人信息'],
@@ -5598,7 +6354,7 @@ var LIVE={
       ['2026-11-03 13:14:26','liuyulong','10.20.21.34','企业邮件系统','liuyulong@example.com','liuyulong@example.com','liuyulong@example.com','【审批】账号锁定','70 KB','14'],
       ['2026-11-04 16:21:39','houdongliang','10.20.21.41','邮件归档服务','houdongliang@example.com','houdongliang@example.com','houdongliang@example.com','【告警】登录异常','99 KB','21'],
       ['2026-11-05 19:28:52','liangyuyao','10.20.21.48','企业邮件系统','liangyuyao@example.com','liangyuyao@example.com','liangyuyao@example.com','【日报】策略变更','128 KB','28'],
-      ['2026-11-06 22:35:05','aoyuling','10.20.21.55','邮件归档服务','aoyuling@example.com','aoyuling@example.com','aoyuling@example.com','【审批】账号锁定','157 KB','5'],
+      ['2026-11-06 22:35:05','admin','10.20.21.55','邮件归档服务','admin@example.com','admin@example.com','admin@example.com','【审批】账号锁定','157 KB','5'],
       ['2026-11-07 01:42:18','zhangwei','10.20.21.62','企业邮件系统','zhangwei@example.com','zhangwei@example.com','zhangwei@example.com','【告警】登录异常','186 KB','12'],
       ['2026-11-08 04:49:31','chendaw','10.20.21.69','邮件归档服务','chendaw@example.com','chendaw@example.com','chendaw@example.com','【日报】策略变更','215 KB','19'],
       ['2026-11-09 07:56:44','wangjie','10.20.21.76','企业邮件系统','wangjie@example.com','wangjie@example.com','wangjie@example.com','【审批】账号锁定','244 KB','26'],
@@ -5610,7 +6366,7 @@ var LIVE={
       ['2026-11-03 13:14:26','liuyulong','10.20.21.34','企业邮件系统','仅允许内网办公终端访问','70 KB','14'],
       ['2026-11-04 16:21:39','houdongliang','10.20.21.41','邮件归档服务','高峰期流量灰度策略','99 KB','21'],
       ['2026-11-05 19:28:52','liangyuyao','10.20.21.48','企业邮件系统','生产环境灰度验证中','128 KB','28'],
-      ['2026-11-06 22:35:05','aoyuling','10.20.21.55','邮件归档服务','由系统初始化自动创建','157 KB','5'],
+      ['2026-11-06 22:35:05','admin','10.20.21.55','邮件归档服务','由系统初始化自动创建','157 KB','5'],
       ['2026-11-07 01:42:18','zhangwei','10.20.21.62','企业邮件系统','应客户要求临时开放','186 KB','12'],
       ['2026-11-08 04:49:31','chendaw','10.20.21.69','邮件归档服务','运维专用，变更需审批','215 KB','19'],
       ['2026-11-09 07:56:44','wangjie','10.20.21.76','企业邮件系统','定期巡检后调整','244 KB','26'],
@@ -5634,7 +6390,7 @@ var LIVE={
       ['liuyulong','刘宇龙','审计管理员','<span class="dot g">正常</span>','15****1014','liuyulong@example.com','刘宇龙','2026-11-03 13:14:26'],
       ['houdongliang','侯东亮','只读用户','<span class="dot o">告警</span>','16****1021','houdongliang@example.com','侯东亮','2026-11-04 16:21:39'],
       ['liangyuyao','梁宇尧','超级管理员','<span class="dot g">正常</span>','17****1028','liangyuyao@example.com','梁宇尧','2026-11-05 19:28:52'],
-      ['aoyuling','敖玉玲','系统管理员','<span class="dot gy">离线</span>','18****1035','aoyuling@example.com','敖玉玲','2026-11-06 22:35:05'],
+      ['admin','敖玉玲','系统管理员','<span class="dot gy">离线</span>','18****1035','admin@example.com','敖玉玲','2026-11-06 22:35:05'],
       ['zhangwei','张伟','审计管理员','<span class="dot g">正常</span>','13****1042','zhangwei@example.com','张伟','2026-11-07 01:42:18'],
       ['chendaw','陈大卫','只读用户','<span class="dot g">正常</span>','14****1049','chendaw@example.com','陈大卫','2026-11-08 04:49:31'],
       ['wangjie','王劼','超级管理员','<span class="dot gy">停用</span>','15****1056','wangjie@example.com','王劼','2026-11-09 07:56:44'],
@@ -7665,7 +8421,7 @@ var PF_API_META={
  '/blim-api/api/elogonconfig/v1/uninstall/device/status':{pk:'/#/uninstall',gap:[1,3],flag:'bg'},
  '/blim-api/api/elogonconfig/v1/uninstall/device/confirm':{pk:'/#/uninstall',gap:[6,35]}
 };
-var PF_USERS=['aoyuling','caojianbo','chenlong','daishijing','dinghaojie','gongqiang','hetao','jiadelong','leo.li','lixiangfen'];
+var PF_USERS=['admin','caojianbo','chenlong','daishijing','dinghaojie','gongqiang','hetao','jiadelong','leo.li','lixiangfen'];
 var PF_IPS=['10.20.21.118','10.20.21.121','10.20.21.135','10.20.22.44','10.20.22.67','10.20.23.9'];
 var PF_SR=['页面切换','来源变化','超时'];
 var PF_SR_RAW={'会话开始':'','页面切换':'page_view_id','来源变化':'referer_change','超时':'end'};
@@ -8503,6 +9259,603 @@ reg('/resource/publish/profile',{html:pfMainHtml});
       apis:[{u:'/blim-api/api/auth/v1/legacyPermit',cnt:42,usr:6}]});
     pb.mod=bm.length; pb.__modsN=bm.length;   /* 两个一起改，否则下次 pfMods 会按模板重建把它冲掉 */
   }
+})();
+
+/* ============ V1.8.4.0 新增 5 页（依据 2026-11-19 实况采集：7 模块 / 66 页）============ */
+/* ---- 1. 资源 › MCP服务  /resource/application/mcp ---- */
+var MCP_GROUPS=[{n:'所有分组'},{n:'办公助手',lv:1},{n:'运维工具',lv:1}];
+var MCP_ROWS=[
+  ['OA知识库','mcp_oa_kb','10.200.1.11','办公助手',8443,'API-Key',d('已发布','g')],
+  ['工单查询助手','mcp_ticket','10.200.1.12','办公助手',8443,'API-Key',d('已发布','g')],
+  ['日志检索','mcp_logs','10.200.1.21','运维工具',8443,'无',d('未发布','gy')],
+  ['CMDB 资产查询','mcp_cmdb','10.200.1.22','运维工具',8443,'API-Key',d('已发布','g')]
+];
+var MCP_STEP=0;
+function mcpToolbar(){
+  return '<div class="toolbar">'
+    + '<button class="btn-pri" onclick="mcpWizard(0)">新增</button>'
+    + '<button class="btn-pri" onclick="lpTip(\'更换分组（演示）\')">更换分组</button>'
+    + '<button class="btn-plain" onclick="lpTip(\'删除（演示）\')">删除</button>'
+    + '</div>';
+}
+function mcpWizard(step){
+  MCP_STEP=step||0;
+  var names=['基本信息','应用主机','完成向导'];
+  var head='<div class="wz">'+names.map(function(s,i){
+    return '<div class="wzs'+(i===MCP_STEP?' on':(i<MCP_STEP?' done':''))+'"><i>'
+      + (i<MCP_STEP?'&#10003;':(i+1))+'</i><span>'+s+'</span></div>';
+  }).join('<em></em>')+'</div>';
+  var body='';
+  if(MCP_STEP===0){
+    body='<div class="wzsec">基本信息</div>'
+      + '<div class="frow"><label><em>*</em>服务名称</label><div class="ctl"><input id="mcpName" placeholder="请输入MCP服务名称" maxlength="50" value=""><div class="hint">0 / 50</div></div></div>'
+      + '<div class="frow"><label><em>*</em>服务标识</label><div class="ctl"><input id="mcpId" placeholder="请输入服务标识" maxlength="100"><div class="hint">0 / 100</div></div></div>'
+      + '<div class="frow"><label><em>*</em>服务分组</label><div class="ctl"><select id="mcpGrp"><option>MCP服务分组</option><option>办公助手</option><option>运维工具</option></select></div></div>';
+  } else if(MCP_STEP===1){
+    body='<div class="wzsec">协议类型 <span class="wz-sub">通信方式仅支持 streamable-http</span></div>'
+      + '<div class="frow"><label>访问协议</label><div class="ctl"><select><option>HTTP</option><option>HTTPS</option></select></div></div>'
+      + '<div class="frow"><label>应用协议</label><div class="ctl"><select><option>HTTP</option></select></div></div>'
+      + '<div class="wzsec" style="margin-top:22px">访问地址</div>'
+      + '<div class="frow"><label><em>*</em>网关地址</label><div class="ctl"><input placeholder="请输入MCP服务网关域名，不支持IP地址"><div class="hint">示例：mcp.company.com</div></div></div>'
+      + '<div class="frow"><label><em>*</em>端口</label><div class="ctl"><input placeholder="请输入端口" value="8443"></div></div>'
+      + '<div class="frow"><label><em>*</em>网关端点</label><div class="ctl"><input placeholder="如 /mcp"><div class="hint">智能体调用时拼接在网关地址之后</div></div></div>';
+  } else {
+    body='<div class="wz-done"><i>&#10003;</i><b>配置完成</b>'
+      + '<div>点击「完成」后生成 MCP 服务，网关按 streamable-http 解析 MCP 协议，并把每次工具调用写入审计 › MCP访问记录。</div></div>';
+  }
+  var foot;
+  if(MCP_STEP===0) foot='<button class="btn-plain" onclick="lpCloseFormDrawer()">取消</button><button class="btn-pri" onclick="mcpWizard(1)">下一步</button>';
+  else if(MCP_STEP===1) foot='<button class="btn-plain" onclick="mcpWizard(0)">上一步</button><button class="btn-pri" onclick="mcpWizard(2)">下一步</button>';
+  else foot='<button class="btn-plain" onclick="mcpWizard(1)">上一步</button><button class="btn-pri" onclick="mcpDone()">完成</button>';
+  lpFormDrawer('新增MCP服务', head+body, foot, 560);
+}
+function mcpDone(){
+  var el=document.getElementById('mcpName');
+  var name=(el&&el.value)||'新建MCP服务';
+  MCP_ROWS.push([name,'mcp_new'+(MCP_ROWS.length+1),'10.200.1.'+(30+MCP_ROWS.length),'办公助手',8443,'API-Key',d('未发布','gy')]);
+  lpCloseFormDrawer(); lpRerender(); lpTip('已新增 '+name);
+}
+reg('/resource/application/mcp',{
+  tree:{title:'服务分组<span class="mcp-eh" onclick="lpTip(\'显示空组（演示）\')"><i>&#8853;</i>显示空组</span>',
+    items:MCP_GROUPS.map(function(g){ return {n:g.n,lv:g.lv,k:g.lv?g.n:''}; })},
+  nodeFilter:function(row,k){ return !k || row[3]===k; },
+  cols:[{t:'服务名称'},{t:'服务标识'},{t:'FakeIP'},{t:'服务分组'},{t:'端口'},{t:'出向认证'},{t:'发布状态'}],
+  rows:MCP_ROWS,
+  check:true, ops:[{n:'编辑'},{n:'删除'}],
+  filters:[{t:'in',ph:'请输入服务名称',w:200},{t:'in',ph:'请输入服务标识',w:200}], more:false,
+  html:function(c,r){ return filterHtml(c)+mcpToolbar()+tableHtml(r)+pagerHtml2(r); }
+});
+
+/* ---- 2. 安全 › 智能体认证  /strategy/identity/agent ---- */
+var AGENT_ROWS=[
+  ['Agent20261119051408','http://10.20.9.34:1034','1034','--','••••••••'],
+  ['Agent20261118051417','http://10.20.9.34:1031','1031','--','••••••••'],
+  ['Agent20261117051347','http://10.20.9.34:1029','1029','--','••••••••'],
+  ['ZT_CTRL_GW_API','http://10.20.9.34:2443','ZT_CTRL_GW_API','gw-identity','••••••••'],
+  ['ZT_CTRL_CS_API','http://10.20.9.34:2443','ZT_CTRL_CS_API','cs-identity','••••••••'],
+  ['ZT_CTRL_M_API','http://10.20.9.34:2443','ZT_CTRL_M_API','m-identity','••••••••'],
+  ['ZT_CTRL_SDP_API','http://1.2.2.2:2443','ZT_CTRL_SDP_API','sdp-identity','••••••••'],
+  ['Agent20261115051601','http://10.20.9.34:1025','1025','--','••••••••']
+];
+function agentToolbar(){
+  return '<div class="toolbar">'
+    + '<button class="btn-pri" onclick="agentForm()">添加</button>'
+    + '<button class="btn-plain" onclick="lpTip(\'请先勾选要删除的认证服务\')">删除</button>'
+    + '</div>';
+}
+function agentForm(){
+  lpFormDrawer('新增认证服务',
+    '<div class="wzsec">基本信息</div>'
+    + '<div class="frow"><label><em>*</em>认证服务</label><div class="ctl"><input placeholder="请输入认证服务名称" maxlength="50"><div class="hint">0 / 50</div></div></div>'
+    + '<div class="frow"><label>服务类型</label><div class="ctl"><select disabled><option>智能体认证服务</option></select></div></div>'
+    + '<div class="frow"><label><em>*</em>注册API-Key</label><div class="ctl"><select><option>请选择AIAM系统端点注册的授权API-Key</option><option>ZT_CTRL_GW_API</option><option>ZT_CTRL_CS_API</option></select><div class="hint">在 AIAM 系统端点注册后回填，零信任用它调用 AIAM 鉴权接口</div></div></div>'
+    + '<div class="wzsec" style="margin-top:22px">认证系统</div>'
+    + '<div class="frow"><label><em>*</em>服务地址</label><div class="ctl"><input placeholder="https://aiam.company.com:2443"></div></div>'
+    + '<div class="frow"><label>身份ID</label><div class="ctl"><input placeholder="请输入身份ID/APIkey"></div></div>'
+    + '<div class="frow"><label>身份密钥</label><div class="ctl"><input placeholder="请输入身份密钥"></div></div>'
+    + '<div class="wzsec" style="margin-top:22px">缓存策略</div>'
+    + '<div class="frow"><label><em>*</em>JWKS公钥</label><div class="ctl"><input value="60" style="width:120px"><span class="unit">分钟</span></div></div>'
+    + '<div class="frow"><label><em>*</em>鉴权策略</label><div class="ctl"><input value="10" style="width:120px"><span class="unit">分钟</span></div></div>',
+    '<button class="btn-plain" onclick="lpCloseFormDrawer()">取消</button>'
+    + '<button class="btn-pri" onclick="agentSave()">保存</button>', 520);
+}
+function agentSave(){ lpCloseFormDrawer(); lpTip('已保存认证服务（演示）'); }
+reg('/strategy/identity/agent',{
+  cols:[{t:'认证服务'},{t:'服务地址'},{t:'注册API-Key'},{t:'身份ID'},{t:'身份密钥'}],
+  rows:AGENT_ROWS,
+  check:true, ops:[{n:'编辑'},{n:'删除'}],
+  filters:[{t:'in',ph:'请输入认证服务'}],
+  html:function(c,r){ return filterHtml(c)+agentToolbar()+tableHtml(r)+pagerHtml2(r); }
+});
+
+/* ---- 3. 审计 › MCP访问记录  /audit/flow/mcp ---- */
+var MCP_AUDIT_ROWS=[
+  ['2026-11-19 14:32:11','10.20.21.229','sess-9f2a4c','zhangsan@corp','agent-7f31','mcp_oa_kb','query_kb','AIAM 判定',d('放行','g'),d('成功','g')],
+  ['2026-11-19 14:31:52','10.20.21.229','sess-9f2a4c','zhangsan@corp','agent-7f31','mcp_oa_kb','list_docs','AIAM 判定',d('放行','g'),d('成功','g')],
+  ['2026-11-19 14:28:07','10.20.21.240','sess-3b7d11','lisi@corp','agent-2c88','mcp_cmdb','update_asset','AIAM 判定',d('阻断','r'),d('已拒绝','r')],
+  ['2026-11-19 14:22:35','10.20.21.240','sess-3b7d11','lisi@corp','agent-2c88','mcp_ticket','create_ticket','AIAM 判定',d('身份认证','o'),d('成功','g')],
+  ['2026-11-19 14:15:44','10.20.21.229','sess-9f2a4c','zhangsan@corp','agent-7f31','mcp_logs','search_log','本地策略',d('放行','g'),d('失败','gy')],
+  ['2026-11-19 14:02:18','10.20.22.31','sess-77ab90','wangwu@corp','agent-91de','mcp_oa_kb','summary','AIAM 判定',d('放行','g'),d('成功','g')]
+];
+reg('/audit/flow/mcp',{
+  cols:[{t:'时间'},{t:'请求IP'},{t:'会话ID'},{t:'用户 (sub)'},{t:'AgentID'},{t:'MCP服务'},{t:'Tool名称'},{t:'决策方式'},{t:'决策结果'},{t:'执行结果'}],
+  rows:MCP_AUDIT_ROWS,
+  check:false,
+  html:function(c,r){
+    return '<div class="filters">'
+      + '<input class="fin" style="width:170px" placeholder="开始时间"><span class="spa-t">至</span>'
+      + '<input class="fin" style="width:170px" placeholder="结束时间">'
+      + '<select class="fsel" style="min-width:170px"><option>默认日志服务集群</option></select>'
+      + '<select class="fsel" style="min-width:170px"><option>请选择MCP服务</option>'
+      +   ['mcp_oa_kb','mcp_ticket','mcp_cmdb','mcp_logs'].map(function(x){return '<option>'+x+'</option>'}).join('')
+      + '</select>'
+      + '<span class="fmore" onclick="lpTip(\'更多筛选（演示）\')">更多筛选 <i>&#9662;</i></span>'
+      + '<div class="fbtns"><button class="btn-plain" onclick="lpTip(\'已重置筛选条件\')">重置</button>'
+      + '<button class="btn-pri" onclick="lpTip(\'查询完成\')">查询</button></div>'
+      + '</div>'
+      + '<div class="toolbar"><div class="tsearch"><i class="iconfont icon-search"></i>'
+      + '<input class="fin" placeholder="请输入AgentID / 会话ID / Tool名称" onkeydown="if(event.key===\'Enter\')lpTip(\'查询完成\')"></div></div>'
+      + tableHtml(r)+pagerHtml2(r);
+  }
+});
+
+/* ---- 4. 网络 › SDP代理  /network/manage/sdp_proxy ---- */
+var SDP_SVC=[{on:true,target:'',addr:''}];
+var SDP_AUTH=[['david','david','AutoGroup2026','','http://www.david.com','http://www.david2.com','test',d('启用','g')]];
+function spxSetHtml(){
+  var groups=SDP_SVC.map(function(s,i){
+    return '<div class="sdp-grp"><div class="sdp-gt">服务配置 '+(i+1)+'</div>'
+      + '<div class="fm-row"><label></label><div class="fc"><label class="sdp-chk"><input type="checkbox"'+(s.on?' checked':'')+' onchange="spxToggle('+i+',this.checked)"> 开启</label></div></div>'
+      + '<div class="fm-row"><label><em>*</em>目标SDP服务</label><div class="fc"><input placeholder="请输入内容" maxlength="200" value="'+s.target+'" oninput="spxVal('+i+',\'target\',this.value)"><span class="unit">'+s.target.length+' / 200</span><i class="sdp-q" title="目标 SDP 服务的标识，用于识别该服务下可代理的应用">?</i></div></div>'
+      + '<div class="fm-row"><label><em>*</em>服务集成地址</label><div class="fc"><input placeholder="请输入内容" maxlength="200" value="'+s.addr+'" oninput="spxVal('+i+',\'addr\',this.value)"><span class="unit">'+s.addr.length+' / 200</span></div></div>'
+      + '<div class="fm-row"><label></label><div class="fc"><button class="btn-plain" onclick="spxDelSvc('+i+')">删除</button></div></div>'
+      + '</div>';
+  }).join('');
+  return '<div class="fm-card"><div class="fm-hd">代理参数'
+    + '<div class="r"><button class="btn-plain" onclick="lpTip(\'代理参数已保存（演示）\')">保存</button>'
+    + '<button class="btn-plain" onclick="spxAddSvc()">新增</button></div></div>'
+    + '<div class="fm-bd">'
+    + '<div class="sp-tip"><i>i</i><div><b>代理参数</b>设置本级可以代理的目标SDP服务参数，用于本级控制器与代理控制器进行通信。通信交互数据如下：<br>'
+    + '1. 拉取目标控制器地址和目标的SDP服务资源清单，用于终端识别和接管代理应用的流量<br>'
+    + '2. 将本级注册的终端设备清单同步给代理的SDP服务，用于终端向代理的目标控制器敲门进行身份校验</div></div>'
+    + '<div class="fm-row"><label>代理ID</label><div class="fc sdp-id"><input value="ctyCA" readonly style="width:300px">'
+    + '<i class="sdp-act" title="重新生成" onclick="lpTip(\'已重新生成代理ID（演示）\')">&#8635;</i>'
+    + '<i class="sdp-q" title="系统生成的唯一标识，同时作为可信终端标识前缀同步到目标平台">?</i></div></div>'
+    + groups
+    + '</div></div>';
+}
+function spxAuthHtml(){
+  var trs=SDP_AUTH.map(function(a,i){
+    return '<tr><td class="c-chk"><input type="checkbox"></td>'
+      + a.slice(0,7).map(function(x){ return '<td>'+(x||'—')+'</td>'; }).join('')
+      + '<td>'+a[7]+'</td>'
+      + '<td class="c-op"><a class="op" onclick="lpTip(\'禁用（演示）\')">禁用</a>'
+      + '<a class="op" onclick="lpTip(\'编辑（演示）\')">编辑</a>'
+      + '<a class="op" onclick="lpTip(\'删除（演示）\')">删除</a>'
+      + '<a class="op more" title="更多操作" onclick="lpMoreOps(event,'+JSON.stringify("'/network/manage/sdp_proxy'")+',i,'+JSON.stringify("'多语言'")+')">&#8943;</a></td></tr>';
+  }).join('');
+  return '<div class="toolbar"><button class="btn-pri" onclick="lpTip(\'新增代理授权（演示）\')">新增</button>'
+    + '<button class="btn-plain" onclick="lpTip(\'请先勾选要删除的代理授权\')">删除</button></div>'
+    + '<div class="lp-tbl-wrap"><table class="lp-tbl"><thead><tr>'
+    + '<th class="c-chk"><input type="checkbox"></th><th>代理ID</th><th>代理服务</th><th>终端分组</th><th>描述</th>'
+    + '<th>集成接口地址</th><th>授权连接地址</th><th>授权SDP服务</th><th>状态</th><th class="c-op">操作</th>'
+    + '</tr></thead><tbody>'+trs+'</tbody></table></div>'
+    + '<div class="pager2"><span>共 '+SDP_AUTH.length+' 条</span></div>';
+}
+function spxHtml(c,r){
+  var t=lst(r).tab||0;
+  return '<div class="dtabs" style="margin-bottom:14px">'
+    + ['代理设置','代理授权'].map(function(x,i){
+        return '<span class="'+(i===t?'on':'')+'" onclick="lpTab(\''+r+'\','+i+')">'+x+'</span>';
+      }).join('')+'</div>'
+    + (t===0? spxSetHtml() : spxAuthHtml());
+}
+function spxToggle(i,v){ SDP_SVC[i].on=v; }
+function spxVal(i,k,v){ SDP_SVC[i][k]=v; }
+function spxAddSvc(){ SDP_SVC.push({on:false,target:'',addr:''}); lpRerender(); }
+function spxDelSvc(i){
+  if(SDP_SVC.length===1){ lpTip('至少保留一组服务配置'); return; }
+  SDP_SVC.splice(i,1); lpRerender(); lpTip('已删除服务配置 '+(i+1));
+}
+reg('/network/manage/sdp_proxy',{
+  rows:[],
+  html:spxHtml
+});
+
+/* ---- 5. 终端 › SPA策略  /terminal/security/agent_spa ---- */
+function spaHtml(){
+  return '<div class="fm-card"><div class="fm-hd">SPA 防爆破设置'
+    + '<div class="r"><button class="btn-pri" onclick="lpTip(\'SPA策略已保存（演示）\')">保存</button></div></div>'
+    + '<div class="fm-bd">'
+    + '<div class="fm-row"><label>终端策略</label><div class="fc">'
+      + '<span class="spa-t">同一终端于</span><input class="spa-in" value="30"><span class="spa-t">秒的时间窗口内，累计在同一IP下连续敲门</span>'
+      + '<input class="spa-in" value="2"><span class="spa-t">次，触发安全预警阈值。</span></div></div>'
+    + '<div class="fm-row"><label></label><div class="fc"><span class="spa-note">系统将自动封禁，可前往智能封禁模块查看封禁信息，<span class="spa-link" onclick="openPage(\'智能IP封禁\',\'/strategy/network/risk_ip\')">立即前往</span></span></div></div>'
+    + '<div class="fm-row"><label>IP策略</label><div class="fc">'
+      + '<span class="sw on" onclick="this.classList.toggle(\'on\')"><i></i></span>'
+      + '<span class="spa-t">同一IP于</span><input class="spa-in" value="30"><span class="spa-t">秒的时间窗口内，累计连续敲门</span>'
+      + '<input class="spa-in" value="2"><span class="spa-t">次，触发安全预警阈值。</span></div></div>'
+    + '<div class="fm-row"><label></label><div class="fc"><span class="spa-note">系统将自动封禁，可前往智能封禁模块查看封禁信息，<span class="spa-link" onclick="openPage(\'智能IP封禁\',\'/strategy/network/risk_ip\')">立即前往</span></span></div></div>'
+    + '<div class="sp-tip" style="margin:2px 0 14px"><i>i</i><div>IP策略须谨慎开启，当多终端共用同一网络出口，对该IP的封禁操作将直接影响所有关联终端，存在大规模业务中断风险。</div></div>'
+    + '<div class="fm-row"><label></label><div class="fc"><span class="spa-note">安全通知设置，可前往消息通知设置通知用户、模板及通知方式，'
+      + '<span class="spa-link" onclick="openPage(\'消息通知\',\'/system/setting/notify\')">立即前往</span></span></div></div>'
+    + '</div></div>'
+    + '<div class="fm-card"><div class="fm-hd">SPA 连接安全设置</div><div class="fm-bd">'
+    + '<div class="fm-row"><label>心跳连接</label><div class="fc">'
+      + '<span class="spa-t">控制通道心跳连接安全，心跳间隔</span><input class="spa-in" value="0"><span class="spa-t">（10-600）秒，最大丢包数</span>'
+      + '<input class="spa-in" value="0"><span class="spa-t">（1-10）个范围内才可保持连接，否则将自动断开连接。</span></div></div>'
+    + '<div class="sp-tip" style="margin:2px 0 14px 114px"><i>i</i><div>控制通道连接检查周期 ＝ 心跳间隔 × 最大丢包数。修改后需客户端重新连接生效。</div></div>'
+    + '<div class="fm-row"><label>智能断开</label><div class="fc">'
+      + '<span class="spa-t">终端连接安全，终端在智能连接模式下，流量检查周期</span><input class="spa-in" value="0"><span class="spa-t">（1-1440）分钟，在此周期时间内未检查到保护应用访问流量，将自动断开连接。</span></div></div>'
+    + '<div class="fm-row"><label>单包响应</label><div class="fc">'
+      + '<span class="sw on" onclick="this.classList.toggle(\'on\')"><i></i></span>'
+      + '<span class="spa-t">启用后，SPA连接校验失败时将反馈具体错误类型（如密钥/账号/密码问题），提升用户排错体验。</span></div></div>'
+    + '</div></div>';
+}
+reg('/terminal/security/agent_spa',{
+  rows:[],
+  html:spaHtml
+});
+
+/* ---------- 原型导航桥（导航面板 / 直链用，2026-11-19 v2.34） ----------
+   1) navGo(route,name)：由 route 反查所属模块 → 切模块 → 开页面（不闪一次模块首页）
+   2) 直链：index.html?demo=1#/resource/publish/profile 直接落在该页，跳过登录
+   PS：右下角那个导航面板在 nav_panel.js 里，这里只提供「按 route 跳转」这一件事 */
+(function(){
+  if(typeof MODULES==='undefined') return;   /* 自检桩环境没有菜单数据，直接跳过 */
+
+  var LEAVES=[];
+  MODULES.forEach(function(m){
+    m.menus.forEach(function(nd){
+      var items=nd.items||(nd.route?[nd]:[]);
+      items.forEach(function(it){
+        LEAVES.push({mod:m.key, name:it.name, route:it.route});
+      });
+    });
+  });
+  function leafOf(route){
+    for(var i=0;i<LEAVES.length;i++) if(LEAVES[i].route===route) return LEAVES[i];
+    return null;
+  }
+
+  /* 进应用：登录页 / 选择角色页只在第一次路过 */
+  function navEnter(){
+    var app=document.getElementById('app');
+    if(app && app.style.display!=='block'){
+      var lg=document.getElementById('login'), rl=document.getElementById('role');
+      if(lg) lg.classList.add('hide');
+      if(rl) rl.classList.add('hide');
+      try{ enterApp(); }catch(e){}
+    }
+  }
+
+  function navGo(route,name,opt){
+    opt=opt||{};
+    if(!route) return false;
+    var lf=leafOf(route);
+    if(!lf) return false;
+    name=name||lf.name;
+    navEnter();
+    if(curModule!==lf.mod){
+      curModule=lf.mod;
+      var links=document.querySelectorAll('#topnav a');
+      for(var i=0;i<links.length;i++) links[i].classList.toggle('on', links[i].getAttribute('data-k')===lf.mod);
+      try{ renderSidebar(); }catch(e){}
+    }
+    /* replace=true 只留这一个页签；默认像点菜单一样把页签留着 */
+    if(opt.replace===true) tabs=[{name:name,route:route}];
+    openPage(name,route);
+    try{ if(typeof window.npSyncEntry==='function') window.npSyncEntry(); }catch(e){}
+    return true;
+  }
+
+  /* 直链：#/route 或 ?page=/route */
+  function hashRoute(){
+    var h=String((typeof location!=='undefined'&&location.hash)||'');
+    var m=/^#\/?([^?]*)/.exec(h);
+    var r=m&&m[1]?'/'+m[1].replace(/\/+$/,''):'';
+    if(!r){
+      var q=String((typeof location!=='undefined'&&location.search)||'');
+      var p=/[?&]page=([^&]+)/.exec(q);
+      if(p) r=decodeURIComponent(p[1]);
+    }
+    return r && leafOf(r) ? r : '';
+  }
+  function bootNav(){
+    var r=hashRoute();
+    if(!r) return;
+    var lf=leafOf(r);
+    navGo(r, lf?lf.name:'', {replace:true});
+  }
+  if(typeof document!=='undefined' && document.addEventListener){
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bootNav);
+    else bootNav();
+    if(typeof window!=='undefined' && window && window.addEventListener){
+      window.addEventListener('hashchange',function(){
+        var r=hashRoute();
+        if(r){ var lf=leafOf(r); navGo(r, lf?lf.name:'', {replace:true}); }
+      });
+    }
+  }
+
+  window.navGo=navGo;
+  window.navLeaves=function(){ return LEAVES; };
+})();
+
+/* ---------- 原型页面导航 · 左侧常驻栏（index 内嵌，2026-11-19 v2.36） ----------
+   左右布局：左栏 264px 常驻，右侧原型整体右移；收起后 52px 竖条；全屏整栏隐藏。
+   点一条 = 直接跳过去，栏不收起，可以连着点着看。 */
+(function(){
+  if(typeof MODULES==='undefined' || typeof document==='undefined') return;
+
+  var W_OPEN=264, W_COL=52;
+  var NP={inApp:false, col:false, pages:[], dock:null, btn:null, cur:''};
+
+  /* ---------- 数据：摊平菜单 ---------- */
+  function collect(){
+    var out=[];
+    MODULES.forEach(function(m){
+      m.menus.forEach(function(nd){
+        var items=nd.items||(nd.route?[nd]:[]);
+        items.forEach(function(it){
+          out.push({mod:m.key, modName:m.name, group:nd.group||(nd.center?'资源中心':''),
+                    name:it.name, route:it.route});
+        });
+      });
+    });
+    return out;
+  }
+  function esc(s){
+    return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* ---------- 树 ---------- */
+  function treeHtml(){
+    var h='', lastMod='', lastGrp=null, grpOpen=false;
+    NP.pages.forEach(function(p){
+      if(p.mod!==lastMod){
+        if(grpOpen){ h+='</div></div>'; grpOpen=false; }
+        if(lastMod) h+='</div></div>';
+        var n=NP.pages.filter(function(x){ return x.mod===p.mod; }).length;
+        h+='<div class="np-mod open"><div class="np-mh"><i class="ar"></i><span class="t">'+esc(p.modName)+'</span>'
+          +'<span class="c">'+n+'</span></div><div class="np-mb">';
+        lastMod=p.mod; lastGrp=null;
+      }
+      var g=p.group||'';
+      if(g!==lastGrp){
+        if(grpOpen){ h+='</div></div>'; grpOpen=false; }
+        if(g){ h+='<div class="np-grp open"><div class="np-gh"><i class="ar"></i><span>'+esc(g)+'</span></div><div class="np-gb">'; grpOpen=true; }
+        lastGrp=g;
+      }
+      h+='<div class="np-it" data-r="'+esc(p.route)+'" data-s="'
+        +esc((p.name+' '+p.route+' '+p.modName+' '+(p.group||'')).toLowerCase())+'"'
+        +' title="'+esc(p.name+'　'+p.route)+'"><span>'+esc(p.name)+'</span></div>';
+    });
+    if(grpOpen) h+='</div></div>';
+    if(lastMod) h+='</div></div>';
+    return h;
+  }
+
+  /* ---------- 建栏 ---------- */
+  function build(){
+    if(NP.dock) return;
+    NP.pages=collect();
+
+    var d=document.createElement('aside');
+    d.className='np-dock';
+    d.id='npDock';
+    d.innerHTML=
+        '<div class="np-hd"><b>页面导航</b><span class="n">'+NP.pages.length+'</span>'
+      + '<span class="col" data-act="col" title="收起（⌘K）">&#10094;</span></div>'
+      + '<div class="np-q"><div class="box"><i class="i"></i>'
+      + '<input id="npQ" placeholder="搜页面 / 路由" autocomplete="off" spellcheck="false"></div></div>'
+      + '<div class="np-loginrow" data-act="login">登录页</div>'
+      + '<div class="np-tree" id="npTree">'+treeHtml()+'</div>'
+      + '<div class="np-ft"><span class="fs" data-act="fs" title="全屏查看（只剩原型本身，Esc 退出）"><i></i>全屏</span>'
+      + '<span>⌘K 收起</span></div>'
+      + '<div class="np-rail" data-act="col" title="展开页面导航（⌘K）"><i></i><span class="vt">页面导航</span></div>';
+    document.body.appendChild(d);
+
+    /* 登录页胶囊（登录页没有侧栏，用这个进） */
+    var btn=document.createElement('button');
+    btn.className='np-btn'; btn.id='npBtn'; btn.type='button';
+    btn.innerHTML='<i></i>页面导航<kbd>⌘K</kbd>';
+    btn.title='进入原型，左侧常驻页面导航';
+    document.body.appendChild(btn);
+    NP.dock=d; NP.btn=btn;
+
+    btn.addEventListener('click',function(e){
+      e.stopPropagation();
+      var first=NP.pages[0];
+      if(first) go(first.route); else toLogin();
+    });
+
+    d.addEventListener('click',function(e){
+      var act=e.target.closest('[data-act]');
+      if(act){
+        var a=act.getAttribute('data-act');
+        if(a==='col') return toggleCol();
+        if(a==='login') return toLogin();
+        if(a==='fs') return enterFull();
+        return;
+      }
+      var mh=e.target.closest('.np-mh');
+      if(mh){ mh.parentNode.classList.toggle('open'); return; }
+      var gh=e.target.closest('.np-gh');
+      if(gh){ gh.parentNode.classList.toggle('open'); return; }
+      var it=e.target.closest('.np-it');
+      if(it && it.getAttribute('data-r')) go(it.getAttribute('data-r'));
+    });
+
+    var q=document.getElementById('npQ');
+    q.addEventListener('input',function(){ filter(q.value); });
+    q.addEventListener('keydown',function(e){
+      if(e.key==='Enter'){
+        var first=NP.dock.querySelector('#npTree .np-it[data-r]:not([style*="display: none"])');
+        if(first) go(first.getAttribute('data-r'));
+      }else if(e.key==='Escape'){ q.value=''; filter(''); q.blur(); }
+      e.stopPropagation();
+    });
+
+    document.addEventListener('keydown',function(e){
+      if((e.metaKey||e.ctrlKey) && (e.key==='k'||e.key==='K')){
+        e.preventDefault();
+        if(NP.inApp) toggleCol();
+        return;
+      }
+      var tag=((e.target&&e.target.tagName)||'').toLowerCase();
+      var typing=(tag==='input'||tag==='textarea'||tag==='select');
+      if(!typing && (e.key==='f'||e.key==='F') && !e.metaKey && !e.ctrlKey && !e.altKey && NP.inApp){
+        e.preventDefault(); enterFull();
+      }
+    });
+    ['fullscreenchange','webkitfullscreenchange'].forEach(function(ev){
+      document.addEventListener(ev,onFsChange);
+    });
+
+    /* 页面切换后高亮跟着走 */
+    var _open=openPage;
+    openPage=function(n,r){ _open(n,r); mark(r); };
+
+    syncEntry();
+    (function(){
+      var app=document.getElementById('app');
+      if(app && window.MutationObserver) new MutationObserver(syncEntry).observe(app,{attributes:true,attributeFilter:['style']});
+    })();
+  }
+
+  /* ---------- 宽度：顶栏 / 侧栏 / 主区三处让位靠这个变量 ---------- */
+  function applyW(){
+    var w='0px';
+    if(NP.inApp && !document.body.classList.contains('np-fs')) w=(NP.col?W_COL:W_OPEN)+'px';
+    document.body.style.setProperty('--npw',w);
+  }
+  function syncEntry(){
+    var app=document.getElementById('app');
+    var inApp=!!(app && app.style.display==='block');
+    NP.inApp=inApp;
+    document.body.classList.toggle('np-in',inApp);
+    if(!inApp) document.body.classList.remove('np-fs');
+    applyW();
+    if(inApp) mark(currentRoute||'');
+  }
+  function toggleCol(){
+    NP.col=!NP.col;
+    document.body.classList.toggle('np-col',NP.col);
+    applyW();
+    if(!NP.col){
+      var q=document.getElementById('npQ');
+      if(q) setTimeout(function(){ try{ q.focus(); }catch(e){} },70);
+    }
+  }
+
+  /* ---------- 跳转 ---------- */
+  function pageOf(route){
+    for(var i=0;i<NP.pages.length;i++) if(NP.pages[i].route===route) return NP.pages[i];
+    return null;
+  }
+  function go(route){
+    var p=pageOf(route); if(!p) return;
+    if(typeof navGo==='function') navGo(route,p.name,{replace:false});
+    else openPage(p.name,route);
+    if(NP.col) toggleCol();       /* 收起态点了页面就展开，接着连着看 */
+  }
+  function toLogin(){
+    var app=document.getElementById('app'); if(app) app.style.display='none';
+    var role=document.getElementById('role'); if(role) role.classList.add('hide');
+    var lg=document.getElementById('login'); if(lg) lg.classList.remove('hide');
+    try{ if(typeof makeCap==='function') makeCap(); }catch(e){}
+    syncEntry();
+  }
+
+  /* ---------- 全屏：只剩 index 本身 ---------- */
+  function fsEl(){ return document.fullscreenElement||document.webkitFullscreenElement||null; }
+  function toast(msg){
+    var t=document.getElementById('npToast');
+    if(!t){ t=document.createElement('div'); t.id='npToast'; t.className='np-toast'; document.body.appendChild(t); }
+    t.textContent=msg; t.classList.add('on');
+    clearTimeout(t.__tm);
+    t.__tm=setTimeout(function(){ t.classList.remove('on'); },2200);
+  }
+  function onFsChange(){
+    var on=!!fsEl();
+    document.body.classList.toggle('np-fs',on);
+    applyW();
+    if(on) toast('全屏中 · 按 Esc 退出');
+  }
+  function enterFull(){
+    var el=document.documentElement;
+    var fn=el.requestFullscreen||el.webkitRequestFullscreen;
+    if(!fn){ toast('当前浏览器不支持全屏，按 F11'); return; }
+    var p;
+    try{ p=fn.call(el); }catch(e){ toast('全屏被拦截，按 F11'); return; }
+    if(p&&p.then) p.then(function(){ onFsChange(); },function(){ toast('全屏被拦截，按 F11'); });
+    else setTimeout(onFsChange,120);
+  }
+
+  /* ---------- 高亮 / 搜索 ---------- */
+  function mark(route){
+    NP.cur=route||'';
+    if(!NP.dock) return;
+    var items=NP.dock.querySelectorAll('.np-it[data-r]');
+    for(var i=0;i<items.length;i++) items[i].classList.toggle('on', items[i].getAttribute('data-r')===NP.cur);
+    var cur=NP.dock.querySelector('.np-it.on');
+    if(!cur || NP.col) return;
+    var gb=cur.parentNode; if(gb && gb.classList.contains('np-gb')) gb.parentNode.classList.add('open');
+    var mb=cur.closest('.np-mb'); if(mb) mb.parentNode.classList.add('open');
+    try{
+      var mod=cur.closest('.np-mod');
+      var mh=mod&&mod.querySelector('.np-mh');
+      if(mh) mh.scrollIntoView({block:'start'});
+      var tree=document.getElementById('npTree');
+      if(tree){
+        var a=cur.getBoundingClientRect(), b=tree.getBoundingClientRect();
+        if(a.top<b.top || a.bottom>b.bottom) cur.scrollIntoView({block:'nearest'});
+      }
+    }catch(e){}
+  }
+  function filter(v){
+    if(!NP.dock) return;
+    v=String(v||'').trim().toLowerCase();
+    var hit=0;
+    var mods=NP.dock.querySelectorAll('.np-mod');
+    for(var i=0;i<mods.length;i++){
+      var mod=mods[i], mHit=0;
+      var its=mod.querySelectorAll('.np-it');
+      for(var j=0;j<its.length;j++){
+        var ok=!v || (its[j].getAttribute('data-s')||'').indexOf(v)>=0;
+        its[j].style.display=ok?'':'none';
+        if(ok) mHit++;
+      }
+      var grps=mod.querySelectorAll('.np-grp');
+      for(var k=0;k<grps.length;k++){
+        var gIts=grps[k].querySelectorAll('.np-it'), gHit=0;
+        for(var m=0;m<gIts.length;m++) if(gIts[m].style.display!=='none') gHit++;
+        grps[k].style.display=gHit?'':'none';
+        if(gHit) grps[k].classList.add('open');
+      }
+      mod.style.display=mHit?'':'none';
+      if(v&&mHit) mod.classList.add('open');
+      hit+=mHit;
+    }
+    var none=NP.dock.querySelector('.np-empty');
+    if(!hit){
+      if(!none){
+        none=document.createElement('div'); none.className='np-empty';
+        document.getElementById('npTree').appendChild(none);
+      }
+      none.textContent='没有匹配的页面';
+    }else if(none){ none.remove(); }
+  }
+
+  /* ---------- 对外 ---------- */
+  window.npToggleCol=toggleCol;
+  window.npSyncEntry=syncEntry;
+  window.npGo=go;
+  window.npIsInApp=function(){ return NP.inApp; };
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',build);
+  else build();
 })();
 
 
