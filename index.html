@@ -510,6 +510,9 @@ input{font-family:inherit}
 
 
 
+
+
+
 /*<<LISTS_CSS_BEGIN>>*/
 /* ================= 列表页通用（第 2 批：终端/网络/资源/安全/审计/系统） ================= */
 .lp-card{background:#fff;border-radius:3px;display:flex;min-height:calc(100vh - 64px - 42px - 32px)}
@@ -568,7 +571,7 @@ input{font-family:inherit}
 .lp-tbl .c-op .op{color:var(--blue);margin-left:14px;font-size:13px;text-decoration:none;cursor:pointer}
 .lp-tbl .c-op .op:hover{color:#2FA9EC;text-decoration:underline}
 .lp-tbl .ell{display:inline-block;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
-.lp-tbl input[type=checkbox]{width:14px;height:14px;accent-color:#0095E5;cursor:pointer;vertical-align:-2px}
+.lp-tbl input[type=checkbox]{cursor:pointer}
 .lp-empty{padding:70px 0;text-align:center;color:var(--t3);font-size:13px}
 .lp-empty .big{font-size:14px;color:var(--t2);margin-bottom:6px}
 
@@ -756,7 +759,7 @@ input{font-family:inherit}
 /* 复选组 / 色板 / 滑块 */
 .chk-grp{display:flex;flex-wrap:wrap;gap:10px 18px;padding-top:7px}
 .chk{display:inline-flex;align-items:center;gap:6px;cursor:pointer;color:#303133}
-.chk input{width:14px;height:14px;accent-color:#0095E5;cursor:pointer}
+.chk input{cursor:pointer}
 .sw-list{display:flex;align-items:center;gap:10px;padding-top:4px}
 .sw-i{width:20px;height:20px;border-radius:3px;cursor:pointer;border:2px solid #fff;box-shadow:0 0 0 1px #DCDFE6}
 .sw-i.on{box-shadow:0 0 0 2px var(--blue)}
@@ -920,7 +923,7 @@ input{font-family:inherit}
 .pf-fbar .fin,.pf-fbar .fsel{flex:0 0 auto}
 .pf-fbar.sub{margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #F0F2F5}
 .pf-fbar .pf-cb{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:#606266;cursor:pointer}
-.pf-fbar .pf-cb input{accent-color:#0095E5;cursor:pointer}
+.pf-fbar .pf-cb input{cursor:pointer}
 .pf-tilde{color:#C0C4CC;font-size:12px}
 .pf-gap{font-variant-numeric:tabular-nums;font-size:12px}
 .pf-gap.s{color:#606266}
@@ -1411,7 +1414,7 @@ tr.pf-subrow>td{padding:0!important;background:#FAFBFC;border-bottom:1px solid #
 .pf-req-tbl .c-api .u{font-family:Consolas,monospace;font-size:11px;color:#303133;display:inline-block;vertical-align:middle;max-width:calc(100% - 78px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pf-req-tbl .pf-tag{vertical-align:middle;margin-left:4px}
 .pf-fbar .pf-cb{flex-shrink:0}
-.pf-fbar .pf-cb input{flex-shrink:0;width:14px;height:14px}
+.pf-fbar .pf-cb input{flex-shrink:0}
 .pf-req-tbl .c-ip{font-family:Consolas,monospace;font-size:11px;color:#86909C}
 .pf-req-tbl .pf-gap{text-align:right}
 .pf-req-tbl .c-ts{font-family:Consolas,monospace;font-size:11px;color:#4E5969}
@@ -1855,6 +1858,89 @@ select.fsel,select.fin{
 .pf-dtp .ft{display:flex;align-items:center;height:44px;padding:0 10px;border-top:1px solid var(--sp-bd-l)}
 .pf-dtp .ft .lk{color:var(--sp-blue);font-size:12px;cursor:pointer;margin-right:auto}
 .pf-dtp .ft .btn-pri{height:28px;padding:0 14px;font-size:12px}
+
+/* ============ v2.31 规范对齐（4.4.1 输入框 / 4.4.2 数字框 / 4.4.3 单选多选 / 4.4.4 开关 / 4.5.1 表格） ============
+   沁 2026-11-19 定：控件描边保持 #C9CDD4、表头底保持 #F5F7FA，只改规范里明确冲突的状态与形态 */
+
+/* ---- 1 输入框 / 下拉：圆角 2；悬停与聚焦都走主色（4.4.1 悬停态实测 #0095E5） ---- */
+.fin,.fsel,.tsearch .fin,.pager2 select,.pager2 .jump input,
+.frow .ctl input,.frow .ctl select,.frow .ctl textarea,
+.fm-row .fc input,.fm-row .fc select,.pg-item input[type=text]{border-radius:2px}
+.fin:hover,.fsel:hover,.pager2 select:hover,.pager2 .jump input:hover,
+.frow .ctl input:hover,.frow .ctl select:hover,.frow .ctl textarea:hover,
+.fm-row .fc input:hover,.fm-row .fc select:hover{border-color:var(--sp-blue)}
+.btn-pri,.btn-plain{border-radius:2px}
+
+/* ---- 2 复选框 / 单选框：16×16、圆角 2、选中主色实心；未全选白色横杠（4.4.3） ---- */
+input[type=checkbox],input[type=radio]{
+  -webkit-appearance:none;appearance:none;position:relative;flex-shrink:0;
+  width:16px;height:16px;margin:0;border:1px solid var(--sp-bd);border-radius:2px;background:#fff;
+  cursor:pointer;vertical-align:-3px;transition:border-color .15s,background .15s}
+input[type=radio]{border-radius:50%}
+input[type=checkbox]:hover:not(:disabled),input[type=radio]:hover:not(:disabled){border-color:var(--sp-blue)}
+input[type=checkbox]:checked,input[type=radio]:checked{border-color:var(--sp-blue)}
+input[type=checkbox]:checked{background:var(--sp-blue)}
+input[type=checkbox]:checked::after{content:"";position:absolute;left:4px;top:1px;width:5px;height:9px;
+  border:2px solid #fff;border-top:0;border-left:0;transform:rotate(43deg);box-sizing:border-box}
+input[type=checkbox]:indeterminate{background:var(--sp-blue);border-color:var(--sp-blue)}
+input[type=checkbox]:indeterminate::after{content:"";position:absolute;left:3px;top:6px;width:8px;height:2px;
+  border-radius:1px;background:#fff}
+input[type=radio]:checked::after{content:"";position:absolute;left:3px;top:3px;width:8px;height:8px;
+  border-radius:50%;background:var(--sp-blue)}
+input[type=checkbox]:disabled,input[type=radio]:disabled{background:#F7F8FA;border-color:#E5E6EB;cursor:not-allowed}
+input[type=checkbox]:disabled::after,input[type=radio]:disabled::after{opacity:.45}
+.pf-btbl input[type=radio]{vertical-align:-3px}
+
+/* ---- 3 开关：36×20、滑块 16；开=主色、关=#C9CDD4、禁用开=#B3DEF7、禁用关=#EBEEF5（4.4.4） ---- */
+.pf-sw i{width:36px;height:20px;border-radius:10px;background:#C9CDD4}
+.pf-sw i::after{top:2px;left:2px;width:16px;height:16px}
+.pf-sw.on i::after{left:18px}
+.pf-sw.dis{cursor:not-allowed}
+.pf-sw.dis i{background:#EBEEF5}
+.pf-sw.dis.on i{background:var(--sp-blue-d)}
+.pf-sw.dis b{color:#C9CDD4}
+
+/* ---- 4 数字输入框：−  值  +（4.4.2 按钮式，去掉浏览器原生上下箭头） ---- */
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield}
+.pf-num{display:inline-flex;align-items:center;height:32px;border:1px solid var(--sp-bd);border-radius:2px;
+  background:#fff;overflow:hidden;vertical-align:middle;transition:border-color .15s}
+.pf-num:hover,.pf-num.on{border-color:var(--sp-blue)}
+.pf-num>button{width:26px;height:30px;border:0;background:transparent;color:#4E5969;font-size:14px;line-height:1;
+  cursor:pointer;padding:0;font-family:inherit}
+.pf-num>button:hover:not(:disabled){background:var(--sp-hov);color:var(--sp-blue)}
+.pf-num>button:disabled{color:#C9CDD4;cursor:not-allowed;background:transparent}
+.pf-num>input{width:40px;height:30px;border:0;outline:none;background:transparent;text-align:center;
+  font-size:13px;color:#1D2129;font-variant-numeric:tabular-nums;padding:0}
+.pf-num>input:disabled{color:#C9CDD4;background:#F7F8FA}
+
+/* ---- 5 表格：数字列右对齐 + 可排序列双箭头 + 行内操作收口（4.5.1） ---- */
+.lp-tbl th.num,.lp-tbl td.num{text-align:right;font-variant-numeric:tabular-nums}
+.lp-tbl th.srt{position:relative;cursor:pointer;padding-right:22px;user-select:none}
+.lp-tbl th.srt:hover{color:var(--sp-blue)}
+.lp-tbl th.srt .ar{position:absolute;right:8px;top:50%;width:8px;height:14px;margin-top:-7px}
+.lp-tbl th.srt .ar:before,.lp-tbl th.srt .ar:after{content:"";position:absolute;left:1px;
+  border-left:3px solid transparent;border-right:3px solid transparent}
+.lp-tbl th.srt .ar:before{top:0;border-bottom:5px solid #C9CDD4}
+.lp-tbl th.srt .ar:after{bottom:0;border-top:5px solid #C9CDD4}
+.lp-tbl th.srt.asc .ar:before{border-bottom-color:var(--sp-blue)}
+.lp-tbl th.srt.des .ar:after{border-top-color:var(--sp-blue)}
+.lp-tbl td.hollow{color:#C9CDD4}
+.lp-tbl .c-op .op.more{color:#86909C;letter-spacing:0;font-weight:700}
+.lp-tbl .c-op .op.more:hover{color:var(--sp-blue)}
+/* 行内操作「…」弹出菜单 */
+.lp-opsmenu{position:fixed;z-index:210;min-width:100px;padding:4px 0;background:#fff;
+  border:1px solid var(--sp-bd-l);border-radius:4px;box-shadow:0 6px 20px rgba(29,33,41,.14)}
+.lp-opsmenu span{display:block;height:30px;line-height:30px;padding:0 12px;font-size:13px;color:#4E5969;cursor:pointer}
+.lp-opsmenu span:hover{background:var(--sp-hov);color:var(--sp-blue)}
+
+/* 画像里的两张表（批次表 / 模块清单）数字列同样右对齐 */
+.pf-btbl th.num,.pf-btbl td.num{text-align:right;font-variant-numeric:tabular-nums}
+.pf-mtbl td.num{text-align:right;font-variant-numeric:tabular-nums}
+/* 数字步进内层输入：不吃旧的「小输入框」规则（.pf-dayset input / .pf-picked input[type=number]） */
+.pf-sect .frow .ctl .pf-dayset .pf-num>input,.pf-dayset .pf-num>input,.pf-picked .pf-num>input{
+  width:40px;height:30px;border:0;border-radius:0;padding:0;flex:0 0 40px;background:transparent;text-align:center}
+.pf-dayset .pf-num{flex:0 0 auto}
 
 /*<<LISTS_CSS_END>>*/
 </style>
@@ -3151,6 +3237,9 @@ function drawApiMon(){
 
 
 
+
+
+
 /*<<LISTS_JS_BEGIN>>*/
 /* ================= 列表页引擎（第 2 批） ================= */
 var LISTS={}, LSTATE={};
@@ -3187,9 +3276,47 @@ function lpRows(r){
       all=all.filter(function(row){ return c.nodeFilter(row,it.k); });
     }
   }
+  /* 排序（v2.31）：c.sort 里列出的列名可点表头排序，数字按数值比、其余按字符比 */
+  if(st.sort && c.sort && c.sort.indexOf(st.sort.n)>=0){
+    var ci=c.cols.map(function(x){return x.t;}).indexOf(st.sort.n), d=st.sort.d;
+    all=all.slice(0).sort(function(a,b){
+      var av=lpPlain(a[ci]), bv=lpPlain(b[ci]);
+      var an=parseFloat(String(av).replace(/[^\d.\-]/g,'')), bn=parseFloat(String(bv).replace(/[^\d.\-]/g,''));
+      if(!isNaN(an)&&!isNaN(bn)&&/\d/.test(av)&&/\d/.test(bv)) return (an-bn)*d;
+      return av===bv?0:(av>bv?1:-1)*d;
+    });
+  }
   var total=all.length, pages=Math.max(1,Math.ceil(total/st.size));
   if(st.page>pages) st.page=pages;
   return {all:all,total:total,pages:pages,rows:all.slice((st.page-1)*st.size, st.page*st.size)};
+}
+/* 去掉标签取纯文本，排序比较用 */
+function lpPlain(v){ return String(v==null?'':v).replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').trim(); }
+function lpSort(r,name){
+  var s=lst(r);
+  if(s.sort && s.sort.n===name) s.sort.d=-s.sort.d;
+  else s.sort={n:name,d:1};
+  s.page=1; lpRerender();
+}
+/* 数字列自动识别：表头在黑名单里的（名称/时间/IP/编号…）一律不算；
+   余下列要求非空单元格全部是数字（允许千分位、单位、百分号），否则不右对齐 */
+var LP_NUMHEAD=/名称|地址|IP|编号|ID|账号|账户|路径|标识|时间|日期|周期|窗口|URL|指纹|用户|描述|原因|说明|备注|账号|端口|域名|版本/i;
+var LP_NUMVAL=/^-?[\d,]+(\.\d+)?\s*(%|‰|次|条|个|人|台|天|秒|分钟|小时|分钟|MB|GB|KB|B)?$/i;
+function lpNumCols(c,q){
+  if(c.num) return c.num;      /* 页面显式指定优先 */
+  var out=[];
+  c.cols.forEach(function(col,i){
+    if(LP_NUMHEAD.test(col.t)) return;
+    var hit=0;
+    for(var k=0;k<q.all.length;k++){
+      var v=lpPlain(q.all[k][i]);
+      if(!v||v==='--') continue;
+      if(!LP_NUMVAL.test(v)) return;
+      hit++;
+    }
+    if(hit>0) out.push(i);
+  });
+  return out;
 }
 function lpPage(r,p){ var s=lst(r),q=lpRows(r); s.page=Math.min(Math.max(1,p|0),q.pages); lpRerender(); }
 function lpSize(r,v){ var s=lst(r); s.size=parseInt(v,10)||10; s.page=1; lpRerender(); }
@@ -3285,21 +3412,62 @@ function toolbarHtml(c){
 }
 function tableHtml(r){
   var c=LISTS[r], q=lpRows(r), s=lst(r);
+  var nc=lpNumCols(c,q), srt=c.sort||[];
   var th='<tr>';
   if(c.check) th+='<th class="c-chk"><input type="checkbox" onclick="lpAll(this,\''+r+'\')"></th>';
-  c.cols.forEach(function(col){ th+='<th'+(col.w?' style="width:'+col.w+'"':'')+'>'+col.t+'</th>'; });
+  c.cols.forEach(function(col,i){
+    var cls=[];
+    if(nc.indexOf(i)>=0) cls.push('num');
+    if(srt.indexOf(col.t)>=0){
+      cls.push('srt');
+      if(s.sort && s.sort.n===col.t) cls.push(s.sort.d>0?'asc':'des');
+      th+='<th'+(col.w?' style="width:'+col.w+'"':'')+(cls.length?' class="'+cls.join(' ')+'"':'')
+        +' onclick="lpSort(\''+r+'\',\''+col.t+'\')">'+col.t+'<i class="ar"></i></th>';
+      return;
+    }
+    th+='<th'+(col.w?' style="width:'+col.w+'"':'')+(cls.length?' class="'+cls.join(' ')+'"':'')+'>'+col.t+'</th>';
+  });
   if(c.ops) th+='<th class="c-op">操作</th>';
   th+='</tr>';
   var tb=q.rows.map(function(row,i){
     var gi=(s.page-1)*s.size+i, td='<tr>';
     if(c.check) td+='<td class="c-chk"><input type="checkbox" '+(s.sel[gi]?'checked':'')+' onclick="lpSel(this,\''+r+'\','+gi+')"></td>';
-    row.forEach(function(cell){ td+='<td>'+cell+'</td>'; });
-    if(c.ops) td+='<td class="c-op">'+c.ops.map(function(o){
-      return '<a class="op" onclick="lpOp(\''+r+'\','+gi+',\''+o.n+'\')">'+o.n+'</a>' }).join('')+'</td>';
+    row.forEach(function(cell,j){
+      var t=lpPlain(cell);
+      td+='<td'+(nc.indexOf(j)>=0?' class="num"':'')+(t===''?' class="hollow"':'')+'>'+(t===''?'--':cell)+'</td>';
+    });
+    if(c.ops){
+      /* 规范 4.5.1：单行最多三个操作，其余收进「…」 */
+      var first=c.ops.slice(0,3), rest=c.ops.slice(3);
+      td+='<td class="c-op">'+first.map(function(o){
+        return '<a class="op" onclick="lpOp(\''+r+'\','+gi+',\''+o.n+'\')">'+o.n+'</a>' }).join('')
+        +(rest.length?'<a class="op more" title="更多操作" onclick="lpMoreOps(event,\''+r+'\','+gi+',\''+rest.map(function(o){return o.n}).join('|')+'\')">&#8943;</a>':'')
+        +'</td>';
+    }
     return td+'</tr>';
   }).join('');
   if(!q.rows.length) tb='<tr><td colspan="'+((c.check?1:0)+c.cols.length+(c.ops?1:0))+'"><div class="lp-empty"><div class="big">暂无数据</div><div>调整筛选条件后重试</div></div></td></tr>';
   return '<div class="lp-tbl-wrap"><table class="lp-tbl"><thead>'+th+'</thead><tbody>'+tb+'</tbody></table></div>';
+}
+/* 「…」更多操作：弹一层小菜单，点外面或选中后关闭 */
+function lpMoreOps(e,r,gi,names){
+  if(e){ e.stopPropagation(); e.preventDefault(); }
+  lpCloseOps();
+  var m=document.createElement('div');
+  m.id='lpOpsMenu'; m.className='lp-opsmenu';
+  m.innerHTML=names.split('|').map(function(n){
+    return '<span onclick="lpOp(\''+r+'\','+gi+',\''+n+'\');lpCloseOps()">'+n+'</span>' }).join('');
+  document.body.appendChild(m);
+  var b=e&&e.target?e.target.getBoundingClientRect():{left:0,bottom:0,right:0};
+  var w=m.offsetWidth||100, h=m.offsetHeight||40;
+  m.style.left=Math.max(8,Math.min(b.right-w,(window.innerWidth||1200)-w-8))+'px';
+  m.style.top=Math.min(b.bottom+4,(window.innerHeight||800)-h-8)+'px';
+  setTimeout(function(){ document.addEventListener('click',lpCloseOps); },0);
+}
+function lpCloseOps(){
+  var m=document.getElementById('lpOpsMenu');
+  if(m&&m.parentNode) m.parentNode.removeChild(m);
+  document.removeEventListener('click',lpCloseOps);
 }
 function pagerHtml2(r){
   var q=lpRows(r), s=lst(r), h='<div class="pager2"><span>共 '+q.total+' 条</span><div class="pg">';
@@ -5505,6 +5673,34 @@ Object.keys(LIVE).forEach(function(r){
   LISTS[r]=base;
 });
 })();
+/* ====== 可排序列（v2.31，竹云 4.5.1）======
+   lists_live.js 是生成文件，不手改；排序配置单独放这一层，inject 时排在 live 之后、profile 之前。
+   只登记「点表头排序说得通」的列：时间、数量、阈值这类；名称/状态这种排了也没意义的不要登记。 */
+(function(){
+  var M={
+    '/terminal/manage/register':['注册时间','终端标识'],
+    '/terminal/user/index':['连接时间','在线时长'],
+    '/terminal/online-device/index':['连接时间','在线时长'],
+    '/audit/flow/operation':['时间','操作员'],
+    '/audit/session/user':['上线时间','在线时长'],
+    '/audit/session/terminal':['连接时间','在线时长'],
+    '/audit/auth/terminal':['鉴权时间'],
+    '/audit/auth/user':['鉴权时间'],
+    '/audit/auth/strategy':['鉴权时间'],
+    '/audit/safety/security':['时间','危险等级'],
+    '/audit/alarm/index':['发生时间','级别'],
+    '/strategy/flow/cc':['时间窗(秒)','最大请求数'],
+    '/strategy/flow/fusing':['统计时间窗(秒)','最小请求数','失败率阈值']
+  };
+  Object.keys(M).forEach(function(r){
+    var c=LISTS[r];
+    if(!c) return;
+    var names=c.cols.map(function(x){return x.t;});
+    var ok=M[r].filter(function(n){ return names.indexOf(n)>=0; });
+    if(ok.length) c.sort=ok;
+  });
+})();
+
 /* ================= 应用画像（主从布局） ================= */
 
 /* ---------- 数据 ---------- */
@@ -6038,7 +6234,7 @@ function pfMainHtml(c,r){
   /* 批次列表 */
   h+='<div class="pf-batches"><table class="pf-btbl"><thead><tr>'
     +'<th style="width:36px"></th><th>版本 / 学习窗口</th><th style="width:66px">时长</th>'
-    +'<th style="width:92px">采集条数</th><th style="width:66px">模块数</th>'
+    +'<th class="num" style="width:92px">采集条数</th><th class="num" style="width:66px">模块数</th>'
     /* 列宽按内容定（2026-11-17）：时间、状态这类字段一旦折行，整张表行高就参差不齐 */
     +'<th style="width:118px">状态</th><th style="width:142px">最近发布时间</th>'
     +'<th style="width:132px">操作</th></tr></thead><tbody>';
@@ -6050,7 +6246,7 @@ function pfMainHtml(c,r){
     h+='<tr class="'+(on?'on':'')+'" onclick="pfPickBatch(\''+b.id+'\')">'
       +'<td class="c-chk"><input type="radio" name="pfb" '+(on?'checked':'')+'></td>'
       +'<td'+(on?' class="cur"':'')+'>'+pfVerTag(app,b)+b.ct+' ~ '+b.et.slice(5,10)+'</td>'
-      +'<td>'+b.days+' 天</td><td>'+pfNum(b.cnt)+'</td><td>'+pfNum(b.mod)+'</td>'
+      +'<td>'+b.days+' 天</td><td class="num">'+pfNum(b.cnt)+'</td><td class="num">'+pfNum(b.mod)+'</td>'
       +'<td>'+stCell+'</td><td style="color:#909399">'+(b.pt||'\u2014')+'</td>'
       /* 主操作位固定宽度：发布 / 取消发布 / 结束学习 / — 文字长度不同，不固定宽度会把删除顶来顶去 */
       +'<td><div class="pf-ops">'
@@ -7877,6 +8073,28 @@ function pfDelApp(){
   },'danger');
 }
 
+/* 数字输入框（竹云 4.4.2 按钮式）：−  值  +，最小 1，不设上限时 max 传 0 */
+function pfNumHtml(id,val,min,max,cb){
+  return '<div class="pf-num" id="'+id+'_w">'
+    +'<button type="button" tabindex="-1" onclick="pfNumStep(\''+id+'\',-1)">&#8722;</button>'
+    +'<input id="'+id+'" type="number" min="'+min+'"'+(max?' max="'+max+'"':'')+' value="'+val+'"'
+    +(cb?' oninput="'+cb+'"':'')
+    +' onfocus="pfNumFocus(\''+id+'\',1)" onblur="pfNumFocus(\''+id+'\',0)">'
+    +'<button type="button" tabindex="-1" onclick="pfNumStep(\''+id+'\',1)">+</button></div>';
+}
+function pfNumStep(id,d){
+  var el=document.getElementById(id); if(!el) return;
+  var min=parseInt(el.getAttribute('min'),10)||1, max=parseInt(el.getAttribute('max'),10)||0;
+  var v=parseInt(el.value,10); if(isNaN(v)) v=min;
+  v+=d; if(v<min) v=min; if(max && v>max) v=max;
+  el.value=v;
+  if(el.oninput) el.oninput();
+}
+function pfNumFocus(id,on){
+  var w=document.getElementById(id+'_w');
+  if(w && w.classList) w.classList[on?'add':'remove']('on');
+}
+
 /* ---------- 开启学习 ---------- */
 function pfOpenLearn(preId){
   PF_SEL={};
@@ -7896,7 +8114,7 @@ function pfOpenLearn(preId){
 
   body+='<div class="pf-sect"><div class="st">学习时长<em>按天设置，最少 1 天，建议 7–30 天覆盖一个完整业务周期</em></div>'
     +'<div class="frow"><label>批量设置</label><div class="ctl"><div class="pf-dayset">'
-    +'<input id="pfBatch" type="number" min="1" value="7"><span class="u">天</span>'
+    +pfNumHtml('pfBatch',7,1,0)+'<span class="u">天</span>'
     +'<button class="btn-plain" onclick="pfApplyBatch()">应用到已选应用</button></div>'
     +'</div></div></div>';
 
@@ -8023,11 +8241,11 @@ function pfRenderPicked(){
     h='<div class="pf-hint" style="padding:16px 0 4px">尚未选择应用。学习时长建议 7–30 天，需覆盖一个完整业务周期。</div>';
   }else{
     h='<table class="pf-picked"><thead><tr><th>应用名称</th><th>数据中心 / 分组</th>'
-      +'<th style="width:130px">学习时长</th><th style="width:60px">操作</th></tr></thead><tbody>';
+      +'<th style="width:152px">学习时长</th><th style="width:60px">操作</th></tr></thead><tbody>';
     ids.forEach(function(id){
       var a=pfApp(id)||pfMeta(id);
       h+='<tr><td>'+a.n+'</td><td style="color:#909399">'+a.dc+' / '+a.grp+'</td>'
-        +'<td><input type="number" min="1" value="'+PF_SEL[id]+'" oninput="pfSetDays(\''+id+'\',this.value)"> 天</td>'
+        +'<td>'+pfNumHtml('pfDay_'+id,PF_SEL[id],1,0,'pfSetDays(\''+id+'\',this.value)')+' <span style="color:#4E5969">天</span></td>'
         +'<td><span class="rm" onclick="pfRemove(\''+id+'\')">移除</span></td></tr>';
     });
     h+='</tbody></table>';
