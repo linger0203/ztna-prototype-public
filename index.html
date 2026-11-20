@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
+<html lang="zh-CN" data-page-node-id="Jy2PpOB9SKyo9YAxDpWvbA">
+<head data-page-node-id="RtOKKPIbzKPllChEWBKaLV">
+<meta charset="utf-8" data-page-node-id="nrCDDGgEeY3RUjvj1jthqw">
 <title>竹云零信任安全服务平台 · 管控台原型</title>
-<link rel="stylesheet" href="_assets/iconfont.css">
+<link rel="stylesheet" href="_assets/iconfont.css" data-page-node-id="B5xmWVfhuJnLIZ8jimLLut">
 <script src="_assets/echarts.min.js"></script>
 <script>if(typeof echarts==="undefined"){document.write('<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"><\/script>')}</script>
 <style>
@@ -34,6 +34,15 @@ input{font-family:inherit}
   background:rgba(255,255,255,.05);color:#fff;padding:0 10px 0 34px;font-size:13px;outline:none}
 #login .fld input::placeholder{color:#87A9C8}
 #login .fld input:focus{border-color:#3FA9F5;background:rgba(255,255,255,.09)}
+/* 密码可见切换（沁 2026-11-20）：右侧眼睛，点一下明文/密文互换 */
+#login .fld:has(.lg-eye) input{padding-right:38px}
+#login .lg-eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:26px;height:26px;
+  display:flex;align-items:center;justify-content:center;border-radius:3px;cursor:pointer;color:#8FB3D4;
+  --eye:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E")}
+#login .lg-eye:hover{background:rgba(255,255,255,.09);color:#DCEBFA}
+#login .lg-eye:before{content:"";width:17px;height:17px;background:currentColor;
+  -webkit-mask:var(--eye) center/contain no-repeat;mask:var(--eye) center/contain no-repeat}
+#login .lg-eye.on{--eye:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24'/%3E%3Cline x1='1' y1='1' x2='23' y2='23'/%3E%3C/svg%3E")}
 #login .cap{display:flex;gap:8px}
 #login .cap input{flex:1}
 #login .cap .img{width:86px;height:38px;flex-shrink:0;border-radius:3px;background:#173F68;border:1px solid rgba(130,180,230,.3);
@@ -393,6 +402,34 @@ input{font-family:inherit}
 .placeholder{background:#fff;border-radius:3px;padding:70px 20px;text-align:center;color:var(--t3)}
 .placeholder .big{font-size:15px;color:var(--t2);margin-bottom:8px}
 .placeholder .route{font-size:12px;color:var(--t4);font-family:Consolas,monospace}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2112,6 +2149,262 @@ input[type=number]{-moz-appearance:textfield}
 .tree .th .mcp-eh i{font-style:normal;font-size:12px;line-height:1}
 .tree .th .mcp-eh:hover{color:#007FC4}
 
+/* ===== 1.8.4.0 系统模块重做（lists_sys184.js，2026-11-20） ===== */
+/* 复选/单选标签（自定义 i 方框，区别于老 .chk 的 input 写法） */
+.chk i{width:14px;height:14px;border:1px solid #C9CDD4;border-radius:2px;background:#fff;
+  position:relative;flex-shrink:0;display:inline-block}
+.chk.on i{background:#0095E5;border-color:#0095E5}
+.chk.on i::after{content:'';position:absolute;left:4px;top:1px;width:4px;height:8px;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.chk.on{color:#0095E5}
+/* 开关 + 说明文字 */
+.swrow{display:flex;align-items:center;gap:10px;min-height:32px}
+.swtx{font-size:13px;color:#4E5969}
+/* 行内控件组 */
+.inl{display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap}
+.inl .lb{font-size:13px;color:#86909C}
+.inl .unit,.unit{font-size:13px;color:#86909C}
+/* 字段下方灰字说明 */
+.fh{font-size:12px;color:#86909C;margin-top:4px;line-height:18px}
+.fm-note{font-size:12px;color:#86909C;padding:10px 0 0}
+/* 二级页签 */
+.dtabs.mini span{font-size:13px;padding:5px 14px}
+/* 运行参数大表 */
+.run-tbl td{vertical-align:top;line-height:20px}
+.run-tbl .td-note{font-size:12px;color:#86909C;line-height:18px}
+.run-tbl td input{height:30px}
+.lp-tbl-foot{padding:12px 16px;font-size:12px;color:#86909C;border-top:1px solid #EBEEF5}
+/* 页面定制素材说明 */
+.pg-note{font-size:12px;color:#86909C;line-height:16px;margin-top:6px}
+.pg-item input[type=text]{width:100%}
+/* 消息通知卡片 */
+.tb-tip{font-size:12px;color:#86909C;margin:-6px 0 12px}
+.nt-card{margin-bottom:12px}
+.nt-card .fm-hd .r{display:inline-flex;align-items:center;gap:14px}
+.nt-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
+.nt-row>label{width:88px;flex-shrink:0;font-size:13px;color:#4E5969;line-height:32px;text-align:right}
+.nt-row>input{width:280px}
+.nt-note{background:#F7F8FA;border-radius:4px;padding:10px 12px;font-size:12px;color:#86909C;line-height:20px}
+.nt-note b{display:block;color:#4E5969;font-weight:600;margin-bottom:4px}
+/* 产品许可网关授权 */
+.lc-gws{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;padding:16px 20px}
+.lc-gw{display:flex;align-items:center;gap:10px;border:1px solid #EBEEF5;border-radius:6px;padding:12px 14px}
+.lc-gw .iconfont{font-size:22px;color:#0095E5}
+.lc-gw span{flex:1;font-size:13px;color:#1F2329}
+.lc-gw em{font-style:normal;font-size:12px;color:#00B42A;background:#E8FFEA;border-radius:2px;padding:2px 8px}
+/* 项目定制 · 智能学习 组织勾选面板 */
+.sl-box{display:flex;gap:12px;align-items:stretch;width:100%;max-width:720px}
+.sl-col{flex:1;border:1px solid #EBEEF5;border-radius:4px;min-width:0}
+.sl-hd{height:34px;line-height:34px;padding:0 12px;background:#F5F7FA;border-bottom:1px solid #EBEEF5;
+  font-size:13px;color:#4E5969}
+.sl-bd{padding:8px;min-height:196px;max-height:196px;overflow:auto}
+.sl-it{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:4px;cursor:pointer;
+  font-size:13px;color:#303133}
+.sl-it:hover{background:#F2F9FA}
+.sl-it i{width:14px;height:14px;border:1px solid #C9CDD4;border-radius:2px;background:#fff;
+  position:relative;flex-shrink:0;display:inline-block}
+.sl-it.on i{background:#0095E5;border-color:#0095E5}
+.sl-it.on i::after{content:'';position:absolute;left:4px;top:1px;width:4px;height:8px;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.sl-it.on{color:#0095E5}
+.sl-mid{display:flex;flex-direction:column;justify-content:center;gap:8px}
+.sl-mid .btn-plain{width:36px;padding:0;height:28px;line-height:28px}
+
+/* 抽屉内说明段 */
+.dnote{font-size:12px;color:#86909C;line-height:20px;padding:0 2px 4px}
+/* 运行参数表：固定列宽，避免输入框被挤扁 */
+.run-tbl{table-layout:fixed;width:100%}
+.run-tbl td input[type=text]{width:100%;box-sizing:border-box}
+.fm-row .fc input[type=password]{width:100%;max-width:420px;box-sizing:border-box}
+.run-tbl td{white-space:normal}
+.run-tbl td.td-note{white-space:normal}
+
+/* ===== 流量染色抽屉（师大定制） ===== */
+.dye{padding:0 0 8px}
+.dye-top{background:#fff;border-radius:6px}
+.dye-top .lp-empty{padding:26px 0;color:#86909C}
+.dye-sec{background:#fff;border-radius:6px;margin-top:14px;padding:16px 18px 18px}
+.dye-sh{display:flex;align-items:center;gap:10px}
+.dye-sh .t{font-size:14px;font-weight:600;color:#1F2329}
+.dye-sh .r{margin-left:auto;display:inline-flex;align-items:center;gap:8px}
+.dye-sh .plus{width:22px;height:22px;line-height:20px;text-align:center;border:1px solid #C9CDD4;
+  border-radius:3px;color:#4E5969;cursor:pointer;font-size:15px}
+.dye-sh .plus:hover{border-color:#0095E5;color:#0095E5}
+.dye-mlbtn{height:28px;font-size:13px;padding:0 12px}
+.dye-sd{font-size:12px;color:#86909C;margin:6px 0 12px}
+.dye-url{display:flex;align-items:center;gap:8px;background:#F7F8FA;border-radius:4px;
+  padding:8px 12px;margin-bottom:12px}
+.dye-url .ar{color:#86909C;font-size:11px;cursor:pointer}
+.dye-url .lb{font-size:13px;color:#4E5969;white-space:nowrap}
+.dye-url .dye-url-in{flex:1;border:none;border-bottom:1px solid #C9CDD4;background:transparent;
+  border-radius:0;height:28px;padding:0 4px}
+.dye-url .dye-url-in:focus{border-bottom-color:#0095E5;outline:none}
+.dye-url .del{cursor:pointer;color:#86909C;opacity:.75}
+.dye-url .del:hover{color:#F54141;opacity:1}
+.dye-in{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+.dye-in textarea{flex:1;border:1px solid #C9CDD4;border-radius:4px;padding:6px 8px;font-size:13px;
+  resize:vertical;min-height:36px;font-family:inherit}
+.dye-in input,.dye-in select{flex:1;height:32px}
+.dye-in select.dye-sel{max-width:150px;flex:none}
+.dye-in .btn-pri{align-self:stretch;height:auto;min-height:36px}
+.dye-tbl th{background:#F5F7FA}
+.dye-tbl .lp-empty{padding:18px 0;color:#86909C}
+.dye-top-wrap{background:#fff;border-radius:6px;padding:14px 14px 6px}
+.dye-top-wrap .lp-empty{padding:22px 0;color:#86909C}
+.dye-url .dye-ck{width:14px;height:14px;border:1px solid #C9CDD4;border-radius:2px;background:#fff;
+  flex-shrink:0;position:relative;cursor:pointer;display:inline-block}
+.dye-url .dye-ck.on{background:#0095E5;border-color:#0095E5}
+.dye-url .dye-ck.on::after{content:'';position:absolute;left:4px;top:1px;width:4px;height:8px;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+
+/* ===== 智能学习策略弹窗 ===== */
+.dyem{padding:2px 2px 4px}
+.dyem-sw{display:flex;justify-content:flex-end;margin-bottom:6px}
+.dyem-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px}
+.dyem-row>label{width:84px;flex-shrink:0;text-align:right;font-size:13px;color:#4E5969;line-height:32px}
+.dyem-row>label em{color:#F54141;font-style:normal;margin-right:4px}
+.dyem-row>input{flex:1;height:32px}
+.dyem-fc{flex:1;min-width:0}
+.dyem-l1{display:flex;gap:8px;margin-bottom:8px}
+.dyem-l1 select{width:110px;flex:none;height:32px}
+.dyem-l1 input{flex:1;height:32px}
+.dyem-l2{display:flex;gap:8px}
+.dyem-l2 input{flex:1;height:32px}
+.dyem-tbl th{background:#F5F7FA;text-align:center}
+.dyem-tbl td{text-align:center}
+.modal.dyem-box{width:600px}
+.lk.red{color:#F54141}
+.lk.red:hover{color:#D93026}
+
+/* ===== 客户端隧道管控策略（中储粮定制） ===== */
+.tun{background:#fff;border-radius:6px;padding:18px 20px 22px}
+.tun-hd{font-size:15px;font-weight:600;color:#1F2329;line-height:22px}
+.tun-tip{display:flex;gap:10px;background:#EAF6FE;border-radius:4px;padding:12px 14px;margin:14px 0 18px;
+  font-size:13px;color:#4E5969;line-height:22px}
+.tun-tip .i{flex-shrink:0;width:16px;height:16px;line-height:16px;text-align:center;border-radius:50%;
+  background:#0095E5;color:#fff;font-size:11px;font-style:normal;margin-top:3px}
+.tun-tip b{color:#1F2329;font-weight:600}
+.tun-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.tun-bar>span{font-size:14px;font-weight:600;color:#1F2329}
+.tun-wrap{display:flex;gap:16px;align-items:flex-start}
+.tun-l{flex:1;min-width:0;border:1px solid #EBEEF5;border-radius:4px;overflow:hidden;background:#fff}
+.tun-search{display:flex;align-items:center;gap:8px;background:#F5F7FA;padding:10px 14px}
+.tun-search .iconfont{color:#86909C;font-size:13px}
+.tun-search input{width:200px;height:28px;border:1px solid #C9CDD4;border-radius:14px;background:#fff;
+  padding:0 12px;font-size:13px}
+.tun-tree{padding:8px 8px 14px;min-height:300px;max-height:400px;overflow:auto}
+.tun-root{display:flex;align-items:center;gap:7px;height:32px;padding:0 8px;font-size:13px;
+  font-weight:600;color:#1F2329}
+.tun-r{width:300px;flex-shrink:0;border:1px solid #EBEEF5;border-radius:4px;overflow:hidden;background:#fff}
+.tun-rhd{display:flex;align-items:center;justify-content:space-between;background:#F5F7FA;
+  padding:9px 14px;font-size:13px;color:#4E5969}
+.tun-rhd b{color:#0095E5;font-weight:600}
+.tun-sel{padding:6px 8px 10px;min-height:300px;max-height:400px;overflow:auto}
+.tun-sel .chip{display:flex;align-items:center;height:34px;padding:0 12px;border-radius:3px;
+  font-size:13px;color:#1F2329;cursor:pointer}
+.tun-sel .chip:hover{background:#F5F7FA}
+.tun-sel .chip.on{background:#EAF6FE;color:#1F2329}
+.tun-sel .chip .x{margin-left:auto;cursor:pointer;color:#86909C;font-size:15px;line-height:1;
+  opacity:0;width:18px;text-align:center}
+.tun-sel .chip:hover .x,.tun-sel .chip.on .x{opacity:1}
+.tun-sel .chip.on .x:hover{color:#F54141}
+/* 组织树节点（.tunn 前缀，避免与左侧导航 .tn 撞名） */
+.tunn{display:flex;align-items:center;gap:7px;height:32px;padding-right:8px;border-radius:3px;
+  cursor:pointer;font-size:13px;color:#1F2329;user-select:none}
+.tunn:hover{background:#F2F9FA}
+.tunn.hide{display:none}
+.tunn .ar{width:12px;font-size:9px;color:#86909C;transition:transform .15s;text-align:center;flex-shrink:0}
+.tunn .ar.open{transform:rotate(90deg)}
+.tunn .cb{width:14px;height:14px;border:1px solid #C9CDD4;border-radius:2px;background:#fff;
+  position:relative;flex-shrink:0;display:inline-block}
+.tunn .cb.on{background:#0095E5;border-color:#0095E5}
+.tunn .cb.on::after{content:'';position:absolute;left:4px;top:1px;width:4px;height:8px;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.tunn .cb.half{background:#0095E5;border-color:#0095E5}
+.tunn .cb.half::after{content:'';position:absolute;left:3px;top:6px;width:7px;height:2px;background:#fff}
+.tunn.half .nm{color:#1F2329}
+
+/* ===== 账号/角色/权限（v2.45） ===== */
+.rb-chips{display:flex;flex-wrap:wrap;gap:8px}
+.rb-chip{display:inline-flex;align-items:center;height:30px;padding:0 12px;border:1px solid #C9CDD4;
+  border-radius:15px;font-size:13px;color:#4E5969;cursor:pointer;user-select:none;background:#fff}
+.rb-chip:hover{border-color:#0095E5;color:#0095E5}
+.rb-chip.on{background:#EAF6FE;border-color:#0095E5;color:#0095E5;font-weight:500}
+.rb-chip.on::before{content:'\2713';margin-right:5px;font-size:11px}
+.rb-hint{border:1px solid #EBEEF5;border-radius:4px;padding:4px 10px;background:#FAFBFC}
+.rb-hl{display:flex;align-items:center;gap:8px;height:28px;font-size:12px;color:#86909C}
+.rb-hl b{color:#1D2129;font-weight:600;font-size:13px}
+/* .frow 用 index.html 里的标准水平表单样式，这里不再覆盖 */
+.frow .ctl input[disabled]{background:#F5F7FA;color:#86909C}
+
+/* 权限树 */
+.perm{font-size:13px}
+.perm-hd{display:flex;align-items:center;gap:12px;padding:0 0 10px;border-bottom:1px solid #EBEEF5;
+  font-size:12px;color:#86909C;margin-bottom:6px}
+.perm-hd .lk{margin-left:auto}
+.perm-hd .lk+.lk{margin-left:0}
+.perm-m{border-bottom:1px solid #F2F3F5}
+.pm-h{display:flex;align-items:center;gap:8px;height:38px;cursor:pointer;user-select:none}
+.pm-h:hover{background:#F7F8FA}
+.pm-h b{font-size:13px;color:#1D2129;font-weight:600}
+.pm-h .cnt{margin-left:auto;font-size:12px;color:#86909C;padding-right:8px}
+.pm-b{padding:0 0 6px 22px}
+.pm-l{display:flex;align-items:center;gap:8px;height:32px;padding-right:8px;border-radius:3px;cursor:pointer}
+.pm-l:hover{background:#F7F8FA}
+.pm-l .nm{font-size:13px;color:#1D2129}
+.pm-l .ops{margin-left:auto;display:flex;gap:4px}
+.pm-l .ops i{font-style:normal;font-size:11px;color:#C9CDD4;border:1px solid #E5E6EB;border-radius:2px;
+  padding:0 5px;line-height:16px}
+.pm-l .ops i.on{color:#0095E5;border-color:#B3DEF7;background:#F2F9FE}
+.perm-cnt{margin-right:auto;font-size:12px;color:#86909C;line-height:32px}
+/* 勾选框（复用规范样式） */
+.perm .cb{width:14px;height:14px;border:1px solid #C9CDD4;border-radius:2px;background:#fff;
+  flex-shrink:0;position:relative;display:inline-block}
+.perm .cb.on{background:#0095E5;border-color:#0095E5}
+.perm .cb.on::after{content:'';position:absolute;left:4px;top:1px;width:4px;height:8px;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.perm .cb.half{background:#0095E5;border-color:#0095E5}
+.perm .cb.half::after{content:'';position:absolute;left:3px;top:6px;width:7px;height:2px;background:#fff}
+/* 抽屉内表格底部小计 */
+.dw-foot{display:flex;align-items:center;gap:10px;padding:10px 2px 0;font-size:12px;color:#86909C}
+.dw-foot .pg{margin-left:auto;display:flex;gap:4px}
+.dw-foot .pg i{font-style:normal;width:24px;height:24px;line-height:24px;text-align:center;border-radius:3px;
+  background:#0095E5;color:#fff}
+/* 登录页可用账号提示 */
+.lg-hint{margin-top:10px;font-size:12px;color:rgba(255,255,255,.55);line-height:19px;text-align:left}
+.lg-hint b{color:rgba(255,255,255,.92);font-weight:600}
+.dw-ct{font-size:12px;color:#909399;margin-bottom:4px}
+/* 列多且要在一屏内放下的列表（操作员/角色管理）：固定布局 + 超长省略 */
+.lp-tbl.fixed{table-layout:fixed;width:100%}
+.lp-tbl.fixed td,.lp-tbl.fixed th{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lp-tbl.fixed .c-op{width:150px}
+.lp-tbl.fixed .c-chk{width:40px}
+/* 修横向溢出：flex 子项默认 min-width:auto，表格会把 .main 撑出视口（页面导航栏占位后更明显） */
+.main{min-width:0}
+.lp-card{max-width:100%}
+/* 更多筛选：超过 3 个条件时折叠，点「更多筛选」展开 */
+.filters .fitem{display:inline-flex}
+.filters:not(.all) .fitem:nth-child(n+4){display:none}
+/* 操作列常驻右侧：列多的表横向滚动时，操作仍可见（沁反馈「操作看不到」） */
+.lp-tbl th.c-op,.lp-tbl td.c-op{position:sticky;right:0;z-index:2;background:#fff}
+.lp-tbl thead th.c-op{background:var(--sp-th,#F5F7FA);z-index:3}
+.lp-tbl tbody tr:hover td.c-op{background:var(--sp-hov,#F2F9FA)}
+.lp-tbl th.c-op{box-shadow:-8px 0 8px -8px rgba(0,0,0,.14)}
+.lp-tbl td.c-op{box-shadow:-8px 0 8px -8px rgba(0,0,0,.14)}
+/* 详情抽屉·概览统计卡 */
+.dw-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.dw-stats .s{background:#F7F8FA;border-radius:4px;padding:10px 12px;border:1px solid #EBEEF5}
+.dw-stats .s b{display:block;font-size:20px;line-height:28px;color:#1D2129;font-weight:600}
+.dw-stats .s span{font-size:12px;color:#86909C}
+.dw-stats .s.warn b{color:#F54141}
+/* 数据范围条（分级分权，2026-11-20） */
+.scope-bar{display:flex;align-items:center;gap:8px;margin:0 0 10px;padding:8px 12px;
+  background:#EAF6FE;border:1px solid #BFE3F7;border-radius:4px;font-size:12px;color:#1D2129}
+.scope-bar .iconfont{color:#0095E5;font-size:14px}
+.scope-bar b{font-weight:600;color:#0077B8}
+.scope-bar .sb-org{color:#4E5969;padding-left:8px;border-left:1px solid #BFE3F7}
+.scope-bar .sb-tip{margin-left:auto;color:#86909C}
+
 /* ============ 原型页面导航（index 内嵌左侧常驻栏，2026-11-19 v2.36） ============
    左右布局：左栏常驻，右侧原型整体右移（topbar / sidebar / main 三处让位）
    收起后只剩 52px 竖条；全屏时整栏隐藏，屏幕就是 index 原样 */
@@ -2235,98 +2528,98 @@ body.np-in .np-btn,body.np-fs .np-btn{display:none!important}
 /*<<LISTS_CSS_END>>*/
 </style>
 </head>
-<body>
+<body data-page-node-id="9c1BBf7zTlIFK4t51ffjNt">
 
 <!-- ================= 登录 ================= -->
-<div id="login">
-  <div class="lg"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台"></div>
-  <div class="card">
-    <h2>系统登录</h2>
-    <div class="fld"><i class="iconfont icon-account_number"></i><input id="u" placeholder="账号" value="admin"></div>
-    <div class="fld"><i class="iconfont icon-password"></i><input id="p" type="password" placeholder="密码" value="B@m123456"></div>
-    <div class="fld cap">
-      <i class="iconfont icon-verification_code"></i>
-      <input id="c" placeholder="验证码" value="8F2D">
-      <div class="img" id="capImg" title="看不清？换一张" onclick="makeCap()"><b style="color:#F2C94C">8</b><b style="color:#FF7BA9">F</b><b style="color:#5ADE8B">2</b><b style="color:#5FB8FF">D</b></div>
+<div id="login" data-page-node-id="JLMMUIyNguQZXtaOcv5b8W">
+  <div class="lg" data-page-node-id="nesFfGkH4fEhop3SlEzzn9"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台" data-page-node-id="Ae5Q8yykwNAYuuiVx59dGh"></div>
+  <div class="card" data-page-node-id="70d9SJDpkbvv5oJymsNjnY">
+    <h2 data-page-node-id="YARAO1kdnR95HmFV7gClT5">系统登录</h2>
+    <div class="fld" data-page-node-id="HruPvvT1DavFIuI164mc3b"><i class="iconfont icon-account_number" data-page-node-id="vvvRluZ2Yn1Ms19eEXnLPG"></i><input id="u" placeholder="账号" value="admin" data-page-node-id="cjbDUGrS0JcDATBVp1uWyy"></div>
+    <div class="fld" data-page-node-id="jE6aqjF8cSecQfI69dIvaV"><i class="iconfont icon-password" data-page-node-id="kZWLCXUUwuOD1jAvIZT0fT"></i><input id="p" type="password" placeholder="密码" value="123456" data-page-node-id="X5MWq8OPS04Nlj1RLJ2fZr"><span class="lg-eye" id="pEye" title="显示密码" onclick="togglePw()" data-page-node-id="4Byo6zmN4wV74g6yGE2XI2"></span></div>
+    <div class="fld cap" data-page-node-id="lUfICa7dWGphIEcAzwMmFF">
+      <i class="iconfont icon-verification_code" data-page-node-id="gVU7DYT5h1jVRu9XrPHtFB"></i>
+      <input id="c" placeholder="验证码" value="8F2D" data-page-node-id="TabrcZZ6ASz9Q4q0A3fqYa">
+      <div class="img" id="capImg" title="看不清？换一张" onclick="makeCap()" data-page-node-id="7u9GCuqplAIPrUT085OZkW"><b style="color:#F2C94C" data-page-node-id="0yxSB1VDF58lRerA5XnLKP">8</b><b style="color:#FF7BA9" data-page-node-id="4COX2hGxcG8POOQhOmPRx5">F</b><b style="color:#5ADE8B" data-page-node-id="K1uZ0wbCisxIDzpvTKtw6J">2</b><b style="color:#5FB8FF" data-page-node-id="lEyaeszsENFvS9unrcbNET">D</b></div>
     </div>
-    <div class="row" onclick="document.getElementById('rm').classList.toggle('on')">
-      <span class="box" id="rm"></span>记住密码
+    <div class="row" onclick="document.getElementById('rm').classList.toggle('on')" data-page-node-id="cQBvBbi4zExRPHAm7BtCJB">
+      <span class="box" id="rm" data-page-node-id="eBWLtYLcr0Ri8FntrvoEb0"></span>记住密码
     </div>
-    <div class="err" id="err"></div>
-    <button class="btn" onclick="doLogin()">登 录</button>
+    <div class="err" id="err" data-page-node-id="oIVVOxyVRPvxQeFBTxMFrD"></div>
+    <button class="btn" onclick="doLogin()" data-page-node-id="sxdZy9vzZhM681SCAiGgEE">登 录</button>
   </div>
-  <div class="foot">Copyright © 2022 BambooCloud 技术支持：深圳竹云科技股份有限公司</div>
+  <div class="foot" data-page-node-id="bNTSRGHEgIFTfAEsk6owoC">Copyright © 2022 BambooCloud 技术支持：深圳竹云科技股份有限公司</div>
 </div>
 
 <!-- ================= 角色选择 ================= -->
-<div id="role" class="hide">
-  <div class="wrap">
-    <h1>登录</h1>
-    <div class="tip">您具有多个管理员角色，请选择本次登录的角色</div>
-    <div class="opt" data-r="系统管理员" onclick="pickRole(this)">
-      <span class="av"><i class="iconfont icon-operator"></i></span><span class="nm">系统管理员</span><span class="rdo"></span>
+<div id="role" class="hide" data-page-node-id="mRjeRWvhfYb2QEPALQi09g">
+  <div class="wrap" data-page-node-id="GaEvZ8zZq8tPRuZbpQiDxH">
+    <h1 data-page-node-id="kCrnLhpScHWl1zGTGzHVNY">登录</h1>
+    <div class="tip" data-page-node-id="N7CWCsN2N7CiYD1C6dRCzP">您具有多个管理员角色，请选择本次登录的角色</div>
+    <div class="opt" data-r="系统管理员" onclick="pickRole(this)" data-page-node-id="s5upTcqLgla3INgPA4vool">
+      <span class="av" data-page-node-id="TU2Cb8eeKl3IgUGShgLLQg"><i class="iconfont icon-operator" data-page-node-id="HagwFCTiTDLGJS6RuNJrpE"></i></span><span class="nm" data-page-node-id="TTjJ531wC5YkVnOvrjcL9H">系统管理员</span><span class="rdo" data-page-node-id="zb0YWiDGRNadm7EpIUCyCF"></span>
     </div>
-    <div class="opt on" data-r="超级管理员" onclick="pickRole(this)">
-      <span class="av"><i class="iconfont icon-operator"></i></span><span class="nm">超级管理员</span><span class="rdo"></span>
+    <div class="opt on" data-r="超级管理员" onclick="pickRole(this)" data-page-node-id="OHolijqvbwZN2si7EZbjRe">
+      <span class="av" data-page-node-id="5kZnHPQKjAzgxVysVuRQ1P"><i class="iconfont icon-operator" data-page-node-id="MHU6s293k18iyUJH3D0yfu"></i></span><span class="nm" data-page-node-id="VlcIzkXS26DKz2fcUK6ZEu">超级管理员</span><span class="rdo" data-page-node-id="Ox2c68R4sIxpvHJ70TLaFr"></span>
     </div>
-    <div class="acts">
-      <button class="no" onclick="location.reload()">取 消</button>
-      <button class="ok" onclick="enterApp()">登 录</button>
+    <div class="acts" data-page-node-id="U0OtG4AhObtHQjTkRTjzRH">
+      <button class="no" onclick="location.reload()" data-page-node-id="sjnkrXg4Odju3TmldzbT8z">取 消</button>
+      <button class="ok" onclick="enterApp()" data-page-node-id="TtFBT5BQDR8cqRoVtBOAZd">登 录</button>
     </div>
   </div>
 </div>
 
 <!-- ================= 应用 ================= -->
-<div id="app">
-  <header class="topbar">
-    <div class="logo"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台"></div>
-    <nav id="topnav"></nav>
-    <div class="right">
-      <div class="lang" id="btnLang" onclick="toggleLang(event)">
-        <span id="langName">简体中文</span><i class="iconfont icon-drop_down"></i>
-        <div class="lang-pop" id="langPop">
-          <div class="on" onclick="pickLang('zh',event)">简体中文</div>
-          <div onclick="pickLang('en',event)">English</div>
+<div id="app" data-page-node-id="XYDkEBnez2c7Cu0jCdFXot">
+  <header class="topbar" data-page-node-id="DjlrGwxIPdojvVV6mj9Txs">
+    <div class="logo" data-page-node-id="Pr0dMaY5rrlT7pTTYSxcW6"><img src="_assets/logo.svg" alt="竹云零信任安全服务平台" data-page-node-id="dT8sDDvjHmssYgqikumsnX"></div>
+    <nav id="topnav" data-page-node-id="9n6AcbKAWsJqgEbGsklU23"></nav>
+    <div class="right" data-page-node-id="hKFpy1YPUvmkjPcPFz0DY2">
+      <div class="lang" id="btnLang" onclick="toggleLang(event)" data-page-node-id="JErJAReHQMC5dSmeEYneIV">
+        <span id="langName" data-page-node-id="3tKuxd941pOPcu56vhz5cu">简体中文</span><i class="iconfont icon-drop_down" data-page-node-id="vClfbl80as2csWj5XjkpdO"></i>
+        <div class="lang-pop" id="langPop" data-page-node-id="UZk7NaScLSf8FXp8HSLbti">
+          <div class="on" onclick="pickLang('zh',event)" data-page-node-id="KntwCuIricI4o5uAYx8wdh">简体中文</div>
+          <div onclick="pickLang('en',event)" data-page-node-id="XwBQqxVO6H8gymuEvCTfvV">English</div>
         </div>
       </div>
-      <div class="grid" id="btnGrid" onclick="togglePop('popSafety',event)"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="who" id="btnWho" onclick="togglePop('popUser',event)"><span class="av">a</span><span id="whoName">admin</span></div>
+      <div class="grid" id="btnGrid" onclick="togglePop('popSafety',event)" data-page-node-id="VYltwm624nMruhPHtEHr4I"><i data-page-node-id="WIGVM74QTuCYlMhHkWSCH2"></i><i data-page-node-id="5h96TaEQqX8owwia5Hr8rY"></i><i data-page-node-id="UJyDkDDFGYyG70u1wNR3Bf"></i><i data-page-node-id="0rKDSKEFMmsMwmaEtRkwji"></i><i data-page-node-id="FoOzpg0uOob63iGGDF0ckG"></i><i data-page-node-id="9MVAdm83vvSz2HcsTTKuPT"></i><i data-page-node-id="TRKPvDWQfACVi761ITO7Ca"></i><i data-page-node-id="o2DrfzkmfqkNhmvtIsmRmU"></i><i data-page-node-id="npzgSn2iIEXlrIEZDh6ePw"></i></div>
+      <div class="who" id="btnWho" onclick="togglePop('popUser',event)" data-page-node-id="nN8mzAOQaDMSW70emfU99F"><span class="av" data-page-node-id="HbdEjuqJosMVXtPs2kt01C">a</span><span id="whoName" data-page-node-id="CDvtHUYvFMh0ihStUIomfH">admin</span></div>
 
-      <div class="pop pop-safety" id="popSafety">
-        <div class="hero">
-          <div class="ht">零信任安全中心</div>
-          <div class="hs">点击进入其他安全管控台</div>
-          <svg class="himg" viewBox="0 0 72 52" fill="none">
-            <rect x="14" y="6" width="44" height="34" rx="4" fill="#fff" opacity=".95"/>
-            <rect x="14" y="6" width="44" height="34" rx="4" stroke="#8CC6F2" stroke-width="1"/>
-            <path d="M36 14l9 3v8c0 5-3.8 8.6-9 9.8-5.2-1.2-9-4.8-9-9.8v-8l9-3z" fill="#2C8FE0"/>
-            <path d="M32 25.5l2.8 2.8 5.2-5.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <div class="pop pop-safety" id="popSafety" data-page-node-id="s9CoKWBIc7Yy4IOgNUHTei">
+        <div class="hero" data-page-node-id="zVA9KhlOf7FzuRzV2PNurx">
+          <div class="ht" data-page-node-id="fxyIPPcl53KWxZ3lnofD5p">零信任安全中心</div>
+          <div class="hs" data-page-node-id="snsVpQA0bxT1zRoeifVf9y">点击进入其他安全管控台</div>
+          <svg class="himg" viewBox="0 0 72 52" fill="none" data-page-node-id="RxsDGlNcpyQCRfTD4GtX3Y">
+            <rect x="14" y="6" width="44" height="34" rx="4" fill="#fff" opacity=".95" data-page-node-id="4HFxXs9Gb2OTovMe70D1Dl"/>
+            <rect x="14" y="6" width="44" height="34" rx="4" stroke="#8CC6F2" stroke-width="1" data-page-node-id="KkuyJnUX4VGs8LEotZqmCJ"/>
+            <path d="M36 14l9 3v8c0 5-3.8 8.6-9 9.8-5.2-1.2-9-4.8-9-9.8v-8l9-3z" fill="#2C8FE0" data-page-node-id="J8QpJfSTNRdOFjFHFRa04D"/>
+            <path d="M32 25.5l2.8 2.8 5.2-5.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" data-page-node-id="yULulinHCEFGwtAZDI6NJg"/>
           </svg>
         </div>
-        <div class="apps" id="safetyApps"></div>
+        <div class="apps" id="safetyApps" data-page-node-id="fFAb5Nn9Ipx56Rovm6VP6C"></div>
       </div>
 
-      <div class="pop pop-user" id="popUser">
-        <div class="uhead">
-          <span class="uav"><i class="iconfont icon-head_sculpture"></i></span>
-          <div class="umeta"><b>admin</b><span class="utag">超级管理员</span></div>
+      <div class="pop pop-user" id="popUser" data-page-node-id="BBTwGdx5jYVOa3RwCiH35q">
+        <div class="uhead" data-page-node-id="GARiiu5cj5ZNKglV7Q9EYC">
+          <span class="uav" data-page-node-id="iQvCiZr2rrsMAQ1wa2I3gQ"><i class="iconfont icon-head_sculpture" data-page-node-id="8x56O9wZm7EtXHOZ5GMaW3"></i></span>
+          <div class="umeta" data-page-node-id="8chCEmWQ8udArV0TMiljeb"><b data-page-node-id="KPGYWm0cNRLUPCWf4bogFH">admin</b><span class="utag" data-page-node-id="IMwghB6GmdA7eC80WHrJdy">超级管理员</span></div>
         </div>
-        <div class="uact" onclick="alert('修改密码：待批次七随「操作员管理」一起做')"><i class="iconfont icon-change_password"></i>修改密码</div>
-        <div class="uact" onclick="location.reload()"><i class="iconfont icon-exit_the_system"></i>退出系统</div>
+        <div class="uact" onclick="openChangePwd()" data-page-node-id="mK85C9hzBvpRkGSz4VWTl8"><i class="iconfont icon-change_password" data-page-node-id="qjFiCMVBvss67Ml6bu2HhA"></i>修改密码</div>
+        <div class="uact" onclick="logout()" data-page-node-id="qK013l2uEmatQEzqk5NE6q"><i class="iconfont icon-exit_the_system" data-page-node-id="NqyEYTtLOuqHhXEfWrCCEq"></i>退出系统</div>
       </div>
     </div>
   </header>
 
-  <aside class="sidebar">
-    <div class="scroll" id="side"></div>
-    <div class="collapse" onclick="toggleCollapse()"><i class="iconfont icon-navigation_stow"></i><span>收起菜单</span></div>
+  <aside class="sidebar" data-page-node-id="6xDzeq7B7gW0V3Td8FJFk3">
+    <div class="scroll" id="side" data-page-node-id="QSRl6By34ExxBLizfoNe08"></div>
+    <div class="collapse" onclick="toggleCollapse()" data-page-node-id="ntLFmgyHjVNMhtPOrgUWRh"><i class="iconfont icon-navigation_stow" data-page-node-id="cMeTk5SRYbcB8tAp6cJn9i"></i><span data-page-node-id="pkGKEuZyda4eam1tBeYHIQ">收起菜单</span></div>
   </aside>
 
-  <div class="flyout" id="flyout" onmouseenter="clearTimeout(window.__flyT)" onmouseleave="hideFlySoon()"></div>
+  <div class="flyout" id="flyout" onmouseenter="clearTimeout(window.__flyT)" onmouseleave="hideFlySoon()" data-page-node-id="mIsyPEEpNbGAyw3YKftnAI"></div>
 
-  <main class="main">
-    <div class="tabbar" id="tabbar"></div>
-    <div class="page" id="page"></div>
+  <main class="main" data-page-node-id="hbKWVy1Eaq1yIanZF56RoW">
+    <div class="tabbar" id="tabbar" data-page-node-id="0vHqkqmQajD0En35vBdP9C"></div>
+    <div class="page" id="page" data-page-node-id="ZrK1RUlGh55hxRqWoxXM4f"></div>
   </main>
 </div>
 
@@ -2391,9 +2684,7 @@ var MODULES = [
           { name:'API授权', route:'/resource/resource/api' } ]},
       { group:'基础配置', icon:'icon-configuration_center', items:[
           { name:'数据中心', route:'/resource/datacenter/index' },
-          { name:'应用证书', route:'/resource/application/certificate' } ]},
-      { group:'项目定制', icon:'icon-configuration_center', items:[
-          { name:'应用维护', route:'/project/maintenance/index' } ]}
+          { name:'应用证书', route:'/resource/application/certificate' } ]}
   ]},
   { key:'security', name:'安全', menus:[
       { group:'网络控制', icon:'icon-network_control', items:[
@@ -2444,6 +2735,16 @@ var MODULES = [
           { name:'产品许可', route:'/system/license/index' } ]},
       { group:'AI 平台', icon:'icon-configuration_center', items:[
           { name:'LLM 服务', route:'/system/ai/llm' } ]}
+  ]},
+  /* 项目定制（沁 2026-11-20 重新梳理）：不在左侧菜单出现，也不占顶栏，只通过「页面导航 › 项目定制」进入。
+     定制功能本身长在真实页面上（染色在 Web应用行内、隧道管控在客户端版本左树），这里只放直达入口，
+     fn 项由 nav_panel 直接调用同名全局函数，不再另做一套独立页面。 */
+  { key:'project', name:'项目定制', navOnly:true, menus:[
+      { group:'首师项目', icon:'icon-configuration_center', items:[
+          { name:'应用维护', route:'/project/maintenance/index' },
+          { name:'流量染色（Web应用·行内）', fn:'goDyeDemo' } ]},
+      { group:'中储粮项目', icon:'icon-configuration_center', items:[
+          { name:'客户端隧道管控（客户端版本·左树）', fn:'goTunnelDemo' } ]}
   ]}
 ];
 
@@ -2497,6 +2798,7 @@ var MOD_EN={home:'Home',terminal:'Terminal',network:'Network',resource:'Resource
 function buildTopNav(){
   var html='';
   MODULES.forEach(function(m){
+    if(m.navOnly) return;   /* 项目定制只进页面导航，不占顶栏 */
     var label=(LANG==='en'?(MOD_EN[m.key]||m.name):m.name);
     html+='<a href="javascript:;" data-k="'+m.key+'" class="'+(m.key===curModule?'on':'')+'" onclick="switchModule(\''+m.key+'\')">'+label+'</a>';
   });
@@ -2518,9 +2820,11 @@ function pickLang(l,e){
   document.getElementById('langPop').classList.remove('on');
   document.documentElement.lang=(l==='en'?'en':'zh-CN');
   buildTopNav();
+  /* 已配置多语言的页面（如应用画像的模块名）跟着当前语言重渲染 */
+  try{ if(typeof LISTS!=='undefined' && LISTS[currentRoute] && typeof lpRerender==='function') lpRerender(); }catch(e){}
   if(document.querySelector('.sidebar .collapse span'))
     document.querySelector('.sidebar .collapse span').textContent=(l==='en'?'Collapse':'收起菜单');
-  lpTip(l==='en'?'Language: English（原型仅演示顶栏语言项，完整语言包见实机）':'界面语言已切换为简体中文');
+  lpTip(l==='en'?'Language: English':'界面语言已切换为简体中文');
 }
 
 var curModule='home';
@@ -2749,11 +3053,11 @@ function mtListHtml(){
     + '</div>'
     + '<div class="toolbar">'
     +   '<button class="btn-plain" onclick="mtRedraw()">刷新</button>'
-    +   '<button class="btn-plain" onclick="lpTip(\'新增应用（演示）\')">新增</button>'
-    +   '<button class="btn-plain" onclick="lpTip(\'更换分组（演示）\')">更换分组</button>'
+    +   '<button class="btn-plain" onclick="lpTip(\'新增应用\')">新增</button>'
+    +   '<button class="btn-plain" onclick="lpTip(\'更换分组\')">更换分组</button>'
     +   '<button class="btn-pri" onclick="mtOpenMaint()">维护</button>'
     +   '<button class="btn-plain" onclick="mtCancelSel()">取消维护</button>'
-    +   '<button class="btn-plain" onclick="lpTip(\'删除应用（演示）\')">删除</button>'
+    +   '<button class="btn-plain" onclick="lpTip(\'删除应用\')">删除</button>'
     + '</div>'
     + '<div class="lp-tbl-wrap"><table class="lp-tbl mt-tbl"><thead><tr>'
     + '<th class="c-chk"><input type="checkbox"></th><th>应用名称</th><th>访问方式</th>'
@@ -2775,7 +3079,7 @@ function mtTplHtml(){
   return '<div class="lp-card"><div class="lp-body">'
     + '<div class="toolbar">'
     +   '<button class="btn-plain" onclick="mtRedraw()">刷新</button>'
-    +   '<button class="btn-plain" onclick="lpTip(\'新增模板（演示）\')">新增</button>'
+    +   '<button class="btn-plain" onclick="lpTip(\'新增模板\')">新增</button>'
     + '</div>'
     + '<div class="lp-tbl-wrap"><table class="lp-tbl mt-tbl mt-tbl-tpl"><thead><tr>'
     + '<th style="width:64px">序号</th><th style="width:210px">名称</th><th style="width:230px">代码</th>'
@@ -2978,6 +3282,7 @@ function moduleOfRoute(route){
   if(!route) return null;
   for(var i=0;i<MODULES.length;i++){
     var m=MODULES[i];
+    if(m.navOnly) continue;   /* 项目定制不占顶栏/侧栏，不进模块反查 */
     for(var j=0;j<m.menus.length;j++){
       var nd=m.menus[j];
       if(nd.items){
@@ -3934,6 +4239,34 @@ function drawApiMon(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*<<LISTS_JS_BEGIN>>*/
 /* ================= 列表页引擎（第 2 批） ================= */
 var LISTS={}, LSTATE={};
@@ -3969,6 +4302,20 @@ function lpRows(r){
     if(it && it.k!==undefined && it.k!==null){
       all=all.filter(function(row){ return c.nodeFilter(row,it.k); });
     }
+  }
+  /* 查询条件（筛选区 / 顶部搜索）：都按「包含」匹配，命中即保留 */
+  if(st.q && st.q.length){
+    all=all.filter(function(row){
+      return st.q.every(function(cond){
+        return lpPlain(row[cond.i]).toLowerCase().indexOf(String(cond.v).toLowerCase())>=0;
+      });
+    });
+  }
+  if(st.kw){
+    var kw=String(st.kw).toLowerCase();
+    all=all.filter(function(row){
+      return row.some(function(cell){ return lpPlain(cell).toLowerCase().indexOf(kw)>=0; });
+    });
   }
   /* 排序（v2.31）：c.sort 里列出的列名可点表头排序，数字按数值比、其余按字符比 */
   if(st.sort && c.sort && c.sort.indexOf(st.sort.n)>=0){
@@ -4070,7 +4417,7 @@ function lpBody(r){
   if(c.html) return c.html(c,r);
   if(c.cardTitle){
     h+='<div class="lp-ct"><h4>'+c.cardTitle+'</h4>'
-      +(c.cardBtn? '<button class="btn-pri" onclick="lpTip(\''+c.cardBtn+'（演示）\')">'+c.cardBtn+'</button>':'')
+      +(c.cardBtn? '<button class="btn-pri" onclick="lpTip(\''+c.cardBtn+'\')">'+c.cardBtn+'</button>':'')
       +'</div>';
   }
   if(c.tabs2) h+=tabs2Html(c);
@@ -4088,20 +4435,70 @@ function tabs2Html(c){
 function lpTab(r,i){ var s=lst(r); s.tab=i; s.node=0; lpRerender(); }
 
 function filterHtml(c){
-  var h='<div class="filters">';
-  (c.filters||[]).forEach(function(f){
+  var h='<div class="filters" id="lpFilters">';
+  (c.filters||[]).forEach(function(f,i){
+    h+='<span class="fitem" data-i="'+i+'" data-t="'+(f.t||'in')+'">';
     if(f.t==='sel'){
       h+='<select class="fsel">'+'<option>'+f.ph+'</option>'+(f.opts||[]).map(function(o){return '<option>'+o+'</option>'}).join('')+'</select>';
     }else if(f.t==='date'){
-      h+='<span class="fdate"><i class="iconfont icon-date_selection"></i><input class="fin" value="'+f.v1+'"><em>至</em><input class="fin" value="'+f.v2+'"></span>';
+      h+='<span class="fdate"><i class="iconfont icon-date_selection"></i><input class="fin" value="'+(f.v1||'')+'"><em>至</em><input class="fin" value="'+(f.v2||'')+'"></span>';
     }else{
-      h+='<input class="fin" placeholder="'+f.ph+'"'+(f.w?' style="width:'+f.w+'px"':'')+'>';
+      h+='<input class="fin" placeholder="'+f.ph+'"'+(f.w?' style="width:'+f.w+'px"':'')
+        +' onkeydown="if(event.key===\'Enter\')lpSearch(\''+c.route+'\')">';
     }
+    h+='</span>';
   });
-  if(c.more!==false) h+='<span class="fmore" onclick="lpTip(\'展开更多筛选条件（演示）\')">更多筛选 <i class="iconfont icon-drop_down"></i></span>';
-  h+='<span class="fbtns"><button class="btn-plain" onclick="lpTip(\'已重置筛选条件\')">重置</button>'
-    +'<button class="btn-pri" onclick="lpTip(\'查询完成\')">查询</button></span></div>';
+  if(c.more!==false && (c.filters||[]).length>3)
+    h+='<span class="fmore" onclick="lpMoreFilter(this)">更多筛选 <i class="iconfont icon-drop_down"></i></span>';
+  h+='<span class="fbtns"><button class="btn-plain" onclick="lpResetSearch(\''+c.route+'\')">重置</button>'
+    +'<button class="btn-pri" onclick="lpSearch(\''+c.route+'\')">查询</button></span></div>';
   return h;
+}
+/* 查询：把筛选区里填了值的条件带到 lpRows 过滤；顶部搜索框按全列模糊匹配 */
+function lpSearch(r){
+  var st=lst(r), c=LISTS[r]||{}, q=[];
+  var box=document.getElementById('lpFilters');
+  if(box){
+    var its=box.querySelectorAll('.fitem');
+    for(var i=0;i<its.length;i++){
+      var t=its[i].getAttribute('data-t');
+      var idx=+(its[i].getAttribute('data-i'));
+      if(t==='date') continue;                    /* 日期区间不参与自由文本过滤，避免默认值把数据全筛掉 */
+      var el=its[i].querySelector('input,select');
+      if(!el) continue;
+      if(el.tagName==='SELECT'){
+        if(el.selectedIndex<=0) continue;
+        q.push({i:idx, v:el.options[el.selectedIndex].text});
+      } else {
+        var v=String(el.value||'').trim();
+        if(v) q.push({i:idx, v:v});
+      }
+    }
+  }
+  var sb=document.querySelector('#page .tsearch .fin');
+  st.q=q; st.kw=sb? String(sb.value||'').trim():''; st.page=1; st.sel={};
+  lpRerender();
+  var n=(lpRows(r).rows||[]).length;
+  lpTip((q.length||st.kw)? ('查询完成，命中 '+n+' 条') : ('已显示全部 '+n+' 条'));
+}
+function lpResetSearch(r){
+  var st=lst(r);
+  st.q=[]; st.kw=''; st.page=1; st.sel={};
+  var box=document.getElementById('lpFilters');
+  if(box){
+    var ins=box.querySelectorAll('input'); for(var i=0;i<ins.length;i++) ins[i].value='';
+    var sels=box.querySelectorAll('select'); for(var j=0;j<sels.length;j++) sels[j].selectedIndex=0;
+  }
+  var sb=document.querySelector('#page .tsearch .fin'); if(sb) sb.value='';
+  lpRerender();
+  lpTip('已重置筛选条件');
+}
+function lpMoreFilter(el){
+  var f=document.getElementById('lpFilters');
+  if(!f) return;
+  f.classList.toggle('all');
+  var on=f.classList.contains('all');
+  el.innerHTML=(on?'收起筛选':'更多筛选')+' <i class="iconfont icon-drop_down"></i>';
 }
 function toolbarHtml(c){
   var h='<div class="toolbar">';
@@ -4109,7 +4506,7 @@ function toolbarHtml(c){
     var cls=b.pri?'btn-pri':'btn-plain';
     h+='<button class="'+cls+'" onclick="lpAct(\''+c.route+'\',\''+b.n+'\')">'+b.n+'</button>';
   });
-  if(c.search) h+='<div class="tsearch"><i class="iconfont icon-search"></i><input class="fin" placeholder="'+c.search+'" onkeydown="if(event.key===\'Enter\')lpTip(\'查询完成\')"></div>';
+  if(c.search) h+='<div class="tsearch"><i class="iconfont icon-search"></i><input class="fin" placeholder="'+c.search+'" onkeydown="if(event.key===\'Enter\')lpSearch(\''+c.route+'\')"></div>';
   return h+'</div>';
 }
 function tableHtml(r){
@@ -4134,8 +4531,9 @@ function tableHtml(r){
   var tb=q.rows.map(function(row,i){
     var gi=(s.page-1)*s.size+i, td='<tr>';
     if(c.check) td+='<td class="c-chk"><input type="checkbox" '+(s.sel[gi]?'checked':'')+' onclick="lpSel(this,\''+r+'\','+gi+')"></td>';
-    row.forEach(function(cell,j){
-      var t=lpPlain(cell);
+    /* 只渲染 cols 里定义的列：行里多出来的数据（如过滤用的隐藏字段）不当列显示 */
+    c.cols.forEach(function(col,j){
+      var cell=row[j], t=lpPlain(cell);
       td+='<td'+(nc.indexOf(j)>=0?' class="num"':'')+(t===''?' class="hollow"':'')+'>'+(t===''?'--':cell)+'</td>';
     });
     if(c.ops){
@@ -4154,7 +4552,7 @@ function tableHtml(r){
     return td+'</tr>';
   }).join('');
   if(!q.rows.length) tb='<tr><td colspan="'+((c.check?1:0)+c.cols.length+(c.ops?1:0))+'"><div class="lp-empty"><div class="big">暂无数据</div><div>调整筛选条件后重试</div></div></td></tr>';
-  return '<div class="lp-tbl-wrap"><table class="lp-tbl"><thead>'+th+'</thead><tbody>'+tb+'</tbody></table></div>';
+  return '<div class="lp-tbl-wrap"><table class="lp-tbl'+(c.fixedW?' fixed':'')+'"><thead>'+th+'</thead><tbody>'+tb+'</tbody></table></div>';
 }
 /* 「…」更多操作：弹一层小菜单，点外面或选中后关闭 */
 function lpMoreOps(e,r,gi,names){
@@ -4203,24 +4601,27 @@ function pagerHtml2(r){
 /* --- 操作 --- */
 function lpAct(r,name){
   var c=LISTS[r];
+  /* 自定义处理器优先（工具栏与行内共用一套，gi=-1 表示来自工具栏） */
+  if(c.opHandlers && c.opHandlers[name]){ c.opHandlers[name](r,-1); return; }
   if(name==='多语言'){ mlOpen(r); return; }
   if(name==='删除'){
     var n=lpSelCount(r);
     if(!n){ lpTip('请先勾选要删除的数据'); return; }
-    lpConfirm('确认删除','已选中 '+n+' 条数据，删除后不可恢复。',function(){ lst(r).sel={}; lpTip('已删除 '+n+' 条（演示）'); lpRerender(); });
+    lpConfirm('确认删除','已选中 '+n+' 条数据，删除后不可恢复。',function(){ lst(r).sel={}; lpTip('已删除 '+n+' 条'); lpRerender(); });
     return;
   }
   if(name==='刷新'){ lpTip('已刷新'); lpRerender(); return; }
   if(c.form) { lpForm(c, name); return; }
-  lpTip(name+'（演示）');
+  lpTip(name+'：已提交');
 }
 function lpOp(r,gi,name){
   var c=LISTS[r];
   if(name==='多语言'){ mlOpen(r,gi); return; }
+  if(c.opHandlers && c.opHandlers[name]){ c.opHandlers[name](r,gi); return; }
   if(name==='详情'||name==='查看'){ if(c.drawer){ lpOpenDrawer(r,gi); return; } }
-  if(name==='删除'){ lpConfirm('确认删除','删除后不可恢复，是否继续？',function(){ lpTip('已删除（演示）'); }); return; }
+  if(name==='删除'){ lpConfirm('确认删除','删除后不可恢复，是否继续？',function(){ lpTip('已删除'); }); return; }
   if(name==='编辑'&&c.form){ lpForm(c,'编辑'); return; }
-  lpTip(name+'（演示）');
+  lpTip(name+'：已提交');
 }
 
 /* --- 抽屉 --- */
@@ -4232,6 +4633,13 @@ function drawerHtml(c){
 }
 function lpOpenDrawer(r,gi){
   var c=LISTS[r], row=c.rows[gi], dw=c.drawer;
+  /* 自定义 html 页（看板类）不会走 lpHtml，抽屉容器可能没渲染出来，这里补一次 */
+  if(!document.getElementById('dBody')){
+    var host=document.querySelector('.main')||document.body;
+    var wrap=document.createElement('div');
+    wrap.innerHTML=drawerHtml({drawer:dw});
+    while(wrap.firstChild) host.appendChild(wrap.firstChild);
+  }
   var body=dw.body? dw.body(row,gi) : genDetail(c,row,gi);
   document.getElementById('dTitle').textContent = dw.title? dw.title(row,gi) : ((dw.name||'详情'));
   var tag=document.getElementById('dTag');
@@ -4344,7 +4752,7 @@ function lpForm(c,title){
   }).join('');
   lpFormDrawer(title, body,
     '<button class="btn-plain" onclick="lpCloseFormDrawer()">取消</button>'
-    +'<button class="btn-pri" onclick="lpCloseFormDrawer();lpTip(\'已保存（演示）\')">保存</button>');
+    +'<button class="btn-pri" onclick="lpCloseFormDrawer();lpTip(\'已保存\')">保存</button>');
 }
 
 
@@ -4408,7 +4816,7 @@ function mlSave(){
   var inputs=document.querySelectorAll('#mBody .frow input');
   for(var i=0;i<inputs.length&&i<fs.length;i++) ML.vals[fs[i]][ML.lang]=inputs[i].value;
   lpCloseModal();
-  lpTip('多语言内容已保存（演示）');
+  lpTip('多语言内容已保存');
 }
 
 /* ================= 终端模块（10 页） ================= */
@@ -4758,7 +5166,7 @@ function blHtml(c,r){
   return '<div class="dtabs" style="margin-bottom:16px"><span class="on">Windows</span></div>'
     + g
     + '<div class="fm-foot stick"><button class="btn-plain" onclick="lpTip(\'已恢复默认基线\')">恢复默认</button>'
-    + '<button class="btn-pri" onclick="lpTip(\'基线策略已保存（演示）\')">保存</button></div>';
+    + '<button class="btn-pri" onclick="lpTip(\'基线策略已保存\')">保存</button></div>';
 }
 reg('/terminal/security/check',{
   rows:[],
@@ -4816,6 +5224,8 @@ function cliTree(cur){
     gi[i]=items.length;
     items.push({n:CLI_NAMES[i],ar:true,open:i===cur,go:(i===cur?null:CLI_ROUTES[i])});
     if(i===cur){ CLIENT_VERS.forEach(function(x){ items.push({n:x.v,lv:1,k:x.v}); }); }
+    /* 客户端版本下挂「客户端隧道管控」（中储粮定制，沁 2026-11-20） */
+    if(i===cur && i===0){ items.push({n:'客户端隧道管控',lv:1,k:'__tunnel'}); }
   }
   return {items:items,gi:gi};
 }
@@ -4835,15 +5245,15 @@ function cdPick(el){
 }
 function cliBasicHtml(x){
   return '<div class="cd-card"><div class="cd-ct"><h4>基本信息</h4>'
-    +'<a class="op" onclick="lpTip(\'编辑基本信息（演示）\')">编辑</a></div>'
+    +'<a class="op" onclick="lpTip(\'编辑基本信息\')">编辑</a></div>'
     +'<div class="cd-kv">'
       +'<div><b>版本信息</b><span>'+x.v+'</span></div>'
       +'<div><b>发布时间</b><span>'+x.pub+'</span></div>'
       +'<div><b>当前状态</b><span>'+d(x.st, x.st==='生效中'?'g':'gy')+'</span></div>'
     +'</div>'
     +'<div class="cd-link">'
-      +'<div class="row"><b>下载链接</b><span>Windows：<a onclick="lpTip(\'打开下载地址（演示）\')">'+x.win+'</a></span></div>'
-      +'<div class="row"><b></b><span>Mac OS：<a onclick="lpTip(\'打开下载地址（演示）\')">'+x.mac+'</a></span></div>'
+      +'<div class="row"><b>下载链接</b><span>Windows：<a onclick="lpTip(\'打开下载地址\')">'+x.win+'</a></span></div>'
+      +'<div class="row"><b></b><span>Mac OS：<a onclick="lpTip(\'打开下载地址\')">'+x.mac+'</a></span></div>'
     +'</div></div>';
 }
 /* --- 1. 客户端版本 --- */
@@ -4856,11 +5266,12 @@ function cliBasicHtml(x){
     check:false, ops:[{n:'编辑'},{n:'删除'}],
     before:function(c,r){ cliInit(r, T.gi[0]+1); },
     html:function(c,r){
+      if(typeof tunPicked==='function' && tunPicked(c,r)) return tunHtml();
       var s=cliSel(c,r);
       if(s) return '<div class="cd-title">客户端版本 '+s.v+'</div>'+cliBasicHtml(s);
       return '<div class="toolbar">'
-        +'<button class="btn-pri" onclick="lpTip(\'新增版本（演示）\')">新增版本</button>'
-        +'<button class="btn-plain" onclick="lpTip(\'导入安装包（演示）\')">导入安装包</button>'
+        +'<button class="btn-pri" onclick="lpTip(\'新增版本\')">新增版本</button>'
+        +'<button class="btn-plain" onclick="lpTip(\'导入安装包\')">导入安装包</button>'
         +'<span class="tsearch"><i class="iconfont icon-search"></i>'
         +'<input class="fin" placeholder="请输入版本号" onkeydown="if(event.key===\'Enter\')lpTip(\'查询完成\')"></span></div>'
         + tableHtml(r) + pagerHtml2(r);
@@ -4917,7 +5328,7 @@ function cliBasicHtml(x){
           + '<div class="cd-radio-row"><span class="cd-rl">升级方式</span>'
             + '<label class="cd-rd on" onclick="cdPick(this)"><i></i>完成客户端下载后要求立即升级</label>'
             + '<label class="cd-rd" onclick="cdPick(this)"><i></i>完成客户端下载在下次重新启动时升级</label></div>'
-          + '<button class="btn-pri" style="margin-top:6px" onclick="lpTip(\'已保存（演示）\')">保存</button></div>';
+          + '<button class="btn-pri" style="margin-top:6px" onclick="lpTip(\'已保存\')">保存</button></div>';
     },
     after:function(){
       var c=LISTS['/terminal/client/upgrade'];
@@ -5040,11 +5451,11 @@ function rcHtml(c,r){
     + '<div class="fm-row"><label>有效期</label><div class="fc"><input type="text" value="2025-08-15 至 2027-08-14" readonly>'
       + '<span class="hint">剩余 276 天</span></div></div>'
     + '<div class="fm-row"><label>证书文件</label><div class="fc"><span class="pg-up has" style="width:240px;height:34px;flex-direction:row;gap:8px" '
-      + 'onclick="lpTip(\'选择证书文件（演示）\')"><i class="iconfont icon-newly_added"></i><span>server.crt</span></span></div></div>'
+      + 'onclick="lpTip(\'选择证书文件\')"><i class="iconfont icon-newly_added"></i><span>server.crt</span></span></div></div>'
     + '<div class="fm-row"><label>私钥文件</label><div class="fc"><span class="pg-up has" style="width:240px;height:34px;flex-direction:row;gap:8px" '
-      + 'onclick="lpTip(\'选择私钥文件（演示）\')"><i class="iconfont icon-newly_added"></i><span>server.key</span></span></div></div>'
-    + '</div><div class="fm-foot"><button class="btn-plain" onclick="lpTip(\'新增证书（演示）\')">新增</button>'
-    + '<button class="btn-pri" onclick="lpTip(\'应用证书已保存（演示）\')">保存</button></div></div>';
+      + 'onclick="lpTip(\'选择私钥文件\')"><i class="iconfont icon-newly_added"></i><span>server.key</span></span></div></div>'
+    + '</div><div class="fm-foot"><button class="btn-plain" onclick="lpTip(\'新增证书\')">新增</button>'
+    + '<button class="btn-pri" onclick="lpTip(\'应用证书已保存\')">保存</button></div></div>';
 }
 reg('/resource/application/certificate',{
   rows:[],
@@ -5231,9 +5642,9 @@ function sdpHtml(c,r){
         +'<div class="sdp-app"><b>'+x.ap[1]+'</b><span>正在访问</span></div>'
       +'</div></td>'
       +'<td class="c-op" style="text-align:center"><div class="sdp-cell">'
-        +'<a class="op" onclick="lpTip(\'SDP 服务详情（演示）\')">详情</a>'
-        +'<a class="op" onclick="lpTip(\'编辑 SDP 服务（演示）\')">编辑</a>'
-        +'<a class="op" onclick="lpTip(\'删除确认（演示）\')">删除</a>'
+        +'<a class="op" onclick="lpTip(\'SDP 服务详情\')">详情</a>'
+        +'<a class="op" onclick="lpTip(\'编辑 SDP 服务\')">编辑</a>'
+        +'<a class="op" onclick="lpTip(\'删除确认\')">删除</a>'
         +'<a class="op more" title="更多操作" onclick="lpMoreOps(event,'+JSON.stringify("'/network/manage/sdp'")+',ri,'+JSON.stringify("'多语言'")+')">&#8943;</a>'
       +'</div></td>'
     +'</tr>';
@@ -5245,8 +5656,8 @@ function sdpHtml(c,r){
     +'<span class="fbtns"><button class="btn-plain" onclick="lpTip(\'已重置筛选条件\')">重置</button>'
     +'<button class="btn-pri" onclick="lpTip(\'查询完成\')">查询</button></span></div>'
     +'<div class="toolbar"><button class="btn-plain" onclick="lpTip(\'已刷新\')">刷新</button>'
-    +'<button class="btn-pri" onclick="lpTip(\'新增 SDP 服务（演示）\')">新增</button>'
-    +'<span style="margin-left:auto"><button class="btn-pri" onclick="lpTip(\'策略推荐（演示）\')">策略推荐</button></span></div>'
+    +'<button class="btn-pri" onclick="lpTip(\'新增 SDP 服务\')">新增</button>'
+    +'<span style="margin-left:auto"><button class="btn-pri" onclick="lpTip(\'策略推荐\')">策略推荐</button></span></div>'
     +'<div class="lp-tbl-wrap"><table class="sdp-tbl">'
     +'<colgroup><col style="width:6.5%"><col style="width:20%"><col style="width:21%"><col style="width:26%"><col style="width:12.5%"><col style="width:14%"></colgroup>'
     +'<thead><tr><th>运行状态</th><th class="l">服务名称</th><th>终端</th><th>服务边界（接入网关集群）</th><th>应用系统</th><th>操作</th></tr></thead>'
@@ -5484,7 +5895,7 @@ function wmHtml(c,r){
       + '</div>'
       + '<div class="fm-foot"><button class="btn-plain" onclick="wmClear()">清空</button>'
         + '<button class="btn-plain" onclick="lpRerender()">取消</button>'
-        + '<button class="btn-pri" onclick="lpTip(\'页面水印策略已保存（演示）\')">保存</button></div>'
+        + '<button class="btn-pri" onclick="lpTip(\'页面水印策略已保存\')">保存</button></div>'
       + '</div>'
     + '</div>'
     + '<div><div class="fm-card"><div class="fm-hd">水印预览<span class="r">'
@@ -5613,9 +6024,9 @@ function mpHtml(c,r){
       + '<div class="fm-bd"><div class="fm-row"><label>管理范围</label><div class="fc">'
       + '<div class="chk-grp" style="flex-direction:column;align-items:flex-start;gap:12px">'+chks+'</div>'
       + '</div></div></div>'
-      + '<div class="fm-foot"><button class="btn-plain" onclick="lpConfirm(\'确认删除\',\'删除后该组织将失去对应管理权限，是否继续？\',function(){lpTip(\'已删除（演示）\')})">删除</button>'
-      + '<button class="btn-plain" onclick="lpTip(\'新增分权（演示）\')">新增</button>'
-      + '<button class="btn-pri" onclick="lpTip(\''+MP_TABS[ti]+'分权已保存（演示）\')">保存</button></div></div>';
+      + '<div class="fm-foot"><button class="btn-plain" onclick="lpConfirm(\'确认删除\',\'删除后该组织将失去对应管理权限，是否继续？\',function(){lpTip(\'已删除\')})">删除</button>'
+      + '<button class="btn-plain" onclick="lpTip(\'新增分权\')">新增</button>'
+      + '<button class="btn-pri" onclick="lpTip(\''+MP_TABS[ti]+'分权已保存\')">保存</button></div></div>';
 }
 reg('/system/operator/manage_org',{
   tree:{title:'组织机构',items:[{n:'根组织机构',ar:true},{n:'外部组织',lv:1},
@@ -5697,7 +6108,7 @@ function sysHtml(c,r){
     + '<div class="fm-card"><div class="fm-hd">'+SYS_TABS[ti]+'<span class="r">'
       + '<span>最后修改：2026-11-08 10:12</span></span></div>'
       + '<div class="fm-bd">'+rows+'</div>'
-      + '<div class="fm-foot"><button class="btn-pri" onclick="lpTip(\''+SYS_TABS[ti]+'已保存（演示）\')">保存</button></div></div>';
+      + '<div class="fm-foot"><button class="btn-pri" onclick="lpTip(\''+SYS_TABS[ti]+'已保存\')">保存</button></div></div>';
 }
 reg('/system/setting/integration',{
   rows:[],
@@ -5718,8 +6129,8 @@ function pgItem(it){
     return '<div class="pg-item"><div class="pt">'+it[0]+'</div>'
       + '<input type="text" value="'+it[2]+'"></div>';
   }
-  return '<div class="pg-item"><div class="pt">'+it[0]+'<span class="op" onclick="lpTip(\'已恢复默认素材（演示）\')">恢复默认</span></div>'
-    + '<div class="pg-up has" onclick="lpTip(\'选择文件上传（演示）\')">'
+  return '<div class="pg-item"><div class="pt">'+it[0]+'<span class="op" onclick="lpTip(\'已恢复默认素材\')">恢复默认</span></div>'
+    + '<div class="pg-up has" onclick="lpTip(\'选择文件上传\')">'
     + '<i class="iconfont icon-newly_added"></i><span>'+it[2]+'</span></div></div>';
 }
 function pgHtml(c,r){
@@ -5727,12 +6138,12 @@ function pgHtml(c,r){
   return '<div class="dtabs" style="margin-bottom:14px">'+PG_TABS.map(function(t,i){
       return '<span class="'+(i===ti?'on':'')+'" onclick="lpTab(\''+r+'\','+i+')">'+t+'</span>'; }).join('')+'</div>'
     + '<div class="fm-card"><div class="fm-hd">'+PG_TABS[ti]+'定制<span class="r">'
-      + '<span class="op" onclick="lpTip(\'恢复默认全部素材（演示）\')">恢复默认</span>'
-      + '<span class="op" onclick="lpTip(\'已导出定制包（演示）\')">导出</span></span></div>'
+      + '<span class="op" onclick="lpTip(\'恢复默认全部素材\')">恢复默认</span>'
+      + '<span class="op" onclick="lpTip(\'已导出定制包\')">导出</span></span></div>'
       + '<div class="pg-grid">'+PG_ITEMS[ti].map(pgItem).join('')+'</div>'
       + '<div class="fm-foot"><button class="btn-plain" onclick="lpRerender()">清空</button>'
         + '<button class="btn-plain" onclick="lpRerender()">取消</button>'
-        + '<button class="btn-pri" onclick="lpTip(\''+PG_TABS[ti]+'定制已保存（演示）\')">保存</button></div></div>';
+        + '<button class="btn-pri" onclick="lpTip(\''+PG_TABS[ti]+'定制已保存\')">保存</button></div></div>';
 }
 reg('/system/setting/page',{
   rows:[],
@@ -5761,9 +6172,9 @@ function lcHtml(c,r){
     return '<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+x[2]+'</td></tr>';
   }).join('');
   return '<div class="toolbar">'
-      + '<button class="btn-pri" onclick="lpTip(\'选择许可文件导入（演示）\')">许可文件</button>'
+      + '<button class="btn-pri" onclick="lpTip(\'选择许可文件导入\')">许可文件</button>'
       + '<button class="btn-plain" onclick="lpTip(\'许可信息已刷新\')">刷新</button>'
-      + '<button class="btn-plain" onclick="lpTip(\'许可设置（演示）\')">设置</button></div>'
+      + '<button class="btn-plain" onclick="lpTip(\'许可设置\')">设置</button></div>'
     + '<div class="lc-hero"><div class="main">'
       + '<div class="cust">深圳竹云科技股份有限公司</div>'
       + '<div class="meta"><span><b>许可版本</b>V7.2 企业版</span>'
@@ -6511,6 +6922,15 @@ var PF_MODS_FULL=[
   apis:[{u:'/blim-api/api/elogonconfig/v1/checkTrustedDevice',cnt:605,usr:44}]}
 ];
 
+/* 模块名默认英文（2026-11-20）：导入的模块直接带英文名；没带英文的，英文界面回落显示中文。
+   改名弹窗里可以逐模块改中文/英文两套名称。 */
+var PF_EN_SEED={
+  '用户登录':'User Login','认证方式查询':'Authentication Methods','公钥获取':'Public Key Retrieval',
+  '设备卸载校验':'Device Uninstall Check','品牌定制查询':'Branding Config Query','壁纸配置':'Wallpaper Settings',
+  '可信设备校验':'Trusted Device Check','文件预览':'File Preview','旧版权限校验':'Legacy Permission Check'
+};
+PF_MODS_FULL.forEach(function(m){ if(!m.nEn && PF_EN_SEED[m.n]) m.nEn=PF_EN_SEED[m.n]; });
+
 var PF_DATA=[
  {n:'零信任安全策略中心',id:'spcconsole',dc:'总部深圳数据中心',grp:'零信任应用组',at:'2026-10-20',batches:[
    {id:'PF-20261112-03',days:7,cnt:9120,usr:70,mod:7,st:'pd',pt:'',ct:'2026-11-05 09:00',et:'2026-11-12 09:00'},
@@ -7179,7 +7599,7 @@ function pfModList(b){
       +'<td class="c-exp"><span class="pf-caret'+(open?' on':'')+'">'+(open?'&minus;':'+')+'</span></td>'
       +'<td class="c-seq">'+(editable?'<span class="pf-grip" title="拖动调整顺序"><i></i></span>':'')
         +'<span class="no">'+(gi+1)+'</span></td>'
-      +'<td class="c-nm" onclick="event.stopPropagation()"><span class="pf-mod-nm" title="'+m.n+'">'+m.n+'</span>'
+      +'<td class="c-nm" onclick="event.stopPropagation()"><span class="pf-mod-nm" title="'+pfN(m)+'">'+pfN(m)+'</span>'
         +'</td>'
       +'<td><span'+(editable
         ?' class="pf-senpick" title="点击设置模块敏感度" onclick="event.stopPropagation();pfPickSens('+ri+')"'
@@ -7403,30 +7823,57 @@ function pfTipHide(){
 
 function pfRename(ri){
   var m=pfModAt(ri); if(!m) return;
-  /* 2026-11-18 沁：去掉「模块名会写进 TA 的行为基线…历史日志仍沿用旧名」这句说明 */
-  lpOpenModal('修改模块名称',
-    '<input id="rnInp" class="fin" style="width:100%" maxlength="30" value="'+m.n+'">'
-    +'<div style="font-size:12px;color:#A8ABB2;margin-top:8px">不超过 30 个字，建议用业务能看懂的说法</div>',
+  RN={ri:ri, lang:'zh', zh:m.n, en:(m.nEn||'')};
+  pfRnRender();
+}
+/* 模块名多语言（2026-11-20 沁）：改名弹窗带语言页签，中文是默认语言；
+   英文留空时界面回落显示中文。顶部语言切成 English 时，模块名跟着变英文。 */
+var RN={ri:0, lang:'zh', zh:'', en:''};
+function pfN(m){
+  if(!m) return '';
+  return (typeof LANG!=='undefined' && LANG==='en' && m.nEn)? m.nEn : m.n;
+}
+function pfRnRender(){
+  var en=(RN.lang==='en');
+  var v=(en?RN.en:RN.zh).replace(/"/g,'&quot;');
+  var body='<div class="ml-tabs">'
+    + '<span class="'+(en?'':'on')+'" onclick="pfRnLang(\'zh\')">Chinese (Simplified, China)<em>（默认语言）</em></span>'
+    + '<span class="'+(en?'on':'')+'" onclick="pfRnLang(\'en\')">English</span></div>'
+    + '<div class="frow"><label>模块名称</label><div class="ctl">'
+    + '<input id="rnInp" class="fin" maxlength="30" value="'+v+'" placeholder="'+(en?'Please enter module name':'请输入模块名称')+'">'
+    + '<div class="hint">'+(en?'留空时界面回落显示默认语言内容。':'不超过 30 个字，建议用业务能看懂的说法。')+'</div>'
+    + '</div></div>'
+    + '<div class="ml-note">只作用于当前模块；英文未填写时，英文界面回落显示中文名称。</div>';
+  lpOpenModal('修改模块名称', body,
     '<button class="btn-plain" onclick="lpCloseModal()">取消</button>'
-    +'<button class="btn-pri" onclick="pfRenameOk('+ri+')">确定</button>');
+    + '<button class="btn-pri" onclick="pfRenameOk('+RN.ri+')">确定</button>');
+  var md=document.getElementById('modal'); if(md) md.style.width='560px';
   setTimeout(function(){
     var e=document.getElementById('rnInp');
-    if(e){ e.focus(); e.select(); e.onkeydown=function(ev){ if(ev.key==='Enter') pfRenameOk(ri); }; }
+    if(e){ e.focus(); e.select(); e.onkeydown=function(ev){ if(ev.key==='Enter') pfRenameOk(RN.ri); }; }
   },30);
+}
+function pfRnLang(l){
+  var e=document.getElementById('rnInp');
+  if(e){ if(RN.lang==='en') RN.en=e.value; else RN.zh=e.value; }
+  RN.lang=l; pfRnRender();
 }
 function pfRenameOk(ri){
   var e=document.getElementById('rnInp');
   var v=e?String(e.value||'').trim():'';
-  if(!v){ lpTip('模块名称不能为空'); return; }
+  if(RN.lang==='en') RN.en=v; else RN.zh=v;
+  var zh=(RN.zh||'').trim(), en=(RN.en||'').trim();
+  if(!zh){ lpTip('中文名称不能为空'); return; }
   var m=pfModAt(ri), old=m.n;
-  if(v===old){ lpCloseModal(); return; }
+  if(zh===old && en===(m.nEn||'')){ lpCloseModal(); return; }
   pfMarkOri(m);
-  m.n=v;
+  m.n=zh;
   /* 展开状态是按名字记的，改名后要跟着把 key 挪过去，不然行会自己收起来 */
-  if(PF_EXP[old]){ PF_EXP[v]=1; delete PF_EXP[old]; }
-  pfAudit(pfCurApp().n,old,'改模块名',old+' → '+v);
+  if(zh!==old && PF_EXP[old]){ PF_EXP[zh]=1; delete PF_EXP[old]; }
+  m.nEn=en;
+  pfAudit(pfCurApp().n, old, '改模块名', old+' → '+zh+(en?(' / '+en):''));
   lpCloseModal();
-  lpRerender(); lpTip('已改名为「'+v+'」');
+  lpRerender(); lpTip('模块名称已保存');
 }
 /* ================= 画像对比（2026-11-18 新增） =================
    场景：应用新增了模块，重新学习生成了新画像。管理员要快速确认「新画像 vs
@@ -7828,7 +8275,7 @@ function pfCmpPrevHtml(cb, bb){
     +'<table class="pf-mtbl pf-prevt"><thead><tr><th style="width:180px">模块名称</th><th>主 API</th>'
     +'<th style="width:60px">API 数</th><th style="width:78px">敏感度</th><th style="width:88px">来源</th></tr></thead><tbody>';
   list.forEach(function(x){
-    t+='<tr'+(x.src==='V1'?' class="fromv1"':'')+'><td>'+x.m.n+'</td>'
+    t+='<tr'+(x.src==='V1'?' class="fromv1"':'')+'><td>'+pfN(x.m)+'</td>'
       +'<td class="u" title="'+x.m.main+'">'+pfShortPath(x.m.main)+'</td>'
       +'<td>'+(((x.m.apis||[]).length)||x.m.api||0)+'</td>'
       +'<td>'+pfSensTag(x.m.sens)+'</td>'
@@ -8090,7 +8537,7 @@ function pfAnalysis(b){
   bars.forEach(function(m){ if(m.cnt>bmax) bmax=m.cnt; });
   bars.forEach(function(m){
     var cover=Math.round(m.usr/totalUsr*100);
-    h+='<div class="pf-hrow2"><span class="lb" title="'+m.n+'">'+m.n+'</span>'
+    h+='<div class="pf-hrow2"><span class="lb" title="'+pfN(m)+'">'+pfN(m)+'</span>'
       +'<div class="tr"><i style="width:'+(m.cnt/bmax*100).toFixed(1)+'%"></i></div>'
       +'<span class="vv">'+m.cnt.toLocaleString()+'</span>'
       +'<span class="cv" title="覆盖用户占比">'+cover+'% 用户</span></div>';
@@ -8174,7 +8621,7 @@ function pfSensPanel(mods,M){
     var chips=top.map(function(r){ return '<span class="uc">'+r.u+'</span>'; }).join('')||'—';
     var tip='<b>访问次数前 '+top.length+' 的用户</b><div class="chips">'+chips+'</div>'
       +(us.length>top.length?'<div class="more">共 '+us.length+' 人访问过，这里按次数取前 '+top.length+' 位</div>':'');
-    h+='<tr><td class="mn" title="'+m.n+'">'+m.n+'</td>'
+    h+='<tr><td class="mn" title="'+pfN(m)+'">'+pfN(m)+'</td>'
       +'<td>'+pfSensTag(m.sens)+'</td>'
       +'<td class="r num">'+m.usr+'</td>'
       +'<td class="r num">'+m.cnt.toLocaleString()+'</td>'
@@ -9274,8 +9721,8 @@ var MCP_STEP=0;
 function mcpToolbar(){
   return '<div class="toolbar">'
     + '<button class="btn-pri" onclick="mcpWizard(0)">新增</button>'
-    + '<button class="btn-pri" onclick="lpTip(\'更换分组（演示）\')">更换分组</button>'
-    + '<button class="btn-plain" onclick="lpTip(\'删除（演示）\')">删除</button>'
+    + '<button class="btn-pri" onclick="lpTip(\'更换分组\')">更换分组</button>'
+    + '<button class="btn-plain" onclick="lpTip(\'删除\')">删除</button>'
     + '</div>';
 }
 function mcpWizard(step){
@@ -9316,7 +9763,7 @@ function mcpDone(){
   lpCloseFormDrawer(); lpRerender(); lpTip('已新增 '+name);
 }
 reg('/resource/application/mcp',{
-  tree:{title:'服务分组<span class="mcp-eh" onclick="lpTip(\'显示空组（演示）\')"><i>&#8853;</i>显示空组</span>',
+  tree:{title:'服务分组<span class="mcp-eh" onclick="lpTip(\'显示空组\')"><i>&#8853;</i>显示空组</span>',
     items:MCP_GROUPS.map(function(g){ return {n:g.n,lv:g.lv,k:g.lv?g.n:''}; })},
   nodeFilter:function(row,k){ return !k || row[3]===k; },
   cols:[{t:'服务名称'},{t:'服务标识'},{t:'FakeIP'},{t:'服务分组'},{t:'端口'},{t:'出向认证'},{t:'发布状态'}],
@@ -9359,7 +9806,7 @@ function agentForm(){
     '<button class="btn-plain" onclick="lpCloseFormDrawer()">取消</button>'
     + '<button class="btn-pri" onclick="agentSave()">保存</button>', 520);
 }
-function agentSave(){ lpCloseFormDrawer(); lpTip('已保存认证服务（演示）'); }
+function agentSave(){ lpCloseFormDrawer(); lpTip('已保存认证服务'); }
 reg('/strategy/identity/agent',{
   cols:[{t:'认证服务'},{t:'服务地址'},{t:'注册API-Key'},{t:'身份ID'},{t:'身份密钥'}],
   rows:AGENT_ROWS,
@@ -9389,7 +9836,7 @@ reg('/audit/flow/mcp',{
       + '<select class="fsel" style="min-width:170px"><option>请选择MCP服务</option>'
       +   ['mcp_oa_kb','mcp_ticket','mcp_cmdb','mcp_logs'].map(function(x){return '<option>'+x+'</option>'}).join('')
       + '</select>'
-      + '<span class="fmore" onclick="lpTip(\'更多筛选（演示）\')">更多筛选 <i>&#9662;</i></span>'
+      + '<span class="fmore" onclick="lpTip(\'更多筛选\')">更多筛选 <i>&#9662;</i></span>'
       + '<div class="fbtns"><button class="btn-plain" onclick="lpTip(\'已重置筛选条件\')">重置</button>'
       + '<button class="btn-pri" onclick="lpTip(\'查询完成\')">查询</button></div>'
       + '</div>'
@@ -9412,14 +9859,14 @@ function spxSetHtml(){
       + '</div>';
   }).join('');
   return '<div class="fm-card"><div class="fm-hd">代理参数'
-    + '<div class="r"><button class="btn-plain" onclick="lpTip(\'代理参数已保存（演示）\')">保存</button>'
+    + '<div class="r"><button class="btn-plain" onclick="lpTip(\'代理参数已保存\')">保存</button>'
     + '<button class="btn-plain" onclick="spxAddSvc()">新增</button></div></div>'
     + '<div class="fm-bd">'
     + '<div class="sp-tip"><i>i</i><div><b>代理参数</b>设置本级可以代理的目标SDP服务参数，用于本级控制器与代理控制器进行通信。通信交互数据如下：<br>'
     + '1. 拉取目标控制器地址和目标的SDP服务资源清单，用于终端识别和接管代理应用的流量<br>'
     + '2. 将本级注册的终端设备清单同步给代理的SDP服务，用于终端向代理的目标控制器敲门进行身份校验</div></div>'
     + '<div class="fm-row"><label>代理ID</label><div class="fc sdp-id"><input value="ctyCA" readonly style="width:300px">'
-    + '<i class="sdp-act" title="重新生成" onclick="lpTip(\'已重新生成代理ID（演示）\')">&#8635;</i>'
+    + '<i class="sdp-act" title="重新生成" onclick="lpTip(\'已重新生成代理ID\')">&#8635;</i>'
     + '<i class="sdp-q" title="系统生成的唯一标识，同时作为可信终端标识前缀同步到目标平台">?</i></div></div>'
     + groups
     + '</div></div>';
@@ -9429,12 +9876,12 @@ function spxAuthHtml(){
     return '<tr><td class="c-chk"><input type="checkbox"></td>'
       + a.slice(0,7).map(function(x){ return '<td>'+(x||'—')+'</td>'; }).join('')
       + '<td>'+a[7]+'</td>'
-      + '<td class="c-op"><a class="op" onclick="lpTip(\'禁用（演示）\')">禁用</a>'
-      + '<a class="op" onclick="lpTip(\'编辑（演示）\')">编辑</a>'
-      + '<a class="op" onclick="lpTip(\'删除（演示）\')">删除</a>'
+      + '<td class="c-op"><a class="op" onclick="lpTip(\'禁用\')">禁用</a>'
+      + '<a class="op" onclick="lpTip(\'编辑\')">编辑</a>'
+      + '<a class="op" onclick="lpTip(\'删除\')">删除</a>'
       + '<a class="op more" title="更多操作" onclick="lpMoreOps(event,'+JSON.stringify("'/network/manage/sdp_proxy'")+',i,'+JSON.stringify("'多语言'")+')">&#8943;</a></td></tr>';
   }).join('');
-  return '<div class="toolbar"><button class="btn-pri" onclick="lpTip(\'新增代理授权（演示）\')">新增</button>'
+  return '<div class="toolbar"><button class="btn-pri" onclick="lpTip(\'新增代理授权\')">新增</button>'
     + '<button class="btn-plain" onclick="lpTip(\'请先勾选要删除的代理授权\')">删除</button></div>'
     + '<div class="lp-tbl-wrap"><table class="lp-tbl"><thead><tr>'
     + '<th class="c-chk"><input type="checkbox"></th><th>代理ID</th><th>代理服务</th><th>终端分组</th><th>描述</th>'
@@ -9465,7 +9912,7 @@ reg('/network/manage/sdp_proxy',{
 /* ---- 5. 终端 › SPA策略  /terminal/security/agent_spa ---- */
 function spaHtml(){
   return '<div class="fm-card"><div class="fm-hd">SPA 防爆破设置'
-    + '<div class="r"><button class="btn-pri" onclick="lpTip(\'SPA策略已保存（演示）\')">保存</button></div></div>'
+    + '<div class="r"><button class="btn-pri" onclick="lpTip(\'SPA策略已保存\')">保存</button></div></div>'
     + '<div class="fm-bd">'
     + '<div class="fm-row"><label>终端策略</label><div class="fc">'
       + '<span class="spa-t">同一终端于</span><input class="spa-in" value="30"><span class="spa-t">秒的时间窗口内，累计在同一IP下连续敲门</span>'
@@ -9496,6 +9943,1039 @@ reg('/terminal/security/agent_spa',{
   rows:[],
   html:spaHtml
 });
+
+/* ================= ZTNA 1.8.4.0 系统模块按现网重做（2026-11-20） =================
+   实采源：_build/_live184_crawl.json + _build/_live184_tabs.json
+   本文件在 lists_live.js / lists_v1840.js 之后注入，优先级最高。 */
+
+/* ---------- 0. 其他模块的列 / 按钮按现网修正（补丁层，不动原配置） ---------- */
+(function(){
+  function has(arr,name){ for(var i=0;i<arr.length;i++){ if((arr[i].t||arr[i].n||arr[i])===name) return true; } return false; }
+  function renameToolbar(route,from,to){
+    var c=LISTS[route]; if(!c||!c.toolbar) return;
+    c.toolbar.forEach(function(x){ if(x && x.n===from) x.n=to; });
+  }
+
+  /* 终端设备：现网第 8 列是「终端平台」，另外有 4 个页签 */
+  var dev=LISTS['/terminal/manage/device'];
+  if(dev && dev.cols && !has(dev.cols,'终端平台')){
+    var at=7;
+    for(var i=0;i<dev.cols.length;i++){ if(dev.cols[i].t==='终端平台'){ at=i; break; } }
+    if(dev.cols[at] && dev.cols[at].t!=='终端平台') dev.cols.splice(at,0,{t:'终端平台'});
+    else dev.cols.push({t:'终端平台'});
+    var pf=['Windows 10','Windows 11','macOS 14','统信 UOS','麒麟 V10','Windows 10','macOS 13','Windows 11'];
+    (dev.rows||[]).forEach(function(row,ri){ if(row && row.length>6) row.splice(at,0,pf[ri%pf.length]); });
+    if(!dev.tabs2) dev.tabs2=['终端管理','回收终端','终端分组','组织机构'];
+  }
+
+  /* Web应用：现网最后一列是「维护状态」，工具栏有 显示空组 / 维护 / 取消维护 */
+  var web=LISTS['/resource/application/system'];
+  if(web){
+    if(web.cols && !has(web.cols,'维护状态')){
+      web.cols.push({t:'维护状态'});
+      (web.rows||[]).forEach(function(row,ri){ if(row) row.push(d(ri%7===0?'维护中':'正常', ri%7===0?'o':'g')); });
+    }
+    /* 现网工具栏就这 6 个，行内操作另有 详情/编辑/API服务/例外/染色 */
+    web.toolbar=[{n:'显示空组'},{n:'新增',pri:true},{n:'更换分组'},{n:'维护'},{n:'取消维护'},{n:'删除'}];
+    web.ops=[{n:'详情'},{n:'编辑'},{n:'API服务'},{n:'例外'},{n:'染色'}];
+  }
+
+  /* 操作员管理：现网工具栏有「启用」 */
+  var op=LISTS['/system/operator/operator-manage'];
+  if(op && op.toolbar && !op.toolbar.some(function(x){return x.n==='启用';})) op.toolbar.push({n:'启用'});
+
+  /* 策略类页面：现网按钮叫「添加」不是「新增」 */
+  ['/strategy/flow/cc','/strategy/flow/fusing','/strategy/flow/waf',
+   '/strategy/identity/auth','/strategy/identity/agent','/strategy/network/ip'].forEach(function(r){
+    renameToolbar(r,'新增','添加');
+    renameToolbar(r,'添加','添加');   /* 幂等 */
+  });
+
+  /* 余下几处现网按钮补齐（2026-11-20 实采核对） */
+  function addBtn(route,btn,pri){
+    var c=LISTS[route]; if(!c) return;
+    c.toolbar=c.toolbar||[];
+    if(!c.toolbar.some(function(x){ return x.n===btn; })) c.toolbar.push({n:btn,pri:!!pri});
+  }
+  addBtn('/network/manage/agent_work','新增',true);
+  addBtn('/resource/application/mail','隐藏空组');
+  addBtn('/resource/application/net','隐藏空组');
+  addBtn('/resource/datacenter/index','多语言');
+  var sec1=LISTS['/system/setting/secret'];
+  if(sec1){ sec1.toolbar=[{n:'新增',pri:true},{n:'删除'}]; sec1.ops=[{n:'编辑'},{n:'删除'},{n:'禁用'}]; }
+  var aaa=LISTS['/audit/flow/application'];
+  if(aaa && aaa.ops && !aaa.ops.some(function(x){return x.n==='查看';})) aaa.ops.unshift({n:'查看'});
+})();
+
+/* ================= 1. 系统参数（现网 8 个页签） ================= */
+var S184_TABS=['IAM系统','Web应用','文件服务','安全与调试','运行参数','业务参数','语言设置','集成参数'];
+
+function s184Row(label,ctl,note){
+  return '<div class="fm-row"><label>'+label+'</label><div class="fc">'+ctl
+    + (note?'<div class="fh">'+note+'</div>':'') + '</div></div>';
+}
+function s184Sel(ph,opts,cur){
+  return '<select><option value="">'+ph+'</option>'+(opts||[]).map(function(o){
+    return '<option'+(o===cur?' selected':'')+'>'+o+'</option>'; }).join('')+'</select>';
+}
+function s184Sw(on,text){
+  return '<div class="swrow"><span class="sw'+(on?' on':'')+'" onclick="this.classList.toggle(\'on\')"><i></i></span>'
+    + (text?'<span class="swtx">'+text+'</span>':'')+'</div>';
+}
+function s184Chk(items,cur){
+  return '<div class="chk-grp">'+items.map(function(x){
+    return '<label class="chk'+(x===cur?' on':'')+'" onclick="s184Pick(this)"><i></i>'+x+'</label>'; }).join('')+'</div>';
+}
+
+/* IAM 系统 / 集成参数 共用 */
+function s184IamHtml(extra){
+  return '<div class="fm-card"><div class="fm-hd">集成配置</div><div class="fm-bd">'
+    + s184Row('集成系统', s184Chk(['竹云IAM6.9','竹云IAM7.0','竹云IAM6.10','竹云零信任认证中心'],'竹云零信任认证中心'))
+    + s184Row('服务访问地址','<input type="text" value="https://sdp.example.com:18014" placeholder="请输入身份管理服务API访问地址">')
+    + s184Row('身份ID','<input type="text" value="pxQbvlL9g9rz4dlo" placeholder="请输入身份ID/AppKey">')
+    + s184Row('身份密钥','<input type="password" value="QbP7hXfntc6p3C7IPvxSEVccr6gKyT4B" placeholder="请输入身份密钥/AppSecret">')
+    + (extra||'')
+    + '</div><div class="fm-foot"><button class="btn-pri" onclick="lpTip(\'集成配置已保存\')">保存</button></div></div>';
+}
+
+/* Web 应用 */
+function s184WebHtml(){
+  return '<div class="fm-card"><div class="fm-hd">Web 应用转发与缓存</div><div class="fm-bd">'
+    + s184Row('TLS 最低版本', s184Sel('请选择 TLS 最低版本',['TLSv1.0','TLSv1.1','TLSv1.2','TLSv1.3'],'TLSv1.2'))
+    + s184Row('TLCP 最低版本', s184Sel('请选择 TLCP 最低版本',['TLCPv1.1'],'TLCPv1.1'))
+    + s184Row('TLS加密算法', s184Sel('请选择加密算法套件',['默认套件','仅国密套件','国密优先'],'默认套件'))
+    + s184Row('静态资源类型','<textarea rows="2">*.css , *.js, *.ico , *.png , *.jpg , *.gif ，  *.svg ， *.woff ， *.ttf</textarea>')
+    + s184Row('静态资源缓存', s184Sw(true,'开启，网关缓存静态资源')
+        + '<div class="inl"><input type="text" value="1800" style="width:120px"><span class="unit">秒</span></div>',
+        '静态资源缓存更新间隔')
+    + s184Row('页面前缀','<input type="text" value="<!DOCTYPE html,<html,<!doctype html">')
+    + s184Row('页面标签','<input type="text" value="</body>">')
+    + s184Row('例外标签','<input type="text" value="id=\'apps\',</html>">')
+    + s184Row('转发Buffer大小（Byte）','<input type="text" value="32768" placeholder="请输入代理转发Buffer大小">')
+    + s184Row('缓存最大客户端数量','<input type="text" value="0" placeholder="请输入缓存最大客户端数量,0代表不限数量">')
+    + s184Row('每台目标主机客户端数量','<input type="text" value="200" placeholder="请输入每台目标主机缓存最大客户端数量">')
+    + '</div><div class="fm-foot"><button class="btn-plain" onclick="lpRerender()">重置</button>'
+    + '<button class="btn-pri" onclick="lpTip(\'Web 应用配置已保存\')">保存</button></div></div>';
+}
+
+/* 文件服务 */
+function s184FileHtml(){
+  return '<div class="fm-card"><div class="fm-hd">文件服务</div><div class="fm-bd">'
+    + s184Row('文件服务名称','<input type="text" value="文件服务" placeholder="请输入文件服务名称">')
+    + s184Row('服务器地址','<input type="text" value="https://10.20.9.40:9010" placeholder="请输入文件服务器访问地址">')
+    + '</div><div class="fm-foot"><button class="btn-pri" onclick="lpTip(\'文件服务已保存\')">保存</button></div></div>';
+}
+
+/* 安全与调试 */
+function s184SafeHtml(){
+  function dbg(name,def){
+    return '<div class="fm-row"><label>'+name+'</label><div class="fc">'
+      + '<div class="swrow"><span class="sw on" onclick="this.classList.toggle(\'on\')"><i></i></span>'
+      + '<span class="swtx">开启，启用所有'+name+'服务DEBUG模式</span></div>'
+      + '<div class="inl"><span class="lb">服务类型</span>'
+      + '<select style="width:160px"><option>全选</option><option>sag-web</option><option>sag-auth</option><option>sag-proxy</option></select>'
+      + '<span class="lb">调试时长（秒）</span><input type="text" value="'+(def||'99999')+'" style="width:120px"></div>'
+      + '</div></div>';
+  }
+  return '<div class="fm-card"><div class="fm-hd">主机防火墙</div><div class="fm-bd">'
+    + s184Row('控制器设备', s184Sw(true,'开启，启用所有控制器主机防火墙规则'))
+    + s184Row('网关设备', s184Sw(true,'开启，启用所有网关主机防火墙规则'))
+    + '</div></div>'
+    + '<div class="fm-card" style="margin-top:12px"><div class="fm-hd">DEBUG 模式</div><div class="fm-bd">'
+    + dbg('控制器') + dbg('网关') + dbg('管控台')
+    + '</div></div>'
+    + '<div class="fm-card" style="margin-top:12px"><div class="fm-hd">火焰图分析</div><div class="fm-bd">'
+    + ['控制器','网关','管控台'].map(function(n){
+        return s184Row(n+'火焰图', s184Sw(true,'开启，启用所有'+n+'服务火焰图分析')); }).join('')
+    + '</div><div class="fm-foot"><button class="btn-pri" onclick="lpTip(\'安全与调试已保存\')">保存</button></div></div>';
+}
+
+/* 运行参数（控制器 / 网关 / 管控台 三个子页签） */
+var S184_RUN_SUB=['控制器','网关','管控台'];
+var S184_RUN_GROUPS=[
+  {g:'安全配置',items:[
+    ['密码数据加密','关闭','提供服务配置文件中的密码数据加解密设置，选择加密将显示密文，选择解密将显示明文，保存后立即生效。'],
+    ['User-Agent配置','','提供调用外部服务时请求头中的User-Agent标识设置，便于外部服务识别零信任系统的合法调用。'],
+    ['X-Forwarded-For配置','','提供控制器转发请求时向后端传递真实客户端IP的X-Forwarded-For头设置，多个代理链路以逗号分隔。'],
+    ['X-Real-IP配置','','提供控制器转发请求时向后端传递真实客户端IP的X-Real-IP头设置。']
+  ]},
+  {g:'客户端接入配置',items:[
+    ['心跳间隔','60 秒','客户端与控制器之间隧道保持的心跳间隔时间，保存后客户端重新连接后生效。'],
+    ['最大丢包数','6','心跳检查的误差配置，隧道连接保持间隔周期 = 最大丢包数 × 心跳间隔时间。'],
+    ['智能连接时长','10 分钟','客户端在智能连接模式下，未访问受保护应用时自动断开时长设置。'],
+    ['SDP服务鉴权时长','20 分钟','客户端接入 SDP 服务后定期校验接入服务信息的频率。'],
+    ['SDP服务重试时长','5 分钟','客户端未成功接入 SDP 服务后自动重试的时长设置。'],
+    ['TCP隧道类型','TLS','客户端和网关建立 TCP 隧道加密协议选择，可选 TLS（标密证书认证）、TLCP（国密证书认证）。'],
+    ['源IP适配','关闭','网络切换时使用固定 IP 开关设置，开启后优先使用固定源 IP 进行身份认证传参。'],
+    ['固定源IP','','固定源 IP 设置，避免因办公区网络切换导致 IP 变更而触发下线。'],
+    ['Token自动续期时长','0 分钟','客户端 Token 自动续期的时间间隔设置。'],
+    ['无流量自动退出时长','0 分钟','客户端无流量访问时自动退出登录的超时时长。']
+  ]},
+  {g:'策略中心联动配置',items:[
+    ['网关鉴权有效期','20 分钟','用户访问应用鉴权成功结果的有效时间配置，过期后重新发起应用鉴权，保存后立即生效。'],
+    ['AppID','6FoYRjGtYGqHTpTNXWpYMtRE','调用策略中心 API 服务时识别控制服务身份的标识，默认内置。'],
+    ['AppSecret','sFYpR59SxOSFaYh45xbZdyAXdbl2JS','调用策略中心 API 服务时识别控制服务身份的密钥，默认内置。']
+  ]}
+];
+function s184RunHtml(r){
+  var sub=lst(r).sub||0;
+  var gi=0,body='';
+  S184_RUN_GROUPS.forEach(function(gp){
+    gi++;
+    gp.items.forEach(function(it,i){
+      body+='<tr>';
+      if(i===0) body+='<td rowspan="'+gp.items.length+'">'+gi+'</td><td rowspan="'+gp.items.length+'">'+gp.g+'</td>';
+      else body+='';
+      body+='<td>'+it[0]+'</td>'
+        + '<td>'+(it[1]?'<input type="text" value="'+it[1]+'" style="width:100%">':'<input type="text" value="" style="width:100%">')+'</td>'
+        + '<td class="td-note">'+it[2]+'</td>'
+        + '<td>'+(i===gp.items.length-1?'<a href="javascript:;" class="lk" onclick="lpTip(\''+gp.g+'已保存\')">保存</a> <a href="javascript:;" class="lk" onclick="lpRerender()">重置</a>':'')+'</td>'
+        + '</tr>';
+    });
+  });
+  return '<div class="dtabs mini" style="margin-bottom:12px">'+S184_RUN_SUB.map(function(t,i){
+      return '<span class="'+(i===sub?'on':'')+'" onclick="s184Sub(\''+r+'\','+i+')">'+t+'</span>'; }).join('')+'</div>'
+    + '<div class="fm-card"><div class="fm-bd" style="padding:0">'
+    + '<table class="lp-tbl run-tbl"><thead><tr><th style="width:56px">序号</th><th style="width:140px">参数类型</th>'
+    + '<th style="width:190px">参数名称</th><th style="width:240px">值</th><th>参数说明</th><th style="width:120px">操作</th></tr></thead>'
+    + '<tbody>'+body+'</tbody></table></div></div>';
+}
+
+/* 业务参数 / 语言设置 */
+function s184BizHtml(){
+  return '<div class="fm-card"><div class="fm-bd" style="padding:0">'
+    + '<table class="lp-tbl"><thead><tr><th style="width:56px">序号</th><th>参数名称</th><th style="width:110px">系统内置</th>'
+    + '<th>参数说明</th><th style="width:140px">操作</th></tr></thead><tbody>'
+    + '<tr><td>1</td><td>可信访问工具数据项</td><td>是</td><td>此数据项用于应用发布展示的可信访问列表</td>'
+    + '<td><a href="javascript:;" class="lk" onclick="lpTip(\'编辑\')">编辑</a> '
+    + '<a href="javascript:;" class="lk" onclick="lpTip(\'多语言\')">多语言</a></td></tr>'
+    + '</tbody></table></div><div class="lp-tbl-foot">共 1 条</div></div>';
+}
+function s184LangHtml(){
+  return '<div class="toolbar"><button class="btn-pri" onclick="lpTip(\'新增语言\')">语言设置</button>'
+    + '<button class="btn-plain" onclick="lpTip(\'已重新拉取语言包\')">重试</button></div>'
+    + '<div class="fm-card"><div class="fm-bd" style="padding:0">'
+    + '<table class="lp-tbl"><thead><tr><th>语言名称</th><th>Locale代码</th><th style="width:120px">状态</th><th style="width:100px">默认</th></tr></thead>'
+    + '<tbody><tr><td colspan="4"><div class="lp-empty">暂无数据</div></td></tr></tbody></table></div></div>';
+}
+
+function sys184Html(c,r){
+  var ti=lst(r).tab||0, body='';
+  if(ti===0) body=s184IamHtml();
+  else if(ti===1) body=s184WebHtml();
+  else if(ti===2) body=s184FileHtml();
+  else if(ti===3) body=s184SafeHtml();
+  else if(ti===4) body=s184RunHtml(r);
+  else if(ti===5) body=s184BizHtml();
+  else if(ti===6) body=s184LangHtml();
+  else body=s184IamHtml('<div class="fm-note">集成参数与 IAM 系统同源，差异项由控制器下发后在此只读展示。</div>');
+  return '<div class="dtabs" style="margin-bottom:16px">'+S184_TABS.map(function(t,i){
+      return '<span class="'+(i===ti?'on':'')+'" onclick="lpTab(\''+r+'\','+i+')">'+t+'</span>'; }).join('')+'</div>'+body;
+}
+function s184Sub(r,i){ var s=lst(r); s.sub=i; lpRerender(); }
+function s184Pick(el){
+  var box=el.parentNode, i;
+  for(i=0;i<box.children.length;i++) box.children[i].classList.remove('on');
+  el.classList.add('on');
+}
+reg('/system/setting/integration',{ rows:[], html:sys184Html });
+
+/* ================= 2. 页面定制（管控台 / 客户端 × 3 组素材） ================= */
+var PG184_TABS=['管控台','客户端'];
+var PG184_GROUPS=[
+  {g:'登录页设置', items:[
+    ['背景图','img','login-bg.png','支持格式png文件大小1M以内,建议尺寸1920px*960px'],
+    ['登录LOGO','img','login_logo.png','支持格式png文件大小1M以内,建议尺寸346px*44px'],
+    ['登录框LOGO','img','login_box.png','支持格式png文件大小1M以内,建议尺寸100px*100px'],
+    ['底部图标','img','footer_icon.png','支持格式png文件大小1M以内,建议尺寸540px*66px'],
+    ['底部版权文字','txt','Copyright © 2017-2024 竹云科技','0 / 20']
+  ]},
+  {g:'内容页配置', items:[
+    ['导航LOGO','img','nav_logo.png','支持格式png文件大小1M以内,建议尺寸540px*66px']
+  ]},
+  {g:'页签配置', items:[
+    ['浏览器图标','img','favicon.ico','支持格式png文件大小1M以内,建议尺寸16px*16px']
+  ]},
+  {g:'其他', items:[
+    ['系统名称','txt','竹云零信任安全服务平台',''],
+    ['界面图标','img','ui_icon.png','支持格式png文件大小1M以内,建议尺寸32px*32px'],
+    ['关于LOGO','img','about_logo.png','支持格式png文件大小1M以内,建议尺寸240px*60px'],
+    ['标题名称','txt','零信任安全服务平台',''],
+    ['二级名称','txt','统一身份安全管控台','']
+  ]}
+];
+function pg184Item(it){
+  if(it[1]==='txt'){
+    return '<div class="pg-item"><div class="pt">'+it[0]+'</div>'
+      + '<input type="text" value="'+it[2]+'" placeholder="请输入'+it[0]+'">'
+      + (it[3]?'<div class="pg-note">'+it[3]+'</div>':'')+'</div>';
+  }
+  return '<div class="pg-item"><div class="pt">'+it[0]+'</div>'
+    + '<div class="pg-up has" onclick="lpTip(\'选择文件上传\')">'
+    + '<i class="iconfont icon-newly_added"></i><span>'+it[2]+'</span></div>'
+    + (it[3]?'<div class="pg-note">'+it[3]+'</div>':'<div class="pg-note"><a href="javascript:;" class="lk" onclick="lpTip(\'预览\')">预览</a></div>')
+    + '</div>';
+}
+function pg184Html(c,r){
+  var ti=lst(r).tab||0;
+  var body=PG184_GROUPS.map(function(gp){
+    return '<div class="fm-card" style="margin-bottom:12px"><div class="fm-hd">'+gp.g+'</div>'
+      + '<div class="pg-grid">'+gp.items.map(pg184Item).join('')+'</div></div>';
+  }).join('');
+  return '<div class="dtabs" style="margin-bottom:14px">'+PG184_TABS.map(function(t,i){
+      return '<span class="'+(i===ti?'on':'')+'" onclick="lpTab(\''+r+'\','+i+')">'+t+'</span>'; }).join('')+'</div>'
+    + body
+    + '<div class="fm-card"><div class="fm-foot" style="border-top:1px solid #EBEEF5">'
+    + '<button class="btn-plain" onclick="lpTip(\'已恢复默认素材\')">恢复默认</button>'
+    + '<button class="btn-plain" onclick="lpRerender()">清空</button>'
+    + '<button class="btn-pri" onclick="lpTip(\''+PG184_TABS[ti]+'定制已保存\')">保存</button></div></div>';
+}
+reg('/system/setting/page',{ rows:[], html:pg184Html });
+
+/* ================= 3. 消息通知（现网 5 个页签，卡片式） ================= */
+var NT184_TABS=['告警事件通知','终端信息通知','可信APP通知','应用服务通知','页面安全通知'];
+var NT184_DATA=[
+  [ /* 告警事件通知 */
+    {n:'主机负载告警',on:1,obj:'admin',types:['钉钉机器人','短信','邮件'],lvl:['严重类事件','警告类事件','提醒类事件'],
+     d:'NOTIFY_USER：通知对象；OBJECT_TYPE：告警事件中的主体对象类型，包括控制器、网关；OBJECT：服务对象信息，显示对应服务IP；MSG：主机负载使用情况；TIMEDATE：发送时间'},
+    {n:'服务恢复告警',on:1,obj:'admin',types:['钉钉机器人','短信','邮件'],lvl:['严重类事件','警告类事件','提醒类事件'],
+     d:'NOTIFY_USER：通知对象；OBJECT_TYPE：告警事件中的主体对象类型，包括控制器、网关、ES服务、ETCD服务、数据库、策略引擎服务、应用主机'}
+  ],
+  [ /* 终端信息通知 */
+    {n:'终端注册审批通知',on:1,obj:'{AGENT_USER}',types:['钉钉机器人','短信','邮件'],d:'NOTIFY_USER：终端责任人；AGENT_NAME：终端名称；APP_NAME：终端主机名'},
+    {n:'终端合规结果通知',on:1,obj:'{AGENT_USER}',types:['钉钉机器人','短信','邮件'],d:'NOTIFY_USER：终端责任人；RESULT：合规检查结果；TIMEDATE：检查时间'}
+  ],
+  [ /* 可信APP通知 */
+    {n:'可信APP登录确认',on:1,obj:'{NOTIFY USER}',types:['钉钉','企微','微信','飞书','短信'],d:'NOTIFY_USER：通知对象；APP_NAME：应用名称；TIMEDATE：确认时间'}
+  ],
+  [ /* 应用服务通知 */
+    {n:'应用服务到期提醒',on:1,obj:'admin',types:['钉钉机器人','短信','邮件'],time:'30',d:'NOTIFY_USER：通知对象；APP_NAME：应用名称；EXPIRE_TIME：到期时间'}
+  ],
+  [] /* 页面安全通知 */
+];
+function nt184Card(x){
+  var types=x.types.map(function(t){
+    var on=x.types.indexOf(t)===0;
+    return '<label class="chk'+(on?' on':'')+'" onclick="s184Pick(this)"><i></i>'+t+'</label>'; }).join('');
+  var lvl=(x.lvl||[]).map(function(t){
+    return '<label class="chk on" onclick="s184Pick(this)"><i></i>'+t+'</label>'; }).join('');
+  return '<div class="fm-card nt-card"><div class="fm-hd">'+x.n
+      + '<span class="r"><span class="sw'+(x.on?' on':'')+'" onclick="this.classList.toggle(\'on\')"><i></i></span>'
+      + '<a href="javascript:;" class="lk" onclick="lpTip(\'已重新发送\')">重试</a></span></div>'
+    + '<div class="fm-bd">'
+    + '<div class="nt-row"><label>通知对象</label><input type="text" value="'+x.obj+'" placeholder="请输入通知对象"></div>'
+    + '<div class="nt-row"><label>通知类型</label><div class="chk-grp">'+types+'</div></div>'
+    + (lvl?'<div class="nt-row"><label>通知级别</label><div class="chk-grp">'+lvl+'</div></div>':'')
+    + (x.time?'<div class="nt-row"><label>提醒时间</label><input type="text" value="'+x.time+'" style="width:120px"><span class="unit">分钟</span></div>':'')
+    + '<div class="nt-note"><b>说明</b>'+x.d+'</div>'
+    + '</div><div class="fm-foot"><button class="btn-pri" onclick="lpTip(\''+x.n+'已保存\')">保存</button></div></div>';
+}
+function nt184Html(c,r){
+  var ti=lst(r).tab||0, list=NT184_DATA[ti]||[];
+  var body=list.length? list.map(nt184Card).join('')
+    : '<div class="fm-card"><div class="fm-bd"><div class="lp-empty">该类通知暂未提供模板</div></div></div>';
+  return '<div class="dtabs" style="margin-bottom:16px">'+NT184_TABS.map(function(t,i){
+      return '<span class="'+(i===ti?'on':'')+'" onclick="lpTab(\''+r+'\','+i+')">'+t+'</span>'; }).join('')+'</div>'
+    + '<div class="tb-tip">通知内容支持变量占位符，实际发送时按事件上下文替换。</div>'+body;
+}
+reg('/system/setting/notify',{ rows:[], html:nt184Html });
+
+/* ================= 4. 产品许可（按现网结构） ================= */
+var LC184_GW=['零信任安全接入网关','零信任数据安全网关','零信任API网关','零信任安全邮件网关'];
+var LC184_USE=[
+  ['SDP服务使用量','20','20',''],
+  ['应用系统使用量','36','100',''],
+  ['终端设备使用量','128','500','']
+];
+function lc184Html(c,r){
+  var gw=LC184_GW.map(function(n){
+    return '<div class="lc-gw"><i class="iconfont icon-secure_access_gateway"></i><span>'+n+'</span>'
+      + '<em class="ok">已授权</em></div>'; }).join('');
+  var use=LC184_USE.map(function(x){
+    var pct=Math.round(parseInt(x[1],10)/parseInt(x[2],10)*100);
+    return '<div class="lc-cap"><div class="cn">'+x[0]+'</div>'
+      + '<div class="cv">'+x[1]+'<em>/ '+x[2]+'</em></div>'
+      + '<div class="bar"><i style="width:'+pct+'%"></i></div></div>'; }).join('');
+  return '<div class="toolbar">'
+      + '<button class="btn-pri" onclick="lpTip(\'选择许可文件导入\')">许可文件</button>'
+      + '<button class="btn-plain" onclick="lpTip(\'许可信息已刷新\')">刷新</button>'
+      + '<button class="btn-plain" onclick="lpTip(\'许可设置\')">设置</button></div>'
+    + '<div class="fm-card"><div class="fm-hd">许可文件<span class="r">许可编号：cb98288c3d58408e9a451bae61e84b8a</span></div>'
+      + '<div class="fm-bd" style="padding:0"><table class="lp-tbl"><thead><tr><th>客户名称</th><th>许可有效期</th><th style="width:160px">许可状态</th></tr></thead>'
+      + '<tbody><tr><td>内部学习项目</td><td>2027-04-27</td><td>'+d('正常','g')+'</td></tr></tbody></table></div></div>'
+    + '<div class="fm-card" style="margin-top:12px"><div class="fm-hd">License授权信息</div>'
+      + '<div class="lc-gws">'+gw+'</div></div>'
+    + '<div class="fm-card" style="margin-top:12px"><div class="fm-hd">授权使用量</div>'
+      + '<div class="lc-caps">'+use+'</div></div>';
+}
+reg('/system/license/index',{ rows:[], html:lc184Html });
+
+/* ================= 项目定制（2026-11-20 沁重新梳理） =================
+   定制功能一律不进左侧菜单，只通过「页面导航 › 项目定制」进入；
+   但功能本身长在真实页面上，不另做一套独立页面 —— 这里只放直达入口。
+
+   ① 师大：资源 › Web应用 › 行内「染色」→ 流量染色抽屉 →「智能学习 >>」→ 智能学习策略
+      （实现见 lists_dye.js）
+   ② 中储粮：终端 › 客户端 › 客户端版本 › 左树「客户端隧道管控」
+      （实现见 lists_tunnel.js）
+   ③ 应用维护（定制页面，index.html 内的 mtHtml，route /project/maintenance/index） */
+
+/* 页面导航 › 项目定制 › 流量染色：直达 Web应用 并打开第一个应用的染色抽屉 */
+function goDyeDemo(){
+  openPage('Web应用','/resource/application/system');
+  var c=LISTS['/resource/application/system'];
+  if(c && c.opHandlers && c.opHandlers['染色']) c.opHandlers['染色'](c.route,0);
+  else lpTip('染色入口未挂载');
+}
+
+/* 页面导航 › 项目定制 › 客户端隧道管控：直达客户端版本并选中左树「客户端隧道管控」 */
+function goTunnelDemo(){
+  openPage('客户端版本','/terminal/client/version');
+  var r='/terminal/client/version', c=LISTS[r];
+  if(!c){ lpTip('页面未注册'); return; }
+  var its=treeItems(c), s=lst(r), hit=-1;
+  for(var i=0;i<its.length;i++){ if(its[i].n==='客户端隧道管控'){ hit=i; break; } }
+  if(hit<0){ lpTip('未找到「客户端隧道管控」节点'); return; }
+  s.node=hit; s.__cli=1;            /* 置 __cli 防止 before 钩子把节点重置回版本详情 */
+  lpRerender();
+}
+
+/* ================= 流量染色（师大需求，2026-11-20） =================
+   入口：资源 › Web应用 › 行内「染色」
+   抽屉「流量染色」：顶部规则表 + 响应内容区 + 规则置换区（右上角「智能学习 >>」）
+   「智能学习 >>」→ 居中弹窗「智能学习策略」：开关 / 截止时间 / 置换规则 / 规则表 / 确定
+   确定后把学习结果自动化核准并回填到「规则置换」明细。 */
+
+var DYE={ url:'', resp:[], rep:[] };            /* resp=响应内容规则  rep=规则置换 */
+var DYE_STORE={};                               /* 按应用名分开存，切换应用不串数据 */
+var DYE_ML={ on:true, deadline:'', pos:'全部',
+  rows:[['响应内容','*.cnki.net','*.cnu.cnki.cnnu.net'],
+        ['响应内容','href="***"','href="ip2.bm.com"']] };
+var DYE_POS=['请求头','请求内容','响应头','响应内容'];
+
+/* ---------- 区块骨架 ---------- */
+function dyeSec(title,desc,extra,body){
+  return '<div class="dye-sec"><div class="dye-sh"><span class="t">'+title+'</span>'
+    + '<span class="r">'+(extra||'')+'</span></div>'
+    + '<div class="dye-sd">'+desc+'</div>' + body + '</div>';
+}
+function dyeUrlBlock(mode){
+  var chk = mode==='rep'
+    ? '<span class="dye-ck on" onclick="dyeChk(this)"></span>' : '';
+  return '<div class="dye-url"><span class="ar">&#9662;</span>'
+    + '<span class="lb">请求URL:</span>' + chk
+    + '<input type="text" class="dye-url-in" value="'+(DYE.url||'')+'" placeholder="请输入URL地址/路径">'
+    + '<span class="del" title="删除该URL" onclick="lpTip(\'已删除该 URL 分组\')">'
+    + '<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.6 8.2h5.8l.6-8.2" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    + '</span></div>';
+}
+function dyeChk(el){ el.classList.toggle('on'); }
+
+/* ---------- 顶部规则表 ---------- */
+function dyeTop(){
+  return '<div class="dye-top-wrap"><table class="lp-tbl dye-top">'
+    + '<thead><tr><th style="width:60px">序号</th><th>请求URL</th><th style="width:120px">响应内容</th>'
+    + '<th style="width:120px">规则置换</th><th style="width:80px">操作</th></tr></thead>'
+    + '<tbody><tr><td colspan="5"><div class="lp-empty">暂无数据</div></td></tr></tbody></table></div>';
+}
+function dyeRespTable(){
+  var rows=DYE.resp.length? DYE.resp.map(function(x,i){
+    return '<tr><td>'+(i+1)+'</td><td>'+x[0]+'</td><td>'+(x[1]||'--')+'</td>'
+      + '<td><a class="lk red" onclick="dyeDel(\'resp\','+i+')">删除</a></td></tr>'; }).join('')
+    : '<tr><td colspan="4"><div class="lp-empty">暂无数据</div></td></tr>';
+  return '<table class="lp-tbl dye-tbl"><thead><tr><th style="width:60px">序号</th><th>目标数据</th>'
+    + '<th>置换后数据</th><th style="width:90px">操作</th></tr></thead><tbody>'+rows+'</tbody></table>';
+}
+function dyeRepTable(){
+  var rows=DYE.rep.length? DYE.rep.map(function(x,i){
+    return '<tr><td>'+(i+1)+'</td><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+(x[2]||'--')+'</td>'
+      + '<td><a class="lk red" onclick="dyeDel(\'rep\','+i+')">删除</a></td></tr>'; }).join('')
+    : '<tr><td colspan="5"><div class="lp-empty">暂无数据</div></td></tr>';
+  return '<table class="lp-tbl dye-tbl"><thead><tr><th style="width:60px">序号</th><th style="width:110px">置换位置</th>'
+    + '<th>原数值</th><th>置换后数值</th><th style="width:80px">操作</th></tr></thead><tbody>'+rows+'</tbody></table>';
+}
+function dyeHtml(){
+  var resp = dyeSec('响应内容','指定请求URL，并设置响应报文中需要修改内容的匹配规则和置换内容。',
+      '<span class="plus" title="新增 URL 分组" onclick="lpTip(\'已新增一个 URL 分组\')">+</span>',
+      dyeUrlBlock('resp')
+      + '<div class="dye-in"><textarea rows="2" id="dyeR1" placeholder="请输入目标数据匹配规则"></textarea>'
+      +   '<textarea rows="2" id="dyeR2" placeholder="请输入置换后数据"></textarea>'
+      +   '<button class="btn-pri" onclick="dyeAdd(\'resp\')">添加</button></div>'
+      + dyeRespTable());
+
+  var rep = dyeSec('规则置换','指定请求URL，并设置需要修改内容的匹配规则和置换内容。',
+      '<button class="btn-plain dye-mlbtn" onclick="dyeMlOpen()">智能学习 &gt;&gt;</button>',
+      dyeUrlBlock('rep')
+      + '<div class="dye-in"><select id="dyePos" class="dye-sel">'
+      +   '<option value="">请选择置换位置</option>'
+      +   DYE_POS.map(function(p){ return '<option>'+p+'</option>'; }).join('') + '</select>'
+      +   '<input type="text" id="dyeRep1" placeholder="请输入置换前数值">'
+      +   '<input type="text" id="dyeRep2" placeholder="请输入置换后数值">'
+      +   '<button class="btn-pri" onclick="dyeAdd(\'rep\')">添加</button></div>'
+      + dyeRepTable());
+
+  return '<div class="dye">'+dyeTop()+resp+rep+'</div>';
+}
+function dyeAdd(kind){
+  if(kind==='resp'){
+    var a=document.getElementById('dyeR1'), b=document.getElementById('dyeR2');
+    if(!a.value.trim()){ lpTip('请输入目标数据匹配规则'); return; }
+    DYE.resp.push([a.value.trim(), b.value.trim()||'--']); a.value=''; b.value='';
+  } else {
+    var p=document.getElementById('dyePos'), c=document.getElementById('dyeRep1'), d=document.getElementById('dyeRep2');
+    if(!p.value){ lpTip('请选择置换位置'); return; }
+    if(!c.value.trim()){ lpTip('请输入置换前数值'); return; }
+    DYE.rep.push([p.value, c.value.trim(), d.value.trim()||'--']);
+    c.value=''; d.value='';
+  }
+  dyeRerender();
+}
+function dyeDel(kind,i){
+  (kind==='resp'? DYE.resp : DYE.rep).splice(i,1);
+  dyeRerender();
+}
+function dyeRerender(){
+  var box=document.querySelector('#dBody .dye');
+  if(box) box.outerHTML=dyeHtml();
+}
+/* 从 Web应用 行内「染色」打开 */
+function dyeOpen(r,gi){
+  var c=LISTS[r], row=c.rows[gi], key=strip(row[0]);
+  var st=DYE_STORE[key];
+  var u=strip(row[2])||'';
+  if(u && !/^https?:/i.test(u)) u='https://'+u;
+  DYE = st? { url:st.url, resp:st.resp.slice(0), rep:st.rep.slice(0) } : { url:u, resp:[], rep:[] };
+  DYE_STORE[key]=DYE;
+  /* 智能学习策略每次打开都从默认样例起（演示口径） */
+  document.getElementById('dTitle').textContent='流量染色';
+  document.getElementById('dTag').innerHTML='';
+  document.getElementById('dBody').innerHTML=dyeHtml();
+  document.getElementById('mask').classList.add('on');
+  document.getElementById('drawer').classList.add('on');
+}
+
+/* ---------- 智能学习策略（染色抽屉内弹窗） ---------- */
+function dyeMlBody(){
+  var rows=DYE_ML.rows.length? DYE_ML.rows.map(function(x,i){
+    return '<tr><td>'+(i+1)+'</td><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+x[2]+'</td>'
+      + '<td><a class="lk red" onclick="dyeMlDel('+i+')">删除</a></td></tr>'; }).join('')
+    : '<tr><td colspan="5"><div class="lp-empty">暂无数据</div></td></tr>';
+  return '<div class="dyem">'
+    + '<div class="dyem-sw"><span class="sw'+(DYE_ML.on?' on':'')+'" onclick="dyeMlToggle(this)"><i></i></span></div>'
+    + '<div class="dyem-row"><label><em>*</em>截止时间</label>'
+      + '<input type="text" id="dyeMlDl" value="'+DYE_ML.deadline+'" placeholder="请设置自学习截止时间"></div>'
+    + '<div class="dyem-row"><label><em>*</em>置换规则</label><div class="dyem-fc">'
+      + '<div class="dyem-l1"><select id="dyeMlPos">'
+        + ['全部'].concat(DYE_POS).map(function(p){
+            return '<option'+(p===DYE_ML.pos?' selected':'')+'>'+p+'</option>'; }).join('') + '</select>'
+        + '<input type="text" id="dyeMl1" placeholder="请输入置换前数值"></div>'
+      + '<div class="dyem-l2"><input type="text" id="dyeMl2" placeholder="请输入置换后数值">'
+        + '<button class="btn-pri" onclick="dyeMlAdd()">添加</button></div>'
+      + '</div></div>'
+    + '<table class="lp-tbl dyem-tbl"><thead><tr><th style="width:60px">序号</th><th style="width:100px">置换位置</th>'
+      + '<th>原数值</th><th>置换后数值</th><th style="width:80px">操作</th></tr></thead><tbody>'+rows+'</tbody></table>'
+    + '</div>';
+}
+function dyeMlOpen(){
+  lpOpenModal('智能学习策略', dyeMlBody(),
+    '<button class="btn-pri" onclick="dyeMlOk()">确定</button>');
+  var m=document.getElementById('modal'); if(m) m.classList.add('dyem-box');
+}
+function dyeMlToggle(el){ el.classList.toggle('on'); DYE_ML.on=el.classList.contains('on'); }
+function dyeMlAdd(){
+  var p=document.getElementById('dyeMlPos'), a=document.getElementById('dyeMl1'), b=document.getElementById('dyeMl2');
+  if(!p.value){ lpTip('请选择置换位置'); return; }
+  if(!a.value.trim()){ lpTip('请输入置换前数值'); return; }
+  DYE_ML.rows.push([p.value, a.value.trim(), b.value.trim()||'--']);
+  a.value=''; b.value='';
+  var bd=document.getElementById('mBody'); if(bd) bd.innerHTML=dyeMlBody();
+}
+function dyeMlDel(i){
+  DYE_ML.rows.splice(i,1);
+  var bd=document.getElementById('mBody'); if(bd) bd.innerHTML=dyeMlBody();
+}
+function dyeMlOk(){
+  var dl=document.getElementById('dyeMlDl');
+  DYE_ML.deadline=dl? dl.value : DYE_ML.deadline;
+  if(!DYE_ML.rows.length){ lpTip('暂无学习到的置换规则'); return; }
+  /* 学习结果自动化核准：直接回填「规则置换」明细 */
+  DYE_ML.rows.forEach(function(x){ DYE.rep.push([x[0],x[1],x[2]]); });
+  DYE_ML.rows=[];
+  lpCloseModal();
+  dyeRerender();
+  lpTip('已按智能学习结果自动生成并核准 '+DYE.rep.length+' 条置换规则');
+}
+
+/* 挂到 Web应用 页：行内「染色」（行内其余操作保持 1.8.4.0 现网口径） */
+(function(){
+  var c=LISTS['/resource/application/system'];
+  if(!c) return;
+  c.drawer=c.drawer||{ name:'应用详情', body:function(row,gi){ return genDetail(c,row,gi); } };
+  c.ops=c.ops||[];
+  if(!c.ops.some(function(x){ return x.n==='染色'; })) c.ops.push({n:'染色'});
+  c.opHandlers={ '染色':dyeOpen };
+})();
+
+/* ================= 客户端隧道管控（中储粮需求，2026-11-20） =================
+   入口：终端 › 客户端 › 客户端版本 › 左侧树「客户端隧道管控」
+   页面：客户端隧道管控策略 —— 勾选组织，被勾选的移动端走零信任 SDK 隧道，未勾选走原有业务通道。 */
+
+var TUN_TREE={n:'组织架构',c:[
+  {n:'总裁办'},
+  {n:'技术部',c:[{n:'研发一部'},{n:'研发二部'},{n:'测试部'}]},
+  {n:'销售部',c:[{n:'华中区'},{n:'华南区'},{n:'华北区'}]},
+  {n:'人事部'},
+  {n:'财务部'},
+  {n:'市场部'}
+]};
+var TUN_SEL={'销售部':1,'华中区':1,'华南区':1,'华北区':1,'人事部':1,'财务部':1};
+var TUN_OPEN={'组织架构':1,'销售部':1};
+var TUN_TOTAL=30;                /* 组织总数（演示口径，与现网截图 3/30 一致） */
+var TUN_ACTIVE='销售部';          /* 已选列表里高亮的那一行 */
+
+function tunPicked(c,r){
+  var its=treeItems(c), it=its[lst(r).node||0];
+  return !!(it && it.n==='客户端隧道管控');
+}
+function tunFind(name,node){
+  node=node||TUN_TREE;
+  if(node.n===name) return node;
+  var kids=node.c||[];
+  for(var i=0;i<kids.length;i++){ var f=tunFind(name,kids[i]); if(f) return f; }
+  return null;
+}
+function tunState(o){
+  if(!o.c || !o.c.length) return TUN_SEL[o.n]? 'on':'';
+  var n=0;
+  o.c.forEach(function(k){ if(tunState(k)==='on'||tunState(k)==='half') n+=1; });
+  if(n===0) return TUN_SEL[o.n]? 'on':'';
+  if(n===o.c.length && TUN_SEL[o.n]!==0) return 'on';
+  return 'half';
+}
+function tunNode(o,lv,forceOpen){
+  var st=tunState(o), hasKid=!!(o.c&&o.c.length), op=!!TUN_OPEN[o.n];
+  var ar='<span class="ar'+(hasKid&&(op||forceOpen)?' open':'')+'"'
+    + ' onclick="event.stopPropagation();tunExp(\''+o.n+'\')">&#9654;</span>';
+  var h='<div class="tunn'+(st==='half'?' half':'')+'" style="padding-left:'+(lv*20+8)+'px" '
+    + 'onclick="tunPick(\''+o.n+'\')">'
+    + ar + '<span class="cb '+(st||'')+'"></span><span class="nm">'+o.n+'</span></div>';
+  if(hasKid && (op||forceOpen)) h+=o.c.map(function(k){ return tunNode(k,lv+1,forceOpen); }).join('');
+  return h;
+}
+function tunChips(){
+  var out=[];
+  (function walk(nodes,supp){
+    nodes.forEach(function(o){
+      var st=tunState(o);
+      if(st==='on'){ if(!supp) out.push(o.n); }
+      else if(st==='half'){ out.push(o.n); walk(o.c||[],true); }
+    });
+  })(TUN_TREE.c,false);
+  return out;
+}
+function tunHtml(){
+  var chips=tunChips();
+  return '<div class="tun">'
+    + '<div class="tun-hd">客户端隧道管控策略</div>'
+    + '<div class="tun-tip"><span class="i">i</span><div>'
+      + '此功能仅在「移动端」条件下生效，PC端应用不受此策略控制。<br>'
+      + '勾选的组织，所属用户的移动设备流量将走零信任SDK隧道加密传输，未勾选的组织，所属用户的移动设备流量仍走原有业务通道，'
+      + '业务访问不受影响，此策略用于灰度验证SDK稳定性，可随时取消勾选回退，不会阻断业务</div></div>'
+    + '<div class="tun-bar"><span>选择组织机构</span>'
+      + '<button class="btn-pri" onclick="lpTip(\'客户端隧道管控策略已保存\')">保存</button></div>'
+    + '<div class="tun-wrap">'
+      + '<div class="tun-l">'
+        + '<div class="tun-search"><i class="iconfont icon-search"></i>'
+        + '<input placeholder="输入部门名称" oninput="tunFilter(this.value)"></div>'
+        + '<div class="tun-tree" id="tunTree"><div class="tun-root">'
+          + '<span class="ar open" onclick="tunExp(\'组织架构\')">&#9654;</span>'
+          + '<span class="nm">组织架构</span></div>'
+          + TUN_TREE.c.map(function(o){ return tunNode(o,1); }).join('') + '</div>'
+      + '</div>'
+      + '<div class="tun-r">'
+        + '<div class="tun-rhd"><span>已选 <b>'+chips.length+'</b>/'+TUN_TOTAL+'</span>'
+        + '<a class="lk" onclick="tunClear()">清空</a></div>'
+        + '<div class="tun-sel">'+(chips.length? chips.map(function(n){
+            return '<div class="chip'+(n===TUN_ACTIVE?' on':'')+'" onclick="tunActive(\''+n+'\')">'+n
+              + '<span class="x" onclick="event.stopPropagation();tunPick(\''+n+'\')">&times;</span></div>'; }).join('')
+            : '<div class="lp-empty" style="padding:40px 0">暂未选择组织</div>')+'</div>'
+      + '</div>'
+    + '</div></div>';
+}
+function tunRerender(){
+  var box=document.querySelector('.lp-body .tun');
+  if(box) box.outerHTML=tunHtml();
+}
+function tunActive(name){ TUN_ACTIVE=name; tunRerender(); }
+function tunPick(name){
+  var o=tunFind(name);
+  if(!o) return;
+  var on = tunState(o)==='on'? 0:1;
+  TUN_SEL[o.n]=on;
+  (function setKids(x){ (x.c||[]).forEach(function(k){ TUN_SEL[k.n]=on; setKids(k); }); })(o);
+  if(on) TUN_OPEN[o.n]=1;
+  /* 回写父级：全选=1，全不选=0，部分=由 tunState 推 half */
+  (function up(node){
+    (node.c||[]).forEach(function(k){
+      up(k);
+      if(k.c && k.c.length){
+        var n=0; k.c.forEach(function(g){ if(tunState(g)==='on'||tunState(g)==='half') n+=1; });
+        TUN_SEL[k.n] = n===k.c.length? 1 : 0;
+      }
+    });
+  })(TUN_TREE);
+  if(on) TUN_ACTIVE=name;
+  tunRerender();
+}
+function tunExp(name){
+  TUN_OPEN[name]=TUN_OPEN[name]?0:1;
+  tunRerender();
+}
+function tunClear(){
+  Object.keys(TUN_SEL).forEach(function(k){ TUN_SEL[k]=0; });
+  TUN_ACTIVE='';
+  tunRerender();
+}
+function tunFilter(v){
+  v=String(v||'').trim();
+  var box=document.getElementById('tunTree'); if(!box) return;
+  var all=box.querySelectorAll('.tunn');
+  if(!v){
+    for(var j=0;j<all.length;j++) all[j].classList.remove('hide');
+    return;
+  }
+  for(var i=0;i<all.length;i++){
+    var nm=all[i].querySelector('.nm').textContent;
+    var hit=nm.indexOf(v)>=0;
+    all[i].classList.toggle('hide',!hit);
+    /* 命中的节点，把子级一起放出来 */
+    if(hit){
+      var nx=all[i].nextElementSibling;
+      var lv=(all[i].style.paddingLeft||'0').replace('px','')|0;
+      while(nx && nx.classList.contains('tunn')){
+        var nlv=(nx.style.paddingLeft||'0').replace('px','')|0;
+        if(nlv<=lv) break;
+        nx.classList.remove('hide'); nx=nx.nextElementSibling;
+      }
+    }
+  }
+}
+
+/* ================= 详情抽屉内的页签（2026-11-20 沁：tab 点不动、后面没数据） =================
+   原来三个详情抽屉的「会话记录 / 应用访问 / 告警事件」都是写死的 span，点了没反应；
+   这里补通用能力：dwTab(key,i) 重渲染当前抽屉，并给三张表都填真实派生数据。 */
+
+var DW_CUR={r:'',gi:0};
+var DTAB={};
+
+/* 记录当前打开的抽屉，供页签回跳 */
+(function(){
+  var _open=lpOpenDrawer;
+  lpOpenDrawer=function(r,gi){ DW_CUR={r:r,gi:gi}; _open(r,gi); };
+})();
+
+function dtabHtml(key,tabs,extra){
+  var cur=DTAB[key]||0;
+  return '<div class="dtabs"'+(extra?' '+extra:'')+'>'+tabs.map(function(t,i){
+    return '<span class="'+(i===cur?'on':'')+'" onclick="dwTab(\''+key+'\','+i+')">'+t+'</span>' }).join('')+'</div>';
+}
+function dwTab(key,i){
+  DTAB[key]=i;
+  var r=DW_CUR.r, c=LISTS[r];
+  if(!c||!c.drawer||!c.drawer.body) return;
+  var row=(c.rows||[])[DW_CUR.gi];
+  var body=document.getElementById('dBody');
+  body.innerHTML=c.drawer.body(row,DW_CUR.gi);
+  body.scrollTop=0;
+  if(c.drawer.after) c.drawer.after(row,DW_CUR.gi);
+}
+
+/* ---------- 派生数据（用行号做种子，同一行每次打开都一样） ---------- */
+function duT(gi,k){
+  var d=8+((gi+k)%10);
+  return '2026-11-11 '+p2(d)+':'+p2((gi*7+k*13)%60)+':'+p2((gi*3+k*7)%60);
+}
+function duDur(gi,k){ return [128,64,312,86,205,47][(gi+k)%6]+' ms'; }
+function duFlow(gi,k){ return (12+(gi+k)%40)+'.'+(gi+k)%10+' MB'; }
+
+/* 会话记录 */
+function duSessRows(row,gi,n){
+  var out=[];
+  for(var k=0;k<n;k++){
+    out.push(['SESS-'+(88420+gi*3+k), duT(gi,k), duT(gi,k+1),
+      P_GW[(gi+k)%5], d(k===0?'进行中':'已结束', k===0?'g':'gy')]);
+  }
+  return '<table class="lp-tbl"><thead><tr><th style="width:130px">会话ID</th><th>接入时间</th><th>退出时间</th>'
+    + '<th style="width:96px">网关节点</th><th style="width:84px">状态</th></tr></thead><tbody>'
+    + out.map(function(x){ return '<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+(x[2]||'—')+'</td>'
+        + '<td>'+x[3]+'</td><td>'+x[4]+'</td></tr>' }).join('')
+    + '</tbody></table>'+duFoot(n);
+}
+
+/* 应用访问（在线用户 / 在线设备通用） */
+function duAppRows(row,gi,n){
+  var res=['成功','成功','成功','成功','被拒绝','成功'];
+  var out=[];
+  for(var k=0;k<n;k++){
+    var a=P_APPS[(gi+k*3)%P_APPS.length];
+    out.push([a, duT(gi,k), '10.'+(50+(gi+k)%6)+'.'+(20+(gi+k)%20)+'.'+(100+(gi+k)%80),
+      duFlow(gi,k), duDur(gi,k), res[(gi+k)%6]]);
+  }
+  return '<table class="lp-tbl"><thead><tr><th>应用名称</th><th style="width:150px">访问时间</th><th>目的地址</th>'
+    + '<th style="width:90px">流量</th><th style="width:90px">耗时</th><th style="width:84px">结果</th></tr></thead><tbody>'
+    + out.map(function(x){
+        return '<tr><td><span style="color:#0095E5">'+x[0]+'</span></td><td>'+x[1]+'</td><td>'+x[2]+'</td>'
+          + '<td>'+x[3]+'</td><td>'+x[4]+'</td><td>'+d(x[5], x[5]==='成功'?'g':'r')+'</td></tr>' }).join('')
+    + '</tbody></table>'+duFoot(n);
+}
+
+/* 应用鉴权（在线设备） */
+function duAuthRows(row,gi,n){
+  var pol=['默认策略，覆盖全部适用对象','针对敏感数据的访问控制','仅允许内网办公终端访问','高峰期流量灰度策略'];
+  var out=[];
+  for(var k=0;k<n;k++){
+    out.push([P_APPS[(gi+k*2)%P_APPS.length], duT(gi,k), pol[(gi+k)%4],
+      ['单包','会话'][(gi+k)%2], d([ '放行','放行','放行','拒绝'][(gi+k)%4], (gi+k)%4===3?'r':'g')]);
+  }
+  return '<table class="lp-tbl"><thead><tr><th>应用名称</th><th style="width:150px">鉴权时间</th><th>命中策略</th>'
+    + '<th style="width:84px">鉴权方式</th><th style="width:84px">结果</th></tr></thead><tbody>'
+    + out.map(function(x){ return '<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+x[2]+'</td><td>'+x[3]+'</td><td>'+x[4]+'</td></tr>' }).join('')
+    + '</tbody></table>'+duFoot(n);
+}
+
+/* 单包鉴权（终端设备） */
+function duPktRows(row,gi,n){
+  var out=[];
+  for(var k=0;k<n;k++){
+    out.push([duT(gi,k), '169.2.'+((gi+k)%9+1)+'.'+((gi+k)%60+10), P_APPS[(gi+k)%P_APPS.length],
+      ['TCP','UDP','HTTPS'][(gi+k)%3], d((gi+k)%5===4?'拒绝':'通过', (gi+k)%5===4?'r':'g')]);
+  }
+  return '<table class="lp-tbl"><thead><tr><th style="width:150px">鉴权时间</th><th>虚拟IP</th><th>目标应用</th>'
+    + '<th style="width:84px">协议</th><th style="width:84px">结果</th></tr></thead><tbody>'
+    + out.map(function(x){ return '<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+x[2]+'</td><td>'+x[3]+'</td><td>'+x[4]+'</td></tr>' }).join('')
+    + '</tbody></table>'+duFoot(n);
+}
+
+/* 告警事件 */
+function duAlertRows(row,gi,n){
+  var EV=[['异常登录地点','高','登录地与常用地不符（深圳 → 境外）','待处置'],
+          ['暴力破解尝试','高','5 分钟内连续 12 次认证失败','已阻断'],
+          ['非工作时间访问敏感应用','中','23:40 访问「财务共享」','已确认'],
+          ['终端基线不合规','中','未安装指定杀毒软件','待处置'],
+          ['同一账号多终端登录','低','3 台终端同时在线','已确认'],
+          ['设备指纹变更','低','终端指纹与本机记录不一致','已确认']];
+  var out=[];
+  for(var k=0;k<n;k++){
+    var e=EV[(gi+k)%EV.length];
+    out.push([duT(gi,k+2), e[0], e[1], e[2], e[3]]);
+  }
+  return '<table class="lp-tbl"><thead><tr><th style="width:150px">发生时间</th><th style="width:170px">事件类型</th>'
+    + '<th style="width:70px">等级</th><th>描述</th><th style="width:90px">处置状态</th></tr></thead><tbody>'
+    + out.map(function(x){
+        var lv=x[2]==='高'?'red':x[2]==='中'?'orange':'blue';
+        var st=x[4]==='待处置'?'o':(x[4]==='已阻断'?'r':'g');
+        return '<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+tg(x[2],lv)+'</td><td>'+x[3]+'</td><td>'+d(x[4],st)+'</td></tr>' }).join('')
+    + '</tbody></table>'+duFoot(n);
+}
+function duFoot(n){
+  return '<div class="dw-foot">共 '+n+' 条<span class="pg"><i class="on">1</i></span></div>';
+}
+
+/* ---------- 按列名取字段（1.8.4.0 后列结构变过，别再写死索引） ---------- */
+function dcol(route,name){
+  var c=LISTS[route], cs=(c&&c.cols)||[];
+  for(var i=0;i<cs.length;i++) if(cs[i].t===name) return i;
+  return -1;
+}
+function dcell(route,row,name){
+  var i=dcol(route,name);
+  return (i>=0 && row[i]!=null && row[i]!=='')? row[i] : '—';
+}
+function dwInfo(route,row,title,fields){
+  return '<div class="dpanel"><div class="dt">'+title+'</div>'
+    + dkv(fields.map(function(f){ return [f, strip(String(dcell(route,row,f)))||'—'] }))+'</div>';
+}
+function dwCharts(aTitle,bTitle){
+  return '<div class="dpanel"><div class="dt">行为分析</div>'
+    +'<div class="seg" style="margin-bottom:10px">'+['今日','7日','本周','本月'].map(function(p,i){
+        return '<span class="'+(i===1?'on':'')+'" onclick="segPick(this)">'+p+'</span>' }).join('')+'</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">'
+    +'<div><div class="dw-ct">'+aTitle+'</div><div id="dChart1" style="height:168px"></div></div>'
+    +'<div><div class="dw-ct">'+bTitle+'</div><div id="dChart2" style="height:168px"></div></div>'
+    +'</div></div>';
+}
+/* 重写抽屉：基本信息 + 行为分析 + 可切换页签 */
+function rebindDrawer(route,key,tabs,infoTitle,infoFields,charts){
+  var c=LISTS[route];
+  if(!c||!c.drawer) return;
+  c.drawer.body=function(row,gi){
+    var ti=DTAB[key]||0;
+    return dwInfo(route,row,infoTitle,infoFields)
+      + dwCharts(charts[0],charts[1])
+      + '<div class="dpanel">'+dtabHtml(key,tabs)
+      + (ti===0? duSessRows(row,gi,5) : ti===1? tabs[1]==='应用访问'? duAppRows(row,gi,8) : tabs[1]==='应用鉴权'? duAuthRows(row,gi,7) : duPktRows(row,gi,6) : duAlertRows(row,gi,4))
+      + '</div>';
+  };
+}
+/* ① 在线用户 */
+rebindDrawer('/terminal/user/index','user',['会话记录','应用访问','告警事件'],'基本信息',
+  ['用户ID','终端状态','终端标识','接入位置','用户IP','连接时间','在线时长','应用访问'],
+  ['应用访问排名 TOP5','累计在线时长统计']);
+/* ② 在线设备 */
+rebindDrawer('/terminal/online-device/index','dev',['会话记录','应用鉴权','告警事件'],'终端信息',
+  ['终端标识','设备指纹','主机名','操作系统','使用人','用户ID','接入位置','控制器','终端IP','用户IP','终端出口IP','虚拟IP','连接时间','在线时长','单包鉴权'],
+  ['应用鉴权次数 TOP5','流量趋势']);
+/* ③ 终端设备 */
+rebindDrawer('/terminal/manage/device','tdev',['会话记录','单包鉴权','告警事件'],'终端信息',
+  ['终端标识','主机名','设备指纹','终端平台','操作系统','终端分组','责任人','责任人ID','客户端版本','状态','在线','授信时间','最近登录','最近登录时间','闲置时长（天）'],
+  ['单包鉴权次数 TOP5','终端在线时长']);
+/* 图表统一用「当前抽屉」的 after 钩子画，避免各页重复写一套 */
+(function(){
+  var routes=['/terminal/user/index','/terminal/online-device/index','/terminal/manage/device'];
+  routes.forEach(function(r){
+    var c=LISTS[r]; if(!c||!c.drawer) return;
+    c.drawer.after=function(){
+      mk('dChart1',optBar(['特权','OA','HR','财务','邮件'],
+        [{n:'访问次数',c:'#0CA2F2',d:[126,98,74,52,31]}],true,160,14));
+      mk('dChart2',optLine(['11-05','11-06','11-07','11-08','11-09','11-10','11-11'],
+        [{n:'在线时长(分)',c:'#0CA2F2',d:[320,410,380,460,520,480,530],area:true}],null));
+    };
+  });
+})();
+
+/* ================= 通用详情抽屉深挖（2026-11-20 沁：详情要点得开、层级要有） =================
+   问题：全站只有「Web应用」定义了 c.drawer，其余 40 多页的「详情」点了只弹一句提示；
+   而 genDetail 本身也只有「基本信息 + 3 行写死的假记录」。
+   这里做两件事：
+     1) 所有带 详情/查看 的页自动补默认抽屉；
+     2) genDetail 升级为：基本信息 + 4 项统计 + 三个可切换页签（关联记录 / 变更记录 / 引用关系），
+        数据按 路由+行号 派生，同一行每次打开都一样，不同行不一样。 */
+
+/* ---------- 派生 ---------- */
+function gdtSeed(s){
+  var h=7;
+  for(var i=0;i<s.length;i++) h=(h*31+s.charCodeAt(i))%9973;
+  return h;
+}
+function gdtTime(seed,k){
+  var dd=4+((seed+k*3)%9), hh=8+((seed+k*7)%10), mm=(seed*5+k*17)%60, ss=(seed*11+k*29)%60;
+  return '2026-11-'+(dd<10?'0'+dd:dd)+' '+p2(hh)+':'+p2(mm)+':'+p2(ss);
+}
+function gdtName(row){
+  var v=strip(String(row&&row[0]!=null?row[0]:''));
+  if(v.length>14) v=v.slice(0,14)+'…';
+  return v||'当前对象';
+}
+var GDT_TABS=['关联记录','变更记录','引用关系'];
+var GDT_ACT=['配置下发','策略命中','授权访问','同步校验','配置变更','健康检查','审计归档','令牌续期'];
+var GDT_RES=['成功','成功','成功','失败','成功','成功','成功','成功'];
+
+/* 关联记录 */
+function gdtLogRows(c,row,gi,n){
+  var seed=gdtSeed((c.route||'')+'#'+gi), nm=gdtName(row), out=[];
+  var objs=[nm+' 访问策略', nm+' 证书绑定', '默认访问控制策略', nm+' 账号绑定',
+            nm+' 分组继承', '全局例外规则', nm+' 协议映射'];
+  for(var k=0;k<n;k++){
+    var ok=GDT_RES[(seed+k)%8]==='成功';
+    out.push([gdtTime(seed,k), GDT_ACT[(seed+k*2)%8], objs[(seed+k*3)%objs.length],
+      '10.20.'+(20+(seed+k)%9)+'.'+(10+(seed+k*5)%80), ok]);
+  }
+  return '<table class="lp-tbl"><thead><tr><th style="width:136px">时间</th><th style="width:100px">操作类型</th>'
+    +'<th>操作对象</th><th style="width:126px">来源地址</th><th style="width:72px">结果</th></tr></thead><tbody>'
+    +out.map(function(x){
+      return '<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+x[2]+'</td><td>'+x[3]+'</td>'
+        +'<td>'+d(x[4]?'成功':'失败', x[4]?'g':'r')+'</td></tr>' }).join('')
+    +'</tbody></table>'+duFoot(n);
+}
+
+/* 变更记录 */
+function gdtChgRows(c,row,gi,n){
+  var seed=gdtSeed((c.route||'')+'~'+gi);
+  var who=['admin','admin','liwei','系统同步','lizhen'];
+  var CHG=[['新增','初始创建'],['修改','调整访问地址与协议'],['修改','补充应用分组归属'],
+           ['修改','更新证书绑定关系'],['修改','修改描述与责任人'],['同步','同步组织架构变更'],
+           ['修改','调整虚拟IP分配'],['发布','发布至生产环境']];
+  var out=[];
+  for(var k=0;k<n;k++){
+    var pair=CHG[(seed+k*3)%CHG.length];
+    out.push([gdtTime(seed,k+1), who[(seed+k)%who.length], pair[0], pair[1]]);
+  }
+  return '<table class="lp-tbl"><thead><tr><th style="width:136px">时间</th><th style="width:96px">操作人</th>'
+    +'<th style="width:72px">操作</th><th>变更内容</th></tr></thead><tbody>'
+    +out.map(function(x){
+      return '<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+x[2]+'</td><td>'+x[3]+'</td></tr>' }).join('')
+    +'</tbody></table>'+duFoot(n);
+}
+
+/* 引用关系 */
+function gdtRefRows(c,row,gi,n){
+  var seed=gdtSeed((c.route||'')+'@'+gi), nm=gdtName(row);
+  var refs=[['访问控制策略 / 默认策略','策略','策略管理','生效'],
+            ['终端分组 / 研发一部','终端分组','终端管理','生效'],
+            ['用户组 / 全网用户','用户组','身份管理','生效'],
+            ['应用分组 / 默认分组','应用分组','资源管理','生效'],
+            ['审计规则 / 全量记录','审计规则','审计管理','生效'],
+            ['网关集群 / 华南集群','网关集群','网络管理','生效']];
+  var out=[];
+  for(var k=0;k<n;k++){
+    var r0=refs[(seed+k*3)%refs.length];
+    out.push([r0[0], r0[1], r0[2], r0[3], nm]);
+  }
+  return '<table class="lp-tbl"><thead><tr><th>引用对象</th><th style="width:96px">引用类型</th>'
+    +'<th style="width:104px">所在模块</th><th style="width:72px">状态</th></tr></thead><tbody>'
+    +out.map(function(x){
+      return '<tr><td>'+x[0]+'</td><td>'+x[1]+'</td><td>'+x[2]+'</td>'
+        +'<td>'+d(x[3], x[3]==='生效'?'g':'gy')+'</td></tr>' }).join('')
+    +'</tbody></table>'+duFoot(n);
+}
+
+/* 4 项统计 */
+function gdtStats(c,row,gi){
+  var seed=gdtSeed((c.route||'')+'%'+gi);
+  var items=[[(seed%7)+2+' 条','关联策略',''],[(seed%9)+3+' 个','关联对象',''],
+             [(seed%120)+36,'近 7 日操作',''],[seed%6,'异常记录',(seed%6>0?'warn':'')]];
+  return '<div class="dpanel"><div class="dt">概览</div><div class="dw-stats">'
+    +items.map(function(x){
+      return '<div class="s '+(x[2]||'')+'"><b>'+x[0]+'</b><span>'+x[1]+'</span></div>' }).join('')
+    +'</div></div>';
+}
+
+/* 新版详情主体 */
+function gdtDetail(c,row,gi){
+  var route=c.route||'', key='gdt:'+route;
+  var pairs=(c.cols||[]).map(function(col,i){
+    return [col.t, strip(String(row[i]==null?'':row[i]))||'—'];
+  });
+  var ti=DTAB[key]||0;
+  var tabs=GDT_TABS;
+  var body = '<div class="dpanel"><div class="dt">基本信息</div>'+dkv(pairs)+'</div>'
+    + gdtStats(c,row,gi)
+    + '<div class="dpanel">'+dtabHtml(key,tabs)
+    + (ti===0? gdtLogRows(c,row,gi,8) : ti===1? gdtChgRows(c,row,gi,5) : gdtRefRows(c,row,gi,4))
+    + '</div>';
+  return body;
+}
+
+/* 覆盖引擎里的通用详情 */
+genDetail=function(c,row,gi){ return gdtDetail(c,row,gi); };
+
+/* 给所有带「详情 / 查看」但没有抽屉的页补默认抽屉 */
+(function(){
+  for(var r in LISTS){
+    (function(route){
+      var c=LISTS[route];
+      if(!c||!c.ops) return;
+      var hasDet=false;
+      if(c.ops) for(var i=0;i<c.ops.length;i++){
+        var n=c.ops[i]&&c.ops[i].n;
+        if(n==='详情'||n==='查看'){ hasDet=true; break; }
+      }
+      if(!hasDet) return;
+      if(!c.drawer) c.drawer={name:'详情'};
+      if(!c.drawer.body) c.drawer.body=function(row,gi){ return genDetail(c,row,gi); };
+    })(r);
+  }
+})();
 
 /* ---------- 原型导航桥（导航面板 / 直链用，2026-11-19 v2.34） ----------
    1) navGo(route,name)：由 route 反查所属模块 → 切模块 → 开页面（不闪一次模块首页）
@@ -9529,6 +11009,12 @@ reg('/terminal/security/agent_spa',{
     }
   }
 
+  /* 项目定制（navOnly）不切顶栏与左侧菜单：跳进去只换内容区 */
+  function isNavOnly(key){
+    for(var i=0;i<MODULES.length;i++) if(MODULES[i].key===key) return !!MODULES[i].navOnly;
+    return false;
+  }
+
   function navGo(route,name,opt){
     opt=opt||{};
     if(!route) return false;
@@ -9536,7 +11022,7 @@ reg('/terminal/security/agent_spa',{
     if(!lf) return false;
     name=name||lf.name;
     navEnter();
-    if(curModule!==lf.mod){
+    if(curModule!==lf.mod && !isNavOnly(lf.mod)){
       curModule=lf.mod;
       var links=document.querySelectorAll('#topnav a');
       for(var i=0;i<links.length;i++) links[i].classList.toggle('on', links[i].getAttribute('data-k')===lf.mod);
@@ -9598,8 +11084,9 @@ reg('/terminal/security/agent_spa',{
       m.menus.forEach(function(nd){
         var items=nd.items||(nd.route?[nd]:[]);
         items.forEach(function(it){
+          /* 菜单项可以只给 fn（定制功能直接落到某个页面的某个状态），没有 route 时用 fn: 前缀占位 */
           out.push({mod:m.key, modName:m.name, group:nd.group||(nd.center?'资源中心':''),
-                    name:it.name, route:it.route});
+                    name:it.name, route:it.route||('fn:'+it.fn), fn:it.fn||''});
         });
       });
     });
@@ -9627,7 +11114,7 @@ reg('/terminal/security/agent_spa',{
         if(g){ h+='<div class="np-grp open"><div class="np-gh"><i class="ar"></i><span>'+esc(g)+'</span></div><div class="np-gb">'; grpOpen=true; }
         lastGrp=g;
       }
-      h+='<div class="np-it" data-r="'+esc(p.route)+'" data-s="'
+      h+='<div class="np-it" data-r="'+esc(p.route)+'" data-fn="'+esc(p.fn||'')+'" data-s="'
         +esc((p.name+' '+p.route+' '+p.modName+' '+(p.group||'')).toLowerCase())+'"'
         +' title="'+esc(p.name+'　'+p.route)+'"><span>'+esc(p.name)+'</span></div>';
     });
@@ -9684,7 +11171,11 @@ reg('/terminal/security/agent_spa',{
       var gh=e.target.closest('.np-gh');
       if(gh){ gh.parentNode.classList.toggle('open'); return; }
       var it=e.target.closest('.np-it');
-      if(it && it.getAttribute('data-r')) go(it.getAttribute('data-r'));
+      if(it){
+        var fn=it.getAttribute('data-fn');
+        if(fn && typeof window[fn]==='function'){ window[fn](); if(NP.col) toggleCol(); return; }
+        if(it.getAttribute('data-r')) go(it.getAttribute('data-r'));
+      }
     });
 
     var q=document.getElementById('npQ');
@@ -9857,6 +11348,859 @@ reg('/terminal/security/agent_spa',{
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',build);
   else build();
 })();
+
+/* ================= 账号 / 角色 / 权限 / 登录 一条链（2026-11-20 沁） =================
+   沁的要求：高保真、流程完整，能「新建管理员 → 关联角色 → 角色配权限 → 用这个账号登录」。
+   所以这里的操作员、角色、权限都是真数据：保存后列表会变，建出来的账号能直接拿去登录。
+   页面：系统 › 操作员管理 / 角色管理；登录页 / 角色选择页（index.html 外壳） */
+
+/* ---------- ① 角色 ---------- */
+var RBAC_ROLES=[
+  {n:'超级管理员', code:'ROLE_SUPER', data:'全部数据', desc:'拥有全部功能与数据权限', st:'启用', all:true, perms:null},
+  {n:'系统管理员', code:'ROLE_ADMIN', data:'本组织数据', desc:'负责日常配置与运维，权限管理除外', st:'启用', all:false, perms:null},
+  {n:'审计管理员', code:'ROLE_AUDIT', data:'全部数据', desc:'查看审计日志与在线会话，不可配置', st:'启用', all:false, perms:null},
+  {n:'只读用户', code:'ROLE_VIEW', data:'本组织数据', desc:'仅可查看，不可配置', st:'停用', all:false, perms:null}
+];
+
+/* ---------- ② 账号（登录ID 唯一，初始密码统一 B@m123456） ---------- */
+var RBAC_ACCS=[
+  {id:'liangqilan', name:'梁绮澜', pwd:'123456', roles:['超级管理员'], st:'正常', phone:'15****1014', mail:'liangqilan@example.com', org:'零信任产品BU', created:'2026-11-01 07:00:00'},
+  {id:'liwei',      name:'李巍',   pwd:'123456', roles:['系统管理员'], st:'正常', phone:'16****1021', mail:'liwei@example.com', org:'平台研发部', created:'2026-11-02 10:07:13'},
+  {id:'liuyulong',  name:'刘宇龙', pwd:'123456', roles:['审计管理员'], st:'正常', phone:'17****1028', mail:'liuyulong@example.com', org:'交付服务中心', created:'2026-11-03 13:14:26'},
+  {id:'houdongliang',name:'侯东亮',pwd:'123456', roles:['只读用户'], st:'正常', phone:'18****1035', mail:'houdongliang@example.com', org:'研发中心', created:'2026-11-04 16:21:39'},
+  {id:'liangyuyao', name:'梁宇尧', pwd:'123456', roles:['超级管理员','系统管理员'], st:'正常', phone:'13****1042', mail:'liangyuyao@example.com', org:'零信任产品BU', created:'2026-11-05 19:28:52'},
+  {id:'admin',   name:'敖玉玲', pwd:'123456', roles:['超级管理员','系统管理员','审计管理员'], st:'正常', phone:'14****1049', mail:'admin@example.com', org:'零信任产品BU', created:'2026-11-06 22:35:05'},
+  {id:'zhangwei',   name:'张伟',   pwd:'123456', roles:['审计管理员'], st:'正常', phone:'15****1056', mail:'zhangwei@example.com', org:'外部组织', created:'2026-11-07 01:42:18'},
+  {id:'chendaw',    name:'陈大卫', pwd:'123456', roles:['只读用户'], st:'正常', phone:'16****1063', mail:'chendaw@example.com', org:'平台研发部', created:'2026-11-08 04:49:31'},
+  {id:'wangjie',    name:'王劼',   pwd:'123456', roles:['系统管理员'], st:'停用', phone:'15****1070', mail:'wangjie@example.com', org:'研发中心', created:'2026-11-09 07:56:44'},
+  {id:'lihui',      name:'李慧',   pwd:'123456', roles:['系统管理员'], st:'正常', phone:'13****1087', mail:'lihui@example.com', org:'交付服务中心', created:'2026-11-10 10:03:57'}
+];
+var RBAC_ORGS=['根组织机构','外部组织','深圳竹云科技股份有限公司','零信任产品BU','平台研发部','研发中心','交付服务中心'];
+
+var RBAC_ACC=null, RBAC_ROLE='';
+function rbacFind(u){
+  u=String(u||'').trim().toLowerCase();
+  for(var i=0;i<RBAC_ACCS.length;i++){
+    if(RBAC_ACCS[i].id.toLowerCase()===u || RBAC_ACCS[i].name===u) return RBAC_ACCS[i];
+  }
+  return null;
+}
+function rbacRole(n){
+  for(var i=0;i<RBAC_ROLES.length;i++) if(RBAC_ROLES[i].n===n) return RBAC_ROLES[i];
+  return null;
+}
+function rbacRoleUsers(n){
+  var c=0; RBAC_ACCS.forEach(function(a){ if(a.roles.indexOf(n)>=0) c++; }); return c;
+}
+
+/* ---------- ③ 可授权菜单（权限树叶子） ---------- */
+function rbacTree(){
+  var out=[];
+  MODULES.forEach(function(m){
+    if(m.navOnly) return;
+    var leaves=[];
+    (m.menus||[]).forEach(function(nd){
+      if(nd.items) nd.items.forEach(function(it){ leaves.push({n:it.name, r:it.route}); });
+      else if(nd.route) leaves.push({n:nd.name, r:nd.route});
+    });
+    out.push({key:m.key, n:m.name, leaves:leaves});
+  });
+  return out;
+}
+var RBAC_TREE=null, RBAC_ALL_ROUTES={};
+(function(){
+  RBAC_TREE=rbacTree();
+  RBAC_TREE.forEach(function(m){ m.leaves.forEach(function(l){ RBAC_ALL_ROUTES[l.r]=1; }); });
+  function pick(keys){
+    var o={};
+    RBAC_TREE.forEach(function(m){
+      if(keys.indexOf(m.key)<0) return;
+      m.leaves.forEach(function(l){ o[l.r]=1; });
+    });
+    return o;
+  }
+  rbacRole('系统管理员').perms=pick(['home','terminal','network','resource','security','system']);
+  rbacRole('审计管理员').perms=pick(['home','audit']);
+  rbacRole('只读用户').perms=pick(['home','terminal']);
+})();
+
+/* ---------- ④ 行定位（列表过滤/排序后 gi 是视图行号，统一用首列定位） ---------- */
+function lpRowAt(r,gi){
+  var q=lpRows(r); return (q.rows||[])[gi]||null;
+}
+function lpSelRows(r){
+  var s=lst(r), q=(lpRows(r).rows||[]), out=[];
+  Object.keys(s.sel||{}).forEach(function(k){ if(s.sel[k] && q[+k]) out.push(q[+k]); });
+  return out;
+}
+function opAccAt(r,gi){
+  var row=lpRowAt(r,gi); if(!row) return null;
+  return rbacFind(strip(row[0]));
+}
+function rlRoleAt(r,gi){
+  var row=lpRowAt(r,gi); if(!row) return null;
+  var n=strip(row[0]);
+  for(var i=0;i<RBAC_ROLES.length;i++) if(RBAC_ROLES[i].n===n) return RBAC_ROLES[i];
+  return null;
+}
+
+/* ---------- ⑤ 列表数据 ---------- */
+var RBAC_OP_COLS=[['登录ID','96px'],['姓名','76px'],['角色','150px'],['状态','68px'],
+                  ['联系方式','96px'],['邮箱','130px'],['创建者','60px'],['创建时间','100px']];
+var RBAC_ROLE_COLS=[['角色名称','118px'],['角色编码','110px'],['操作员数','76px'],['数据权限','90px'],
+                    ['权限数','68px'],['描述','180px'],['状态','68px']];
+function rbacOpRows(){
+  return RBAC_ACCS.map(function(a){
+    return [a.id, a.name, a.roles.join('、'), d(a.st, a.st==='正常'?'g':'r'),
+            a.phone||'—', a.mail||'—', 'admin', a.created||'2026-11-01 07:00:00',
+            a.org||''];   /* 第 9 位只给左树过滤用，不显示 */
+  });
+}
+function rbacRoleRows(){
+  return RBAC_ROLES.map(function(r){
+    var cnt=(r.all||!r.perms)? Object.keys(RBAC_ALL_ROUTES).length : Object.keys(r.perms).length;
+    return [r.n, r.code, String(rbacRoleUsers(r.n)), d(r.data,'b'), String(cnt),
+            r.desc||'—', d(r.st, r.st==='启用'?'g':'gy')];
+  });
+}
+
+/* ---------- ⑥ 操作员管理 ---------- */
+(function(){
+  var r='/system/operator/operator-manage', c=LISTS[r];
+  if(!c) return;
+  c.cols=RBAC_OP_COLS.map(function(x){ return {t:x[0],w:x[1]}; });
+  c.rows=rbacOpRows();
+  c.fixedW=true;
+  c.tree={title:'组织机构',tool:['icon-newly_added'],items:[
+    {n:'根组织机构',ar:true,k:'根组织机构'},
+    {n:'外部组织',lv:1,k:'外部组织'},
+    {n:'深圳竹云科技股份有限公司',lv:1,k:'深圳竹云科技股份有限公司'},
+    {n:'零信任产品BU',lv:2,k:'零信任产品BU'},
+    {n:'平台研发部',lv:2,k:'平台研发部'},
+    {n:'研发中心',lv:2,k:'研发中心'},
+    {n:'交付服务中心',lv:2,k:'交付服务中心'}
+  ]};
+  c.nodeFilter=function(row,k){ return k==='根组织机构' ? true : row[8]===k; };
+  c.ops=[{n:'编辑'},{n:'分配角色'},{n:'重置密码'},{n:'停用'}];
+  c.toolbar=[{n:'新增',pri:true},{n:'启用'},{n:'删除'}];
+  c.opHandlers={
+    '新增':function(){ opCreate(); },
+    '启用':function(rt,gi){ opEnable(rt,gi); },
+    '删除':function(rt,gi){ opDel(rt,gi); },
+    '编辑':function(rt,gi){ opEdit(rt,gi); },
+    '分配角色':function(rt,gi){ opRoles(rt,gi); },
+    '重置密码':function(rt,gi){ opReset(rt,gi); },
+    '停用':function(rt,gi){ opToggle(rt,gi); }
+  };
+})();
+function opRefresh(){ var c=LISTS['/system/operator/operator-manage']; if(c){ c.rows=rbacOpRows(); lpRerender(); } }
+
+function rbChipHtml(id,list,picked){
+  return '<div class="rb-chips" id="'+id+'">'+list.map(function(n){
+    var on=picked.indexOf(n)>=0;
+    return '<span class="rb-chip'+(on?' on':'')+'" onclick="rbPick(this)">'+n+'</span>' }).join('')+'</div>';
+}
+function rbPick(el){ el.classList.toggle('on'); }
+function rbPicked(id){
+  var box=document.getElementById(id), out=[];
+  if(!box) return out;
+  var its=box.querySelectorAll('.rb-chip');
+  for(var i=0;i<its.length;i++) if(its[i].classList.contains('on')) out.push(its[i].textContent);
+  return out;
+}
+function rbVal(id){ var e=document.getElementById(id); return e? String(e.value).trim():''; }
+
+/* 新建管理员 */
+function opCreate(){
+  var roles=RBAC_ROLES.filter(function(x){ return x.st==='启用'; }).map(function(x){ return x.n; });
+  var body='<div class="fm-bd">'
+    +'<div class="frow"><label><em>*</em>登录ID</label><div class="ctl"><input id="opId" placeholder="字母/数字/下划线，3–20 位">'
+      + '<div class="hint">登录用，创建后不可修改。</div></div></div>'
+    +'<div class="frow"><label><em>*</em>姓名</label><div class="ctl"><input id="opName" placeholder="请输入真实姓名"></div></div>'
+    +'<div class="frow"><label>手机号</label><div class="ctl"><input id="opPhone" placeholder="用于接收告警短信"></div></div>'
+    +'<div class="frow"><label>邮箱</label><div class="ctl"><input id="opMail" placeholder="用于接收告警邮件"></div></div>'
+    +'<div class="frow"><label>所属组织</label><div class="ctl"><select id="opOrg">'
+      + RBAC_ORGS.map(function(o){ return '<option>'+o+'</option>' }).join('')+'</select></div></div>'
+    +'<div class="frow"><label><em>*</em>关联角色</label><div class="ctl">'
+      + rbChipHtml('opRoles',roles,['系统管理员'])
+      + '<div class="hint">可多选；拥有 2 个及以上角色时，登录会先让你选本次使用的角色。</div></div></div>'
+    +'<div class="frow"><label><em>*</em>初始密码</label><div class="ctl"><input id="opPwd" type="text" value="123456">'
+      + '<div class="hint">默认 123456，可改成 6–20 位；字母+数字组合更安全。</div></div></div>'
+    +'<div class="frow"><label>状态</label><div class="ctl"><span class="sw on" id="opSt" onclick="this.classList.toggle(\'on\')"><i></i></span></div></div>'
+    +'</div>';
+  lpFormDrawer('新建管理员', body,
+    '<button class="btn-plain" onclick="lpCloseFormDrawer()">取消</button>'
+    +'<button class="btn-pri" onclick="opSaveCreate()">保存</button>', 520);
+}
+function opSaveCreate(){
+  var id=rbVal('opId'), name=rbVal('opName'), pwd=rbVal('opPwd');
+  if(!id){ lpTip('请填写登录ID'); return; }
+  if(!/^[A-Za-z0-9_]{3,20}$/.test(id)){ lpTip('登录ID 需 3–20 位字母/数字/下划线'); return; }
+  if(rbacFind(id)){ lpTip('登录ID「'+id+'」已存在'); return; }
+  if(!name){ lpTip('请填写姓名'); return; }
+  var roles=rbPicked('opRoles');
+  if(!roles.length){ lpTip('请至少关联一个角色'); return; }
+  if(!pwd) pwd='123456';
+  if(pwd.length<6||pwd.length>20){
+    lpTip('密码需 6–20 位'); return;
+  }
+  var stEl=document.getElementById('opSt');
+  RBAC_ACCS.unshift({id:id, name:name, pwd:pwd, roles:roles,
+    st:(stEl&&!stEl.classList.contains('on'))?'停用':'正常',
+    phone:rbVal('opPhone')||'—', mail:rbVal('opMail')||'—', org:rbVal('opOrg'),
+    created:'2026-11-20 11:50:00'});
+  lpCloseFormDrawer(); opRefresh();
+  lpTip('已创建管理员「'+name+'」，可用 '+id+' / '+pwd+' 登录');
+}
+
+function opEdit(r,gi){
+  var a=opAccAt(r,gi); if(!a) return;
+  var body='<div class="fm-bd">'
+    +'<div class="frow"><label>登录ID</label><div class="ctl"><input value="'+a.id+'" disabled></div></div>'
+    +'<div class="frow"><label><em>*</em>姓名</label><div class="ctl"><input id="opName" value="'+a.name+'"></div></div>'
+    +'<div class="frow"><label>手机号</label><div class="ctl"><input id="opPhone" value="'+(a.phone||'')+'"></div></div>'
+    +'<div class="frow"><label>邮箱</label><div class="ctl"><input id="opMail" value="'+(a.mail||'')+'"></div></div>'
+    +'<div class="frow"><label>所属组织</label><div class="ctl"><select id="opOrg">'
+      + RBAC_ORGS.map(function(o){ return '<option'+(o===a.org?' selected':'')+'>'+o+'</option>' }).join('')+'</select></div></div>'
+    +'<div class="frow"><label>状态</label><div class="ctl"><span class="sw'+(a.st==='正常'?' on':'')+'" id="opSt" onclick="this.classList.toggle(\'on\')"><i></i></span></div></div>'
+    +'</div>';
+  lpFormDrawer('编辑管理员 · '+a.name, body,
+    '<button class="btn-plain" onclick="lpCloseFormDrawer()">取消</button>'
+    +'<button class="btn-pri" onclick="opSaveEdit(\''+a.id+'\')">保存</button>', 476);
+}
+function opSaveEdit(id){
+  var a=rbacFind(id); if(!a) return;
+  var name=rbVal('opName'); if(!name){ lpTip('请填写姓名'); return; }
+  a.name=name; a.phone=rbVal('opPhone')||'—'; a.mail=rbVal('opMail')||'—'; a.org=rbVal('opOrg');
+  var st=document.getElementById('opSt');
+  a.st=(st&&!st.classList.contains('on'))?'停用':'正常';
+  lpCloseFormDrawer(); opRefresh(); lpTip('已保存');
+}
+
+function opRoles(r,gi){
+  var a=opAccAt(r,gi); if(!a) return;
+  var list=RBAC_ROLES.filter(function(x){ return x.st==='启用'; }).map(function(x){ return x.n; });
+  var body='<div class="fm-bd">'
+    +'<div class="frow"><label>管理员</label><div class="ctl"><b>'+a.name+'</b> <span style="color:#86909C">（'+a.id+'）</span></div></div>'
+    +'<div class="frow"><label><em>*</em>关联角色</label><div class="ctl">'
+      + rbChipHtml('opRoles',list,a.roles)
+      + '<div class="hint">保存后立即生效；该管理员下次登录可用新角色。</div></div></div>'
+    +'<div class="frow"><label>角色权限</label><div class="ctl"><div class="rb-hint">'
+      + a.roles.map(function(n){
+          var ro=rbacRole(n); if(!ro) return '';
+          var cnt=(ro.all||!ro.perms)? Object.keys(RBAC_ALL_ROUTES).length : Object.keys(ro.perms).length;
+          return '<div class="rb-hl"><b>'+n+'</b><span>'+cnt+' 个页面 · '+ro.data+'</span></div>' }).join('')
+      + '</div></div></div>'
+    +'</div>';
+  lpFormDrawer('分配角色', body,
+    '<button class="btn-plain" onclick="lpCloseFormDrawer()">取消</button>'
+    +'<button class="btn-pri" onclick="opSaveRoles(\''+a.id+'\')">保存</button>', 476);
+}
+function opSaveRoles(id){
+  var a=rbacFind(id); if(!a) return;
+  var roles=rbPicked('opRoles');
+  if(!roles.length){ lpTip('请至少关联一个角色'); return; }
+  a.roles=roles;
+  lpCloseFormDrawer(); opRefresh();
+  lpTip('已更新「'+a.name+'」的角色：'+roles.join('、'));
+}
+
+function opReset(r,gi){
+  var a=opAccAt(r,gi); if(!a) return;
+  lpConfirm('重置密码','将「'+a.name+'」的密码重置为初始密码 B@m123456，下次登录需使用新密码。',function(){
+    a.pwd='B@m123456'; lpTip('已重置为初始密码 B@m123456');
+  },'warn');
+}
+function opToggle(r,gi){
+  var a=opAccAt(r,gi); if(!a) return;
+  if(a.id===((RBAC_ACC&&RBAC_ACC.id)||'')){ lpTip('不能停用当前登录的账号'); return; }
+  var to=a.st==='正常'?'停用':'正常';
+  lpConfirm(to+'管理员','「'+a.name+'」（'+a.id+'）'+(to==='停用'?'停用后无法登录，已登录会话不受影响。':'恢复正常后可重新登录。'),
+    function(){ a.st=to; opRefresh(); lpTip('已'+to); },'warn');
+}
+function opEnable(r,gi){
+  var rows = gi>=0? [lpRowAt(r,gi)] : lpSelRows(r);
+  rows=rows.filter(function(x){ return x; });
+  if(!rows.length){ lpTip('请先勾选要启用的管理员'); return; }
+  var n=0;
+  rows.forEach(function(row){
+    var a=rbacFind(strip(row[0]));
+    if(a && a.st!=='正常'){ a.st='正常'; n++; }
+  });
+  lst(r).sel={}; opRefresh();
+  lpTip(n? '已启用 '+n+' 个账号':'所选账号均为启用状态');
+}
+function opDel(r,gi){
+  var rows = gi>=0? [lpRowAt(r,gi)] : lpSelRows(r);
+  rows=rows.filter(function(x){ return x; });
+  if(!rows.length){ lpTip('请先勾选要删除的管理员'); return; }
+  var ids=rows.map(function(x){ return strip(x[0]); });
+  if(ids.indexOf((RBAC_ACC&&RBAC_ACC.id)||'')>=0){ lpTip('不能删除当前登录的账号'); return; }
+  var supers=RBAC_ACCS.filter(function(a){ return a.roles.indexOf('超级管理员')>=0; }).length;
+  var cutSuper=rows.filter(function(x){
+    var a=rbacFind(strip(x[0])); return a && a.roles.indexOf('超级管理员')>=0;
+  }).length;
+  if(cutSuper && supers-cutSuper<1){ lpTip('至少要保留一个超级管理员'); return; }
+  lpConfirm('删除管理员','将删除 '+ids.length+' 个管理员（'+ids.join('、')+'），删除后不可恢复。',function(){
+    for(var i=RBAC_ACCS.length-1;i>=0;i--){ if(ids.indexOf(RBAC_ACCS[i].id)>=0) RBAC_ACCS.splice(i,1); }
+    lst(r).sel={}; opRefresh(); lpTip('已删除 '+ids.length+' 个管理员');
+  },'danger');
+}
+
+/* ---------- ⑦ 角色管理 ---------- */
+(function(){
+  var r='/system/operator/role-manage', c=LISTS[r];
+  if(!c) return;
+  c.cols=RBAC_ROLE_COLS.map(function(x){ return {t:x[0],w:x[1]}; });
+  c.rows=rbacRoleRows();
+  c.fixedW=true;
+  c.ops=[{n:'编辑'},{n:'权限'},{n:'删除'}];
+  c.toolbar=[{n:'新增',pri:true},{n:'删除'}];
+  c.opHandlers={
+    '新增':function(){ rlCreate(); },
+    '编辑':function(rt,gi){ rlEdit(rt,gi); },
+    '权限':function(rt,gi){ rlPerm(rt,gi); },
+    '删除':function(rt,gi){ rlDel(rt,gi); }
+  };
+})();
+function rlRefresh(){ var c=LISTS['/system/operator/role-manage']; if(c){ c.rows=rbacRoleRows(); lpRerender(); } }
+
+function rlCreate(){
+  var body='<div class="fm-bd">'
+    +'<div class="frow"><label><em>*</em>角色名称</label><div class="ctl"><input id="rlName" placeholder="如 运维管理员"></div></div>'
+    +'<div class="frow"><label><em>*</em>角色编码</label><div class="ctl"><input id="rlCode" placeholder="如 ROLE_OPS">'
+      + '<div class="hint">大写字母/数字/下划线，创建后不可修改。</div></div></div>'
+    +'<div class="frow"><label>数据权限</label><div class="ctl"><select id="rlData">'
+      + ['全部数据','本组织及下级','本组织','仅本人'].map(function(o){ return '<option>'+o+'</option>' }).join('')+'</select>'
+      + '<div class="hint">决定这个角色能看到哪些组织的数据，与「权限」页签一起生效。</div></div></div>'
+    +'<div class="frow"><label>描述</label><div class="ctl"><textarea id="rlDesc" rows="2" placeholder="这个角色能做什么"></textarea></div></div>'
+    +'<div class="frow"><label>状态</label><div class="ctl"><span class="sw on" id="rlSt" onclick="this.classList.toggle(\'on\')"><i></i></span></div></div>'
+    +'</div>';
+  lpFormDrawer('新建角色', body,
+    '<button class="btn-plain" onclick="lpCloseFormDrawer()">取消</button>'
+    +'<button class="btn-pri" onclick="rlSaveCreate()">保存</button>', 476);
+}
+function rlSaveCreate(){
+  var n=rbVal('rlName'), code=rbVal('rlCode');
+  if(!n){ lpTip('请填写角色名称'); return; }
+  if(rbacRole(n)){ lpTip('角色「'+n+'」已存在'); return; }
+  if(!/^ROLE_[A-Z0-9_]{2,20}$/.test(code)){ lpTip('角色编码需形如 ROLE_OPS（大写字母/数字/下划线）'); return; }
+  if(RBAC_ROLES.some(function(x){ return x.code===code; })){ lpTip('角色编码「'+code+'」已存在'); return; }
+  var st=document.getElementById('rlSt');
+  RBAC_ROLES.push({n:n, code:code, data:rbVal('rlData'), desc:rbVal('rlDesc')||'—',
+    st:(st&&!st.classList.contains('on'))?'停用':'启用', all:false, perms:{'/home/system/index':1}});
+  lpCloseFormDrawer(); rlRefresh();
+  lpTip('已创建角色「'+n+'」，下一步给它分配权限');
+}
+function rlEdit(r,gi){
+  var ro=rlRoleAt(r,gi); if(!ro) return;
+  if(ro.all){ lpTip('超级管理员为内置角色，不支持修改'); return; }
+  var body='<div class="fm-bd">'
+    +'<div class="frow"><label>角色名称</label><div class="ctl"><input id="rlName" value="'+ro.n+'"></div></div>'
+    +'<div class="frow"><label>角色编码</label><div class="ctl"><input value="'+ro.code+'" disabled></div></div>'
+    +'<div class="frow"><label>数据权限</label><div class="ctl"><select id="rlData">'
+      + ['全部数据','本组织及下级','本组织','仅本人'].map(function(o){
+          return '<option'+(o===ro.data?' selected':'')+'>'+o+'</option>' }).join('')+'</select>'
+      + '<div class="hint">本组织＝仅本人所属组织；本组织及下级＝含下级组织；仅本人＝只看自己创建/名下的数据。</div></div></div>'
+    +'<div class="frow"><label>描述</label><div class="ctl"><textarea id="rlDesc" rows="2">'+(ro.desc||'')+'</textarea></div></div>'
+    +'<div class="frow"><label>状态</label><div class="ctl"><span class="sw'+(ro.st==='启用'?' on':'')+'" id="rlSt" onclick="this.classList.toggle(\'on\')"><i></i></span></div></div>'
+    +'</div>';
+  lpFormDrawer('编辑角色 · '+ro.n, body,
+    '<button class="btn-plain" onclick="lpCloseFormDrawer()">取消</button>'
+    +'<button class="btn-pri" onclick="rlSaveEdit(\''+ro.code+'\')">保存</button>', 476);
+}
+function rlSaveEdit(code){
+  var ro=null;
+  RBAC_ROLES.forEach(function(x){ if(x.code===code) ro=x; });
+  if(!ro) return;
+  var old=ro.n;
+  ro.n=rbVal('rlName')||ro.n; ro.data=rbVal('rlData'); ro.desc=rbVal('rlDesc')||'—';
+  var st=document.getElementById('rlSt');
+  ro.st=(st&&!st.classList.contains('on'))?'停用':'启用';
+  if(old!==ro.n){   /* 改名要同步账号上的角色名 */
+    RBAC_ACCS.forEach(function(a){
+      var i=a.roles.indexOf(old);
+      if(i>=0) a.roles[i]=ro.n;
+    });
+  }
+  lpCloseFormDrawer(); rlRefresh(); lpTip('已保存');
+}
+function rlDel(r,gi){
+  var rows = gi>=0? [lpRowAt(r,gi)] : lpSelRows(r);
+  rows=rows.filter(function(x){ return x; });
+  if(!rows.length){ lpTip('请先勾选要删除的角色'); return; }
+  var names=rows.map(function(x){ return strip(x[0]); });
+  if(names.indexOf('超级管理员')>=0){ lpTip('超级管理员为内置角色，不能删除'); return; }
+  var used=names.filter(function(n){ return rbacRoleUsers(n)>0; });
+  if(used.length){ lpTip('「'+used.join('、')+'」下还有管理员，请先调整他们的角色'); return; }
+  lpConfirm('删除角色','将删除 '+names.length+' 个角色（'+names.join('、')+'），删除后不可恢复。',function(){
+    for(var i=RBAC_ROLES.length-1;i>=0;i--){ if(names.indexOf(RBAC_ROLES[i].n)>=0) RBAC_ROLES.splice(i,1); }
+    lst(r).sel={}; rlRefresh(); lpTip('已删除 '+names.length+' 个角色');
+  },'danger');
+}
+
+/* ---------- ⑧ 权限分配（模块 › 菜单 › 操作） ---------- */
+var PERM={code:'', pick:{}};
+var PERM_OPS=['查看','新增','编辑','删除'];
+function rlPerm(r,gi){
+  var ro=rlRoleAt(r,gi); if(!ro) return;
+  if(ro.all){ lpTip('超级管理员默认拥有全部权限，无需分配'); return; }
+  PERM={code:ro.code, pick:{}};
+  Object.keys(ro.perms||{}).forEach(function(k){ PERM.pick[k]=1; });
+  lpFormDrawer('分配权限 · '+ro.n, permTreeHtml(),
+    '<span class="perm-cnt" id="permCnt">已选 '+Object.keys(PERM.pick).length+' / '+Object.keys(RBAC_ALL_ROUTES).length+' 个页面</span>'
+    +'<button class="btn-plain" onclick="lpCloseFormDrawer()">取消</button>'
+    +'<button class="btn-pri" onclick="permSave()">保存</button>', 720);
+}
+function permTreeHtml(){
+  var total=Object.keys(RBAC_ALL_ROUTES).length;
+  var h='<div class="perm"><div class="perm-hd"><span>共 '+total+' 个页面，勾选即授权</span>'
+    +'<a class="lk" onclick="permAll(1)">全选</a><a class="lk" onclick="permAll(0)">全不选</a></div>';
+  RBAC_TREE.forEach(function(m,mi){
+    var on=m.leaves.filter(function(l){ return PERM.pick[l.r] }).length;
+    var st=on===0?'':(on===m.leaves.length?'on':'half');
+    h+='<div class="perm-m"><div class="pm-h" onclick="permMod('+mi+')">'
+      + '<span class="cb '+st+'"></span><b>'+m.n+'</b><span class="cnt">'+on+'/'+m.leaves.length+'</span></div>'
+      + '<div class="pm-b">'+m.leaves.map(function(l){
+          var on2=!!PERM.pick[l.r];
+          return '<div class="pm-l'+(on2?' on':'')+'" onclick="permLeaf(\''+l.r+'\')">'
+            + '<span class="cb '+(on2?'on':'')+'"></span><span class="nm">'+l.n+'</span>'
+            + '<span class="ops">'+PERM_OPS.map(function(o){
+                return '<i class="'+(on2?'on':'')+'">'+o+'</i>' }).join('')+'</span>'
+            + '</div>' }).join('')+'</div></div>';
+  });
+  return h+'</div>';
+}
+function permRedraw(){
+  var box=document.querySelector('#fdDrawer .perm');
+  if(box) box.outerHTML=permTreeHtml();
+  var cnt=document.getElementById('permCnt');
+  if(cnt) cnt.textContent='已选 '+Object.keys(PERM.pick).length+' / '+Object.keys(RBAC_ALL_ROUTES).length+' 个页面';
+}
+function permMod(mi){
+  var m=RBAC_TREE[mi], all=m.leaves.every(function(l){ return PERM.pick[l.r] });
+  m.leaves.forEach(function(l){ if(all) delete PERM.pick[l.r]; else PERM.pick[l.r]=1; });
+  permRedraw();
+}
+function permLeaf(route){
+  if(PERM.pick[route]) delete PERM.pick[route]; else PERM.pick[route]=1;
+  permRedraw();
+}
+function permAll(on){
+  PERM.pick={};
+  if(on) Object.keys(RBAC_ALL_ROUTES).forEach(function(k){ PERM.pick[k]=1; });
+  permRedraw();
+}
+function permSave(){
+  var ro=null;
+  RBAC_ROLES.forEach(function(x){ if(x.code===PERM.code) ro=x; });
+  if(!ro) return;
+  ro.perms={};
+  Object.keys(PERM.pick).forEach(function(k){ ro.perms[k]=1; });
+  lpCloseFormDrawer(); rlRefresh();
+  lpTip('已保存「'+ro.n+'」的权限：'+Object.keys(ro.perms).length+' 个页面');
+}
+
+/* ---------- ⑨ 侧栏 / 顶栏按当前角色权限裁剪 ---------- */
+(function(){
+  var _rs=renderSidebar;
+  renderSidebar=function(){
+    _rs();
+    rbacFilterSidebar();
+  };
+  var _bt=buildTopNav;
+  buildTopNav=function(){
+    _bt();
+    rbacFilterTopNav();
+  };
+})();
+function rbacModVisible(m,perms){
+  return (m.menus||[]).some(function(nd){
+    if(nd.items) return nd.items.some(function(it){ return perms[it.route] });
+    return nd.route? !!perms[nd.route] : false;
+  });
+}
+function rbacFilterTopNav(){
+  if(!RBAC_ROLE) return;
+  var r=rbacRole(RBAC_ROLE);
+  if(!r||r.all||!r.perms) return;
+  var links=document.querySelectorAll('#topnav a[data-k]');
+  for(var i=0;i<links.length;i++){
+    var k=links[i].getAttribute('data-k');
+    var m=MODULES.filter(function(x){ return x.key===k })[0];
+    if(m && !rbacModVisible(m,r.perms)) links[i].style.display='none';
+  }
+}
+function rbacFilterSidebar(){
+  if(!RBAC_ROLE) return;
+  var r=rbacRole(RBAC_ROLE);
+  if(!r||r.all||!r.perms) return;
+  var side=document.getElementById('side'); if(!side) return;
+  var its=side.querySelectorAll('[data-r]');
+  for(var i=0;i<its.length;i++){
+    var rt=its[i].getAttribute('data-r');
+    its[i].style.display=r.perms[rt]?'':'none';
+  }
+  var grps=side.querySelectorAll('.grp');
+  for(var g=0;g<grps.length;g++){
+    var vis=grps[g].querySelectorAll('.it:not([style*="display: none"])').length;
+    grps[g].style.display=vis?'':'none';
+  }
+}
+function rbacGuard(){
+  if(!RBAC_ROLE) return;
+  var r=rbacRole(RBAC_ROLE);
+  if(!r||r.all||!r.perms) return;
+  if(r.perms[currentRoute]) return;
+  var first=null;
+  for(var k in r.perms){ if(r.perms[k]){ first=k; break; } }
+  if(!first) return;
+  var name=first;
+  RBAC_TREE.some(function(m){
+    return m.leaves.some(function(l){ if(l.r===first){ name=l.n; return true } return false });
+  });
+  openPage(name, first);
+}
+
+/* ---------- ⑩ 顶栏当前账号 / 角色 ---------- */
+function rbacWho(){
+  if(!RBAC_ACC) return;
+  var n=document.getElementById('whoName'); if(n) n.textContent=RBAC_ACC.id;
+  var av=document.querySelector('#btnWho .av');
+  if(av) av.textContent=(RBAC_ACC.name||RBAC_ACC.id).charAt(0);
+  var meta=document.querySelector('#popUser .umeta');
+  if(meta) meta.innerHTML='<b>'+RBAC_ACC.name+'（'+RBAC_ACC.id+'）</b>'
+    +'<span class="utag">'+(RBAC_ROLE||RBAC_ACC.roles[0]||'—')+'</span>';
+}
+
+/* ---------- ⑪ 登录 / 角色选择 / 退出 / 改密 ---------- */
+function lgErr(msg){ var e=document.getElementById('err'); if(e) e.textContent=msg; }
+(function(){
+  var _dl=doLogin;
+  doLogin=function(){
+    var u=(document.getElementById('u').value||'').trim();
+    var p=(document.getElementById('p').value||'').trim();
+    var c=(document.getElementById('c').value||'').trim();
+    var shown=document.getElementById('capImg').textContent.trim();
+    if(!u||!p){ lgErr('请输入账号和密码'); return; }
+    if(!c){ lgErr('请输入验证码'); return; }
+    if(c.toUpperCase()!==shown.toUpperCase()){ lgErr('验证码不正确'); return; }
+    var acc=rbacFind(u);
+    if(!acc){ lgErr('账号不存在，请检查登录ID'); return; }
+    if(acc.st!=='正常'){ lgErr('该账号已停用，请联系管理员'); return; }
+    if(acc.pwd!==p){ lgErr('账号或密码不正确'); return; }
+    lgErr('');
+    RBAC_ACC=acc; RBAC_ROLE='';
+    if(acc.roles.length<=1){
+      RBAC_ROLE=acc.roles[0]||'';
+      document.getElementById('login').classList.add('hide');
+      document.getElementById('role').classList.add('hide');
+      enterApp(); return;
+    }
+    rbacRolePick(acc.roles);
+    document.getElementById('login').classList.add('hide');
+    document.getElementById('role').classList.remove('hide');
+  };
+  var _ea=enterApp;
+  enterApp=function(){
+    _ea(); rbacWho(); rbacFilterTopNav(); rbacFilterSidebar(); rbacGuard();
+  };
+})();
+function rbacRolePick(roles){
+  var box=document.querySelector('#role .wrap');
+  if(!box) return;
+  box.innerHTML='<h1>登录</h1>'
+    +'<div class="tip">您具有多个管理员角色，请选择本次登录的角色</div>'
+    + roles.map(function(n,i){
+        return '<div class="opt'+(i===0?' on':'')+'" data-r="'+n+'" onclick="pickRole(this)">'
+          + '<span class="av"><i class="iconfont icon-operator"></i></span><span class="nm">'+n+'</span><span class="rdo"></span></div>' }).join('')
+    +'<div class="acts"><button class="no" onclick="logout()">取 消</button>'
+    + '<button class="ok" onclick="rbacPickOk()">登 录</button></div>';
+}
+function rbacPickOk(){
+  var on=document.querySelector('#role .opt.on');
+  RBAC_ROLE=on? on.getAttribute('data-r') : ((RBAC_ACC&&RBAC_ACC.roles[0])||'');
+  enterApp();
+}
+function logout(){
+  RBAC_ACC=null; RBAC_ROLE='';
+  var app=document.getElementById('app'); if(app) app.style.display='none';
+  var role=document.getElementById('role'); if(role) role.classList.add('hide');
+  var lg=document.getElementById('login'); if(lg) lg.classList.remove('hide');
+  var p=document.getElementById('p'); if(p) p.value='';
+  lgErr('');
+  try{ if(typeof makeCap==='function') makeCap(); }catch(e){}
+}
+function openChangePwd(){
+  if(!RBAC_ACC){ lpTip('请先登录'); return; }
+  var body='<div class="fm-bd">'
+    +'<div class="frow"><label>当前账号</label><div class="ctl"><b>'+RBAC_ACC.name+'</b> <span style="color:#86909C">（'+RBAC_ACC.id+'）</span></div></div>'
+    +'<div class="frow"><label><em>*</em>原密码</label><div class="ctl"><input id="pw0" type="password" placeholder="请输入当前密码"></div></div>'
+    +'<div class="frow"><label><em>*</em>新密码</label><div class="ctl"><input id="pw1" type="password" placeholder="8–20 位，含字母和数字">'
+      + '<div class="hint">不能与原密码相同。</div></div></div>'
+    +'<div class="frow"><label><em>*</em>确认新密码</label><div class="ctl"><input id="pw2" type="password" placeholder="再输入一次"></div></div>'
+    +'</div>';
+  lpFormDrawer('修改密码', body,
+    '<button class="btn-plain" onclick="lpCloseFormDrawer()">取消</button>'
+    +'<button class="btn-pri" onclick="savePwd()">保存</button>', 476);
+}
+function savePwd(){
+  var a=RBAC_ACC; if(!a) return;
+  var o=rbVal('pw0'), n1=rbVal('pw1'), n2=rbVal('pw2');
+  if(o!==a.pwd){ lpTip('原密码不正确'); return; }
+  if(n1.length<6||n1.length>20){ lpTip('新密码需 6–20 位'); return; }
+  if(n1===o){ lpTip('新密码不能与原密码相同'); return; }
+  if(n1!==n2){ lpTip('两次输入的新密码不一致'); return; }
+  a.pwd=n1;
+  lpCloseFormDrawer(); lpTip('密码已修改，下次登录请使用新密码');
+}
+
+/* ================= 2026-11-20 沁：眼睛图标 / 只留可登录账号 / 初始密码 123456 / 数据隔离 ================
+   ① 登录密码支持点眼睛看明文
+   ② 操作员列表只保留可登录（正常状态）的账号，初始密码统一 123456
+   ③ 角色的「数据权限」落到列表数据上：全部数据 / 本组织及下级 / 本组织 / 仅本人  */
+
+/* ---------- ① 密码可见 ---------- */
+function togglePw(){
+  var i=document.getElementById('p'), e=document.getElementById('pEye');
+  if(!i) return;
+  var show=(i.type==='password');
+  i.type=show?'text':'password';
+  if(e){ e.classList.toggle('on',show); e.title=show?'隐藏密码':'显示密码'; }
+}
+
+/* ---------- ② 只保留可登录账号 + 初始密码 123456 ---------- */
+RBAC_ACCS=RBAC_ACCS.filter(function(a){ return a.st==='正常'; });
+RBAC_ACCS.forEach(function(a){ a.pwd='123456'; });
+
+/* ---------- ③ 数据隔离：组织层级 + 角色数据范围 ---------- */
+var ORG_PARENT={
+  '外部组织':'深圳竹云科技股份有限公司',
+  '零信任产品BU':'深圳竹云科技股份有限公司',
+  '平台研发部':'深圳竹云科技股份有限公司',
+  '研发中心':'深圳竹云科技股份有限公司',
+  '交付服务中心':'深圳竹云科技股份有限公司',
+  '深圳竹云科技股份有限公司':'根组织机构'
+};
+function orgPath(o){
+  var out=[o], g=0;
+  while(ORG_PARENT[o] && g++<10){ o=ORG_PARENT[o]; out.push(o); }
+  return out;
+}
+function orgUnder(o){
+  var set={}; set[o]=1;
+  RBAC_ACCS.forEach(function(a){ if(orgPath(a.org).indexOf(o)>=0) set[a.org]=1; });
+  return set;
+}
+var SCOPE_RANK={'全部数据':4,'本组织及下级':3,'本组织':2,'仅本人':1};
+function rbacScopeOf(name){
+  var r=rbacRole(name);
+  return (r && SCOPE_RANK[r.data])? r.data : '仅本人';
+}
+function rbacScopeNow(){
+  if(!RBAC_ACC) return '全部数据';
+  var best='仅本人';
+  (RBAC_ACC.roles||[]).forEach(function(n){
+    var s=rbacScopeOf(n);
+    if(SCOPE_RANK[s]>SCOPE_RANK[best]) best=s;
+  });
+  return best;
+}
+/* 内置角色先对齐口径：系统管理员默认「本组织及下级」，只读用户「本组织」 */
+(function(){
+  RBAC_ROLES.forEach(function(r){
+    if(r.all){ r.data='全部数据'; return; }
+    if(r.data==='本组织数据') r.data='本组织';
+  });
+  var a=rbacRole('系统管理员'); if(a && !SCOPE_RANK[a.data]) a.data='本组织及下级';
+})();
+
+/* 操作员列表：按当前登录角色的数据范围过滤（数据隔离） */
+rbacOpRows=function(){
+  var sc=rbacScopeNow(), me=RBAC_ACC?RBAC_ACC.id:'', base=RBAC_ACC?RBAC_ACC.org:'';
+  var allow=null;
+  if(sc==='本组织') allow=(function(){ var s={}; s[base]=1; return s; })();
+  else if(sc==='本组织及下级') allow=orgUnder(base);
+  return RBAC_ACCS.filter(function(a){
+    if(sc==='仅本人') return a.id===me;
+    if(allow) return !!allow[a.org] || a.id===me;
+    return true;
+  }).map(function(a){
+    return [a.id, a.name, a.roles.join('、'), d(a.st, a.st==='正常'?'g':'r'),
+            a.phone||'—', a.mail||'—', 'admin', a.created||'2026-11-01 07:00:00',
+            a.org||''];
+  });
+};
+
+/* 操作员管理页：每次渲染重算数据范围 + 顶部数据范围条 */
+(function(){
+  var c=LISTS['/system/operator/operator-manage'];
+  if(!c) return;
+  c.before=function(cfg){ cfg.rows=rbacOpRows(); };
+  c.after=function(){
+    var card=document.querySelector('#page .lp-card');
+    if(!card) return;
+    var old=document.querySelector('#page .scope-bar');
+    if(old) old.parentNode.removeChild(old);
+    var sc=rbacScopeNow(), who=RBAC_ACC? (RBAC_ACC.name+' · '+(RBAC_ACC.org||'—')) : '—';
+    var d=document.createElement('div');
+    d.className='scope-bar';
+    d.innerHTML='<i class="iconfont icon-organization"></i>数据范围：<b>'+sc+'</b>'
+      + '<span class="sb-org">'+who+'</span>'
+      + '<span class="sb-tip">'+(sc==='全部数据'?'可见全部组织数据':'仅可见该范围内的操作员，范围由角色「数据权限」决定')+'</span>';
+    card.parentNode.insertBefore(d, card);
+  };
+})();
+
+/* 角色管理页同样按最新口径重算（加载时的快照会把旧「本组织数据」和老的操作员数带进来） */
+(function(){
+  var c=LISTS['/system/operator/role-manage'];
+  if(!c) return;
+  c.before=function(cfg){ cfg.rows=rbacRoleRows(); };
+})();
+
+/* ================= 列表页通用增删改（2026-11-20 沁：不要「仅演示」的按钮） =================
+   引擎原来点「新增/编辑/保存/删除」只弹一句「已保存」，列表不变。
+   这里给配了 c.form 的页面接上真增删改：保存后表格立刻变化，删除真的少一行。
+   仅对走通用表格的页面生效；有 opHandlers / 自定义页面的照旧走各自的处理。 */
+
+/* 读当前表单（lpFormDrawer 里 .frow 结构） */
+function lpFormValues(){
+  var out=[], rows=document.querySelectorAll('#fdDrawer .frow');
+  for(var i=0;i<rows.length;i++){
+    var lb=rows[i].querySelector('label');
+    var req=!!(lb&&lb.querySelector('em'));
+    var name=lb? lb.textContent.replace(/[*\s]/g,'') : '';
+    var sw=rows[i].querySelector('.ctl .sw');
+    var el=rows[i].querySelector('.ctl input,.ctl select,.ctl textarea');
+    var v;
+    if(sw) v=sw.classList.contains('on')?'启用':'停用';
+    else v=el? String(el.value).trim() : '';
+    out.push({name:name, req:req, val:v});
+  }
+  return out;
+}
+
+/* 重写表单：支持回填 + 真保存 */
+function lpForm(c,title,gi){
+  var fs=c.form||[], route=c.route;
+  var row=(gi!=null && gi>=0)? lpRowAt(route,gi) : null;
+  var body=fs.map(function(f,i){
+    var v = row? strip(String(row[i]==null?'':row[i])) : (f.v||'');
+    var ctl;
+    if(f.t==='sel'){
+      var opts=f.opts||[];
+      ctl='<select>'+(v&&opts.indexOf(v)<0? '<option selected>'+v+'</option>':'')
+        +opts.map(function(o){ return '<option'+(o===v?' selected':'')+'>'+o+'</option>' }).join('')+'</select>';
+    } else if(f.t==='area'){
+      ctl='<textarea rows="3" placeholder="'+(f.ph||'')+'">'+v+'</textarea>';
+    } else if(f.t==='sw'){
+      ctl='<span class="sw'+((v==='启用'||f.on)?' on':'')+'" onclick="this.classList.toggle(\'on\')"><i></i></span>';
+    } else {
+      ctl='<input placeholder="'+(f.ph||'')+'" value="'+v+'">';
+    }
+    return '<div class="frow"><label>'+(f.req?'<em>*</em>':'')+esc0(f.lb)+'</label><div class="ctl">'+ctl
+      +(f.hint?'<div class="hint">'+f.hint+'</div>':'')+'</div></div>';
+  }).join('');
+  lpFormDrawer(title, '<div class="fm-bd">'+body+'</div>',
+    '<button class="btn-plain" onclick="lpCloseFormDrawer()">取消</button>'
+    +'<button class="btn-pri" onclick="lpFormSave(\''+route+'\','+(row?gi:-1)+')">保存</button>', 520);
+}
+function esc0(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function lpFormSave(route,gi){
+  var c=LISTS[route]; if(!c){ lpCloseFormDrawer(); return; }
+  var vals=lpFormValues();
+  for(var i=0;i<vals.length;i++){
+    if(vals[i].req && !vals[i].val){ lpTip('请填写「'+vals[i].name+'」'); return; }
+  }
+  var base = gi>=0? lpRowAt(route,gi) : null;
+  if(base){
+    for(var k=0;k<vals.length;k++) base[k]=vals[k].val;
+    lpCloseFormDrawer(); lpTip('已保存'); lpRerender(); return;
+  }
+  var len=Math.max(c.cols.length,((c.rows||[])[0]||[]).length);
+  var row=[];
+  for(var j=0;j<len;j++) row.push(vals[j]? vals[j].val : '');
+  c.rows=c.rows||[];
+  c.rows.unshift(row);
+  lst(route).page=1;
+  lpCloseFormDrawer();
+  lpTip('已新增 1 条');
+  lpRerender();
+}
+
+/* 真删除（工具栏 / 行内） */
+function crudDel(r,gi){
+  var c=LISTS[r]; if(!c||!c.rows) return;
+  var rows = gi>=0? [lpRowAt(r,gi)] : lpSelRows(r);
+  rows=rows.filter(function(x){ return x; });
+  if(!rows.length){ lpTip('请先勾选要删除的数据'); return; }
+  lpConfirm('确认删除','将删除 '+rows.length+' 条数据，删除后不可恢复。',function(){
+    for(var i=c.rows.length-1;i>=0;i--){ if(rows.indexOf(c.rows[i])>=0) c.rows.splice(i,1); }
+    lst(r).sel={};
+    lpTip('已删除 '+rows.length+' 条');
+    lpRerender();
+  },'danger');
+}
+
+/* 包一层：删除走真删；有自定义 handler 的页面不动 */
+(function(){
+  var _act=lpAct;
+  lpAct=function(r,name){
+    var c=LISTS[r]||{};
+    var custom=!!(c.opHandlers&&c.opHandlers[name]);
+    if(!custom && c.rows && !c.html){
+      if(name==='删除'){ crudDel(r,-1); return; }
+      if(name==='维护'){ if(crudMaintain(r,-1,true)) return; }
+      if(name==='取消维护'){ if(crudMaintain(r,-1,false)) return; }
+      if(name==='启用'||name==='停用'){ if(crudSetState(r,-1,name==='启用'?'正常':'停用')) return; }
+    }
+    _act(r,name);
+  };
+  var _op=lpOp;
+  lpOp=function(r,gi,name){
+    var c=LISTS[r]||{};
+    if(name==='删除' && !(c.opHandlers&&c.opHandlers['删除']) && c.rows && !c.html){ crudDel(r,gi); return; }
+    _op(r,gi,name);
+  };
+})();
+
+/* 状态类按钮（启用/停用、维护/取消维护）真生效：改选中行的状态列 */
+function crudSetState(r,gi,text){
+  var c=LISTS[r]; if(!c||!c.cols) return false;
+  var ci=-1;
+  for(var i=0;i<c.cols.length;i++){
+    if(/状态|在线|发布/.test(c.cols[i].t)){ ci=i; break; }
+  }
+  if(ci<0) return false;
+  var rows = gi>=0? [lpRowAt(r,gi)] : lpSelRows(r);
+  rows=rows.filter(function(x){ return x; });
+  if(!rows.length){ lpTip('请先勾选数据'); return true; }
+  var good=/^(正常|启用|生效中|已发布|在线|可值|已开启|开启)$/.test(text);
+  rows.forEach(function(row){
+    row[ci]='<span class="dot '+(good?'g':'gy')+'">'+text+'</span>';
+  });
+  lst(r).sel={}; lpRerender();
+  lpTip('已设为「'+text+'」'+rows.length+' 条');
+  return true;
+}
+/* 维护 / 取消维护 单独处理（状态列取「维护中 / 正常」） */
+function crudMaintain(r,gi,on){
+  var c=LISTS[r]; if(!c||!c.cols) return false;
+  var ci=-1;
+  for(var i=0;i<c.cols.length;i++){ if(/维护/.test(c.cols[i].t)){ ci=i; break; } }
+  if(ci<0) return false;
+  var rows = gi>=0? [lpRowAt(r,gi)] : lpSelRows(r);
+  rows=rows.filter(function(x){ return x; });
+  if(!rows.length){ lpTip('请先勾选数据'); return true; }
+  rows.forEach(function(row){
+    row[ci]='<span class="dot '+(on?'o':'g')+'">'+(on?'维护中':'正常')+'</span>';
+  });
+  lst(r).sel={}; lpRerender();
+  lpTip((on?'已进入维护：':'已取消维护：')+rows.length+' 条');
+  return true;
+}
 
 
 /*<<LISTS_JS_END>>*/
